@@ -1,0 +1,6 @@
+#+TITLE: Gtk
+
+* GLib
+Glib is a set of libraries: GLib core, GObejectand GIO.
+** GLib Core
+GLib Core provides data structure handling in C (/linked lists, trees, hash tables/)
