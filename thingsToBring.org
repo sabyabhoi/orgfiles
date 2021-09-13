@@ -1,5 +1,5 @@
 #+TITLE: Campus survival 101
-#+AUTHOR:
+#+AUTHOR: Sabyasachi Bhoi
 * Clothing and Accessories
 ** Everyday wear
 *** Shirts
@@ -83,7 +83,7 @@
 - you can buy it here as well(The quality here isn't good enough, bring it from your place).
 * Toiletries & Cosmetics
 - Most of the items in this category can be procured from the campus convenience store. *Hence, no need to bring them from home*.
-  ->Towels
+- Towels
 - Shampoo
 - Soap: Carry a soap case too (or a shower gel directly)
 - Scrubber/loofah

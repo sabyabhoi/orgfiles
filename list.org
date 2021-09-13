@@ -1,0 +1,25 @@
+#+TITLE: List
+
+List of all the options I have
+
+* TODO C/C++
+- Game development
+- OpenGL development
+- Kernel development (DIY OS)
+- Competitive programming
+- GTK Applications
+- Contribute to Open-Source
+
+* TODO App Development
+- Finish Erudite
+- Make a timezone converter
+
+* TODO ML/AI
+- Complete the book
+
+* TODO Blockchain and crypto
+- Refer to [[https://github.com/protofire/blockchain-learning-path][these]] resources
+
+* TODO Misc
+- Switch to Awesome WM
+- Malware analysis/Ethical Hacking
