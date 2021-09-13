@@ -1,0 +1,32 @@
+#+TITLE: Docker
+
+* Cheatsheet
+- To pull the image for centos from [[https://hub.docker.com/][docker hub]]:
+#+begin_src shell
+docker pull centos
+#+end_src
+
+- on the docker hub page for a specific image, there will be different version tags available for the image. To use a specific tag for the image:
+#+begin_src shell
+docker pull centos:latest
+#+end_src
+
+- To create a new docker container with the name foo:
+#+begin_src shell
+docker run -d -t --name foo centos
+#+end_src
+
+- To list all the docker containers:
+#+begin_src shell
+docker ps
+#+end_src
+
+- To get a bash shell inside the container named foo:
+#+begin_src shell
+docker exec -it foo bash
+#+end_src
+
+- To stop a running container:
+#+begin_src shell
+docker stop <container>
+#+end_src
