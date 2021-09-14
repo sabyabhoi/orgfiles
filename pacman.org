@@ -1,0 +1,75 @@
+#+TITLE: Pacman
+
+Arch linux package manager
+
+* Installing packages
+If you want to install a package:
+#+begin_src shell
+pacman -S <package>
+#+end_src
+Here, =-S= means /sync/ the package with the repositories.
+
+* Upgrading packages
+To synchronize the package repository (=-y=) and update the packages (=-u=):
+#+begin_src shell
+pacman -Syu
+#+end_src
+
+There's some minimum duration after which you can re-sync the package repository
+again. To force the =-y= flag to synchronize the repository:
+#+begin_src shell
+pacman -Syyu
+#+end_src
+
+* Removing packages
+If you want to remove a package:
+#+begin_src shell
+pacman -R <package>
+#+end_src
+
+If you want to remove a package *and* its dependencies:
+#+begin_src shell
+pacman -Rs <package>
+#+end_src
+
+If you want to remove the package, its dependencies *and* its system config files
+(not the dotfiles):
+#+begin_src shell
+pacman -Rns <package>
+#+end_src
+
+* Querying packages
+To display all the packages installed on the system:
+#+begin_src shell
+pacman -Q
+#+end_src
+
+To display all the packages /you/ installed on the system:
+#+begin_src shell
+pacman -Qe
+#+end_src
+
+To query the package repository for a package:
+#+begin_src shell
+pacman -Ss <package>
+#+end_src
+
+To display only the package name and no other details:
+#+begin_src shell
+pacman -Qq/-Qeq/-Ssq <package>
+#+end_src
+
+To query all the packages installed from the *AUR*:
+#+begin_src shell
+pacman -Qm
+#+end_src
+
+To query all the packages installed from the main repository:
+#+begin_src shell
+pacman -Qn
+#+end_src
+
+To list all the *orphans* (i.e. the packages that were originally dependencies, but now aren't):
+#+begin_src shell
+pacman -Qdt
+#+end_src
