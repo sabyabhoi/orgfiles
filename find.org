@@ -1,0 +1,23 @@
+#+TITLE: find command
+
+A cheatsheet for the unix =find= command.
+
+To find a directory(=d=) or file(=f=):
+#+begin_src sh
+find <dir> -type d/f -name <name of dir/file>
+#+end_src
+
+This search is case-sensitive. To perform case-/insensitive/ search:
+#+begin_src sh
+find <dir> -type d/f -iname <name of dir/file>
+#+end_src
+
+The following command finds the given file with size greater than or equal to =1MB=:
+#+begin_src sh
+find <dir> -name <name> -size +1M
+#+end_src
+
+To find a file with specific permissions:
+#+begin_src sh
+find <dir> -name <name> -perm 766
+#+end_src
