@@ -21,6 +21,8 @@ ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv
 You can use the =-y= tag to automatically overwrite a file, otherwise ffmpeg will
 ask for your confirmation.
 
+You can press =q= to stop the recording, or the good old Ctrl+c.
+
 * Webcam Recording
 To record your webcam, use
 #+begin_src shell
@@ -41,3 +43,10 @@ To use a specific device number:
 ffmpeg -f pulse -i N <output>
 #+end_src
 Here, =N= is the device number.
+
+* Codecs
+To specify the audio and video codecs, use the =-c= tag:
+#+begin_src shell
+ffmpeg -i <input> -c:v libx264 -r 30 -c:a flac <output>
+#+end_src
+=:v= denotes video codec and =-a= denotes audio codec.
