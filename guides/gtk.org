@@ -1,6 +1,7 @@
 #+TITLE: GTK
 
-* GLib
+* Introduction
+** GLib
 Glib is a set of libraries: GLib core, GObejectand GIO.
 - *GLib Core* provides data structure handling for C(/linked lists, trees, hashtables/),
   portability wrappers, an event loop, threads and many other utility functions.
@@ -9,7 +10,7 @@ Glib is a set of libraries: GLib core, GObejectand GIO.
 - *GIO* depends on both *GLib core* and *GObject*, and provides a high-level API for
   input and output: reading a local or remote file, network streams, inter-process
   communication etc.
-* GTK+
+** GTK+
 *GTK+* is a widget toolkist based on *GLib* that can be used for developing applications
 with a GUI. A /widget/ is a GUI element (e.g. a button, text, menu etc.). There
 are some special types of widgets called *containers*, which can contain other
@@ -29,4 +30,10 @@ CC=gcc
 CFLAGS=-Wall
 main:
 	$(CC) $(CFLAGS) $(FILE) `pkg-config --cflags --libs glib-2.0`
+#+end_src
+
+*** Side note
+In case you're using clangd, create an additional file with all the compile flags, named =compile_flags.txt=. Just run the following command to generate the file:
+#+begin_src shell
+pkg-config --cflags --libs glib-2.0 | tr [:space:] "\n" > compile_flags.txt
 #+end_src

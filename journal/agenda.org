@@ -1,0 +1,12 @@
+#+TITLE: Agenda
+
+* Task List
+** TODO EEB
+** TODO POE [/]
+SCHEDULED: <2021-12-05 Sun 16:00>
+- [ ] Revise Monopoly chapter
+- [ ] Do the tutorial numericals for Monopoly
+- [ ] Revise last lecture class' material
+** TODO M3 [/]
+- [ ] Start Fourier Analysis
+** TODO Professional Ethics
