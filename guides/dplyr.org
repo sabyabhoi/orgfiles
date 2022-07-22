@@ -1,0 +1,41 @@
+#+TITLE: Dplyr
+#+PROPERTY: header-args:R :session :results value
+:REVEAL_PROPERTIES:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+REVEAL_THEME: serif
+:END:
+
+* Installation
+run =install.packages("tidyverse")=
+
+* Load the package
+#+begin_src R 
+library(dplyr)
+library(tidyverse)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+Error in library(tidyverse) : there is no package called ‘tidyverse’
+#+end_example
+
+#+begin_src R :results html
+  head(mtcars) %>%
+    summarize(mean=mean(mpg))
+#+end_src
+
+#+RESULTS:
+#+begin_export html
+20.5
+#+end_export

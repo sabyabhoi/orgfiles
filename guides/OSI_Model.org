@@ -1,0 +1,41 @@
+#+TITLE: OSI Model Simplified
+
+* Application Layer
+- This is the closest layer to the end-user.
+- Network applications like /chrome, firefox, email clients etc/. use this layer to give the end result to the user.
+** Examples
+- *File transfer*: FTP protocol
+- *Web surfing*: HTTP(s)
+- *Emails*: SMTP
+- *Virtual Terminals*: Telnet or SSH
+
+* Presentation Layer
+It receives data from the application layer and performs various operations on it.
+** Translation
+- Converting data into binary format
+- E.g. ASCII to EBCDIC
+** Data Compression
+Decrease the number of bits in the data. It can further be of two types:
+1. Lossy
+2. Lossless
+** Encryption
+- Data is encrypted to ensure security.
+- E.g. The Secure Sockets Layer (SSL) Protocol
+
+* Session Layer
+** Session Management
+- Session layer assists the transfer of data, by setting up /sessions/, managing connections, enabling transfer of data and finally terminating the connection.
+- Session layer is assisted by /Application Programming Interfaces (APIs)/ which allow applications on different systems to communicate with each other.
+- This layer keeps a track of the files being transferred.
+- It is here that the files are transferred in the form of *network packets*.
+** Authentication
+1. Server takes in a /username/ and /password/ to authenticate the user.
+2. If the authentication is successful, a session is established.
+** Authorization
+Authorization makes sure that a person is able to access a file if and only if they are /authorized/ to access that file (have the right permissions).
+
+* Transport Layer
+This layer ensures the reliability of communication through the following procedures:
+** Segmentation
+** Flow Control
+** Error Control

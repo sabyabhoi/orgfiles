@@ -1,0 +1,48 @@
+#+TITLE: Docker2
+
+* Basic commands
+** Images
+*** Pull an image
+#+begin_src bash
+docker pull ubuntu
+#+end_src
+*** View images
+#+begin_src bash
+docker images
+#+end_src
+** Containers
+*** View all containers
+#+begin_src bash
+docker ps -a
+#+end_src
+*** View only actively running containers
+#+begin_src bash
+docker ps
+#+end_src
+*** Running containers
+#+begin_src bash
+docker run ubuntu
+#+end_src
+**** Running in detached mode
+#+begin_src bash
+docker run -d ubuntu
+#+end_src
+*** Binding ports from container to host
+#+begin_src bash
+docker run -p<HOST PORT>:<CONTAINER PORT> <CONTAINER>
+#+end_src
+E.g.
+#+begin_src bash
+docker run -d -p80:80 ubuntu
+#+end_src
+
+** Troubleshooting
+*** View logs of a container
+#+begin_src bash
+docker logs <container name/id>
+#+end_src
+*** Get an interactive terminal (it) inside a docker container
+#+begin_src bash
+docker exec -it <container name/id> /bin/bash
+#+end_src
+* Docker Compose

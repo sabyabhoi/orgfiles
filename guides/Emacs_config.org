@@ -1,0 +1,590 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Sabyasachi Bhoi
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
+
+* Basic UI Configuration
+#+begin_src emacs-lisp 
+  ;;  (setq inhibit-startup-message t) ;; hide startup 
+
+  (scroll-bar-mode -1) ;; disable scroll bar
+  (tool-bar-mode -1) ;; disable tool bar
+  (tooltip-mode -1) ;; disable tooltips
+  (set-fringe-mode 10) ;; give some inline padding
+  (menu-bar-mode -1) ;; disable menu bar
+
+  (setq backup-directory-alist '((".*" . "/tmp")))
+  (setq byte-compile-warnings '(cl-functions))
+#+end_src
+
+** Font
+#+begin_src emacs-lisp
+  (defun cb/set-font-faces ()
+    (dolist (face '(default fixed-pitch))
+      (set-face-attribute `,face nil :font "Source Code Pro" :height 170)))
+
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (cb/set-font-faces))))
+    (cb/set-font-faces))
+#+end_src
+
+** Auto-parenthesis completion
+#+begin_src emacs-lisp
+  (electric-pair-mode 1)
+  (setq electric-pair-preserve-balance nil)
+  (setq electric-pair-inhibit-predicate ;; don't autocomplete '<'
+        `(lambda (c)
+           (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))
+#+end_src
+
+** Relative line numbering
+#+begin_src emacs-lisp
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
+  (setq display-line-numbers-type 'relative)
+
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  eshell-mode-hook
+                  treemacs-mode-hook
+                  vterm-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+* Package management
+#+begin_src emacs-lisp
+  (require 'package)
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("org" . "https://orgmode.org/elpa/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")))
+
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  ;; Install use-package if it's not already installed
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+;;  (setq use-package-verbose t)
+#+end_src
+*Note*: If Emacs is unable to find any of the given packages, run the =package-refresh-contents= command to update the =package.el= repository.
+** Keep folders clean
+Use the =no-littering= package to keep folders clean.
+#+begin_src emacs-lisp
+  (use-package no-littering)
+
+  (setq auto-save-file-name-transforms
+        `((".*", (no-littering-expand-var-file-name "auto-save/") t)))
+#+end_src
+
+** Evil
+#+begin_src emacs-lisp
+  (use-package evil
+    :config (evil-mode 1)
+    :init
+    (setq evil-want-integration t
+          evil-want-keybinding nil
+          evil-want-C-u-scroll t
+          evil-undo-system 'undo-redo))
+#+end_src
+ 
+*** Evil Collection
+#+begin_src emacs-lisp
+  (use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+#+end_src
+
+** Project Management
+*** Projectile
+#+begin_src emacs-lisp
+  (use-package projectile
+    :defer 0
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    (use-package rg)
+    (when (file-directory-p "~/workspace/userfiles/programming")
+      (setq projectile-project-search-path '("~/workspace/userfiles/programming")))
+    (setq projectile-switch-project-action #'projectile-dired))
+#+end_src
+
+For a directory to be considered as a project by Projectile, it should
+- either have a =.projectile= file in its root
+- or be under a version control system (like git)
+
+**** Better integration with ivy
+#+begin_src emacs-lisp
+  (use-package counsel-projectile
+    :after projectile
+    :config (counsel-projectile-mode))
+#+end_src
+
+*** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :commands (magit-status magit-get-current-branch))
+#+end_src
+
+** Ivy
+#+begin_src emacs-lisp
+  (use-package ivy
+    :diminish ;; hide the mode name for ivy
+    :bind (("C-s" . swiper)
+           :map ivy-minibuffer-map
+           ("TAB" . ivy-alt-done)
+           ("C-l" . ivy-alt-done)
+           ("C-j" . ivy-next-line)
+           ("C-k" . ivy-previous-line)
+           :map ivy-switch-buffer-map
+           ("C-k" . ivy-previous-line)
+           ("C-l" . ivy-done)
+           ("C-d" . ivy-switch-buffer-kill)
+           :map ivy-reverse-i-search-map
+           ("C-k" . ivy-previous-line)
+           ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
+#+end_src
+
+*** Swiper
+#+begin_src emacs-lisp
+  (use-package swiper
+    :after ivy)
+#+end_src
+
+*** Ivy rich
+#+begin_src emacs-lisp
+  (use-package ivy-rich
+    :after counsel
+    :config (ivy-rich-mode 1))
+#+end_src
+
+*** Counsel
+#+begin_src emacs-lisp
+  (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+           ("C-x b" . counsel-ibuffer)
+           ("C-x C-f" . counsel-find-file))
+    :config
+    (setq ivy-initial-inputs-alist nil))
+#+end_src
+ 
+*** Which key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :defer 0
+    :diminish which-key-mode
+    :config
+    (which-key-mode)
+    (setq which-key-idle-delay 0.3))
+#+end_src
+
+** Company
+#+begin_src emacs-lisp
+  (use-package company
+    :hook (prog-mode . company-mode)
+  :after lsp
+    :bind
+    (:map company-active-map
+          ("<tab>" . company-complete-selection))
+    (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 0)
+    (company-idle-delay 0.0))
+
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+*** Company box
+#+begin_src emacs-lisp
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+
+** Helpful
+A better help buffer for Emacs (with text formatting and all).
+#+begin_src emacs-lisp
+  (use-package helpful
+    :commands (helpful-callable helpful-variable helpful-command helpful-key)
+    :ensure t
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-key] . helpful-key))
+#+end_src
+
+** General
+Easier way to setup keybindings
+#+begin_src emacs-lisp
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup t)
+
+    (general-create-definer cb/leader-key-def
+      :keymaps '(normal)
+      :prefix "SPC"
+      :global-prefix "SPC")
+    (cb/leader-key-def
+      "b" '(counsel-switch-buffer-other-window :which-key "Find File")
+      "." '(counsel-find-file :which-key "Find File")
+      "oe" '(lambda () (interactive) (find-file
+                                      (expand-file-name "~/workspace/userfiles/orgfiles/guides/Emacs_config.org")))
+      "rn" 'lsp-rename)
+    (general-nmap
+      "K" 'lsp-ui-doc-glance))
+#+end_src
+
+** Doom modeline, theme and rainbow delimiters
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1)
+    (use-package all-the-icons
+      :ensure t))
+
+  (use-package doom-themes
+    :ensure t
+    :init
+    (load-theme 'doom-tokyo-night t))
+
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** Org mode
+#+begin_src emacs-lisp
+  (defun cb/org-mode-setup ()
+    (org-indent-mode)
+    (org-toggle-pretty-entities)
+    (auto-fill-mode 0)
+    (visual-line-mode 1)
+    (setq evil-auto-indent nil)
+    (setq org-directory "~/workspace/userfiles/orgfiles/guides")
+    (setq org-default-notes-file (concat org-directory "/notes.org"))
+    (display-line-numbers-mode 0))
+
+  (with-eval-after-load 'org
+    (require 'org-tempo)
+    (add-to-list 'org-structure-template-alist '("elisp" . "src emacs-lisp")))
+
+  (use-package org
+    :hook (org-mode . cb/org-mode-setup)
+    :bind (("C-x e" . org-edit-src-code))
+    :config
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.5))
+    (setq org-ellipsis " ▾"
+          org-hide-emphasis-markers t
+          org-src-fontify-natively t
+          org-image-actual-width nil)
+    (set-face-attribute 'variable-pitch nil :font "Roboto" :height 170)
+    (dolist (face '(
+                    (org-document-title . 1.8)
+                    (org-level-1 . 1.3)
+                    (org-level-2 . 1.2)
+                    (org-level-3 . 1.1)
+                    (org-level-4 . 1.1)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil
+                          :font "Roboto Mono"
+                          :weight 'medium
+                          :height (cdr face))))
+  #+end_src
+
+*** Inline padding
+#+begin_src emacs-lisp
+  (defun cb/org-mode-visual-fill ()
+    (setq visual-fill-column-width 100
+          visual-fill-column-center-text t)
+    (visual-fill-column-mode 1))
+
+  (use-package visual-fill-column
+    :hook (org-mode . cb/org-mode-visual-fill))
+#+end_src
+
+*** Org bullets
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode))
+#+end_src
+ 
+*** Org babel
+**** Configure babel languages
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (python . t)
+       (zig . t)
+       (haskell . t)
+       (lisp . t)
+       (C . t)))
+
+    (setq org-confirm-babel-evaluate nil))
+#+end_src
+
+**** Auto-tangle configuration files
+#+begin_src emacs-lisp
+(defun cb/org-babel-tangle-config()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name
+                       "~/workspace/userfiles/orgfiles/guides/Emacs_config.org"))
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cb/org-babel-tangle-config)))
+#+end_src
+
+*** Org roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/workspace/userfiles/orgfiles/gyaan")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-db-autosync-mode)
+    (org-roam-setup))
+#+end_src
+
+**** Org roam UI
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t))
+#+end_src
+
+*** Org capture
+#+begin_src emacs-lisp
+    (use-package org-capture
+      :config
+      (setq org-capture-templates
+            '(("r" "Reference" entry
+               (file+headline "references.org" "Reference Note")
+               "* %?"))
+            )
+  )
+#+end_src
+
+
+** LSP
+*** LSP mode
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :config
+    (lsp-enable-which-key-integration t)
+    (setq lsp-idle-delay 0.1))
+#+end_src
+
+**** Posframe for diagnostics popup
+Require the posframe package for showing the diagnostics in a popup.
+#+begin_src emacs-lisp
+  (require 'posframe)
+  (setq lsp-signature-function 'lsp-signature-posframe)
+#+end_src
+
+*** LSP UI
+#+begin_src emacs-lisp
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :ensure t
+    :custom
+    (lsp-ui-doc-delay 0.0)
+    (lsp-ui-doc-position 'at-point))
+#+end_src
+
+*** Yasnippet
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :config
+    (setq yas-snippet-dirs
+          '("~/.config/emacs/snippets"))
+    (yas-global-mode 1))
+
+  (add-hook 'c++-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'company-mode)
+  (add-hook 'c++-mode-hook 'yas-minor-mode)
+#+end_src
+
+*** LSP ivy
+#+begin_src emacs-lisp
+  (use-package lsp-ivy
+    :after (ivy lsp))
+#+end_src
+
+*** Emmet
+#+begin_src emacs-lisp
+(use-package emmet-mode)
+
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+#+end_src
+
+** CC Mode
+#+begin_src emacs-lisp
+  (load-file "~/workspace/userfiles/programming/Lisp/cc-mode/main.el")
+#+end_src
+
+** Filetype specific plugins
+*** Rust
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :config
+    (add-hook 'rust-mode-hook #'yas-minor-mode)
+    (add-hook 'rust-mode-hook #'company-mode)
+    (add-hook 'rust-mode-hook #'lsp))
+#+end_src
+
+*** Lua
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :after lsp
+    :config
+    (add-hook 'lua-mode-hook #'yas-minor-mode)
+    (add-hook 'lua-mode-hook #'company-mode)
+    (add-hook 'lua-mode-hook #'lsp)
+    (setq lua-indent-nested-block-content-align nil)
+    (setq lua-indent-close-paren-align nil)
+
+    (defun lua-at-most-one-indent (old-function &rest arguments)
+      (let ((old-res (apply old-function arguments)))
+        (if (> old-res lua-indent-level) lua-indent-level old-res)))
+
+    (advice-add #'lua-calculate-indentation-block-modifier
+                :around #'lua-at-most-one-indent)
+    )
+#+end_src
+
+*** Zig
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :after lsp-mode
+    :custom
+    (zig-format-on-save nil)
+    :config
+    (require 'lsp-mode)
+    (setq lsp-zig-zls-executable "/usr/bin/zls"))
+
+  (add-hook 'zig-mode-hook 'lsp)
+  (add-hook 'zig-mode-hook 'company-mode)
+  (add-hook 'zig-mode-hook 'yas-minor-mode)
+#+end_src
+
+**** Org babel configuration for zig
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/workspace/userfiles/programming/Lisp/ob-zig.el")
+#+end_src
+
+*** Haskell
+#+begin_src emacs-lisp
+(use-package haskell-mode)
+#+end_src
+
+*** Java
+#+begin_src emacs-lisp
+  (use-package lsp-java
+    :config
+    (add-hook 'java-mode-hook 'lsp)
+    (add-hook 'java-mode-hook 'company-mode)
+    (add-hook 'java-mode-hook 'yas-minor-mode))
+#+end_src
+
+*** Nim
+#+begin_src emacs-lisp
+(use-package nim-mode)
+#+end_src
+
+** Debugging with DAP Mode
+#+begin_src emacs-lisp
+  (use-package dap-mode
+    :config
+    (require 'dap-lldb))
+#+end_src
+
+** Dired
+#+begin_src emacs-lisp
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom ((dired-listing-switches "-agho --group-directories-first"))
+    :config
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "h" 'dired-up-directory
+      "l" 'dired-find-file))
+#+end_src
+
+** Terminal modes
+All the different terminal modes available within Emacs.
+*** term-mode
+It is the default terminal emulator shipped with emacs.
+#+begin_src emacs-lisp
+  (use-package term
+    :config
+    (setq explicit-shell-file-name "bash")
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+    )
+#+end_src
+
+*** Better colour support
+#+begin_src emacs-lisp
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+#+end_src
+
+*** vterm
+Provided a native emulation experience rather than one written in elisp.
+#+begin_src emacs-lisp
+  (use-package vterm
+    :commands vterm
+    :config
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+    (setq vterm-max-scrollback 10000))
+#+end_src
+
+** Treemacs
+
+*** LSP Treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :after lsp)
+#+end_src
+
+* Measuring the startup time
+#+begin_src emacs-lisp
+  (defun cb/display-startup-time()
+    (message "Emacs loaded in %s with %d garbage collections."
+             (format "%.2f seconds"
+                     (float-time
+                      (time-subtract after-init-time before-init-time)))
+             gcs-done))
+  (add-hook 'emacs-startup-hook #'cb/display-startup-time)
+#+end_src

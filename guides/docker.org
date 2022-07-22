@@ -18,7 +18,7 @@ docker run -d -t --name foo centos
 
 - To list all the docker containers:
 #+begin_src shell
-docker ps
+docker ps -a
 #+end_src
 
 - To get a bash shell inside the container named foo:
@@ -29,4 +29,42 @@ docker exec -it foo bash
 - To stop a running container:
 #+begin_src shell
 docker stop <container>
+#+end_src
+
+* Dockerfile
+** Basic Syntax
+Create a file named =Dockerfile=
+*** Base image
+#+begin_src dockerfile
+FROM ubuntu
+#+end_src
+
+*** Specifying maintainer (optional)
+Specifying a maintainer is optional, but it is recommended.
+#+begin_src dockerfile
+MAINTAINER Sabyasachi Bhoi <sabyabhoi@gmail.com>
+#+end_src
+The name can also be omitted.
+
+*** Execute commands
+**** RUN
+A =RUN= command is executed when the container is first created.
+#+begin_src dockerfile
+RUN apt-get update
+#+end_src
+
+**** CMD
+A =CMD= command is executed every time the container is launched.
+#+begin_src dockerfile
+CMD ["echo", "Hello world"]
+#+end_src
+
+** Building the file
+#+begin_src bash
+docker build /path/to/dockerfile/dir/
+#+end_src
+
+*** Mention name and version of image
+#+begin_src bash
+docker build -t customUbuntu:1.0.0 /path/to/dockerfile/dir/
 #+end_src
