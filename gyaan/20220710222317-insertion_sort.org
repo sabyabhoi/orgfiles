@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       9039e766-05bd-49ba-bb5f-5d0e46f63dd4
+:END:
+#+title: Insertion Sort
+
+In this sorting O(n^2) sorting algorithm, we maintain a /sorted/ array at the beginning of the original array, adding each element of the unsorted array to the sorted array by comparing and shifting each element to the right.
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  void insertion_sort(vector<int>& a) {
+    int n = a.size();
+    for(int i = 1; i < n; ++i) {
+      int key = a[i];
+      int j;
+      for(j = i - 1; j >= 0 && a[j] > key; --j)
+        a[j + 1] = a[j];
+      a[j + 1] = key;
+    }
+  }
+
+  int main() {
+
+    vector<int> a = {5, 4, 3, 2, 1};
+
+    insertion_sort(a);
+
+    for(int& i : a) cout << i << ' ';
+    cout << '\n';
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS:
+: 1 2 3 4 5

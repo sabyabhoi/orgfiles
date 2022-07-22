@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       2a196753-1827-4496-951f-44b431777e3b
+:END:
+#+title: NES Emulation
+
+1. [[id:2a51d82c-b1df-42d6-8ee7-d1943736a6b9][NES Construction]]
+2. [[id:c23ebbb5-af27-40d4-9839-07ff88684b59][6502 CPU Implementation]]

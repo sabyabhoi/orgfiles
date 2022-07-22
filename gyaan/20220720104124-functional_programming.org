@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       6aa4ce9e-aead-40d1-82ac-43bceb14ae00
+:END:
+#+title: Functional Programming
+
+- Functional Programming is a programming paradigm wherein all entities are written in the form of functions.
+- The behaviour of these functions can be understood primarily on the basis of the input they receive, and the respective output they emit.
+
+* Functional Programming Languages
+- [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]]
+- [[id:104a075c-e049-491b-9aa5-b1aba9a11c46][Lisp]]

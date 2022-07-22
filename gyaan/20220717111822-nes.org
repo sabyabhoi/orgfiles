@@ -1,0 +1,82 @@
+:PROPERTIES:
+:ID:       2a51d82c-b1df-42d6-8ee7-d1943736a6b9
+:END:
+#+title: NES Construction
+
+[[https://en.wikipedia.org/wiki/Nintendo_Entertainment_System][Nintendo Entertainment System(NES)]] is a video game console created by Nintendo.
+
+* Construction
+#+NAME: Components on the Main Bus
+|-----------+---------------+-------------|
+| *Component* | *Start Address* | *End Address* |
+|           |           <r> |         <r> |
+|-----------+---------------+-------------|
+| Memory    |        =0x0000= |      =0x07FF= |
+| PPU       |        =0x2000= |      =0x2007= |
+| APU       |        =0x4000= |      =0x4017= |
+| Cartridge |        =0x4020= |      =0xFFFF= |
+|-----------+---------------+-------------|
+** CPU
+- It has a CPU with the =2A03= microprocessor.
+- The CPU has internal memory.
+- It can /access/ memory upto =64KB=.
+- The CPU is in charge of all the physics of the game; where to render what, etc.
+** Memory
+- It has a memory of 2KB.
+- The address for the memory ranges from =0x0000= to =0x07FF=.
+
+#+begin_src python :session
+0x07FF
+#+end_src
+
+#+RESULTS:
+: 2047
+
+** APU
+- APU stands for *Audio Processing Unit*. 
+- The address range for accessing the APU is from =0x4000= to =0x4017=.
+** Cartridge
+- This is the where all the data for the game is stored.
+- The memory address for the cartridge starts from =0x4020= and covers the rest of the remaining space available, i.e., upto =0xFFFF=. 
+*** Mapper
+- =8KB= of graphical memory wasn't necessarily sufficient to render more sophisticated art.
+- Hence, a rather expensive form of circuitry called the *Mapper* was included in NES cartridges.
+- The mapper implements a *Banking System*, in which the mapper essentially provides different data to the CPU for the same memory addresses. 
+** Bus
+- The bus is responsible for connecting all these components together.
+- All the different components of the NES communicate via the bus.
+** PPU
+- PPU stands for *Picture Processing Unit*. 
+- The NES uses the =2C02= PPU.
+- Every clock tick, the PPU outputs a pixel to the screen.
+  - The clock speeds for the CPU and the PPU are different.
+- The PPU can be thought of like the graphics cards of the NES. 
+- It has a bus of its own, and can access memory of upto =16KB=.
+*** Object Attribute Memory (OAM)
+- The PPU has one additional component connected to it, which doesn't connect to the PPU bus; this is the OAM.
+- It contains data about the location of the sprites (where the player is, the enemy is, etc.).
+** Stuff on the PPU Bus
+#+NAME: Components on the PPU Bus
+|-----------+---------------+-------------|
+| *Component* | *Start Address* | *End Address* |
+|           |           <r> |         <r> |
+|-----------+---------------+-------------|
+| Graphics  |        =0x0000= |      =0x1FFF= |
+| VRAM      |        =0x2000= |      =0x27FF= |
+| Palettes  |        =0x3F00= |      =0x3FFF= |
+|-----------+---------------+-------------|
+*** Memory for graphics
+- It is the actual pixel data, data related to the sprites and all.
+- Takes =8KB= worth of space.
+- This memory does *not* exist on the NES, but on the cartridge.
+*** VRAM
+- Used to store temporary memory used for identifying which tiles to render in the background. 
+- Takes up =2KB=.
+*** Palettes
+- Unlike modern methods of storing pixel data like JPEGs and PNGs, the NES used a proprietory method of storing pixel data which used up 2 bits for each pixel, and this data was stored in palettes.
+  
+* Direct Memory Access (DMA)
+- The PPU is clocked at 3x the frequency of the CPU.
+- So the CPU updating the OAM manually would be far too slow of an operation.
+- Hence, the NES provides a *Direct Memory Access(DMA)*, which temporarily suspends the CPU, and itself transfers memory from the main bus to the OAM.
+- This way the CPU doesn't have to worry about manually transffering the data to the OAM.

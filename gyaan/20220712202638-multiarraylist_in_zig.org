@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       a216eaa4-aadb-4a9d-8900-24edbb3a0772
+:END:
+#+title: MultiArrayList in Zig
+
+=MultiArrayLists= are like =ArrayLists= in Zig, but are used to store structs instead of primitive types.
+#+begin_src zig
+  const std = @import("std");
+  const test_allocator = std.testing.allocator;
+  const MultiArrayList = std.MultiArrayList;
+  const expect = std.testing.expect;
+  const eql = std.mem.eql;
+
+  const Complex = struct {
+      re: f32,
+      im: f32,
+
+      pub fn abs(self: Complex) f32 {
+          return @sqrt(self.re * self.re + self.im * self.im);
+      }
+  };
+
+  test "MultiArrayLists" {
+      var numbers = MultiArrayList(Complex){};
+      defer numbers.deinit(test_allocator);
+
+      try numbers.append(test_allocator, Complex{ .re = 3, .im = 4 });
+
+      try expect(numbers.get(0).abs() == 5.0);
+  }
+#+end_src

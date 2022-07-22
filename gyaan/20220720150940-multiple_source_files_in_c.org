@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       a8a078e6-459d-4b64-918a-f6e20f42d03e
+:END:
+#+title: Multiple source files in C++
+
+Suppose you have a source file and a header file in C++:
+
+#+FILE: Logger.h
+#+begin_src C++ 
+  #include <iostream>
+
+  void info();
+#+end_src
+
+#+FILE: Logger.cpp
+#+begin_src c++
+  #include "Logger.h"
+
+  void info() {
+    std::cout << "All systems functional.\n";
+  }
+#+end_src
+
+Then we just need to include the /header/ file into the main file, (not the source C++ file).
+#+NAME: main.cpp
+#+begin_src c++
+  #include "Logger.h"
+
+  int main() {
+    info();
+    return 0;
+  }
+#+end_src
+
+and then compile it using =g++=:
+#+begin_src bash
+g++ main.cpp Logger.cpp Logger.h 
+#+end_src

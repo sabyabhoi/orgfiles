@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       e12d16fa-3a50-4931-9e60-c583d41de345
+:END:
+#+title: Assembly Language
+
+Here we talk about [[https://www.nasm.us/][NASM x86 assembly]]. 
+
+* Registers
+- Registers are places inside the CPU which are used for storing data
+- The ones we care about right now are =ax=, =bx=, =cx= and =dx=, which are *16-bit* registers.
+** 16-bit registers
+- Divided into two 8-bit halfs: the lower half (=al= for =ax=) and the higher half (=ah= for =ax=).
+
+* Important instructions
+** Labels and Jumping
+:PROPERTIES:
+:ID:       d3a98b61-8ffe-4070-acce-cf8e01622eb2
+:END:
+#+begin_src asm
+  label:
+          code
+          code
+          code
+          jump label
+#+end_src
+
+One can also jump to the current address, sort of creating an empty infinite loop:
+#+begin_src asm
+  jmp $
+#+end_src
+
+** Setting bytes with =db=
+:PROPERTIES:
+:ID:       8024afaa-5615-4264-aeac-1c21a638ea4f
+:END:
+We can use the =db= instruction (short for *define byte*) to set a single or multiple bytes of memory at the current memory location.
+#+begin_src asm
+  ;; Setting a single byte
+  db 5
+  db 'A'
+
+  ;; Setting multiple bytes
+  db 1,2,29
+  db "Hello"
+#+end_src
+
+
+* Creating a binary out of assembly
+:PROPERTIES:
+:ID:       43c0b0ca-7341-4bdf-8e6a-b8d624920fbb
+:END:
+#+begin_src sh
+nasm -f bin file.asm -o file.bin
+#+end_src
+Here, the =-f= flag allows us to choose the binary type (=bin= in this case).
+
+** Running the file on an emulator (=qemu=)
+#+begin_src sh
+qemu-system-x86_64 file.bin
+#+end_src

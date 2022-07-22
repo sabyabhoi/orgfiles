@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       25152c82-3785-4ea0-8041-4ec7a9838085
+:END:
+#+title: Dutch National Flag Sort
+
+- Used for [[id:50bfeb67-0627-42bb-a4a3-e3e177f6eae5][sorting]] an array comprising of only 0s, 1s, and 2s.
+
+* Algorithm
+1. Employ three pointers:
+   1. =l=, which keeps track of the 0s
+   2. =m=, which keeps track of the 1s
+   3. =r=, which keeps track of the 2s
+2. Instantiate =l = 0=, =m = 0= and =r = n - 1=, where =n= is the length of the array =a=.
+3. If =a[m] = 1=, increment =m=.
+4. If =a[m] = 0=, swap =a[l]= and =a[m]=, increment =l= by 1.
+5. If =a[m] = 2=, swap =a[r]= and =a[m]=, decrement =r= by 1.
+
+* Time & Space Complexity
+- Since the array is only traversed once, the time complexity is O(n).
+- Since no extra space is used, the space complexity is O(1).
+* Code
+#+begin_src C++
+  void DNF(vector<int>& a) {
+    int l = 0, m = 0, r = a.size() - 1;
+
+    while(m <= r) {
+      if(a[m] == 1) ++m;
+      else if(a[m] == 0) swap(a[l++], a[m]);
+      else if(a[m] == 2) swap(a[r--], a[m]);
+    }
+  }
+#+end_src

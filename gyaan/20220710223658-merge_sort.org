@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       c31089e9-a39e-43d7-9686-1f8d5fd84cd9
+:END:
+#+title: Merge Sort
+
+Employs a divide and conquer algorithm to split the array into two parts till the size of each sub-array reaches 1.
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  void merge(const vector<int>& l, const vector<int>& r, vector<int>& a) {
+    int il = 0, ir = 0, ia = 0, nl = l.size(), nr = r.size();
+    while(il < nl && ir < nr) {
+      if(l[il] < r[ir]) a[ia++] = l[il++];
+      else a[ia++] = r[ir++];
+    }
+    while(il < nl) a[ia++] = l[il++];
+    while(ir < nr) a[ia++] = r[ir++];
+  }
+
+  void merge_sort(vector<int>& a) {
+    int n = a.size();
+    if(n == 1) return;
+
+    vector<int> left(a.begin(), a.begin() + n / 2);
+    vector<int> right(a.begin() + n / 2, a.end());
+
+    merge_sort(left);
+    merge_sort(right);
+    merge(left, right, a);
+  }
+
+  int main() {
+  
+    vector<int> a = {50, 40, 30, 10, 20};
+    merge_sort(a);
+
+    for(int& i : a) cout << i << ' ';
+    cout << '\n';
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS:
+: 10 20 30 40 50

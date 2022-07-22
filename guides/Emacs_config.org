@@ -4,7 +4,7 @@
 
 * Basic UI Configuration
 #+begin_src emacs-lisp 
-  ;;  (setq inhibit-startup-message t) ;; hide startup 
+  (setq inhibit-startup-message t) ;; hide startup 
 
   (scroll-bar-mode -1) ;; disable scroll bar
   (tool-bar-mode -1) ;; disable tool bar
@@ -20,7 +20,7 @@
 #+begin_src emacs-lisp
   (defun cb/set-font-faces ()
     (dolist (face '(default fixed-pitch))
-      (set-face-attribute `,face nil :font "Source Code Pro" :height 170)))
+      (set-face-attribute `,face nil :font "Source Code Pro" :height 165)))
 
   (if (daemonp)
       (add-hook 'after-make-frame-functions
@@ -270,6 +270,7 @@ Easier way to setup keybindings
 #+end_src
 
 ** Org mode
+
 #+begin_src emacs-lisp
   (defun cb/org-mode-setup ()
     (org-indent-mode)
@@ -336,7 +337,6 @@ Easier way to setup keybindings
      'org-babel-load-languages
      '((emacs-lisp . t)
        (python . t)
-       (zig . t)
        (haskell . t)
        (lisp . t)
        (C . t)))
@@ -381,16 +381,25 @@ Easier way to setup keybindings
 
 *** Org capture
 #+begin_src emacs-lisp
-    (use-package org-capture
-      :config
-      (setq org-capture-templates
-            '(("r" "Reference" entry
-               (file+headline "references.org" "Reference Note")
-               "* %?"))
-            )
-  )
+  (use-package org-capture
+    :ensure nil
+    :config
+    (setq org-capture-templates
+          '(("r" "Reference" entry
+             (file+headline "references.org" "Reference Note")
+             "* %?"))
+          )
+    )
 #+end_src
 
+*** Org ref
+#+begin_src emacs-lisp
+  (use-package org-ref
+    :config
+    (setq bibtex-completion-bibliography '("~/workspace/userfiles/college/uni.bib"))
+    (setq org-latex-pdf-process (list "latexmk -f -pdf %f"))
+    )
+#+end_src
 
 ** LSP
 *** LSP mode
@@ -498,11 +507,6 @@ Require the posframe package for showing the diagnostics in a popup.
   (add-hook 'zig-mode-hook 'yas-minor-mode)
 #+end_src
 
-**** Org babel configuration for zig
-#+begin_src emacs-lisp
-(add-to-list 'load-path "~/workspace/userfiles/programming/Lisp/ob-zig.el")
-#+end_src
-
 *** Haskell
 #+begin_src emacs-lisp
 (use-package haskell-mode)
@@ -588,3 +592,4 @@ Provided a native emulation experience rather than one written in elisp.
              gcs-done))
   (add-hook 'emacs-startup-hook #'cb/display-startup-time)
 #+end_src
+

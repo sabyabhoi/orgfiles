@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       85df6e3b-862e-45ad-9d1b-a1e7d18cf4a8
+:END:
+#+title: OS Development
+
+* Introduction
+- For understanding how an operating system works, we need to understand [[id:e12d16fa-3a50-4931-9e60-c583d41de345][assembly]] language.
+- Whenever an OS is booted up, it looks for the *Boot sector*.
+
+* Boot sector
+:PROPERTIES:
+:ID:       7bb493a3-c75a-4944-be1c-4e275a98ae0d
+:END:
+- It is a *512 byte* long piece of binary code ending with the hexadecimal number =0x55aa=.
+** Creating a simple boot sector
+#+begin_src asm
+  jmp $
+
+  times 510-($-$$) db 0
+  db 0x55, 0xaa
+#+end_src
+
+Save this in a file named =boot.bin= and then [[id:43c0b0ca-7341-4bdf-8e6a-b8d624920fbb][run it using qemu]].
+* [[id:556e2072-59f1-4d47-a7a7-2e724a53a0e4][BIOS]]
+* Stack
+** Initializing a stack
+This can be done be setting a pointer to the base and top of the stack using the =bp= and =sp= registers respectively.
+
+#+begin_src asm
+          mov bp, 0x8000 ;; E.g. Setting bp to 0x8000
+          mov sp, bp
+          mov bh, 'A' ;; Setting bx = 'A' for example
+          push bx ;; Pushing bx onto the stack
+          pop bx ;; Get the value off of the stack and place it into bx
+#+end_src
+
+* Segmentation
+- Real mode uses 16-bit addressing, which means that we can only access memory locations in the range [0, 2^16] = [0, 64KB].
+- For real world applications, this amount is way too small. Hence, we split the entire available memory into *segments* of 64KB each. This is called *Segmentation*.
+- Some segments to keep in mind are
+|----------+-----------------|
+| *Segments* | *Access register* |
+|----------+-----------------|
+| data     | =ds=              |
+| code     | =cs=              |
+| stack    | =ss=              |
+|----------+-----------------|
+
+* System Interrupts
+:PROPERTIES:
+:ID:       7d3b0071-079e-4845-8157-d63737461e20
+:END:
+- A system interrupt is an instruction where we literally interrupt the CPUs operation (whatever it was doing recently), and cater to our instructions instead. 
+- One such interrupt is the =int 0x10= [[id:556e2072-59f1-4d47-a7a7-2e724a53a0e4][BIOS]] interrupt, which is used to print characters on the screen.
+  

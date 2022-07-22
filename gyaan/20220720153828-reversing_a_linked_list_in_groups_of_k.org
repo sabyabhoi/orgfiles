@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       ba700caa-59e9-451f-af3d-ee24cb720d4d
+:END:
+#+title: Reversing a Linked List in groups of k
+
+Given a [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked list]] of length =n=, we're supposed to reverse the linked list in groups of =k=.
+
+#+BEGIN_EXAMPLE
+Input:
+6 3
+1 2 3 4 5 6
+
+Output:
+3 2 1 6 5 4
+#+END_EXAMPLE
+
+In order to solve this problem, we
+1. [[id:77a36ed7-c499-4f8f-b0b5-8618b85ca1f4][Iteratively reverse]] the first k elements of the list.
+2. Point =head->next= to the head of the next reversed list, which can be retrieved by calling the function with =curr= as the head.
+3. Return =prev=.
+
+#+begin_src c++
+Node* reversek(Node* head, int k) {
+  Node *prev = nullptr, *curr = head, *next = nullptr;
+  int count = 0;
+  while(curr != nullptr && count < k) {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+    ++count;
+  }
+
+  if(curr != nullptr)
+    head->next = reversek(curr, k);
+
+  return prev;
+#+end_src

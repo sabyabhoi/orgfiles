@@ -1,0 +1,88 @@
+:PROPERTIES:
+:ID:       104a075c-e049-491b-9aa5-b1aba9a11c46
+:END:
+#+title: Lisp
+
+- Lisp is a prefix based high level programming language.
+- There are various different /dialects/ of Lisp, like
+  - Clojure (JVM stuff)
+  - Common Lisp
+  - Emacs Lisp 
+
+* Sexp
+- Expressions in Lisp are called *Symbolic Expressions or S-expressions or sexp*.
+- Any sexp is a valid program.
+* REPL
+The Lisp interpreter checks the source code in a repeated loop, called the *Read-Evaluate-Print-Loop* or *REPL*.
+* Simple Program
+*Note*: Here I'm going to use Emacs Lisp (elisp), because it's natively available on Emacs (the editor I'm using).
+#+begin_src emacs-lisp
+(+ 8 10)
+#+end_src
+
+#+RESULTS:
+: 18
+
+* Formatting
+#+begin_src emacs-lisp
+(format "Hello sailor!")
+#+end_src
+
+#+RESULTS:
+: Hello sailor!
+
+#+begin_src emacs-lisp
+(format "I am %d years old" 20)
+#+end_src
+
+#+RESULTS:
+: I am 20 years old
+
+* Maths operations
+** Basics
+#+begin_src emacs-lisp
+  (+ 5 4) ; 9
+  (- 5 4) ; 1
+  (* 5 4) ; 20
+  (/ 5 4) ; 5/4
+  (/ 5 4.0) ; 1.25
+  (rem* 5 4) ; 1
+  (mod 5 4) ; 1
+#+end_src
+
+#+RESULTS:
+: 1
+
+** Advance
+#+begin_src emacs-lisp
+  (expt 5 3); 5^3
+  (sqrt 81); 9
+  (exp 1); e^1
+  (log 1000 10); log(1000) base 10 = 3
+  (eq 'val1 'val2); return T if 'val1 == 'val2
+  (floor 5.5); 5
+  (ceiling 5.5); 6
+  (max 5 10); 10
+  (min 5 10); 5
+  (oddp 15); T
+  (evenp 15); Nil
+  (null nil); check if value passed is nil/false
+  (numberp 2); T
+#+end_src
+
+#+RESULTS:
+: t
+
+** Equality
+#+begin_src emacs-lisp
+  (setq *name* 'Sabya)
+
+  (eq *name* 'Sabya); T
+  (equal *name* 'Sabya); T
+  (equal 1 1); T
+  (equal 1.0 1); Nil
+  (equalp 1.0 1); T 
+#+end_src
+
+#+RESULTS:
+: t

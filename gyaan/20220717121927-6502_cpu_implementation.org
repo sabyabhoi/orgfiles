@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       c23ebbb5-af27-40d4-9839-07ff88684b59
+:END:
+#+title: 6502 CPU Implementation
+
+* Connections of the CPU
+[[../assets/CPU.png]]
+
+* How the CPU interacts with the BUS
+[[../assets/BUS.png]]
+
+* Registers
+The 6502 processor comes with the following registors:
+- =A=: Accumulator (8-bit)
+- =X=: Register (8-bit)
+- =Y=: Register (8-bit)
+- =stkp=: Stack Pointer
+- =pc=: Program Counter
+- =status=: Status Register
+* Instructions
+It would be simple to form an architecture where
+1. the processor outputs the program counter(=pc=) onto the bus
+2. Receives a single byte instruction from other components on the bus
+3. Processes the instruction and outputs some data (if required).
+
+But the 6502 processor does *not* operate this way. This is because
+- not all instructions are a single byte in length.
+- Instructions of different sizes require different number of clock cycles to be processed instead of just a single clock cycle. 
+
+Hence, for each instruction, we need to care about 
+1. the *size* of the instruction, and
+2. the *duration* required to process it.
+
+The 6502 processor has 56 different legal instructions. All of these instructions can be mutated into different sizes and durations depending on the arguments passed to these instructions.

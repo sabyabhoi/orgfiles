@@ -1,0 +1,269 @@
+:PROPERTIES:
+:ID:       cb7eda74-5f0d-4b23-ab28-34f1c57e7814
+:END:
+#+title: Haskell
+#+startup: latexpreview
+#+OPTIONS: tex:t
+
+Haskell is a functional programming language.
+
+* Basic Syntax
+- To run Haskell in an interpreter, use the [[https://www.haskell.org/ghc/][Glasgow Haskell Compiler]] Interpreter (ghci).
+** Simple mathematical operations 
+#+begin_src haskell
+5 / 2
+#+end_src
+
+#+RESULTS:
+: 2.5
+
+*** Inbuilt maths functions
+#+begin_src haskell
+min 9 10
+#+end_src
+
+#+RESULTS:
+: 9
+
+#+begin_src haskell
+max 5 (min 9 10)
+#+end_src
+
+#+RESULTS:
+: 9
+
+** (In)equality 
+#+begin_src haskell
+5 == 4
+#+end_src
+
+#+RESULTS:
+: False
+
+#+begin_src haskell
+5 /= 4
+#+end_src
+
+#+RESULTS:
+: True
+
+* Functions
+*Note*: Functions cannot begin with an uppercase letter in Haskell.
+#+begin_src haskell
+square x = x * x
+square 10
+#+end_src
+
+#+RESULTS:
+: 100
+
+#+begin_src haskell
+distance x y = sqrt (x * x + y * y)
+distance 3 4
+#+end_src
+
+#+RESULTS:
+: 5.0
+
+** Functions using conditionals
+#+begin_src haskell
+maxBear age = (if age < 18 then 0 else round(sqrt age))
+maxBear 20
+#+end_src
+
+#+RESULTS:
+: 4
+
+* Lists
+- Lists in Haskell are homogenous. 
+- To define a name in GHCI, we can use the =let= keyword. Doing =let a = 1= inside GHCI is the same as writing =a = 1= in a script and then loading it in GHCI.
+
+#+begin_src haskell
+let piDigits = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9];
+piDigits
+#+end_src
+
+#+RESULTS:
+| 3 | 1 | 4 | 1 | 5 | 9 | 2 | 6 | 5 | 3 | 5 | 8 | 9 | 7 | 9 |
+
+** Concatenating Lists
+*** To the end of the list
+We make use of the =++= operator.
+#+begin_src haskell
+let a = [1, 3, 5, 7, 9];
+let b = [11, 13, 15];
+a ++ b
+#+end_src
+
+#+RESULTS:
+: ghci> [1,3,5,7,9,11,13,15]
+
+*** To the beginning of the list
+We make use of the =:= operator.
+#+begin_src haskell
+'A':" small cat"
+#+end_src
+
+#+RESULTS:
+: A small cat
+
+** Indexing elements
+- We make use of the =!!= operator.
+- Indexing in Haskell starts from =0=.
+
+#+begin_src haskell
+[1,3,4,5,8] !! 3
+#+end_src
+
+#+RESULTS:
+: 5
+
+** Comparing Lists
+- Lists are compared in =lexicographical= order in Haskell.
+
+#+begin_src haskell
+[3,2,1] > [1, 4, 0]
+#+end_src
+
+#+RESULTS:
+: True
+
+** Other List functions
+*** head
+Returns the first element of the list.
+#+begin_src haskell
+head [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+: 1
+
+*** tail
+Returns the entire list /excluding/ the first element.
+#+begin_src haskell
+tail [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+| 2 | 3 | 4 | 5 |
+
+*** last
+Returns the last element of the list.
+#+begin_src haskell
+last [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+: 5
+
+*** init
+Returns the entire list /excluding/ the last element.
+#+begin_src haskell
+init [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+| 1 | 2 | 3 | 4 |
+
+*** length
+Duh.
+#+begin_src haskell
+length [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+: 5
+
+*** null
+Checks if list is empty or not.
+#+begin_src haskell
+null [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+: False
+
+*** reverse
+Reverses the list.
+#+begin_src haskell
+reverse [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+| 5 | 4 | 3 | 2 | 1 |
+
+*** take
+- Returns the first =n= elements of the list.
+- If =n= is greater than the length of the list, then it returns the entire list.
+#+begin_src haskell
+take 3 [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+*** drop
+Drops the first =n= elements of the list.
+#+begin_src haskell
+drop 3 [1, 2, 3, 4, 5]
+#+end_src
+
+#+RESULTS:
+| 4 | 5 |
+
+*** sum, product, maximum, minimum
+Duh.
+
+*** elem
+Checks if element is in the list or not.
+#+begin_src haskell
+4 `elem` [3, 4, 5, 6]
+#+end_src
+
+#+RESULTS:
+: True
+
+** Texas range
+- Range syntax in Haskell
+#+begin_src haskell
+[1..10]
+#+end_src
+
+#+RESULTS:
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+
+#+begin_src haskell
+['b'..'y']
+#+end_src
+
+#+RESULTS:
+: bcdefghijklmnopqrstuvwxy
+
+* Set Comprehensions
+We can simulate the use of set syntax from maths in Haskell:
+
+$\{2 \cdot x | x \in \mathbb{N}, x \leq 10\}$
+
+#+begin_src haskell
+[2 * x | x <- [1..10]]
+#+end_src
+
+#+RESULTS:
+| 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 |
+
+** Adding predicates
+We can add additional conditions in the sets called *predicates*.
+#+begin_src haskell
+[2 * x | x <- [1..10], 2 * x >= 12]
+#+end_src
+
+#+RESULTS:
+| 12 | 14 | 16 | 18 | 20 |
+
+** Multiple variables
+#+begin_src haskell
+[x * y | x <- [1..3], y <- [2..4]]
+#+end_src
+
+#+RESULTS:
+| 2 | 3 | 4 | 4 | 6 | 8 | 6 | 9 | 12 |

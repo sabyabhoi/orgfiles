@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       c1126bf4-8bf3-4023-b5ce-1005bb47c756
+:END:
+#+title: Bubble Sort
+
+It is a simple O(n^2) complexity algorithm which considers to iterators (WLOG) =i= and =j=, where =i < j=. A swap is performed if =a[i] > a[j]=. 
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  void bubble_sort(vector<int>& a) {
+    int n = a.size();
+    for(int i = 0; i < n; ++i) {
+      for(int j = 0; j < n - i - 1; ++j) {
+        if(a[j] > a[j + 1])
+          swap(a[j], a[j + 1]);
+      }
+    }
+  }
+
+  int main() {
+    vector<int> a = {5, 4, 3, 2, 1};
+    bubble_sort(a);
+  
+    for(int& i : a) cout << i << ' ';
+    cout << '\n';
+  }
+#+end_src
+
+#+RESULTS:
+: 1 2 3 4 5

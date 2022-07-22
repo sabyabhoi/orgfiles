@@ -1,0 +1,75 @@
+:PROPERTIES:
+:ID:       1bc40ef5-2d0c-4e26-b421-90483aa64d32
+:END:
+#+title: Reversing a Linked List
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  struct Node {
+    int data;
+    Node* next;
+
+    Node(): data(0), next(nullptr) {}
+    Node(int val): data(val), next(nullptr) {}
+
+    void print() {
+      Node* itr = this;
+      while(itr != nullptr) {
+        cout << itr->data << ' ';
+        itr = itr->next;
+      }
+      cout << '\n';
+    }
+  };
+
+  void delete_list(Node* head) {
+    Node* curr = head, *nxt;
+    while(curr != nullptr) {
+      nxt = curr->next;
+      delete curr;
+      curr = nxt;
+    }
+  }
+
+  Node* from_vec(const vector<int>& v) {
+    Node* head = new Node(v[0]);
+    Node* tmp = head;
+    for(int i = 1; i < v.size(); ++i) {
+      tmp->next = new Node(v[i]);
+      tmp = tmp->next;
+    }
+    return head;
+  }
+#+end_src
+
+* Iterative Approach
+:PROPERTIES:
+:ID:       77a36ed7-c499-4f8f-b0b5-8618b85ca1f4
+:END:
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std 
+  Node* reverse(Node* head) {
+    Node *prev = nullptr, *curr = head, *next;
+
+    while(curr != nullptr) {
+      next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+    }
+    return prev;
+  }
+#+end_src
+
+* Recursive Approach
+#+begin_src c++
+  Node* reverse(Node *head) {
+    if (head == nullptr || head->next == nullptr) {
+      return head;
+    }
+    Node *newHead = reverse(head->next);
+    Node *next = head->next;
+    next->next = head;
+    head->next = nullptr;
+    return newHead;
+  }
+#+end_src

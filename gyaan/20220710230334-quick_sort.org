@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       9f2fe27d-c349-4b5b-a19a-2b17c35ed8ba
+:END:
+#+title: Quick Sort
+
+Similar to [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][Merge Sort]], quick sort is also a *divide and conquer* algorithm, which takes a pivot, places all the elements of the array less than the pivot on its left side, and the elements greater than the pivot on the right, and then sort the left and right sub-arrays.
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  int partition(vector<int>& a, int lb, int ub) {
+    int pivot = a[lb];
+    int l = lb, r = ub;
+    while(l <= r) {
+      while(a[l] <= pivot) ++l;
+      while(a[r] > pivot) --r;
+      if(l <= r)
+        swap(a[l], a[r]);
+    }
+    swap(a[lb], a[r]);
+    return r;
+  }
+
+  void quick_sort(vector<int>& a, int lb, int ub) {
+    if(lb < ub) {
+      int loc = partition(a, lb, ub);
+      quick_sort(a, lb, loc - 1);
+      quick_sort(a, loc + 1, ub);
+    }
+  }
+
+  int main() {
+
+    vector<int> a = {5, 4, 3, 2, 1};
+    quick_sort(a, 0, 4);
+
+    for(int& i : a) cout << i << ' ';
+    cout << '\n';
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS:
+: 1 2 3 4 5

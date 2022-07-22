@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       97a5ec97-cf7a-4c82-9315-8310c99839a1
+:END:
+#+title: Wave Function Collapse
+
+- Based on [[https://youtu.be/rI_y2GAlQFM][The Coding Train's video]].
+- Originally a concept in *Quantum Mechanics*.
+- Relies heavily on the idea of _entropy_ from *Information Theory*.
+
+* What does it mean to "collapse" a wave function?
+- Consider a Sudoku. When we attempt to solve it, we pick the cells with the least entropy (possibly one option), and fill it with that option. 
+- In this manner, when we're able to fill in a cell with the only valid option, we're essentially /collapsing/ the cell.
+- This further reduces the entropy of its neigbouring cells. This way we can solve the entire Sudoku board.
+

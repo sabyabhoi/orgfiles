@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       cf71dba8-f63d-468d-ab50-9e74c6ae4b3a
+:END:
+#+title: Zettelkasten
+
+- Originally taken from [[https://zenkit.com/en/blog/a-beginners-guide-to-the-zettelkasten-method/][this]] blog.
+
+* Types of notes
+** Fleeting Notes
+- Random thoughts and ideas which pop into our mind.
+- They can be as short as a single word, since they're present just to remind us of the idea later.
+- They're unstructured and unorganized by default.
+- They're just temporary placeholders for ideas, and can be deleted once the ideas are processed into permanent notes.
+** Reference Notes
+- These are the original texts that resonate with us.
+** Literature Notes
+- Literature notes are the notes we take in reference to those sections.
+- The goal here is _not to copy paste the section itself_, but to _add more context to it for future reference_.
+*** General Tips
+- Try to write down more information than necessary.
+- Make a habit to include the title of the article/book/journal etc., the author, the chapter and the page number.
+** Permanent Notes
+- Standalone ideas that can be made without any direct context to other sourced information such as books, articles, etc.
+- Can be made as a recap or summary of the information just researched or learned.
+

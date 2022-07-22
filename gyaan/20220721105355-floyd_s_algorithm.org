@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       b56836d5-2932-476d-b2a2-18c5c3192fbf
+:END:
+#+title: Floyd's Algorithm
+
+- This algorithm is used to detect loops in a [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked list]].
+- In this algorithm we employ two pointers:
+  - the tortoise which traverses the list one node at a time, and
+  - the hare which moves at twice the speed of the tortoise.
+
+* Primary argument
+If \exist a loop in the list, then the hare and the tortoise are going to meet somewhere in the loop.
+
+** Proof
+#+attr_html: :width 500px
+[[../assets/hare-tortoise.png]]
+
+Let
+- the distance before the loop be =A=.
+- The distannce within the loop where the hare and the tortoise meet be =B=.
+- The circumference of the loop be =B + C=.
+- The number of cycles covered by the hare and the tortoise be =n= and =m= respectively.
+
+Then, the total distance =D= covered by the tortoise is given by
+
+\[
+D = A + B + m \cdot (B + C)
+\]
+
+Similarly, the total distance covered by the hare is =2 * D=, since the hare moves at twice the speed of the tortoise:
+
+\[
+2 \cdot D = A + B + n \cdot (B + C)
+\]
+
+Subtracting the first equation from the second, we get
+
+\[
+D = (B + C) \cdot (n - m)
+\]
+
+This implies that the total distance covered by the hare and the tortoise are integral multiples of the circumference of the cycle. Hence, they're bound to meet.
+
+* Locating the start of the loop
+Putting the value of $D = (B + C) \cdot (n - m)$ in the very first equation, we get
+
+\[
+A + B = (n - 2m) \cdot (B + C)
+\]
+
+Now, at the point where they both meet, if any pointer moves a distance of =A + B=, they're going to end up at the same point (marked as star in the diagram), since =A + B= is a multiple of the circumference of the loop. Hence, it doesn't matter if the tortoise starts from the beginning of the list or at the point it meets the hare, after moving a distance of =A + B=, it's going to end up at the same spot.
+
+Now, if the tortoise traverses another =A= nodes from this point, Then it's going to effectively traverse
+
+\[
+A = (n - 2m) \cdot (B + C) - B
+\]
+
+which is =B= less than the circumference of the loop, or, the start of the loop. So, employ two tortoises, one at the start of the list, and another at the point where the hare and the tortoise met, and make them traverse the list. The point where they'll meet would be the start of the loop.
