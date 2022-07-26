@@ -514,6 +514,7 @@ Provided a native emulation experience rather than one written in elisp.
 #+end_src
 
 * Org mode
+** Initial setup hook
 #+begin_src emacs-lisp
   (defun cb/org-mode-setup ()
     (org-indent-mode)
@@ -526,14 +527,32 @@ Provided a native emulation experience rather than one written in elisp.
           org-directory "~/workspace/userfiles/orgfiles/guides"
           org-default-notes-file (concat org-directory "/notes.org"))
     (display-line-numbers-mode 0))
+#+end_src
 
-  (with-eval-after-load 'org
-    (require 'org-tempo)
-    (add-to-list 'org-structure-template-alist '("elisp" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("pro" . "src python :session :results output"))
-    (add-to-list 'org-structure-template-alist '("prv" . "src python :session "))
+** Org Appear
+- Auto-toggle org elements.
+- Show the contents of the org links _only in insert mode_.
+#+begin_src emacs-lisp
+  (use-package org-appear
+    :ensure t
+    :hook (org-mode . org-appear-mode)
+    :custom
+    (org-appear-autolinks t)
+    (org-appear-trigger 'manual)
+    :config
+    ;; Appears only when in evil-insert-mode
+    (add-hook 'evil-insert-state-entry-hook
+              #'org-appear-manual-start
+              nil
+              t)
+    (add-hook 'evil-insert-state-exit-hook
+              #'org-appear-manual-stop nil
+              t)
     )
+#+end_src
 
+** Package setup
+#+begin_src emacs-lisp
   (use-package org
     :hook (org-mode . cb/org-mode-setup)
     :bind (("C-x e" . org-edit-src-code))
@@ -563,6 +582,16 @@ Provided a native emulation experience rather than one written in elisp.
                           :weight 'medium
                           :height (cdr face))))
   #+end_src
+  
+** Source code templates
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+    (require 'org-tempo)
+    (add-to-list 'org-structure-template-alist '("elisp" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("pro" . "src python :session :results output"))
+    (add-to-list 'org-structure-template-alist '("prv" . "src python :session "))
+    )
+#+end_src
 
 ** Hide keywords
 #+begin_src emacs-lisp
