@@ -2,6 +2,7 @@
 :ID:       a216eaa4-aadb-4a9d-8900-24edbb3a0772
 :END:
 #+title: MultiArrayList in Zig
+#+filetags: :CS:
 
 =MultiArrayLists= are like =ArrayLists= in Zig, but are used to store structs instead of primitive types.
 #+begin_src zig

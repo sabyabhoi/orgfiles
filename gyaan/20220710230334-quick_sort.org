@@ -2,6 +2,7 @@
 :ID:       9f2fe27d-c349-4b5b-a19a-2b17c35ed8ba
 :END:
 #+title: Quick Sort
+#+filetags: :CS:
 
 Similar to [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][Merge Sort]], quick sort is also a *divide and conquer* algorithm, which takes a pivot, places all the elements of the array less than the pivot on its left side, and the elements greater than the pivot on the right, and then sort the left and right sub-arrays.
 

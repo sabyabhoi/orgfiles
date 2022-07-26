@@ -1,0 +1,9 @@
+**/*.aux
+**/*.log
+**/*.tex
+**/*.html
+**/*.md
+**/*.pdf
+**/*.fdb_latexmk
+**/*.fls
+journal/

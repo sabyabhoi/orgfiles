@@ -2,6 +2,7 @@
 :ID:       a8a078e6-459d-4b64-918a-f6e20f42d03e
 :END:
 #+title: Multiple source files in C++
+#+filetags: :CS:
 
 Suppose you have a source file and a header file in C++:
 

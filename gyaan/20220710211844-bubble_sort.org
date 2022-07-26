@@ -2,6 +2,7 @@
 :ID:       c1126bf4-8bf3-4023-b5ce-1005bb47c756
 :END:
 #+title: Bubble Sort
+#+filetags: :CS:
 
 It is a simple O(n^2) complexity algorithm which considers to iterators (WLOG) =i= and =j=, where =i < j=. A swap is performed if =a[i] > a[j]=. 
 

@@ -2,6 +2,7 @@
 :ID:       e12d16fa-3a50-4931-9e60-c583d41de345
 :END:
 #+title: Assembly Language
+#+filetags: :CS:
 
 Here we talk about [[https://www.nasm.us/][NASM x86 assembly]]. 
 
@@ -29,7 +30,7 @@ One can also jump to the current address, sort of creating an empty infinite loo
   jmp $
 #+end_src
 
-** Setting bytes with =db=
+** Setting bytes with =db=                                                :CS:
 :PROPERTIES:
 :ID:       8024afaa-5615-4264-aeac-1c21a638ea4f
 :END:
@@ -44,8 +45,7 @@ We can use the =db= instruction (short for *define byte*) to set a single or mul
   db "Hello"
 #+end_src
 
-
-* Creating a binary out of assembly
+* Creating a binary out of assembly                                   :CS:
 :PROPERTIES:
 :ID:       43c0b0ca-7341-4bdf-8e6a-b8d624920fbb
 :END:

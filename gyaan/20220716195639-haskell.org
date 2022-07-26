@@ -2,10 +2,11 @@
 :ID:       cb7eda74-5f0d-4b23-ab28-34f1c57e7814
 :END:
 #+title: Haskell
+#+filetags: :CS:
 #+startup: latexpreview
 #+OPTIONS: tex:t
 
-Haskell is a functional programming language.
+Haskell is a [[id:6aa4ce9e-aead-40d1-82ac-43bceb14ae00][functional programming language]].
 
 * Basic Syntax
 - To run Haskell in an interpreter, use the [[https://www.haskell.org/ghc/][Glasgow Haskell Compiler]] Interpreter (ghci).

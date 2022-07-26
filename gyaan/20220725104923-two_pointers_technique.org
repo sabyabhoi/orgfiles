@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       d7ee77e6-ac4d-472b-9e6c-8660076a2b15
+:ROAM_REFS: https://github.com/crux-bphc/CC-Summer-Group-2021/blob/main/Part-3/Ep3-TwoP-Sliding-Window.md
+:END:
+#+title: Two Pointers Technique
+#+filetags: :CS:
+
+- Employ two different pointers (duh).
+- These pointers are usually
+  - Moving at different speeds in the same direction, or
+  - Moving in the opposite direction.
+- Prolific in [[id:6a9a5dae-f0b6-4b98-b93a-cfd7238f7595][Sorting Algorithms]], and various other [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]].

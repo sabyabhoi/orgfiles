@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       475dc330-0b54-4b73-a721-f484793ed766
+:ROAM_ALIASES: LPS
+:END:
+#+title: Longest Prefix Suffix
+#+filetags: :CS:
+
+- In the Longest Prefix Suffic problem, we're given a string =s=, and we're supposed to find the length of the longest /better/ suffix which is also the longest /better/ prefix.
+- Here, /better/ suffix/prefix means one which isn't equal to the string itself.
+
+#+begin_example
+s = "abcab"
+lps = 2 (for "ab")
+#+end_example
+
+For this, we generate a table, keeping track of the LPS of all the substring till that point.
+
+*IMPORTANT*: In an LPS table, each element denotes the position in the string where the pattern uptill that point has been repeated. E.g. in the following table: 
+
+|---+---+---+---+---|
+| 0 | 1 | 2 | 3 | 4 |
+|---+---+---+---+---|
+| a | b | c | a | b |
+|---+---+---+---+---|
+| 0 | 0 | 0 | 1 | 2 |
+|---+---+---+---+---|
+
+The string ="a"= at index =3= has an LPS value of =1=, which means that the string position =LPS - 1 = 1 - 1 = 0=, the string ="a"= has been repeated. Similarly, the string ="b"= at index =4= has an LPS value of =2=, meaning that at the string position =LPS - 1 = 2 - 1 = 1=, the string ="ab"= has been repeated already.
+
+* Algorithm
+1. Take [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: =l = 0= and =r = 1=. 
+2. Maintain an =ans= array.
+3. If s_l and s_r are equal, then ans_r = l + 1. Increment =l= and =r=.
+4. If s_l and s_r are not equal, then check if =l = 0=.
+   - If it is, then put ans_r = 0, and increment =r=.
+   - If it isn't, then move =l= back by one step, and make it jump to the place in its answer.
+
+#+begin_src cpp
+  vector<int> lps(const string& s) {
+    size_t n = s.length();
+    vector<int> ans(n);
+    ans[0] = 0;
+
+    size_t l = 0, r = 1;
+    while(r < n) {
+      if(s[l] == s[r]) {
+        ans[r++] = ++l;
+      } else if(l <= 0) ans[r++] = 0;
+      else {
+        l = ans[l - 1];
+      }
+    }
+
+    return ans;
+  }
+#+end_src

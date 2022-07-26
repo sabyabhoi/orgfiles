@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       26dce03e-95e6-4d78-8fa9-ba1743336d73
+:END:
+#+title: Common Triad Anatomy
+#+filetags: :MUSIC:
+
+* E Chord Shape
+[[../assets/E-Chord Shape.png]]
+
+If we only consider the first four strings, we get the chord in its *root form* (/no inversions/).
+* C Chord Shape
+[[../assets/C-Chord Shape.png]]
+
+This chord shape itself isn't very famous, but if we consider the first four strings, we get the chord in its *first inversion*.
+* A Chord Shape
+[[../assets/A-Chord Shape.png]]
+
+If consider the first four strings here, we get the chord in its *second inversion*.

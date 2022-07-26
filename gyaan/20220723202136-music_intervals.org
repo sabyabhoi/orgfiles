@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       f46759da-a6c9-4644-b851-3b39fcfd8da2
+:END:
+#+title: Music Intervals
+#+filetags: :MUSIC:
+
+- In Music Theory, intervals are defined as the distance between any two notes.
+
+|------------+---------------|
+| *Interval*   | *Composition*   |
+|------------+---------------|
+| m3         | 1W + 1H       |
+| M3         | 2W            |
+| P5         | 3W + 1H       |
+| dim 5      | 3W            |
+| aug 5      | 4W            |
+| m7         | 5W            |
+| M7         | 5W + 1H       |
+|------------+---------------|

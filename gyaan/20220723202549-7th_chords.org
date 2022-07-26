@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       99a28096-bfac-4629-9ee7-fd34b1fa2f3b
+:END:
+#+title: 7th Chords
+#+filetags: :MUSIC:
+
+- 7^th chords are triads with the 7^th node of the respective scale added to them
+
+* Major 7^th
+- *Denoted by M7, Maj7 or \Delta*
+- major triad + major 7 interval.
+
+[[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][Intervals]]: *R M3 P5 M7*
+
+* Minor 7^th
+- *Denoted by m7 or -7* 
+- minor triad + minor 7 interval.
+
+[[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][Intervals]]: *R m3 P5 m7*
+
+* Dominant 7^th
+- *Denoted by *7*
+- major triad + minor 7 interval.
+
+[[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][Intervals]]: *R M3 P5 m7*
+
+** Why dominant chords are called "Dominant".
+Suppose we're constructing the C7 chord; then in order to do so, we take the scale in which C is /dominant/, that is, C is at an [[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][interval of P5]].
+
+F major = F G A Bb C D E F
+
+We re-arrange it to start from C to get
+
+_C_ D _E_ F _G_ A _Bb_
+
+Hence, we get
+
+C7 = C E G B

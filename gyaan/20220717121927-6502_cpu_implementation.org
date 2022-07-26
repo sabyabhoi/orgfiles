@@ -2,6 +2,7 @@
 :ID:       c23ebbb5-af27-40d4-9839-07ff88684b59
 :END:
 #+title: 6502 CPU Implementation
+#+filetags: :CS:
 
 * Connections of the CPU
 [[../assets/CPU.png]]

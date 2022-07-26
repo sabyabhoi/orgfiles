@@ -1,7 +1,8 @@
 :PROPERTIES:
-:ID:       50bfeb67-0627-42bb-a4a3-e3e177f6eae5
+:ID:       6a9a5dae-f0b6-4b98-b93a-cfd7238f7595
 :END:
 #+title: Sorting Algorithms
+#+filetags: :CS:
 
 * O(n^2) Algorithms
 - [[id:c1126bf4-8bf3-4023-b5ce-1005bb47c756][Bubble sort]]

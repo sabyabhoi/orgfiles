@@ -2,6 +2,7 @@
 :ID:       85df6e3b-862e-45ad-9d1b-a1e7d18cf4a8
 :END:
 #+title: OS Development
+#+filetags: :CS:
 
 * Introduction
 - For understanding how an operating system works, we need to understand [[id:e12d16fa-3a50-4931-9e60-c583d41de345][assembly]] language.
@@ -46,7 +47,7 @@ This can be done be setting a pointer to the base and top of the stack using the
 | stack    | =ss=              |
 |----------+-----------------|
 
-* System Interrupts
+* System Interrupts                                                      :CS:
 :PROPERTIES:
 :ID:       7d3b0071-079e-4845-8157-d63737461e20
 :END:

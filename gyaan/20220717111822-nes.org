@@ -2,6 +2,7 @@
 :ID:       2a51d82c-b1df-42d6-8ee7-d1943736a6b9
 :END:
 #+title: NES Construction
+#+filetags: :CS:
 
 [[https://en.wikipedia.org/wiki/Nintendo_Entertainment_System][Nintendo Entertainment System(NES)]] is a video game console created by Nintendo.
 

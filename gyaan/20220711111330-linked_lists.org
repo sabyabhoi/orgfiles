@@ -2,6 +2,7 @@
 :ID:       58e01dcb-3b38-41dc-852d-777a5ec4cd2a
 :END:
 #+title: Linked Lists
+#+FILETAGS: :CS:
 
 * Basic structure
 #+NAME: nodeStruct
@@ -62,5 +63,3 @@
 #+RESULTS:
 : 1 2 3 4 5
 
-* Important concepts
-- [[id:1bc40ef5-2d0c-4e26-b421-90483aa64d32][Reversing a Linked List]]

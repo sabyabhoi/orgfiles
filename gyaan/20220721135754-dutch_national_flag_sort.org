@@ -2,6 +2,7 @@
 :ID:       25152c82-3785-4ea0-8041-4ec7a9838085
 :END:
 #+title: Dutch National Flag Sort
+#+filetags: :CS:
 
 - Used for [[id:50bfeb67-0627-42bb-a4a3-e3e177f6eae5][sorting]] an array comprising of only 0s, 1s, and 2s.
 

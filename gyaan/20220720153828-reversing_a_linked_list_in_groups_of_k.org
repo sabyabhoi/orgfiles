@@ -2,6 +2,7 @@
 :ID:       ba700caa-59e9-451f-af3d-ee24cb720d4d
 :END:
 #+title: Reversing a Linked List in groups of k
+#+FILETAGS: :CS:
 
 Given a [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked list]] of length =n=, we're supposed to reverse the linked list in groups of =k=.
 

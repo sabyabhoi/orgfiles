@@ -2,9 +2,11 @@
 :ID:       b56836d5-2932-476d-b2a2-18c5c3192fbf
 :END:
 #+title: Floyd's Algorithm
+#+FILETAGS: :CS:
+
 
 - This algorithm is used to detect loops in a [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked list]].
-- In this algorithm we employ two pointers:
+- In this algorithm we employ [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]:
   - the tortoise which traverses the list one node at a time, and
   - the hare which moves at twice the speed of the tortoise.
 

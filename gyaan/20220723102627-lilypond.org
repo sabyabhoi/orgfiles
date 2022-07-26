@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       e1e184b5-5cb1-4914-b979-3d0519e9f5ff
+:ROAM_REFS: http://lilypond.org/
+:END:
+#+title: LilyPond
+#+filetags: :MUSIC:
+
+- It's a program for generating musical notation.
+- It's closely related to LaTeX.
+
+* Basic Syntax
+#+begin_src lilypond :file foo.png
+  \version "2.22.2"
+  {
+    c' e' g' e'
+  }
+#+end_src

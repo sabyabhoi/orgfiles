@@ -2,7 +2,9 @@
 :ID:       1bc40ef5-2d0c-4e26-b421-90483aa64d32
 :END:
 #+title: Reversing a Linked List
+#+filetags: :CS:
 
+- See [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][Linked Lists]].
 #+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
   struct Node {
     int data;

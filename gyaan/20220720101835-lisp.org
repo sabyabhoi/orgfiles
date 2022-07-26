@@ -2,8 +2,9 @@
 :ID:       104a075c-e049-491b-9aa5-b1aba9a11c46
 :END:
 #+title: Lisp
+#+filetags: :CS:
 
-- Lisp is a prefix based high level programming language.
+- Lisp is a prefix based high level [[id:6aa4ce9e-aead-40d1-82ac-43bceb14ae00][functional programming language]].
 - There are various different /dialects/ of Lisp, like
   - Clojure (JVM stuff)
   - Common Lisp

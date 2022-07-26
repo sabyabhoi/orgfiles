@@ -2,6 +2,7 @@
 :ID:       556e2072-59f1-4d47-a7a7-2e724a53a0e4
 :END:
 #+title: BIOS
+#+filetags: :CS:
 
 - When we booted the binary with the [[id:7bb493a3-c75a-4944-be1c-4e275a98ae0d][Boot sector]], we entered what is called *Real Mode*, which is a 16-bit mode assisted by *BIOS*.
 - BIOS Stands for *Basic IO System*.
