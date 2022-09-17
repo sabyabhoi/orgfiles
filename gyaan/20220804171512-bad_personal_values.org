@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       51087747-9617-4590-a53b-71e00bc95c95
+:ROAM_REFS: [[cite:&manson2016subtle]] 
+:END:
+#+title: Bad Personal Values
+
+* Traits of bad personal values
+- In contrast to the [[id:b028d447-a3f8-4a6f-855f-6d9a6482d9fb][Good Personal Values]], these are the [[id:b83aba99-4575-407e-a48b-48a538d73b1d][personal values]] which are
+** Superstitious
+- These values are not static across different people.
+- E.g. if you think you're popular, someone else might think you're not.
+** Socially destructive
+- Doesn't improve you or/and the society
+** Not Immediate or controllable
+- You cannot control this value immediately.
+- E.g. making a girl you admire like you back.
+* Examples
+- Some examples include
+  - dominance through manipulation/violence
+  - philandering
+  - feeling good all the time
+  - always being the centre of attention
+  - not being alone
+  - being rich just for the sake of it
+
+* Notably poor personal values
+** Pleasure
+- Pleasure is not the cause of happiness, rather it is the /effect/.
+** Material success
+** Always being right
+- We're wrong most of the time; hence, it's pointless to aim to be right all the time.
+- Establishing that we're right all the time eliminates all scope of further progress in life.
+** Staying Positive
+- [[id:c523a4ca-3482-47e6-9dd5-ddff83a7fe03][Suffering]] is an inescapable part of life; avoiding it is futile.
+- Trying to stay positive all the time and not addressing the problems only provides us with *temporary highs*; once the high gets over, the problem still persists (and even grows in some cases).
+  

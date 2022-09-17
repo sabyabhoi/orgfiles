@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       089dbb86-3025-4edd-a8e2-4b247c9ac193
+:END:
+#+title: Monoid
+
+In [[id:121106e1-bfee-4e5b-80b9-51446259a4cd][Group Theory]], a [[id:49643318-8d77-471e-9790-d82ad2602774][semi-group]] $(S, \circ)$ is called a *monoid* if it has a [[id:0d63195a-0035-4e4c-97a1-47c4c77b2403][neutral]] element.

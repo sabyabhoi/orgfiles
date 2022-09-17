@@ -1,0 +1,101 @@
+:PROPERTIES:
+:ID:       df129ee0-22bd-4718-b89d-85de5ac4fc38
+:END:
+#+title: 0-1 Knapsack
+#+filetags: :CS:
+
+This is a type of [[id:e8089b0e-fdc0-4ae6-a873-a2c75cf2410b][Knapsack Problem]] in which an item will either go into the knapsack (0), or it won't go into the knapsack (1).
+
+* Recursive approach
+1. The base case of the recursion will occur when either the size of the item set is 0, or the capacity of the knapsack is 0.
+2. We look at all the items in the set moving backwards in the array:
+   - If the weight of the item is greater than the capacity of the knapsack, then we won't add it to the knapsack.
+   - If the weight of the item is less than or equal to the capacity of the knapsack, then we may or may not add it.
+** Code
+#+begin_src c++
+  int knapsack(const vector<int>& wt, const vector<int>& val, int W, int n) {
+    if (n == 0 || W == 0)
+      return 0;
+
+    if (wt[n - 1] <= W)
+      return max(val[n - 1] + knapsack(wt, val, W - wt[n - 1], n - 1),
+                 knapsack(wt, val, W, n - 1));
+
+    return knapsack(wt, val, W, n - 1);
+  }
+#+end_src
+
+Here,
+- =wt= is a vector of the weight of all elements.
+- =val= is a vector of the value of all elements.
+- =W= is the capacity of the knapsack.
+- =n= is the number of elements in the set.
+  
+* Recursion + memoization
+In order to memoize the recursive solution, we first split the inputs into constant and non-constant inputs. We then only memoize the inputs which aren't constant.
+
+In this case, we memoize by taking the size of the array, and the capacity of the knapsack.
+#+begin_src c++
+int knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
+static vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
+if(dp[n][W] != -1) return dp[n][W];
+
+if (n == 0 || W == 0)
+    return 0;
+
+if (wt[n - 1] <= W) 
+    dp[n][W] = max(val[n - 1] + knapsack(wt, val, W - wt[n - 1], n - 1),
+                    knapsack(wt, val, W, n - 1));
+else 
+    dp[n][W] = knapsack(wt, val, W, n - 1);
+
+return dp[n][W];
+}
+#+end_src
+
+* Top-down approach
+Initialize a =dp= variable:
+#+begin_src c++
+vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
+#+end_src
+
+The base case in recursive approach happened when either =n=0=, or =W=0=, or both. Hence, we can set the base case in the =dp= variable as follows:
+#+begin_src c++
+  REP(i, n + 1) {
+    REP(j, W + 1) {
+      if(i == 0 || j == 0) {
+        dp[i][j] = 0;
+        continue;
+      }
+    }
+  }
+#+end_src
+
+The primary logic is exactly the same as the recursion approach with memoization. We just have to replace
+- =n= with =i=
+- =W= with =j=
+- =knapsack= function call with =dp=.
+
+Finally, our function becomes:
+
+#+begin_src c++
+int knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
+  vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
+
+  REP(i, n + 1) {
+    REP(j, W + 1) {
+      if (i == 0 || j == 0) {
+        dp[i][j] = 0;
+        continue;
+      }
+
+      if (wt[i - 1] <= j)
+        dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
+      else
+        dp[i][j] = dp[i - 1][j];
+    }
+  }
+
+  return dp[n][W];
+}
+#+end_src

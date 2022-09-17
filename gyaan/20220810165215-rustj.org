@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       4208e4ff-6603-46c1-a128-750757d7f217
+:END:
+#+title: Rust
+#+filetags: :CS:
+
+Rust is a general purpose programming language.

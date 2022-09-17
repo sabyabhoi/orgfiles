@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       d7f2cdff-c4c5-4ab0-8cbb-8cd8e2128cbd
+:ROAM_REFS: https://jichu4n.com/posts/how-x-window-managers-work-and-how-to-write-one-part-ii/
+:END:
+#+title: X Libraries
+#+filetags: :CS:
+
+For us to create [[id:b1ff0a9a-f69a-4837-932f-b5e47a025282][X Window Managers]], there are two official C libraries:
+* Xlib
+- hides most of the work done by the X protocol behind friendly C APIs
+- hides most of the asynchronous X protocol behind a mixed synchronous and asynchronous API
+
+E.g. if we wish to lookup the attributes (size and position) of a window, we could write the following code:
+
+#+begin_src c
+  XWindowAttributes attrs;
+  XGetWindowAttributes(display, window, &attrs);
+#+end_src
+
+Here, the function =XGetWindowAttributes()= is synchronous (blocking), i.e., it blocks the execution of the program until it gets a response from X server.
+
+** (A)synchronous behaviour in Xlib
+In general,
+- Functions that do not return a value, like =XResizeWindow= are asynchronous.
+- Functions that return a value, like =XSetGeometry= are synchronous.
+
+Instead of sending a single request to the server everytime, Xlib stores up multiple requests in a buffer and sends the buffer to X server at once. This behaviour increases performance of the interaction.
+** Headers
+On 
+* XCB
+- directly exposes all the underlying plumbing
+- fully asynchronous API
+
+E.g.
+
+#+begin_src c
+  xcb_get_window_attributes_cookie_t cookie = xcb_get_window_attributes(connection, window);
+  // do other stuff while waiting for reply
+  xcb_get_window_attributes_reply_t* reply = xcb_get_window_attributes_reply(connection,
+                                                                             cookie,
+                                                                             nullptr);
+  free(reply);
+#+end_src

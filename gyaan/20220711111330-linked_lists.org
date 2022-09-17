@@ -3,10 +3,11 @@
 :END:
 #+title: Linked Lists
 #+FILETAGS: :CS:
+#+DATE:2022-07-05
 
 * Basic structure
 #+NAME: nodeStruct
-#+begin_src C++ :main no :namespaces std
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std :noweb yes
   struct Node {
     int data;
     Node* next;
@@ -42,11 +43,6 @@
     }
     return head;
   }
-#+end_src
-
-#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std :noweb yes
-
-  <<nodeStruct>>
 
   int main() {
 
@@ -60,6 +56,5 @@
   }
 #+end_src
 
-#+RESULTS:
+#+RESULTS: nodeStruct
 : 1 2 3 4 5
-

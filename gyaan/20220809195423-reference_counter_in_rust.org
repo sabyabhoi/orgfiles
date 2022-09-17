@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       550c99ae-d124-4c3e-a42f-9282051d1653
+:END:
+#+title: Reference Counter in Rust
+#+filetags: :CS:
+
+In [[id:4208e4ff-6603-46c1-a128-750757d7f217][Rust]], the =Rc= smart pointer is a smart pointer which allows a value to have _multiple owners_. 
+
+#+begin_src rust
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(10);
+}
+#+end_src
+
+In order to have multiple owners, we make use of the =Rc::clone= function, which takes in the original =Rc= instance:
+#+begin_src rust
+  use std::rc::Rc;
+
+  fn main() {
+      let mut a = Rc::new(10);
+      let b = Rc::clone(&a);
+      let c = Rc::clone(&a);
+
+      println!("{} {} {}", *a + 10, *b + 20, *c + 30);
+  }
+#+end_src
+
+#+RESULTS:
+: 20 30 40
+
+An important pointer to note here is that the =Rc= smart pointer doesn't implement the [[id:a3fa13e7-c157-4ead-9ac3-d6fd7cca12ea][DerefMut trait]], and hence, cannot be borrowed mutably.
+
+* Getting number of references
+We can use the =Rc::strong_count= function to get the number of references to the underlying data on the heap:
+#+begin_src rust
+  use std::rc::Rc;
+
+  fn main() {
+      let a = Rc::new(5);
+      let b = Rc::clone(&a);
+      let c = Rc::clone(&a);
+
+      println!("{}", Rc::strong_count(&a));
+  }
+#+end_src
+
+#+RESULTS:
+: 3

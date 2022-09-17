@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       4c3eeba8-41f3-4f74-bc38-7c5a069cd7de
+:ROAM_REFS: https://www.youtube.com/watch?v=RfHA4OPfoi8
+:END:
+#+title: Compression
+#+filetags: :MUSIC:
+
+In [[id:b2d50324-60dc-4562-9350-38fdb5dec45a][audio processing]], compression is a method by which we can reduce the peaks of an audio signal, in order to normalize the overall volume of the sound.
+
+* Compression parameters
+** Threshold
+It is the volume of the sound (usually in dB) after which the compression kicks in.
+** Attack
+Attack defines how fast or slow the compression should activate once the threshold is crossed. A fast attack, meaning smaller attack time, immediately compresses out all the peaks, while a slow attack, meaning higher attack time, takes a bit of time and feels a bit smoother.
+** Release
+Similar to attack, release defines how fast or slow the compression deactivates once the volume goes below the threshold.
+** Ratio
+Compression ratio specifies how much the volume should be reduced once the threshold is crossed. Higher ratio means higher compression. If the ratio is infinite, then the high volume signals are simply muted.
+** Knee
+Specifies whether or not to smooth out the compressed signal.
+[[../assets/compression-knee.png]]
+
+* Practical usage
+1. Compression is quite useful in *rhythm guitar*, when we wish to have the volume evened out during the entire chord progression.
+2. Compression can also be used for sustaining distorted signals, since one could compress the louder signals and just increase the overall gain to have a single continuous signal. (works well when coupled with overdrive) 

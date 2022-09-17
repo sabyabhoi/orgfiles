@@ -1,0 +1,71 @@
+:PROPERTIES:
+:ID:       a5f37e57-e61c-4a10-93cd-f3c87b44b064
+:END:
+#+title: Binary Tree
+#+filetags: :CS:
+
+* Basic structure
+#+begin_src C++
+  struct Node {
+    int data;
+    Node *left;
+    Node *right;
+  };
+#+end_src
+
+* Height of a Binary Tree
+:PROPERTIES:
+:ID:       40d9539c-f0f9-41f0-8fa6-b19dd443b176
+:END:
+The height of a *node* of a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][binary tree]] is defined as the number of edges in the longest path from that node to a leaf node. The height of a binary tree is simply *the height of the root node*.
+
+** Finding out the height of a node
+We employ a recursive algorithm to do so:
+1. If the node is null, return 0.
+2. Otherwise, return the greater of the height of the left node and the right node plus 1.
+
+#+begin_src c++
+  int height(Node *root) {
+    if(root == nullptr)
+      return 0;
+
+    return max(height(root->left), height(root->right)) + 1;
+  }
+#+end_src
+
+* Diameter of a Binary Tree
+:PROPERTIES:
+:ID:       411b8ad1-d0e4-43d6-903a-fd141898ce55
+:END:
+The diameter of a node of a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][binary tree]], is defined as the number of nodes on the longest path between two nodes. 
+
+#+begin_example
+Tree:
+  1
+ / \
+2   3
+Diameter: 3
+#+end_example
+
+** Finding out the diameter of a binary tree
+The diamaeter could be
+- between two nodes on the left side of the root node,
+- between two nodes on the right side of the root node, or
+- between two nodes on left and right side of the root node respectively (meaning including the root node).
+
+Therefore, we can employ a recursive algorithm to find out the diameter of the tree:
+
+#+begin_src c++
+  int diameter(Node *root) {
+    if(root == nullptr) return;
+
+    int ld = diameter(root->left);
+    int rd = diameter(root->right);
+  
+    int rootd = height(root->left) + height(root->right) + 1;
+
+    return max(max(ld, rd), rootd);
+  }
+#+end_src
+
+Here, the root diameter is calculated as the [[id:40d9539c-f0f9-41f0-8fa6-b19dd443b176][height]] of the left and right sides of the binary tree plus one (the root node itself).

@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       3377733d-11cd-4749-9757-75fc92b9a62f
+:END:
+#+title: Economic Development
+#+filetags: :ECONOMICS:
+
+In [[id:c08807ce-89fc-44df-b516-84a19b122c19][development economics]], development has been (re)defined many times.
+
+* Traditional measures
+The [[id:7c190ee8-978e-46f5-88d5-58cfbd9efc9c][Gross National Income(GNI)]] and Per Capita Income(PCI) are two traditional measures of development of an economy.
+
+** Objection
+One of the implications of the traditional measures is the *Trickle Down effect* according to which promoting the growth of large firms and corporations would in turn be beneficial for poorer sections of the society, as it would create more jobs and other economic opportunities.
+
+* 1970's Redefinition
+:PROPERTIES:
+:ID:       e00b327d-cdfd-4bd8-b2a3-cc29c79d8aa4
+:END:
+Economic development was redefined to add various other concepts such as poverty, education and inequality. The main theme for development now was *Redistribution from Growth*. In other words,
+
+\[
+\textrm{Economic Development} = \textrm{Economic Growth} + \Delta \textrm{in non-economical factors}
+\]
+
+* Sen's "Capability" Approach
+:PROPERTIES:
+:ID:       bf15c162-4c4c-42eb-879a-6b35e200015d
+:END:
+Resource \to Functioning \to Capability \to Utility
+
+** Characteristics
+Each good/commodity has some characteristics which can be quite useful. E.g. a car can be driven, an apple can be eaten, etc.
+** Functioning
+When we act on some characteristic, the characteristic turns into a function. E.g. *We* can drive a car, *we* can eat an apple.
+** Capability
+In order to convert a characteristic into a function, we need to have the capability to do so. Usually, such capabilities are set by societal norms or major institutions. E.g. I can't drive because I don't have a driver's license; I can't eat an apple because I'm allergic to it.
+** Sources of disparities
+There are various sources of disparities which may inhibit an individual's capability:
+*** Personal Heterogenity
+Like an illness, disability etc.
+*** Environmental Diversity
+Like tropical infections, sunburns, etc.
+*** Variations in social climate
+Like high crime rates in a particular region may stop you from going for a job in that region.
+*** Differences in relational perspectives
+These are the norms set by the society. E.g. not buying a condom due to the fear of being judged by the society. 
+*** Differences within family
+E.g. a girl might not get the same medical attention that a boy would get in a family.
+
+* 3 core values of development
+** Sustainance
+It is the ability of an individual to meet their basic needs like food and shelter.
+** Self-esteem
+A sense of worth and respect is also quite important for development. 
+** Freedom of choice
+Includes freedom to make decisions for oneself.

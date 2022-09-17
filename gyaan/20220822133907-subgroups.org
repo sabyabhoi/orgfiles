@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       51d0ea17-d996-4ac6-9652-01ba351822c6
+:END:
+#+title: Subgroups
+
+In [[id:121106e1-bfee-4e5b-80b9-51446259a4cd][Group Theory]], a subset $H$ is called the *subgroup* of [[id:5016f76a-f2ba-489c-96ec-316ab4a91bd9][group]] $G$ if it also forms a group under the same binary operation.
+It is often denoted as:
+
+\[
+H \leq G
+\]
+
+*Important note*: Either two subgroups are completely disjoint, or they are the same; they can't have /some/ common elements.
+* Examples
+Consider the group of integers $\mathbb{Z}$, with the binary /add/ operation (+). Then we can form a subset of this group containing only the /even integers/, which will also form a group, and hence, be a subgroup of $\mathbb{Z}$.
+
+\begin{equation*}
+\{x \; | \; \forall x \in \mathbb{Z} \; \textrm{s.t.} \; x | 2\} \leq \mathbb{Z}
+\end{equation*}
+
+* Lagrange's Theorem
+:PROPERTIES:
+:ID:       31aa223a-7347-44df-a3a8-c4d83d45b143
+:END:
+For a subgroup $H$ of a group $G$, the [[id:bf1f493c-8bb3-4158-a9c9-f9bd67cb2684][order]] of $H$ divides the [[id:bf1f493c-8bb3-4158-a9c9-f9bd67cb2684][order]] of $G$. In other words,
+
+\begin{equation*}
+|H| \; | \; |G|
+\end{equation*}
+
+** Interesting implication
+Consider a finite [[id:5016f76a-f2ba-489c-96ec-316ab4a91bd9][group]] with a prime [[id:bf1f493c-8bb3-4158-a9c9-f9bd67cb2684][order]]. WLOG, let the order be 7. Then we can fill out the set of the group as:
+
+\[
+\{e, a, a^2, a^3, a^4, a^5, a^6\}
+\]
+
+Here, if we operate on $a$ and $a^6$, then we get $a^7$, which isn't in the group. Therefore, we assign $a^7 = e$ for the sake of completeness:
+
+\[
+\{a^7, a, a^2, a^3, a^4, a^5, a^6\}
+\]
+
+If we substitute $a = 1$ and the operator as the add operator, we get:
+
+\[
+\{0, 1, 2, 3, 4, 5, 6\}       
+\]
+
+This is a [[id:61fd5565-98fc-4318-9246-325300b6acfa][cyclic group]] of order 7. Therefore, no matter how abstract a group gets, if its order is a prime, it is a [[id:61fd5565-98fc-4318-9246-325300b6acfa][cyclic group]].

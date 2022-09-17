@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       9c582084-35a1-4d8e-9455-65748ccaa08e
+:END:
+#+title: Check if a Binary Tree is a Binary Search Tree
+#+filetags: :CS:
+
+In order to check if a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]] is a [[id:cc94dbf1-6d0f-43ce-8bee-4b588811a126][Binary Search Tree]] or not, we employ the following algorithm:
+
+* Algorithm
+1. Each node can have an upper or lower limit of values which it can take:
+   - A node to the right side of its parent must be greater in value than its parent
+   - A node to the left side of its parent must be lesser in value than its parent
+2. Using this information, check if all the nodes lie in their respective ranges.
+3. Initialize the range as =INT_MIN= and =INT_MAX=.
+** Code
+#+begin_src c++
+  bool isValid(Node *root, int l, int r) {
+    if (root == nullptr)
+      return true;
+
+    if (root->data <= r && root->data >= l)
+      return isValid(root->left, l, root->data) &&
+        isValid(root->right, root->data, r);
+
+    else
+      return false;
+  }
+
+#+end_src
+
+And then call this function in the following manner:
+#+begin_src c++
+  isValid(root, INT_MIN, INT_MAX);
+#+end_src

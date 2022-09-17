@@ -1,0 +1,88 @@
+:PROPERTIES:
+:ID:       53b8c21d-c96a-4e92-bbd7-7ff176bec026
+:END:
+#+title: Binary Search
+#+filetags: :CS:
+
+Binary search is a searching [[id:a9338446-247d-4883-912e-bd4d705efd39][algorithm]] used to search for an element =k= in a sorted array =a[n]=. 
+
+* Algorithm
+1. Instantiate [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]] pointing to the start and end of the array to be searched: =l= and =r=.
+2. while =l= is not greater than =r=, take the mean of =l= and =r=  called =m= and compare this value with =k=:
+   - if the values are equal, then return =a[m]=.
+   - if =a[m]= is less than =k=, update =l= to be =a[m] + 1=
+   - if =a[m]= is greater than =k=, update =r= to be =a[m] - 1=
+
+3. If =k= isn't found, then return =-1=. 
+#+begin_src c++
+  int binary_search(int a[], int n, int k) {
+    int l = 0, r = n - 1, m;
+    while(l <= r) {
+      m = l + (r - l) / 2;
+      if(a[m] == k) return m;
+      else if(a[m] < k) l = m + 1;
+      else r = m - 1;
+    }
+    return -1;
+  }
+#+end_src
+
+* Upper Bound & Lower Bound
+:PROPERTIES:
+:ID:       c06d1370-0adb-4947-a3a9-3fc20eed69b3
+:END:
+C++ offers two functions in its STL called =std::upper_bound= and =std::lower_bound=
+** Lower Bound
+=lower_bound= returns the index of the first element of an array which has a value greater than or equal to =k=:
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  int my_lower_bound(int a[], int n, int k) {
+    int l = 0, r = n - 1, ans = r, m;
+    while(l <= r) {
+      m = l + (r - l) / 2;
+      if(a[m] >= k) {
+        ans = m;
+        r = m - 1;
+      }
+      else l = m + 1;
+    }
+    return ans;
+  }
+
+  int main() {
+    int a[] = {1, 2, 3, 4, 5, 6};
+    cout << my_lower_bound(a, 6, 3) << '\n';
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS:
+: 2
+
+** Upper Bound
+Similar to =lower_bound=, =upper_bound= returns the index of the first element of an array which has a value *strictly greater* than =k=:
+
+#+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
+  int my_upper_bound(int a[], int n, int k) {
+    int l = 0, r = n - 1, ans = r, m;
+    while(l <= r) {
+      m = l + (r - l) / 2;
+      if(a[m] > k) {
+        ans = m;
+        r = m - 1;
+      }
+      else l = m + 1;
+    }
+    return ans;
+  }
+
+  int main() {
+    int a[] = {1, 2, 3, 4, 5, 6};
+    cout << my_upper_bound(a, 6, 3) << '\n';
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS:
+: 3

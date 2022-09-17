@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       42d9ac34-2327-4d01-b6bc-dcfe712334d5
+:END:
+#+title: Functor typeclass
+#+filetags: :CS:
+
+=Functor= is a [[id:232c8196-5b30-4b8a-a0ab-5edb2b0a58ec][typeclass]] in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]] which is implemented on types that can be mapped over.
+
+#+begin_src haskell
+class Functor f where
+  fmap :: (a -> b) -> f a -> f b
+#+end_src
+
+Comparing this to the type signature of the =map= function:
+#+begin_src haskell
+:t map
+#+end_src
+
+#+RESULTS:
+: map :: (a -> b) -> [a] -> [b]
+
+The =List= type implements the =Functor= typeclass.
+#+begin_src haskell
+instance Functor [] where
+  fmap = map
+#+end_src

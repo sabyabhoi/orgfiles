@@ -1,0 +1,84 @@
+:PROPERTIES:
+:ID:       9c01a514-d167-4468-b8df-2ad8a5c1950c
+:END:
+#+title: Mutexes in Rust
+#+filetags: :CS:
+
+Apart from [[id:e39d5079-331d-41ba-bbe4-af9376b4d7a4][channels]], Mutexes are another way of sharing data between [[id:6690a4d1-0f17-42d7-b5e7-c097f6db6352][threads]] in [[id:4208e4ff-6603-46c1-a128-750757d7f217][Rust]].
+
+Mutex stands for _Mutual Exclusion_, which means that a mutex allows /only one thread/ to access some data at a given point of time. To access a mutex' data, a thread 
+1. must first get access to the /lock/ of a mutex, and
+2. once the thread has finished using the data, it should /unlock/ the mutex.
+
+* Usage
+#+begin_src rust
+  use std::sync::Mutex;
+
+  fn main() {
+      let m = Mutex::new(5);
+
+      {
+	  let mut num = m.lock().unwrap();
+	  *num = 10;
+      }
+
+      println!("{:?}", m);
+  }
+#+end_src
+
+#+RESULTS:
+: Mutex { data: 20, poisoned: false, .. }
+
+The =m.lock()= function returns a =MutexGuard= object, which is essentially a smart pointer (since it implements the [[id:70c30878-38c9-4048-8d1f-98a29857a126][Drop trait]]); so when the guard object is dropped, the mutex is automatically unlocked.
+
+* Using mutexes in multiple threads
+Suppose we wish to alter the value in a mutex in multiple threads (let's say 10 threads):
+#+begin_src rust
+  use std::sync::Mutex;
+  use std::thread;
+
+  fn main() {
+      let counter = Mutex::new(0u8);
+      let mut handles = Vec::with_capacity(10);
+    
+      for _ in 0..10 {
+          let handle = thread::spawn(move || {
+              let mut num = counter.lock().unwrap();
+              *num += 1;
+          });
+          handles.push(handle);
+      }
+      for handle in handles {
+          handle.join().unwrap();
+      }
+      println!("{}", *counter.lock().unwrap());
+  }
+#+end_src
+
+This will throw an error, because the =counter= mutex is trying to be moved into each of the 10 thread closures. One way to fix this would be to clone the mutex, but that would be pointless because we /want/ to increment the value of the original mutex.
+Hence, in order to have multiple owners of the object, we can make use of the [[id:550c99ae-d124-4c3e-a42f-9282051d1653][reference count smart pointer]]. But here's the catch: reference counters don't work properly in multithreaded system, so we use a modified version of reference count called the _Atomic Reference Count_ (Arc) smart pointer:
+#+begin_src rust
+  use std::sync::{Arc, Mutex};
+  use std::thread;
+
+  fn main() {
+      let counter = Arc::new(Mutex::new(0u8));
+      let mut handles = Vec::with_capacity(10);
+
+      for _ in 0..10 {
+	  let counter = Arc::clone(&counter);
+	  let handle = thread::spawn(move || {
+	      let mut num = counter.lock().unwrap();
+	      *num += 1;
+	  });
+	  handles.push(handle);
+      }
+      for handle in handles {
+	  handle.join().unwrap();
+      }
+      println!("{}", *counter.lock().unwrap());
+  }
+#+end_src
+
+#+RESULTS:
+: 10

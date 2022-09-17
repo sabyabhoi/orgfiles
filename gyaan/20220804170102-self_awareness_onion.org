@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       efd96abe-0ba2-496a-89d9-5b1ad85943e0
+:ROAM_REFS: [[cite:&manson2016subtle]]
+:END:
+#+title: Self-Awareness Onion
+
+In the context of emotions, self-awareness refers to the ability to acknowledge the existence of one's emotions, thoughts and feelings.
+Self-awareness is often said to have *three layers*, which form the *Self-Awareness Onion*:
+
+* First Layer
+- Acknowledging the existence of one's emotions
+- Recognizing when people feel their emotions
+- E.g. /"This is when I feel happy"/
+
+* Second Layer
+- Understanding /why/ we feel certain emotions
+- E.g. /"Why do I feel bad when I'm not able to afford X? This is because I mark my inability to afford X as a failure"/.
+
+* Third Layer
+- Questioning one's [[id:b83aba99-4575-407e-a48b-48a538d73b1d][Personal Values]]
+- E.g. /"Why do I mark my inability to afford X as a failure?"/

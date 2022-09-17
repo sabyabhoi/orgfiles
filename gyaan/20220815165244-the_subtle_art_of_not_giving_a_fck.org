@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       f9233155-238c-40e2-ac92-ee33befb350b
+:ROAM_REFS: [[cite:&manson2016subtle]]
+:END:
+#+title: The Subtle Art of Not Giving a Fck
+#+filetags: :BOOK:Life-Advice:
+
+* The book in 3 sentences
+1. Re-assess the [[id:b83aba99-4575-407e-a48b-48a538d73b1d][values]] by which you live your life.
+2. If you're feeling down, remember that you aren't special; [[id:c523a4ca-3482-47e6-9dd5-ddff83a7fe03][life sucks for everyone]].
+3. You're going to die one day anyway, so in the grand scheme of things, most of your problems are petty.
+
+* Impressions
+This book made me think about my [[id:b83aba99-4575-407e-a48b-48a538d73b1d][Personal Values]], which define my lifestyle. It also made me less scared from rejections and failures, because they're an inherent part of human life.

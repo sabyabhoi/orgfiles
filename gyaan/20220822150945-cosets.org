@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       fe4cd6ff-5102-43e2-a177-7b47db10e9f3
+:END:
+#+title: Cosets
+
+In [[id:121106e1-bfee-4e5b-80b9-51446259a4cd][Group Theory]], a [[id:51d0ea17-d996-4ac6-9652-01ba351822c6][Subgroup]] $H$ of a [[id:5016f76a-f2ba-489c-96ec-316ab4a91bd9][Group]] $G$ can be used to decompose the underlying set of $G$ into equal-sized subsets called *Cosets*. E.g. consider a subgroup of the group of all integers with the add operation $\mathbb{Z}$ which contains all the even integers:
+
+\[
+\{ \dots -6, -4, -2, 0, 2, 4, 6, \dots\}
+\]
+
+Then, we can /add 1/ to all the elements of this subgroup to form a subset of all odd integers. This is a /coset/ of $G$. Note that the newly form subset is *not* a [[id:51d0ea17-d996-4ac6-9652-01ba351822c6][subgroup]] of $G$. 
+
+*Note*: a subgroup is a coset of itself.
+
+* Properties of cosets
+1. Cosets have the same size as the [[id:51d0ea17-d996-4ac6-9652-01ba351822c6][subgroups]] from which they originate.
+2. If we operate on a [[id:51d0ea17-d996-4ac6-9652-01ba351822c6][subgroup]] with an element which is in the subgroup itself, then we get a coset which is equal to the subgroup itself; but if we operate with an element which lies outside the subgroup, then we get a completely disjoint coset.

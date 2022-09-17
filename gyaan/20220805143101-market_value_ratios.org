@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       cebcc6bc-c6dd-483b-b39c-8709c946715e
+:END:
+#+title: Market value ratios
+#+filetags: :FINANCE:
+
+These are [[id:015a9a59-7267-4f10-84fa-c37cc24bdfdd][financial ratios]] used to analyze the share price of a company's stock.
+
+* Return on Equity (ROE)
+:PROPERTIES:
+:ID:       816ffff7-c18f-46f7-b957-f56ef0147b3d
+:END:
+
+\[
+ROE = \frac{\textrm{Net profits after tax}}{\textrm{stockholder's equity (net worth)}}
+\]
+
+- It is a measure of how efficient a company is at generating profits.
+- Higher is better.
+- If the =ROE= of a company is high, then it is capable of generating higher profits for a given amount of equity.
+
+* Earnings Per Share (EPS)
+:PROPERTIES:
+:ID:       6752a8d5-7fe2-4082-9396-c51a581c4e21
+:END:
+
+\[
+EPS = \frac{\textrm{Net profits} - \textrm{Dividends}}{\textrm{No. of outstanding shares}}
+\]
+
+- It is a measurement of a company's profits.
+
+* Profit-to-Earnings Ratio (P/E)
+:PROPERTIES:
+:ID:       c2dc60ab-fe6d-49d7-940d-a9f0b6e5b7be
+:END:
+
+\[
+\textrm{P/E} = \frac{\textrm{Price of Stock}}{EPS}
+\]
+
+- How much investors are willing to pay for a stock relative to the company's earnings.
+- It is the amount an investor is expected to invest in a stock to get Rs. 1 worth of profit.

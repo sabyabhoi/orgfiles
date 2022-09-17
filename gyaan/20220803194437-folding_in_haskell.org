@@ -1,0 +1,86 @@
+:PROPERTIES:
+:ID:       53a8aefe-4cda-4725-b56f-15c6cb136e54
+:END:
+#+title:Folding in Haskell
+#+filetags: :CS:
+
+- In [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]], folding is used to accumulate some form of value.
+- In order to perform folding, Haskell provides us with the =foldr= and =foldl= [[id:7039543f-f0c6-4750-843d-5f9855f15394][functions]].
+
+* foldr
+Suppose we wish to write a function that sums up all the elements of a [[id:5846e4e1-2fb8-47c9-8020-d4fa588d4257][list]]:
+#+begin_src haskell
+mysum :: [Int] -> Int
+mysum [] = 0
+mysum (x:xs) = x + mysum xs
+#+end_src
+
+Or suppose we want to get the product of all the elements of a list:
+#+begin_src haskell
+myprod :: [Int] -> Int
+myprod [] = 1
+myprod (x:xs) = x * myprod xs
+#+end_src
+
+Here we can observe that the functions can be generalized into the following form:
+#+begin_src haskell
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr v [] = v
+foldr f v (x:xs) = f x (foldr f v xs)
+#+end_src
+
+/This/ is the =foldr= function. It accumulates the elements of a list using a function =f= and an initial value =v=.
+
+In general, the =foldr= function can be expanded:
+#+begin_src haskell
+foldr f v [a, b, c, d] = f a $ f b $ f c $ f d $ v
+#+end_src
+
+We can simplify the =mysum= and =myprod= functions using =foldr=:
+#+begin_src haskell
+mysum = foldr (+) 0
+myprod = foldr (*) 1
+#+end_src
+
+** Using custom functions
+- We can pass [[id:0fbd6308-a472-46b1-9f0d-83d0f7eabd10][anonymous functions]] as the first argument to =foldr= to perform custom accumulation.
+- Such anonymous functions take two arguments:
+  1. the element of the list
+  2. the current value of the accumulator
+- E.g. if we want to write a function that counts all the occurences of an element in a list:
+
+#+begin_src haskell
+countif e = foldr (\x acc if x == e then acc + 1 else acc) 0
+#+end_src
+
+- If we don't care about the element of the list, we can use the =const $= syntax:
+#+begin_src haskell
+length = foldr (const $ (+) 1) 0
+#+end_src
+
+** foldr1
+- Sometimes there isn't any natural value to assign to an empty list.
+- E.g. finding the maximum value in a list.
+- In such cases, we use =foldr1=:
+
+#+begin_src haskell
+foldr1 f [x] = x
+foldr1 f (x:xs) = f x (foldr1 f xs)
+#+end_src
+
+* foldl
+- The =foldl= function folds (accumulates values) from the left rather than the right (when compared to the =foldr= function).
+#+begin_src haskell
+foldl :: (a -> b -> a) -> a -> [b] -> a
+foldl f v [] = v
+foldl f v (x:xs) = foldl f (f v x) xs 
+#+end_src
+
+** Using custom functions
+- Again, we can pass [[id:0fbd6308-a472-46b1-9f0d-83d0f7eabd10][Anonymous functions]] as the first argument to =foldl= to perform custom accumulation.
+- Note that here, the /accumulator/ is the first argument to the anonymous function rather than the element of the list:
+
+#+begin_src haskell
+  rev :: [Int] -> [Int]
+  rev = foldl (\acc x -> x : acc) []
+#+end_src

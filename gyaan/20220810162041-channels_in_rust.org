@@ -1,0 +1,104 @@
+:PROPERTIES:
+:ID:       e39d5079-331d-41ba-bbe4-af9376b4d7a4
+:END:
+#+title: Channels in Rust
+#+filetags: :CS:
+
+Channels are a way of passing data between [[id:6690a4d1-0f17-42d7-b5e7-c097f6db6352][threads]] in [[id:4208e4ff-6603-46c1-a128-750757d7f217][Rust]]. A channel can be thought of a stream of water, wherein we can place some data on the beginning of the stream, and get the data out from the end of the stream.
+One of the most common channels available to us is the _Multiple Producer Single Consumer_ (MPSC) channel, which grants us the ability to transmit data through multiple different threads and read them out through a single receiver:
+
+#+begin_src rust
+  use std::sync::mpsc;
+  use std::thread;
+  use std::time::Duration;
+
+  fn main() {
+      let (tx, rx) = mpsc::channel();
+
+      thread::spawn(move || {
+	  thread::sleep(Duration::from_millis(100));
+	  tx.send(String::from("Hello,")).unwrap();
+      });
+      println!("{} sailor.", rx.recv().unwrap());
+  }
+#+end_src
+
+#+RESULTS:
+: Hello, sailor.
+
+In important point to note here is that the =rx.recv()= function is /blocking/. In order to not block the flow of execution of the prorgram, one can use the =rx.try_recv()= function, which returns a result type. 
+
+* Ownership rules
+The =tx.send()= function takes [[id:dfc466d8-99a0-488b-9ae7-e5bb58b3ecee][ownership]] of the data passed to it (and doesn't borrow it) intentionally, because it is possible for the thread to modify or even drop the data before it is received through the channel.
+
+#+begin_src rust
+  use std::sync::mpsc;
+  use std::thread;
+
+  fn main() {
+      let (tx, rx) = mpsc::channel();
+
+      thread::spawn(move || {
+	  let val = String::from("Hello, sailor");
+	  tx.send(val).unwrap();
+      });
+      println!("{}", rx.recv().unwrap());
+  }
+#+end_src
+
+#+RESULTS:
+: Hello, sailor
+
+* Sending multiple values 
+#+begin_src rust
+  use std::sync::mpsc;
+  use std::thread;
+
+  fn main() {
+      let (tx, rx) = mpsc::channel();
+
+      thread::spawn(move || {
+	  for val in ["Hello", "Sailor"] {
+	      tx.send(String::from(val)).unwrap();
+	  }
+      });
+
+      for received in rx {
+	  println!("{}", received);
+      }
+  }
+#+end_src
+
+#+RESULTS:
+: Hello
+: Sailor
+
+* Creating multiple producers
+We can simply clone the transmitter object before using it in the spawned thread as follows:
+#+begin_src rust
+  use std::sync::mpsc;
+  use std::thread;
+  use std::time::Duration;
+
+  fn main() {
+      let (tx, rx) = mpsc::channel();
+
+      let tx1 = tx.clone();
+      thread::spawn(move || {
+	  thread::sleep(Duration::from_millis(100));
+	  tx1.send(String::from("Hello, ")).unwrap();
+      });
+
+      thread::spawn(move || {
+	  thread::sleep(Duration::from_millis(200));
+	  tx.send(String::from("sailor.")).unwrap();
+      });
+
+      for received in rx {
+	  print!("{}", received);
+      }
+  }
+#+end_src
+
+#+RESULTS:
+: Hello, sailor.

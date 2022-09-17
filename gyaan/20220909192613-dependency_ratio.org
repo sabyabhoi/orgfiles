@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       d4243744-bfac-4e5f-a64e-e2e9513739fb
+:END:
+#+title: Dependency Ratio
+#+filetags: :ECONOMICS:
+
+It is defined as the proportion of population in the non-working age group: 0-15 years and 65+ years.

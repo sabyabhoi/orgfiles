@@ -1,0 +1,92 @@
+#+TITLE:Reference Notes
+#+AUTHOR:Sabyasachi Bhoi
+
+* Rust, WebAssembly and the future of Serverless
+:PROPERTIES:
+:REF: https://www.youtube.com/watch?v=CMB6AlE1QuI
+:END:
+<2022-08-13 Sat 17:58>
+
+** Rust
+- Speed vs Safety tradeoff in common languages
+- Rust eliminates this tradeoff 
+  - there's still a tradeoff: higher compile times and steaper learning curve
+- 70% of vulnerabilities in microsoft codebase happens due to memory safety issues.
+*** Runtime
+Defined as the amount of stuff the language adds by default to your codebase.
+** WebAssembly
+- asm.js: an early version of wasm
+- wasm is a spiritual successor of asm.js
+- it doesn't compile to javascript, but to machine code directly, resulting in smaller bundle sizes with the same or even better degrees of optimization.
+
+/WebAssembly is neither web, nor assembly/
+
+- It's not assembly: it's machine code.
+- It's not necessarily meant for the web, its specifications lay guidelines for usage on "host environments".
+** Rust + WASM
+Since WASM is machine code, it doesn't have any runtime. But if you're writing code in a language that has a big runtime (e.g. javascript), then you'll have to bring that runtime with you. That's why rust is preferred.
+** Serverless
+* AWS Lambda
+:PROPERTIES:
+:REF: https://www.youtube.com/watch?v=97q30JjEq9Y&t=176s
+:END:
+<2022-08-13 Sat 21:04>
+
+- Lambda is one of the services provided by Amazon to execute code for virtually any kind of languages on the web.
+- Pricing: Metering on time basis (cost per millisecond)
+** How Lambda works
+1. Clients send requests to lambda.
+2. Lambda receives the request, and depending on the number/size of requests, the request is passed onto respective number of containers (like docker containers).
+* Advantage of being a small/independent investor
+:PROPERTIES:
+:REF: [[cite:&lynch12]]
+:END:
+<2022-08-15 Mon 19:19>
+
+There are various advantages of being an independent/small investor. Unlike a hedge fund portfolio manager,
+- you don't have to explain your decisions to higher authorities
+- you aren't limited to choosing large cap companies
+* gRPC
+:PROPERTIES:
+:REF: https://youtu.be/pMgty_RYIOc
+:END:
+<2022-08-25 Thu 19:10>
+** Problems with REST
+- REST APIs aren't optimized for performance.
+- One also has to build clients and all for REST interaction
+** Idea behind gRPC
+- Google came up with [[https://grpc.io/][gRPC]].
+- HTTP 2 is used instead of HTTP 1.1
+- Protobuf
+*** RPC
+- RPC stands for *Remote Procedure Calls*.
+- a remote procedure call is when a computer program causes a procedure to execute in a different address space, which is coded as if it were a normal procedure call, without the programmer explicitly coding the details for the remote interaction.
+** Protobuf
+- Binary based message protocol AKA *Protobuf* are used instead of JSON.
+- Format for data is defined using interfaces in _proto_ files.
+- Anyone can generate clients based off of these proto files.
+* Guitar practice routine
+:PROPERTIES:
+:REF: https://www.youtube.com/watch?v=UMH8CvYQZUU
+:END:
+<2022-08-30 Tue 19:04>
+Practice should be split into three parts:
+** Ear training
+** Techniques
+** Repertoire
+* How to win friends and influence people
+:PROPERTIES:
+:REF: [[cite:&carnegie2016win]] 
+:END:
+<2022-09-11 Sun 12:39>
+
+** Make everyone like you
+*** Don't criticize people
+*** Make people feel important
+*** Give honest and sincere appreciation
+*** Be genuinely interested in them
+*** Remember their name
+*** Be a good listener; make others want to talk about themselves
+*** Generate interest in others
+*** Smile
+*** Talk in terms of their interests

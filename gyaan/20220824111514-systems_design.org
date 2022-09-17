@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       3468cece-fdf8-41f5-981f-4724845e23be
+:END:
+#+title: System Design
+#+filetags: :CS:
+
+System design is the process of of designing components and architecture to meet the needs of the end user.
+
+* Expectations from a system
+** Reliability
+A system is reliable if it has the ability to meet the expectations of the end-user. Such systems are *fault-tolerant*, meaning that in case of some technical failures, they still provide service to the end users. 
+** Availability
+Availability mentions the *uptime* required by a system. E.g. if we design a social media application, then a delay of few seconds can be tolerated. In such cases, availability is not of utmost importance. 
+In order for a system to be available, it should not have a *single point of failure*.
+** Scalability
+Scalability refers to a system's ability to cope with increasing load. There are two types of scalability:
+*** Vertical- Buying bigger machines
+- Can be a single point of failure
+- IO communication takes place (very fast)
+- Data is consistent
+- Hardware limitations are present.
+*** Horizontal
+- Buying more machines
+- Load balancing is required
+- Resilient (in case a single machine fails)
+- Network communication takes place with /Remote Procedure Calls(RPC)/, and hence is a bit slower than IO communication.
+- Issue of data consistency is present.
+- Scales well

@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       121106e1-bfee-4e5b-80b9-51446259a4cd
+:ROAM_REFS: https://www.youtube.com/watch?v=KufsL2VgELo&t=1458s
+:END:
+#+title: Group Theory
+

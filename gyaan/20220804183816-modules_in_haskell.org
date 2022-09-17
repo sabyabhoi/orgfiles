@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       ef1761ed-f921-4da5-b3fc-30dc9d6d5aa3
+:ROAM_REFS: http://learnyouahaskell.com/modules#loading-modules
+:END:
+#+title: Modules in Haskell
+#+filetags: :CS:
+
+- A [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]] module is a collection of related [[id:7039543f-f0c6-4750-843d-5f9855f15394][functions]], [[id:9d458481-0bd8-45a7-9b21-30690cd30e20][types]] and typeclasses.
+- The =Prelude= module is imported by default.
+
+* Importing modules
+Use the =import= keyword to import modules:
+#+begin_src haskell
+import Data.List
+#+end_src
+
+In case you're using GHCi, use the =:m= operator:
+#+begin_src haskell
+:m + Data.List -- single import
+:m + Data.List Data.Set -- multiple import
+#+end_src
+
+** Qualified Imports
+We can namespace the imported functions using the =qualified= keyword:
+#+begin_src haskell
+import qualified Module.Name
+-- or
+import qualified Module.Name as M
+#+end_src
+
+Now all the functions are namespaced under =M=, and can be called using =M.functionName=.
+
+* Importing functions
+If you just want to import couple of functions:
+#+begin_src haskell
+import Module.Name (f1, f2)
+#+end_src
+
+** Excluding functions
+Suppose we wish to include an entire module /excluding/ some functions (maybe due to namespace clashes or something), we can do so by employing the =hiding= keyword:
+#+begin_src haskell
+import Module.Name hiding (f1)
+#+end_src
+
+
+* Creating modules
+Use the =module= keyword at the beginning of the file in the following manner:
+#+begin_src haskell
+module Foo
+( func1
+, func2
+, func3
+) where
+
+func1 = x * x
+func2 = x + x
+func3 = x ^ x
+func4 = 2 * x + x
+#+end_src

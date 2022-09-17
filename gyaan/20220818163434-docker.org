@@ -1,4 +1,8 @@
-#+TITLE: Docker2
+:PROPERTIES:
+:ID:       a156e6cd-8154-44d4-8a2d-0b7f28a527c6
+:END:
+#+title: Docker
+#+filetags: :CS:
 
 * Basic commands
 ** Images
@@ -6,27 +10,34 @@
 #+begin_src bash
 docker pull ubuntu
 #+end_src
+
 *** View images
 #+begin_src bash
 docker images
 #+end_src
+
 ** Containers
 *** View all containers
 #+begin_src bash
 docker ps -a
 #+end_src
+
 *** View only actively running containers
 #+begin_src bash
 docker ps
 #+end_src
+
 *** Running containers
 #+begin_src bash
 docker run ubuntu
 #+end_src
+
 **** Running in detached mode
+/Detaching/ a container means that we wish to run the container in the background, without it being attaching to any input/output streams.
 #+begin_src bash
 docker run -d ubuntu
 #+end_src
+
 *** Binding ports from container to host
 #+begin_src bash
 docker run -p<HOST PORT>:<CONTAINER PORT> <CONTAINER>
@@ -41,8 +52,8 @@ docker run -d -p80:80 ubuntu
 #+begin_src bash
 docker logs <container name/id>
 #+end_src
+
 *** Get an interactive terminal (it) inside a docker container
 #+begin_src bash
 docker exec -it <container name/id> /bin/bash
 #+end_src
-* Docker Compose

@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       015a9a59-7267-4f10-84fa-c37cc24bdfdd
+:END:
+#+title: Financial Ratios Analysis
+#+filetags: :FINANCE:
+
+- Used to analyze the /financial health/ of a company.
+- The objective for the analysis should be very clear.
+
+*Note*: If a ratio uses figures from both the income statement and the balance sheet, then you need to practice caution, because income statement is for a *particular year*, and the balance sheet is issued *since inception*.
+
+* Types of financial ratios
+Financial ratios are grouped into the following categories:
+- [[id:081bd6a9-e9f3-4f42-ae65-953b8bc2ef1a][Liquidity ratios]]
+- [[id:c91ac4a5-6cda-47f5-98e5-7d8802f1dc68][Leverage ratios]]
+- Efficiency ratios
+- Profitability ratios
+- [[id:cebcc6bc-c6dd-483b-b39c-8709c946715e][Market value ratios]]

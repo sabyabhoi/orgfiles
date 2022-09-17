@@ -1,0 +1,178 @@
+#+TITLE:Sxhkd Configuration
+#+AUTHOR:Sabyasachi Bhoi
+#+PROPERTY: header-args :tangle ~/.config/sxhkd/sxhkdrc
+
+Sxhkd is a hotkey manager most commonly used with [[./bspwm.org][bspwm]].
+
+* Predefined stuff
+** WM agnostic hotkeys
+*** Terminal Emulator
+#+begin_src sh 
+super + Return
+	kitty
+#+end_src
+
+*** Program Launcher
+#+begin_src sh 
+super + d
+	rofi -show run
+#+end_src
+
+** BSPWM hotkeys
+*** Quit/Restart bspwm
+#+begin_src sh 
+super + shift + e
+	bspc quit
+
+super + shift + r
+	pkill -USR1 -x sxhkd
+	bspc wm -r
+#+end_src
+
+*** Close and kill window
+#+begin_src sh 
+super + shift + q
+	bspc node -{c,k}
+#+end_src
+
+*** Alternate between tiled and monocle layout
+#+begin_src sh
+super + m
+	bspc desktop -l next
+#+end_src
+
+*** Swap the current node with the biggest window
+#+begin_src sh
+super + g
+	bspc node -s biggest.window
+#+end_src
+
+** State/Flags
+*** Set the window state
+#+begin_src sh 
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+#+end_src
+
+*** Set the node flags
+#+begin_src sh 
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+#+end_src
+
+** Focus/Swap
+*** Focus the node in the given direction
+#+begin_src sh 
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+#+end_src
+
+*** focus the node for the given path jump
+#+begin_src sh :tangle no
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+#+end_src
+
+*** focus the next/previous window in the current desktop
+#+begin_src sh :tangle no
+super + space
+	bspc node -f {next,prev}.local.!hidden.window
+#+end_src
+
+*** focus the next/previous desktop in the current monitor
+#+begin_src sh :tangle no
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+#+end_src
+
+*** focus the last node/desktop
+#+begin_src sh :tangle no
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+#+end_src
+
+*** focus the older or newer node in the focus history
+#+begin_src sh :tangle no
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+#+end_src
+
+*** focus or send to the given desktop
+#+begin_src sh 
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+#+end_src
+
+** Preselect
+*** preselect the direction
+#+begin_src sh :tangle no
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+#+end_src
+
+*** preselect the ratio
+#+begin_src sh :tangle no
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+#+end_src
+
+*** cancel the preselection for the focused node
+#+begin_src sh :tangle no
+super + ctrl + space
+	bspc node -p cancel
+#+end_src
+
+*** cancel the preselection for the focused desktop
+#+begin_src sh :tangle no
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+#+end_src
+
+** Move/Resize
+*** expand a window by moving one of its side outward
+#+begin_src sh 
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+#+end_src
+
+*** contract a window by moving one of its side inward
+#+begin_src sh 
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+#+end_src
+
+*** move a floating window
+#+begin_src sh 
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+#+end_src
+
+* Customized stuff
+** Increase/Decrease brightness
+#+begin_src sh
+XF86MonBrightnessUp
+  brightnessctl set +10%
+
+XF86MonBrightnessDown
+  brightnessctl set 10%-
+#+end_src
+
+** Increase/Decrease volume
+#+begin_src sh
+XF86AudioLowerVolume
+  pactl set-sink-volume @DEFAULT_SINK@ -10%
+
+XF86AudioRaiseVolume
+  pactl set-sink-volume @DEFAULT_SINK@ +10%
+
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+#+end_src
+
+** Launch Emacs client
+#+begin_src sh
+super + e 
+  emacsclient -c
+#+end_src

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       88a2da33-022a-4a68-817b-8017f1b0f8be
+:END:
+#+title: Interbank Lending & Call money rate
+#+filetags: :ECONOMICS:
+
+Banks can lend money to each other for short periods of time (usually 1-2 weeks or even overnight). This type of lending is called *Interbank Lending*. The interest rate at which such lending occurs is called the *Call Money Rate*. 
+
+* Why interbank lending takes place
+In case of sudden spike in demand of liquidity, the bank might not have the amount of cash to meet such requirements. So they borrow from other banks at the call money rate to fulfill such needs. 
+* Scenario during global financial crisis
+Bank deposits decrease \to bank has deficits \to bank panics \to no interbank lending \to increase in inefficiency in market system \to call money rate increases
+
+As a rule of thumb, high interest rate implies inefficiency in financial system.  

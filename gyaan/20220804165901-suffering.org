@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       c523a4ca-3482-47e6-9dd5-ddff83a7fe03
+:ROAM_REFS: [[cite:&manson2016subtle]]
+:END:
+#+title: Suffering
+#+filetags: :Life-Advice:
+
+- Happiness isn't /"achievable"/.
+- Dissatisfaction and unease are inherent part of human life.
+- Suffering is biologically useful:
+  - It is due to suffering that people evolve and innovate new ideas.
+
+* Chosing suffering
+- Instead of thinking about how to avoid suffering (which is impossible), one should think about chosing their suffering.
+- /"What am I willing to struggle for?"/

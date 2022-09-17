@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       798c1a2f-7e0f-49c7-8575-fde14a590734
+:END:
+#+title: IPFS
+#+filetags: :CS:
+
+- Stands for *Inter Planetry File System*.
+- It is a decentralized file sharing system.
+- It used *content based sharing* rather than *location based sharing (IP address based)*.
+- Each file has a unique hash by which it is addressed.
+- When multiple people upload the same file, it is only created once.
+
+* Storing files on IPFS
+- Stored in *IPFS Objects*.
+** IPFS Objects
+- can store upto 256 KB of data
+- can contain links to other IPFS objects
+- are immutable by default
+* Modifying data on IPFS
+- IPFS offers versioning.
+- Whenever we create or update an IPFS block, a new commit block is created with information about the current and the previous version of the object.
+* Limitation
+- If all the nodes containing a particular piece data go offline, then the data becomes inaccessible.
+** Solution
+- Incentivize people to host nodes using [[id:94a4aacb-7799-4d2a-8185-f94150fa7ea2][cryptocurrencies]]: [[https://filecoin.io/][Filecoin]].
+- Proactively distribute files multiple times to make sure it always remains on IPFS.

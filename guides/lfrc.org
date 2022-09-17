@@ -1,0 +1,45 @@
+#+TITLE:lf configuration
+#+AUTHOR:Sabyasachi Bhoi
+#+PROPERTY: header-args :tangle ~/.config/lf/lfrc
+
+* Basic arguments
+#+begin_src sh
+set icons
+set period 1
+set ignorecase true
+set previewer "~/.config/lf/previewer"
+#+end_src
+
+* Make new files/directories
+#+begin_src sh
+cmd mkdir ${{
+	printf "New Directory:"
+	read ans
+	mkdir $ans
+}}
+
+cmd mkfile ${{
+	printf "New File:"
+	read ans
+	touch $ans
+}}
+#+end_src
+
+* Mapping functions
+First, clear out the pre-existing mapping.
+#+begin_src sh
+map n 
+#+end_src
+
+#+begin_src sh
+map nd mkdir
+map nf mkfile
+#+end_src
+
+* Custom previews
+#+begin_src sh :tangle ~/.config/lf/previewer
+  case "$(file --dereference --brief --mime-type -- "$1")" in
+      text/* | */xml | application/json) bat --terminal-width "$(($4-2))" -f "$1" ;;
+  esac
+  exit 1
+#+end_src

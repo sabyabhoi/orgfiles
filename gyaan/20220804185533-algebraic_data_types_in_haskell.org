@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       e60e9421-5046-4951-a0e0-86b573f7c91c
+:END:
+#+title: Algebraic Data Types in Haskell
+#+filetags: :CS:
+#+DATE:2022-07-05
+
+Just like =Bool=, =Int=, =Char= etc., we can create our own custom algebraic data [[id:9d458481-0bd8-45a7-9b21-30690cd30e20][types]] in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]].
+
+* Creating datatypes
+In order to do so, we employ the =data= keyword:
+#+begin_src haskell
+data Bool = False | True
+#+end_src
+The parts after the === sign are called *value constructors*.
+
+* Constructor fields
+Suppose we wish to store the information about a circle: its 2D coordinates and its radius, then we can define the following data type:
+#+begin_src haskell
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float 
+
+:t Circle
+#+end_src
+
+#+RESULTS:
+: ghci> Circle :: Float -> Float -> Float -> Shape
+
+Now we can use it in the following manner:
+#+begin_src haskell
+circle = Circle 10 20 10
+#+end_src
+
+We can also use this datatype for creating custom [[id:7039543f-f0c6-4750-843d-5f9855f15394][functions]]:
+#+begin_src haskell
+area :: Shape -> Int
+area (Circle _ _ r) = pi * r ^ 2
+area (Rectangle x1 y1 x2 y2) = (abs $ x2 - x1) * (abs $ y2 - y1)
+#+end_src
+
+* Derived instances
+- If we try to print our custom type =Shape=, Haskell will throw an error, because it doesn't know how to display the datatype.
+- We need to add a [[id:232c8196-5b30-4b8a-a0ab-5edb2b0a58ec][typeclass]] to its definition:
+#+begin_src haskell
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float deriving (Show)
+#+end_src
+
+* record syntax
+:PROPERTIES:
+:ID:       489497a3-ba4d-44ea-9285-5999e5e556a4
+:END:
+If we wish to name the constructor fields of a [[id:e60e9421-5046-4951-a0e0-86b573f7c91c][datatype]], we can do so using the *record syntax*:
+#+begin_src haskell
+data Person = Person { name :: String,
+                        age :: Int
+                    } deriving (Show)
+
+sabya = Person "Sabya" 20 
+name sabya
+#+end_src

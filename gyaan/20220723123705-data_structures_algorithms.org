@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       a9338446-247d-4883-912e-bd4d705efd39
+:ROAM_ALIASES: DSA
 :END:
 #+title: Data Structures & Algorithms
 #+filetags: :CS:
@@ -13,3 +14,4 @@
   - [[id:475dc330-0b54-4b73-a721-f484793ed766][Longest Prefix Suffix]]
 - [[id:5a444382-4cf1-4104-8978-7b0fee40b666][Rabin Karp Algorithm for Pattern Search]]
 * [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][Linked Lists]]
+* [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]]

@@ -1,12 +1,11 @@
-#+TITLE: Agenda
+#+TITLE: My org agenda file
 
-* Task List
-** TODO EEB
-** TODO POE [/]
-SCHEDULED: <2021-12-05 Sun 16:00>
-- [ ] Revise Monopoly chapter
-- [ ] Do the tutorial numericals for Monopoly
-- [ ] Revise last lecture class' material
-** TODO M3 [/]
-- [ ] Start Fourier Analysis
-** TODO Professional Ethics
+* Academics
+** TODO POM [2/7]
+- [X] Organizational Structure
+- [X] Motivation
+- [ ] Leadership
+- [ ] Operation management
+- [ ] Human Resource Management
+- [ ] Marketing Management
+- [ ] Managing Communication

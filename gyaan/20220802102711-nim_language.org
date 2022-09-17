@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       a1419e1d-e5e3-4759-bb11-59ec648604fa
+:END:
+#+title: Nim Language
+#+filetags: :CS:
+
+From the [[https://nim-lang.org/][Official Website:]]
+
+#+begin_quote
+Nim is a statically typed compiled systems programming language. It combines successful concepts from mature languages like Python, Ada and Modula. 
+#+end_quote
+
+* Basic Syntax
+** Printing stuff
+#+begin_src nim
+echo "Hello World"
+#+end_src
+
+#+RESULTS:
+: Hello World
+
+** Comments
+#+begin_src nim
+  # Single Line comment
+  #[
+  Multi-line comment
+  ]#
+#+end_src
+
+** Variables
+In nim, one can define variables using =let=, =var= and =const= keywords. All of these keywords can be used to define a single variable, or multiple variables at the same time.
+
+*** const
+The value of =const= variables are calculated at compile time
+#+begin_src nim
+  const age = 20
+#+end_src
+
+#+begin_src nim
+  const 
+    name = "Sabya"
+    age = 20
+#+end_src
+
+*** let & var
+- =let= defines variables immutably whereas =var= defines variables mutably
+
+#+begin_src 
+
+#+end_src

@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       b1ff0a9a-f69a-4837-932f-b5e47a025282
+:ROAM_REFS: https://jichu4n.com/posts/how-x-window-managers-work-and-how-to-write-one-part-i/
+:END:
+#+title: X Window Managers
+#+filetags: :CS:
+
+- X.org uses a server-client model.
+- Therefore, an X client is required to connect to the X.org server.
+- A window manager is a simple X client.
+  - It doesn't have an root priveleges.
+  - It communicates with X server using API calls.
+
+[[../assets/X-server.png]]
+
+* Window Hierarchy
+- In X.org, *a window is any rectangular area that is an unit of user interaction/graphic display*.
+- These windows are organized in a tree hierarchy, where the root of the tree is the *root window*: a virtual, invisible window that has the same size as the screen, and is always present.
+* Substructure Redirection
+:PROPERTIES:
+:ID:       fd4ec008-d158-445d-8ba1-03d392ec7ac4
+:END:
+- In the absence of window managers, a program directly sends requests to the X server if it wishes to communicate with the server (for resizing,moving windows etc.).
+- But when a window manager is present, it intercepts these requests and sends them to the X server.
+- This is called *Substructure Redirection*.  
+* Reparenting/Framing
+:PROPERTIES:
+:ID:       f966a1bf-b7fa-4d6d-8614-e58278129b46
+:END:
+- An X window manager adds buttons for minimizing/maximizing and closing windows. This is called *Reparenting* or *framing*.
+- In order to do this,
+  1. the window manager creates a child of the root which is larger than the top level window of the application.
+  2. Calls the =XReparentWindow()= function, specifying the top level window of the application as _win_, and the new window it created as _parent_.
+
+** Non-reparenting window managers
+- If a window manager doesn't decorate the top level windows, then it doesn't need to reparent them. E.g. xmonad, dwm.
+* Compositing
+:PROPERTIES:
+:ID:       17246326-a883-4913-91a7-1e38e21e110c
+:END:
+- A *Composite Extension* is provided to request the X server to not render a specific window and its children directly to the screen, but rather maintain a special buffer without redundant computations.
+- This buffer can be used by the client that made the request.
+- This is what /compositors/ and /compositing window managers/ do: they ask X server to render the top level windows to an in-memory buffer and *composite* the results into an overlay window itself.

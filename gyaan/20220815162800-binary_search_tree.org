@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       cc94dbf1-6d0f-43ce-8bee-4b588811a126
+:ROAM_ALIASES: BST
+:END:
+#+title: Binary Search Tree
+#+filetags: :CS:
+
+A Binary Search Tree (BST) is a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]] in which:
+1. The left subtree of a node contains nodes which are smaller in value to the root node.
+2. The right subtree of a node contains nodes which are greater in value to the root node.
+3. All subtrees are binary search trees.
+4. There are no duplicates

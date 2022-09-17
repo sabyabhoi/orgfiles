@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       413acfaf-e418-4d2a-9928-c6d6bc526438
+:END:
+#+title: Regex in Python
+#+filetags: :CS:
+
+To use regular expressions in [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]], we use the =re= module.
+
+#+begin_src python :session :results none
+import re
+txt = "The rain in Spain"
+#+end_src
+
+* =findAll=
+The =findAll= function returns a list containing all the matches:
+#+begin_src python :session :results raw
+x = re.findall("(?:r|Sp)ain", txt)
+x
+#+end_src
+
+#+RESULTS:
+['rain', 'Spain']
+
+* =search=
+The =search= function searches the string for a match, and returns a Match object if there is a match.
+
+#+begin_src python :session 
+x = re.search("\s", txt)
+type(x)
+#+end_src
+
+#+RESULTS:
+: <class 're.Match'>
+
+Then we can use the =start= method of the =re.Match= class to get the starting index of the matched string:
+#+begin_src python :session 
+x.start()
+#+end_src
+
+#+RESULTS:
+: 3
+
+Similarly, there exists the =end= function:
+#+begin_src python :session 
+x.end()
+#+end_src
+
+#+RESULTS:
+: 4
+
+* =sub=
+The =sub= function replaces the matches with the text of your choice:
+#+begin_src python :session 
+re.sub("\wain", "pain", txt)
+#+end_src
+
+#+RESULTS:
+: The pain in Spain

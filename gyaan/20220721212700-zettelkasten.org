@@ -1,9 +1,8 @@
 :PROPERTIES:
 :ID:       cf71dba8-f63d-468d-ab50-9e74c6ae4b3a
+:ROAM_REFS: https://zenkit.com/en/blog/a-beginners-guide-to-the-zettelkasten-method/
 :END:
 #+title: Zettelkasten
-
-- Originally taken from [[https://zenkit.com/en/blog/a-beginners-guide-to-the-zettelkasten-method/][this]] blog.
 
 * Types of notes
 ** Fleeting Notes

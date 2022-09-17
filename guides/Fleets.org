@@ -1,0 +1,101 @@
+#+TITLE:Fleeting Notes
+#+AUTHOR:Sabyasachi Bhoi
+
+* Discord Bot Development
+<2022-08-01 Mon 21:43>
+
+** Creating the bot
+1. We need to create a /"discord application"/. This can be done so using the [[https://discord.com/developers/applications][Discord Developer Portal]].
+2. Create a new application and enter the name of the bot.
+3. Go to the "Bot" section in the settings on the left and build a bot.
+** Adding bot to a server
+1. Go to =Settings > OAuth2 > URL Generator > Scope= and check the _bot_ scope.
+2. Go to the newly generated URL and add it to the server. 
+** Tokens and stuff
+- The *Bot Token* can be found under =Settings > Bot > Build-A-Bot=. This token is crucial for connecting to APIs.
+* Financial Investment
+<2022-08-04 Thu 20:28>
+
+- I already have an introductory level of theoretical knowledge of *Finance and Account*:
+  - Balance Sheet
+  - PnL Statement
+  - Ratio analysis
+  - Bond analysis and interest rates
+
+In order to get started with investments, I'll take the following path:
+1. Learn about important ratios for ratio analysis.
+2. read the books
+   - The psychology of money
+   - One up on wall street
+   - The intelligent investor
+* Guitar songs to play
+<2022-08-05 Fri 10:58>
+
+- [ ] The Police - Mesage in a bottle
+- [ ] Papa Roach - Last Resort
+- [ ] Guns N' Roses - Don't cry
+- [ ] RHCP - Snow
+- [ ] Jason Mraz - I'm yours (/Maybe/)
+* Setting up mpd + ncmpcpp
+<2022-08-21 Sun 09:00>
+
+mpd is a music player daemon, and ncmpcpp is a music player (who names it that way anyway?).
+
+** mpd setup
+1. Install mpd using the package manager of your choice.
+2. make the following directory:
+#+begin_src shell
+mkdir -p ~/.mpd/playlists/
+#+end_src
+
+3. Create a =~/.mpd/mpd.conf= file
+#+begin_src shell
+  bind_to_address "127.0.0.1"
+  #bind_to_address "~/.mpd/socket"
+  music_directory "~/workspace/userfiles/Media/Music/"
+  playlist_directory "~/.mpd/playlists"   
+  db_file      "~/.mpd/mpd.db"  
+  log_file      "~/.mpd/mpd.log"  
+  pid_file      "~/.mpd/mpd.pid"  
+  state_file     "~/.mpd/mpdstate"  
+  audio_output {  
+
+      type  "pulse"  
+      name  "pulse audio"
+      device         "pulse" 
+      mixer_type      "hardware" 
+  }  
+
+  audio_output {
+      type                    "fifo"
+      name                    "my_fifo"
+      path                    "/tmp/mpd.fifo"
+      format                  "44100:16:2"
+  }
+#+end_src
+
+4. Run =mpd= command: It will give some warnings. It will also give an exception saying that the database file doesn't exist. This exception will go away the next time, since mpd will create a database file for us.
+5. Launch a service for =mpd= using your initialization system. E.g. for runit:
+#+begin_src shell
+ln -s /etc/runit/sv/mpd /run/runit/service/
+#+end_src
+
+Check the status of the service:
+#+begin_src shell
+sv status mpd
+#+end_src
+
+** ncmpcpp
+1. Install ncmpcpp and create a =~/.config/ncmpcpp/config= file:
+#+begin_src shell
+mpd_music_dir = "~/workspace/userfiles/Media/Music/"  
+ncmpcpp_directory  = ~/.config/ncmpcpp
+mpd_host = "localhost"
+mpd_port = "6600" 
+
+visualizer_data_source = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_in_stereo = "yes"
+visualizer_type = "spectrum"
+visualizer_look = "+|"
+#+end_src

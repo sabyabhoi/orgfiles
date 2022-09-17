@@ -1,0 +1,166 @@
+#+TITLE:xinit configuration
+#+AUTHOR:Sabyasachi Bhoi
+#+PROPERTY: header-args :tangle ~/.xinitrc
+
+* Predefined settings
+#+begin_src shell
+#!/bin/sh
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+ for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
+fi
+
+#+end_src
+
+* Environment variables
+** Basic
+#+begin_src shell
+export XDG_CONFIG_HOME=/home/cognusboi/.config
+export XDG_RUNTIME_DIR=$(mktemp -d)
+export TERMINAL=kitty
+export SCRIPTS=/home/cognusboi/scripts
+export SHELL=/bin/fish
+export BROWSER=brave
+export EDITOR=nvim
+export VISUAL=nvim
+#+end_src
+
+** GoLang
+#+begin_src shell
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH 
+#+end_src
+
+** Deno
+#+begin_src shell
+export DENO_INSTALL="/home/cognusboi/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+#+end_src
+
+** Java
+#+begin_src shell
+export _JAVA_AWT_WM_NONREPARENTING=1
+export JAVA_HOME='/usr/lib/jvm/java-18-openjdk'
+export PATH=$JAVA_HOME/bin:$PATH 
+#+end_src
+
+** Android
+#+begin_src shell
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/tools/bin:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH# Android emulator PATH
+export PATH=$ANDROID_HOME/emulator:$PATH# Android SDK ROOT PATH
+export ANDROID_SDK_ROOT=/opt/android-sdk
+export PATH=$ANDROID_SDK_ROOT:$PATH
+#+end_src
+
+** nnn
+#+begin_src shell
+export PATH=/home/cognusboi/workspace/instdir/nnn:$PATH
+#+end_src
+
+* Pipewire
+#+begin_src shell
+pipewire &
+pipewire-pulse &
+wireplumber &
+#+end_src
+
+* Start up
+** Picom compositor
+I'm using [[https://github.com/ibhagwan/picom][ibhagwan's fork of picom]].
+#+begin_src shell
+picom --config=$XDG_CONFIG_HOME/picom/picom.conf -b
+#+end_src
+
+** Load pre-existing background
+#+begin_src shell
+~/.fehbg
+#+end_src
+
+** Swap escape-capslock and set input rate
+#+begin_src shell
+xbindkeys --poll-rc
+setxkbmap -option caps:swapescape
+xset r rate 200 25
+#+end_src
+
+** Emacs daemon
+Launch the emacs server
+#+begin_src shell
+emacs --daemon &
+#+end_src
+
+** Stretch notifications
+#+begin_src shell
+$SCRIPTS/takeabreak.sh &
+#+end_src
+
+** Polybar 
+#+begin_src shell :tangle no
+$XDG_CONFIG_HOME/polybar/launch.sh --forest
+#+end_src
+
+** Music Player Daemon
+#+begin_src shell
+mpd &
+#+end_src
+
+* Window managers
+** i3-gaps
+#+begin_src shell 
+exec i3
+#+end_src
+
+** bspwm
+*** Lemonbar 
+#+begin_src sh :tangle no
+/home/cognusboi/scripts/statusbar/lemonbar.sh | lemonbar -p -f "RobotoMono Nerd Font" & 
+#+end_src
+
+*** BSPWM
+#+begin_src shell :tangle no
+exec bspwm
+#+end_src
+
+** DWM
+#+begin_src shell :tangle no
+$SCRIPTS/statusbar/bar.sh &
+exec dwm
+#+end_src
+
+** Xmonad
+#+begin_src shell :tangle no
+exec xmonad
+#+end_src
+
+** Awesome
+#+begin_src shell  :tangle no
+exec awesome
+#+end_src

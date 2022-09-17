@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       09c09f02-f8d2-41f0-b73a-5572f6935330
+:END:
+#+title: Gas (Blockchain)
+#+filetags: :CS:
+
+- Gas is a unit of computational measure. It is used for measuring the amount an entity is supposed to pay for any given transaction in a ledger on a [[id:94a4aacb-7799-4d2a-8185-f94150fa7ea2][blockchain]]. 
+- The more computation a transaction uses, the more /gas/ one has to pay.
+- It is basically the fee paid to a node operator for successfully adding a
+  transaction to the [[id:94a4aacb-7799-4d2a-8185-f94150fa7ea2][blockchain]].
+* Gas limit
+This limit basically specifies how much gas we're willing to spend on a transaction.
+If the computation exceeds this gas, the transaction won't take place.
+
+Therefore,
+$\textrm{Transaction fee} = \textrm{Gas used} \times \textrm{Gas Price}$

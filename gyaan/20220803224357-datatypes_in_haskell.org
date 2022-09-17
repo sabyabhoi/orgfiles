@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       9d458481-0bd8-45a7-9b21-30690cd30e20
+:END:
+#+title:Types in Haskell
+#+filetags: :CS:
+
+* Finding out the type of a variable/function
+The type of any variable or [[id:7039543f-f0c6-4750-843d-5f9855f15394][function]] in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]] can be found out using the =:t= operator in GHCi.
+#+begin_src haskell
+x = False
+:t x
+#+end_src
+
+#+RESULTS:
+: x :: Bool
+
+* Basic Syntax
+Basic syntax for specifying types is =name :: type=.
+#+begin_src haskell
+x :: Integer
+x = 1
+x
+#+end_src
+
+#+RESULTS:
+: ghci> 1
+
+#+begin_src haskell
+y :: Bool
+y = True
+y
+#+end_src
+
+#+RESULTS:
+: ghci> True
+
+** Types in functions
+#+begin_src haskell
+  foo :: Integer -> Integer -> Integer -> Bool
+  foo min max x = x >= min && x <= max
+
+  foo 10.5 10.5 5.5
+#+end_src
+
+* Type variables
+Let's look at the type of the =head= function:
+#+begin_src haskell
+:t head
+#+end_src
+
+#+RESULTS:
+: head :: [a] -> a
+
+All types in *Haskell begin with a capital letter*. Therefore, =a= cannot be a type in the type definition mentioned above. It is a *Type Variable*. This means that =a= can be of any type.
+
+[[id:7039543f-f0c6-4750-843d-5f9855f15394][Functions]] that use type variables are called *polymorphic functions*.
+
+* Typeclasses
+:PROPERTIES:
+:ID:       232c8196-5b30-4b8a-a0ab-5edb2b0a58ec
+:END:
+
+A typeclass defines some behavior (like comparing for equality, comparing for ordering, enumeration) and then types that can behave in that way are made instances of that typeclass.
+
+Let's look at the type of the equality operator:
+#+begin_src haskell
+:t (==)
+#+end_src
+
+#+RESULTS:
+: (==) :: Eq a => a -> a -> Bool
+
+Here, 
+- everything before the ==>= is called a *class constraint*.
+- The type variable =a= must belong to the *typeclass* =Eq=.
+- The typeclass =Eq= provides an interface for testing for equality
+
+** Defining typeclasses
+#+begin_src haskell
+class Tc a where
+  f1 :: a -> b
+  f2 :: a -> b
+#+end_src
+
+** Implementing typeclasses for types
+Suppose we wish to implement the typeclass =Tc= for the type =Type=, then we can do so using the =instance= keyword:
+#+begin_src haskell
+data Type = Orange | Green | Red
+
+instance Tc Type where
+  f1 Orange = 1
+  f1 Green = 2
+  f1 Red = 3
+  f2 Orange = 4
+  f2 Green = 5
+  f2 Red = 6
+#+end_src
+
+** Subclasses
+E.g.
+#+begin_src haskell
+class (Eq a) => Num a where
+  ...
+#+end_src
+
+Here, we're implementing the =Num= class, which is a subclass of the =Eq= typeclass.

@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       79fd085c-e5b2-47f8-916e-034de5aba48e
+:ROAM_ALIASES: DP
+:END:
+#+title: Dynamic Programming
+#+filetags: :CS:
+
+Dynamic Programming is an important concept in [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]]. It is an enhanced version of *recursion*.
+
+* Identification
+The basic rule of thumb for identifying dynamic programming questions is as follows:
+- Some form of choice is given. E.g. to include something or not.
+  - Some form of repitition is present. If no repitition is present, then DP is pointless.
+- Optimality is considered. E.g. min, max, largest, smallest, total, etc.
+* Approach
+Recursion \to Memoization or Top-down
+* Types of questions
+** [[id:e8089b0e-fdc0-4ae6-a873-a2c75cf2410b][Knapsack Problems]]
+*** [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]]
+1. [[id:d8cab1eb-aaf3-4373-bd03-9aabb9656cbf][Subset sum]]
+2. Equal sum partition
+3. Count of subset sum
+4. Minimum subset sum difference
+5. Target sum
+6. Number of subsets with given difference
+*** [[id:02c7c5e5-7431-4022-8b43-1b2f5112f120][Unbounded knapsack]]
+- [[id:69f76e4b-bbc0-4446-b1b2-b53c17037560][Coin change problems]]
+** Fibonacci
+** LCS
+** LIS
+** Kadane's Algorithm
+** Matrix Chain Multiplication
+** DP on trees
+** DP on grid
+** Misc.

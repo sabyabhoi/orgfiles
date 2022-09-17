@@ -3,10 +3,10 @@
 :END:
 #+title: Haskell
 #+filetags: :CS:
-#+startup: latexpreview
-#+OPTIONS: tex:t
 
-Haskell is a [[id:6aa4ce9e-aead-40d1-82ac-43bceb14ae00][functional programming language]].
+Haskell is a purely [[id:6aa4ce9e-aead-40d1-82ac-43bceb14ae00][functional programming language]]. An important implication of this is that the functions in haskell do not have any /side-effects/, i.e., they do not change the state of any variables they take as input. In case they wish to change the state of a variable, they simply return the altered variable.
+A major problem with this is that altering the state of some values is inherently necessary to build real life programs. E.g. we need to change the state of the output device of the terminal in order to [[id:38331d56-70f4-45a1-9f6a-1479ac5a9a71][print stuff to it]].
+In order to fix this, Haskell separates all the parts of the program with pure functional code from the impure functional code.
 
 * Basic Syntax
 - To run Haskell in an interpreter, use the [[https://www.haskell.org/ghc/][Glasgow Haskell Compiler]] Interpreter (ghci).
@@ -48,198 +48,6 @@ max 5 (min 9 10)
 #+RESULTS:
 : True
 
-* Functions
-*Note*: Functions cannot begin with an uppercase letter in Haskell.
-#+begin_src haskell
-square x = x * x
-square 10
-#+end_src
-
-#+RESULTS:
-: 100
-
-#+begin_src haskell
-distance x y = sqrt (x * x + y * y)
-distance 3 4
-#+end_src
-
-#+RESULTS:
-: 5.0
-
-** Functions using conditionals
-#+begin_src haskell
-maxBear age = (if age < 18 then 0 else round(sqrt age))
-maxBear 20
-#+end_src
-
-#+RESULTS:
-: 4
-
-* Lists
-- Lists in Haskell are homogenous. 
-- To define a name in GHCI, we can use the =let= keyword. Doing =let a = 1= inside GHCI is the same as writing =a = 1= in a script and then loading it in GHCI.
-
-#+begin_src haskell
-let piDigits = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9];
-piDigits
-#+end_src
-
-#+RESULTS:
-| 3 | 1 | 4 | 1 | 5 | 9 | 2 | 6 | 5 | 3 | 5 | 8 | 9 | 7 | 9 |
-
-** Concatenating Lists
-*** To the end of the list
-We make use of the =++= operator.
-#+begin_src haskell
-let a = [1, 3, 5, 7, 9];
-let b = [11, 13, 15];
-a ++ b
-#+end_src
-
-#+RESULTS:
-: ghci> [1,3,5,7,9,11,13,15]
-
-*** To the beginning of the list
-We make use of the =:= operator.
-#+begin_src haskell
-'A':" small cat"
-#+end_src
-
-#+RESULTS:
-: A small cat
-
-** Indexing elements
-- We make use of the =!!= operator.
-- Indexing in Haskell starts from =0=.
-
-#+begin_src haskell
-[1,3,4,5,8] !! 3
-#+end_src
-
-#+RESULTS:
-: 5
-
-** Comparing Lists
-- Lists are compared in =lexicographical= order in Haskell.
-
-#+begin_src haskell
-[3,2,1] > [1, 4, 0]
-#+end_src
-
-#+RESULTS:
-: True
-
-** Other List functions
-*** head
-Returns the first element of the list.
-#+begin_src haskell
-head [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-: 1
-
-*** tail
-Returns the entire list /excluding/ the first element.
-#+begin_src haskell
-tail [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-| 2 | 3 | 4 | 5 |
-
-*** last
-Returns the last element of the list.
-#+begin_src haskell
-last [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-: 5
-
-*** init
-Returns the entire list /excluding/ the last element.
-#+begin_src haskell
-init [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-| 1 | 2 | 3 | 4 |
-
-*** length
-Duh.
-#+begin_src haskell
-length [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-: 5
-
-*** null
-Checks if list is empty or not.
-#+begin_src haskell
-null [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-: False
-
-*** reverse
-Reverses the list.
-#+begin_src haskell
-reverse [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-| 5 | 4 | 3 | 2 | 1 |
-
-*** take
-- Returns the first =n= elements of the list.
-- If =n= is greater than the length of the list, then it returns the entire list.
-#+begin_src haskell
-take 3 [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-| 1 | 2 | 3 |
-
-*** drop
-Drops the first =n= elements of the list.
-#+begin_src haskell
-drop 3 [1, 2, 3, 4, 5]
-#+end_src
-
-#+RESULTS:
-| 4 | 5 |
-
-*** sum, product, maximum, minimum
-Duh.
-
-*** elem
-Checks if element is in the list or not.
-#+begin_src haskell
-4 `elem` [3, 4, 5, 6]
-#+end_src
-
-#+RESULTS:
-: True
-
-** Texas range
-- Range syntax in Haskell
-#+begin_src haskell
-[1..10]
-#+end_src
-
-#+RESULTS:
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-
-#+begin_src haskell
-['b'..'y']
-#+end_src
-
-#+RESULTS:
-: bcdefghijklmnopqrstuvwxy
-
 * Set Comprehensions
 We can simulate the use of set syntax from maths in Haskell:
 
@@ -268,3 +76,4 @@ We can add additional conditions in the sets called *predicates*.
 
 #+RESULTS:
 | 2 | 3 | 4 | 4 | 6 | 8 | 6 | 9 | 12 |
+

@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       ebefb2f5-a6f5-4ff9-acf8-a9acb2762157
+:END:
+#+title: Level Order Traversal
+#+filetags: :CS:
+
+Given a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]], we're supposed to print out the nodes of the tree level-wise.
+
+#+begin_example
+Input:
+     10
+    /  \
+   20   30
+  /  \
+ 40   60
+
+Output:
+10 20 30 40 60
+#+end_example
+
+In order to do this, we make use of a *Queue*.
+1. push the root of the tree to the queue.
+2. while the queue isn't empty, pop the front element, and push its left and right values onto the queue.
+
+* Code
+#+begin_src C++
+  void levelOrderTraversal(Node *head) {
+    if(head == nullptr) return;
+  
+    queue<Node*> q;
+    q.push(head);
+    while(!q.empty()) {
+      Node *curr = q.front();
+
+      if(curr->left != nullptr) q.push(curr->left);
+      if(curr->right != nullptr) q.push(curr->right);
+
+      cout << curr->data << ' ';
+      q.pop();
+    }
+    cout << endl;
+  }
+#+end_src

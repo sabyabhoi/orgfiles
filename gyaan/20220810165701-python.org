@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       df6a7bbc-b960-4d42-9904-b3191cc818f3
+:END:
+#+title: Python
+#+filetags: :CS:
+
+Python is a high-level, interpreted, general-purpose programming language.

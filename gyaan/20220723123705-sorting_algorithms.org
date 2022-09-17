@@ -8,10 +8,8 @@
 - [[id:c1126bf4-8bf3-4023-b5ce-1005bb47c756][Bubble sort]]
 - [[id:9039e766-05bd-49ba-bb5f-5d0e46f63dd4][Insertion sort]]
 - Selection sort
-
 * O(nlog(n)) Algorithms
 - [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][Merge sort]]
 - [[id:9f2fe27d-c349-4b5b-a19a-2b17c35ed8ba][Quick sort]]
-
 * Miscellanious Algorithms 
 - [[id:25152c82-3785-4ea0-8041-4ec7a9838085][DNF Sort]]

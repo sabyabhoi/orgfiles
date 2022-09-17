@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       c08807ce-89fc-44df-b516-84a19b122c19
+:END:
+#+title: Types of Economics
+#+filetags: :ECONOMICS:
+
+* Traditional
+Traditional economics is based on the notion of *Rationality*, i.e., it assumes that all the entities under observation behave rationally.
+It includes various fields of studies, such as macroeconomics, microeconomics etc.
+* Political
+Political economics, as the name suggests has some form of political involvement. Assymetry of knowledge/resources exists in such studies.
+Traditional economics is a subset of political economics.
+* Development
+Development economics tries to understand/establish a link between traditional and political economics. In such studies, values play an important role:
+- *Normative economics*: Passing judgement
+- *Positive economics*: Stating facts

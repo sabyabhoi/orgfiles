@@ -19,7 +19,7 @@
 [[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][Intervals]]: *R m3 P5 m7*
 
 * Dominant 7^th
-- *Denoted by *7*
+- *Denoted by 7*
 - major triad + minor 7 interval.
 
 [[id:f46759da-a6c9-4644-b851-3b39fcfd8da2][Intervals]]: *R M3 P5 m7*

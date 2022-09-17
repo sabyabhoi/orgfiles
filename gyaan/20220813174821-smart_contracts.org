@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       a11993ad-ec84-46f8-a662-d8996322f6d1
+:END:
+#+title: Smart Contracts
+#+filetags: :CS:
+
+- Contracts based on mathematical computation rather than trust (/trustless/).
+- They're decentralized.
+- In order to extract data from outside the [[id:94a4aacb-7799-4d2a-8185-f94150fa7ea2][blockchain]], they require *oracles*, in
+  order to fetch information from the real world, in which case, they're called
+  /hybrid/ smart contracts.
+
+* Decentralized Autonomous Organizations (DAOs)
+Organizations that live online and in these smart contracts

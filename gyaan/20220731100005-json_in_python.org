@@ -1,0 +1,65 @@
+:PROPERTIES:
+:ID:       cf222cc3-8892-4df7-aaca-6ea87a0ae5ef
+:END:
+#+title: JSON in Python
+#+filetags: :CS:
+
+In order to work with JSON data in [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]], we make use of the =json= package.
+
+#+begin_src python :session :results none
+import json
+#+end_src
+
+* Converting from raw JSON to python type
+To convert a string pre-existing in memory into python datatype, use the =json.loads= function. 
+#+begin_src python :session :results pp
+  raw_data =  '{ "name":"John", "age":30, "city":"New York" }'
+
+  json.loads(raw_data)
+#+end_src
+
+#+RESULTS:
+: {'age': 30, 'city': 'New York', 'name': 'John'}
+
+* Converting from python to raw JSON
+To convert a python datatype to raw JSON, use the =json.dumps= function.
+#+begin_src python :session :results output
+  x = {
+      "name": "John",
+      "age": 30,
+      "city": "New York"
+  }
+
+  # convert into JSON:
+  print(json.dumps(x, indent=4)) # indentation is optional
+#+end_src
+
+#+RESULTS:
+: {
+:     "name": "John",
+:     "age": 30,
+:     "city": "New York"
+: }
+
+** With sorting
+One can also sort the keys of the data:
+#+begin_src python :session :results output
+  print(json.dumps(x, indent=4, sort_keys=True))
+#+end_src
+
+#+RESULTS:
+: {
+:     "age": 30,
+:     "city": "New York",
+:     "name": "John"
+: }
+
+* Reading JSON from file
+Use the =json.load= function, which takes in a file object
+#+begin_src python :session :results output
+  with open('../assets/sample.json', 'r') as f:
+      print(json.load(f))
+#+end_src
+
+#+RESULTS:
+: {'name': 'John', 'age': 30, 'city': 'New York'}

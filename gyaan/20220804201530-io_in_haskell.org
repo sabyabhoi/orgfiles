@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       38331d56-70f4-45a1-9f6a-1479ac5a9a71
+:END:
+#+title:IO in Haskell
+#+filetags: :CS:
+#+DATE:2022-07-05
+
+* Printing stuff to the screen
+We employ the =putStrLn= function to print stuff to the screen:
+#+begin_src haskell
+:t putStrLn
+#+end_src
+
+#+RESULTS:
+: putStrLn :: String -> IO ()
+
+#+begin_src haskell 
+putStrLn "Hello sailor"
+#+end_src
+
+#+RESULTS:
+: Hello sailor
+
+** print function
+=print= is a [[id:7039543f-f0c6-4750-843d-5f9855f15394][function]] which takes in a value of any [[id:232c8196-5b30-4b8a-a0ab-5edb2b0a58ec][type that's an instance]] of =Show=, calls =show= with that value to stringify it, and then outputs it to standard output. 
+#+begin_src haskell
+:t print
+#+end_src
+
+#+RESULTS:
+: print :: Show a => a -> IO ()
+
+* Getting input
+We employ the =getLine= function to retrieve input.
+#+begin_src haskell
+:t getLine
+#+end_src
+
+#+RESULTS:
+: getLine :: IO String
+
+An important point to note here is that the return [[id:9d458481-0bd8-45a7-9b21-30690cd30e20][type]] of =getLine= is not a =String=, but rather an =IO String=. Hence, in order to work with this, we need to use it in a =do= block:
+#+begin_src haskell
+main = do
+  name <- getLine
+  putStrLn "Hello " ++ name
+#+end_src
+
+

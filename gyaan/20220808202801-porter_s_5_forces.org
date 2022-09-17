@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       ef1791de-f257-4e54-bd95-3322358dcfbd
+:END:
+#+title: Porter's 5 forces
+#+filetags: :FINANCE:
+
+- Used to assess a firm's competitive position in its respective industry.
+- The five forces are given below:
+* Threat from substitutes
+The threat of substitute products/services arises when the consumer can /easily/ switch to the substitutes; in other words, when _the switching cost is low_.
+* Threat from internal rivalry
+* Threat from new entrants
+_Barriers to entry_ such as 
+- patents
+- high fixed costs/initial capital requirements
+- government regulations
+- technological expertise
+are crucial for determining threat from new entrants.
+* Bargaining power of suppliers
+- Small companies are often at the mercy of the suppliers, because they lack _wide distribution network_.
+* Bargaining power of customers

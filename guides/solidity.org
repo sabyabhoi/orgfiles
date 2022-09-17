@@ -1,7 +1,5 @@
 #+TITLE: Solidity
 #+AUTHOR: Sabyasachi Bhoi
-#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
-#+OPTIONS: ^:{}
 
 * Specifying the solidity version
 To specify a particular version:

@@ -1,0 +1,62 @@
+:PROPERTIES:
+:ID:       39fd79d2-0d2a-4c56-86c7-c39d83b109cc
+:END:
+#+title: SQLite in Python
+#+filetags: :CS:
+
+In order to use SQLite with [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]], import the =sqlite3= module, which comes preinstalled in python3.
+#+begin_src python :session :results none
+import sqlite3
+#+end_src
+
+* Connection
+We can make connections using the =connect= function:
+#+begin_src python :session 
+con = sqlite3.connect("test.db")
+#+end_src
+
+The connect function connects to the database if it already exists, or creates a new file.
+* Cursor object
+The cursor object is used for executing SQL queries.
+#+begin_src python :session 
+cursor = con.cursor()
+#+end_src
+
+* Basic Commands
+** Creating tables
+#+begin_src python :session :results none
+sql_command = '''CREATE TABLE student (
+ID INTEGER PRIMARY KEY,
+NAME VARCHAR(20),
+AGE INTEGER NOT NULL
+)'''
+
+cursor.execute(sql_command)
+#+end_src
+
+** Inserting data
+#+begin_src python :session :results none
+sql_command = 'INSERT INTO student VALUES (1, "John Doe", 20);'
+cursor.execute(sql_command)
+#+end_src
+
+For reasons beyond my comprehension, we have to use the =cursor.commit= function to actually insert the data into the database:
+#+begin_src python :session :results none
+cursor.commit()
+#+end_src
+
+** Selecting data
+#+begin_src python :session :results output
+sql_command = 'SELECT * FROM student'
+for row in cursor.execute(sql_command):
+  print(row)
+#+end_src
+
+#+RESULTS:
+: (1, 'John Doe', 20)
+
+* Closing the connection
+Once we've finished using the database, we must close the connection:
+#+begin_src python :session :results none
+con.close()
+#+end_src

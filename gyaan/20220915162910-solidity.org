@@ -1,0 +1,265 @@
+:PROPERTIES:
+:ID:       a56fb0c9-900b-4546-8071-6d101f5edd70
+:END:
+#+title: Solidity
+#+filetags: :CS:
+
+* Specifying the solidity version
+To specify a particular version:
+#+begin_src solidity
+pragma solidity 0.6.0;
+#+end_src
+
+To specify a range of versions:
+#+begin_src solidity
+pragma solidity >=0.6.0 <0.9.0;
+#+end_src
+
+To specify any version of the form =0.6.x=:
+#+begin_src solidity
+pragma solidity ^0.6.0;
+#+end_src
+
+* SPDX License
+Trust in smart contract can be better established by making use of pre-defined license headers. Just add the following line to the beginning of the file to accept the MIT license:
+#+begin_src solidity
+// SPDX-License-Identifier: MIT
+#+end_src
+
+* Basic Syntax
+** Data types
+#+begin_src solidity
+uint256 foo = 5;
+bool bar =  true;
+string s = "Hello there";
+int256 baz = -5;
+address ethAddress = 0x537F2f825A1c7AbFA4607D22f543e6CE14B11718;
+bytes32 b = "cat";
+#+end_src
+
+** Contracts
+Contracts are similar to classes or objects in javascript.
+#+begin_src solidity
+contract SimpleStorage {
+    // foo gets initialized to 0 by default
+    uint256 foo;
+}
+#+end_src
+
+*** Functions
+#+begin_src solidity
+contract SimpleStorage {
+    uint256 foo;
+
+    function store(uint256 _foo) public {
+        foo = _foo;
+    }
+}
+#+end_src
+
+*** Visibility
+On the platform we deploy this contract to, we won't be able to view the value of
+=foo= variable. We need to make this variable =public=:
+#+begin_src solidity
+uint256 public foo;
+#+end_src
+
+** =view= keyword
+- It is used to read off information from the contract
+- =view= and =pure= are the only types of functions that don't require any transaction
+  cost([[id:09c09f02-f8d2-41f0-b73a-5572f6935330][gas]]).
+
+#+begin_src solidity
+uint256 public foo;
+
+function retrieve() public view returns(uint256) {
+    return foo;
+}
+#+end_src
+
+=public= variables are defined as =view= functions by default.
+** =pure= keyword
+=pure= functions are used solely for performing some mathematical computation.
+#+begin_src solidity
+uint256 public foo;
+
+function compute(uint256 baz) public pure returns(uint256) {
+    return foo - baz;
+}
+#+end_src
+
+** Structs
+#+begin_src solidity
+struct People {
+    uint256 foo;
+    string name;
+}
+People public person = People({ foo: 2, name: "Sabya" });
+#+end_src
+
+Here, =foo= is at the 0^{th} index, and =name= is at the 1^{st} index of the =People= struct. Hence, another way of instantiating the struct is:
+#+begin_src solidity
+People public person = People(2, "Sabya");
+#+end_src
+
+** Arrays
+Arrays are dynamic by default in solidity.
+#+begin_src solidity
+uint256[] public numbers;
+#+end_src
+
+Mention the size of the array inside the square brackets to create an array of
+fixed size:
+#+begin_src solidity
+uint256[5] public numbers;
+#+end_src
+
+*** Pushing elements to arrays
+#+begin_src solidity
+struct People {
+    uint256 foo;
+    string name;
+}
+
+People public people = People(2, "Sabya");
+
+function addPerson(uint256 _foo, string memory _name) public {
+    people.push(People(_foo, _name));
+}
+#+end_src
+
+** =memory= and =storage= keywords
+The =memory= keyword implies that the variable will only exist during the execution of the contract, and will be deleted once the execution finishes.
+#+begin_src solidity
+string memory _name;
+#+end_src
+
+The =storage= keyword on the other hand (default keyword btw) implies that a variable will exist indefinitely on a [[id:94a4aacb-7799-4d2a-8185-f94150fa7ea2][blockchain]], irrespective of the execution cycle.
+#+begin_src solidity
+string storage _name;
+#+end_src
+
+** Mappings
+#+begin_src solidity
+mapping(string => uint256) public nameToFoo;
+
+nameToFoo["sabya"] = 2;
+#+end_src
+
+* Factory Pattern
+Used to procedurally deploy one contract from another contract.
+** Importing contracts
+#+begin_src solidity
+import "./path/to/file.sol";
+#+end_src
+
+** Deploy a contract from another contract
+Let us assume that we've created a template contract by the name of =SimpleStorage= and imported it into the Factory Pattern file, then to deploy it from this new file:
+
+#+begin_src solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+contract SimpleStorage {
+    uint256 public foo;
+    struct People {
+        uint256 foo;
+        string name;
+    }
+    function store(uint256 _foo) public {
+        foo = _foo;
+    }
+    function retrieve() public view returns(uint256) {
+        return foo;
+    }
+}
+#+end_src
+
+#+begin_src solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import "./SimpleStorage.sol";
+
+contract StorageFactory {
+    SimpleStorage[] public simpleStorageArray;
+
+    function createStorageContract() public {
+        SimpleStorage simpleStorage = new SimpleStorage();
+        simpleStorageArray.push(simpleStorage);
+    }
+}
+#+end_src
+
+Here, we're caching the =SimpleStorage= contract so that we could view it.
+** Interacting with the deployed contract from another contract
+Anytime we want to interact with a contract, we require two things:
+1. Address of the contract
+2. The Application Binary Interface (ABI)
+
+#+begin_src solidity
+function sfStore(uint256 _simpleStorageIndex, uint256 _simpleStorageNumber) public {
+    SimpleStorage simpleStorage = SimpleStorage(address(simpleStorageArray[_simpleStorageIndex]));
+    simpleStorage.store(_simpleStorageNumber);
+}
+#+end_src
+
+** Inheritance
+Suppose we want to have all the functions and variables of the contract we're interacting with. In order to do that, we can *inherit* the contract:
+#+begin_src solidity
+contract StorageFactory is SimpleStorage {}
+#+end_src
+
+* Accepting payments
+** =payable= keyword
+If we mark a function =payable=:
+#+begin_src solidity
+function fund() public payable {}
+#+end_src
+then it means that we can use this function to accept some form of payment.
+** Working on =fund= function
+#+begin_src solidity
+mapping(address => uint256) public addressToAmountFunded;
+
+function fund() public payable {
+    addressToAmountFunded[msg.sender] += msg.value;
+}
+#+end_src
+Here, =msg.sender= represents the entity executing the function (i.e., the person sending the money) and =msg.value= is the actual amount sent.
+** Set some minimum acceptable payment value
+- Suppose instead of working in /wei/ (10^{-18} eth) or maybe even /gwei/ (10^{-9} eth), if we want to accept payments with respect to some fiat currency conversion (like INR or USD), then we need to know the conversion rate first.
+- To achieve this, we use *oracles*, which act as a bridge between the blockchain and the real world data.
+* Working with chainlink
+** Importing chainlink code
+#+begin_src solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.0;
+
+import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+#+end_src
+- The import link is nothing but a solidity file on [[https://github.com/smartcontractkit/chainlink/blob/master/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol][chainlink's official github repo]].
+- This import statement imports an interface, called the [[https://docs.chain.link/docs/price-feeds-api-reference/][AggregatorV3Interface]], which basically means a template for implementation. We don't have to implement the functions in this interface, yet we can call these functions directly in our code.
+
+** Writing a function to get chainlink version
+#+begin_src solidity
+function getVersion() public view returns(uint256) {
+    AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
+
+    return priceFeed.version();
+}
+#+end_src
+
+We're creating an object of the type =AggregatorV3Interface=, which accepts a [[https://docs.chain.link/docs/ethereum-addresses/][data feed address]] for getting the price feed. Here, we're using the ETH to USD price feed.
+
+** Writing function to get price data
+#+begin_src solidity
+function getPrice() public view returns(uint256) {
+    AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
+
+    (, int256 answer,,,) = priceFeed.latestRoundData();
+
+    return uint256(answer);
+}
+#+end_src
+
+- Here, we make use of the =latestRoundData= function available in the =AggregatorV3Interface=. It returns a lot of other stuff that we don't necessarily care about, so we can just get rid of them and separating the fields using commas.
+- We then cast the =answer= into a =uint256= to match it with the return type.

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       7c190ee8-978e-46f5-88d5-58cfbd9efc9c
+:ROAM_ALIASES: GNI
+:END:
+#+title: Gross National Income
+#+filetags: :ECONOMICS:
+
+Gross National Income(GNI) is given as the total value of all the goods and services *claimed* by the residents of an economy. In order to get GNI from GDP, we just add the Net Factor incomes from Abroad (NFIA) to the GDP.
+
+\[
+GNI = GDP + NFIA
+\]

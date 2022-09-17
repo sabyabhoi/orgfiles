@@ -1,0 +1,69 @@
+:PROPERTIES:
+:ID:       ab3c5d9c-741f-47af-bb9e-0b7ba0daafc9
+:END:
+#+title: Depth-First Traversal
+#+filetags: :CS:
+
+There are three types of traversals possible in a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][binary tree]]:
+- In order
+- Pre order
+- Post order
+
+*Note*: I don't demonstrate the recursive algorithms for these traversals because they're trivial.
+
+* In order traversal
+- Visit the left node, then the node itself, then the right node.
+** Iterative algorithm
+1. Maintain a stack of nodes.
+2. Push the root node onto the stack and goto the left node.
+3. If the node is not null, then push it onto the stack move left.
+4. If the node is null, pop the top element off of the stack, print it and goto the right node of the popped node.
+
+*** Code
+#+begin_src c++
+void inorder(Node* head) {
+  if(head == nullptr) return;
+  stack<Node*> s;
+
+  while(!s.empty() || head != nullptr) {
+    if(head != nullptr) {
+      s.push(head);
+      head = head->left;
+    } else {
+      cout << s.top()->data << ' ';
+      head = s.top()->right;
+      s.pop();
+    }
+  }
+  cout << '\n';
+}
+#+end_src
+
+* Pre order traversal
+- Visit the node itself, then the left node, then the right node.
+** Iterative algorithm
+1. Maintain a stack of nodes.
+2. Print the root node.
+3. Push the root node onto the stack and goto the left node.
+4. If the node is not null, then push it onto the stack move left.
+5. If the node is null, pop the top element off of the stack, print it and goto the right node of the popped node.
+
+*** Code
+#+begin_src c++
+void preorder(Node* head) {
+  if(head == nullptr) return;
+  stack<Node*> s;
+
+  while(!s.empty() || head != nullptr) {
+    if(head != nullptr) {
+      cout << head->data << ' ';
+      s.push(head);
+      head = head->left;
+    } else {
+      head = s.top()->right;
+      s.pop();
+    }
+  }
+  cout << '\n';
+}
+#+end_src

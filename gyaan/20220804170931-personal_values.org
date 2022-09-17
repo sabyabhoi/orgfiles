@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       b83aba99-4575-407e-a48b-48a538d73b1d
+:ROAM_REFS: [[cite:&manson2016subtle]]
+:END:
+#+title: Personal Values
+#+filetags: :Life-Advice:
+
+- Personal values dictate our lives.
+- These are the values we live by.
+- We employ these values to set the threshold for failure and success, and ultimately, happiness.

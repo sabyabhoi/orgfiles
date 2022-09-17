@@ -1,0 +1,79 @@
+:PROPERTIES:
+:ID:       c2713362-fded-4cbe-9fd6-87c9011606f6
+:END:
+#+title: Binary representation of signed integers
+#+filetags: :CS:
+
+There are three methods by which we can represent signed integers in binary:
+* Signed magnitude
+In this method, the Most Significant Bit (MSB) represents the sign of the number:
+- 0 means positive
+- 1 means negative
+
+#+begin_example
++3 = 011
+-3 = 111
+#+end_example
+
+** Limitation
+Integer arithmetic fails when using this form of representation:
+#+begin_example
++2 + (-1)
+010 + 101
+111 = -3
+#+end_example
+
+* Diminished Radix Complement
+Given a number N with n digits and base r, the (r-1)'s complement is defined as
+
+\[
+r^n - N - 1
+\]
+
+#+begin_example
+9's complement of 865 = 10^3 - 865 - 1 = 134
+#+end_example
+
+** Binary numbers
+For representing and performing arithmetic on binary numbers using the Diminished Radix Complement, we first check if the original number is positive or negative.
+- If the number is positive, then the 1's complement of the number is the number itself.
+- If the number is negative, then the 1's complement of the number is obtained by flipping all the bits of the number except the sign bit (MSB).
+
+#+begin_example
+1's complement of +5 = 0101
+1's complement of -5 = 1010
+#+end_example
+
+|---------+------------------+----------------|
+| Decimal | Signed Magnitude | 1's complement |
+|---------+------------------+----------------|
+|       7 |             0111 |           0111 |
+|       6 |             0110 |           0110 |
+|       5 |             0101 |           0101 |
+|       4 |             0100 |           0100 |
+|       3 |             0011 |           0011 |
+|       2 |             0010 |           0010 |
+|       1 |             0001 |           0001 |
+|       0 |             0000 |           0000 |
+|---------+------------------+----------------|
+|      -0 |             1000 |           1111 |
+|      -1 |             1001 |           1110 |
+|      -2 |             1010 |           1101 |
+|      -3 |             1011 |           1100 |
+|      -4 |             1100 |           1011 |
+|      -5 |             1101 |           1010 |
+|      -6 |             1110 |           1001 |
+|      -7 |             1111 |           1000 |
+|---------+------------------+----------------|
+
+** Performing arithmetic
+In order to perform arithmetic using diminished radix complement, first convert all the numbers into their respective diminished radix complement, and then perform the operation. The resulting value will also be in diminished radix complement form.
+When the carry bit if positive, the answer is also positive, else the answer is negative.
+
+* Radix Complement
+Given a number N with n digits and base r, the r's complement is defined as
+
+\[
+r^n - N = \textrm{diminished radix complement} + 1
+\]
+

@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       b2d50324-60dc-4562-9350-38fdb5dec45a
+:ROAM_ALIASES: DSP
+:ROAM_REFS: https://youtu.be/Ov3GXhorrJE
+:END:
+#+title: Digital Signal Processing
+
+* Quantization
+It is the process of taking a signal of infinitely-many continuous signal points, and mapping it to a finite, discrete set of points.
+* Sampling Rate
+:PROPERTIES:
+:ID:       decbac65-edd7-478e-8a02-64a522e3db71
+:END:
+- It is the rate at which the audio signal is interpreted.
+- E.g. if the sampling rate is 48 kHz, then the audio signal is recorded into digital format 48,000 times per second.
+- In between the intervals wherein no sampling is done, the audio signal is /held/. This is called *sample and hold*.
+#+ATTR_HTML: :width 500px
+[[../assets/Sample-and-hold-circuit-working.jpg]]
+* Bit Depth
+:PROPERTIES:
+:ID:       e2fc9294-621c-4a0b-bed8-62f5fea35265
+:END:
+- Defines the accuracy of the amplitude of the interpreted signal.
+- E.g. if the bit depth is 16, then the amplitude can take values in the range [-1, 1] with a step of 1/2^16.
+* Nyquist–Shannon Sampling theorem
+:PROPERTIES:
+:ID:       92c287f9-7b3f-4e92-bbc0-1f5b6d59575e
+:ROAM_REFS: https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem
+:END:
+- This theorem states that in order for a digital signal to capture all the necessary information of the original analog signal, its *[[id:decbac65-edd7-478e-8a02-64a522e3db71][sampling rate]] must be atleast twice the frequency of the analog signal*.
+  
+\[
+\textrm{sampling rate} = 2\times\textrm{frequency}
+\]
+
+- E.g. if the frequency of the signal is 20 kHz, then the sampling rate should be atleast 40 kHz.
+- The human ear can hear sounds with frequencies ranging from 20 Hz to 20 kHz; therefore the standard sampling rate across a lot of digital audio programs is set be greater than 40 kHz.
+
+* Aliasing
+:PROPERTIES:
+:ID:       aca20bee-f402-4253-bfa9-54a6e3212ea9
+:END:
+- When the frequency of the audio signal is higher than the [[id:decbac65-edd7-478e-8a02-64a522e3db71][Sampling Rate]], then the frequency of the quantized signal is lower than that of the original signal.

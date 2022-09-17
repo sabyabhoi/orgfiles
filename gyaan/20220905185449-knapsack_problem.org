@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       e8089b0e-fdc0-4ae6-a873-a2c75cf2410b
+:END:
+#+title: Knapsack Problems
+#+filetags: :CS:
+
+It is a famous subset of problems with a similar hue:
+[[../assets/knapsack.jpeg]]
+1. A knapsack (bag) is given, which can hold at max =W= amount of weight.
+2. A set of items with different weights (=weights[]=) and value(=value[]=) is given
+3. We're supposed to maximize the value of the knapsack with the given constraints.
+
+* Types of knapsack problems
+** Fractional Knapsack
+:PROPERTIES:
+:ID:       4d47ff21-6fdc-4cb4-88c5-93c9e0c7aa33
+:END:
+Suppose the knapsack is almost full and no space is left for any discrete item. In such case, we can fill the remaining space with a fraction of some item. The value of this item is also divided proportionally.
+
+** [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]]
+** [[id:9d0c5d26-0aed-4ec7-9df5-0e4dc8b6dd4b][Unbounded Knapsack]]

@@ -5,7 +5,7 @@
 #+OPTIONS: ^:{}
 
 * Smart Contracts
-- Contracts based on mathematical computation rather than trust (*trustless*).
+- Contracts based on mathematical computation rather than trust (/trustless/).
 - They're decentralized.
 - In order to extract data from outside the blockchain, they require *oracles*, in
   order to fetch information from the real world, in which case, they're called

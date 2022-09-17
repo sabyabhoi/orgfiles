@@ -5,13 +5,14 @@
 #+title: Rabin Karp Algorithm for Pattern Search
 #+filetags: :CS:
 
-- This algorithm is used for matching patterns in strings.
-- Consider two strings: =s= and =p=.
-- We want to check if =p= is present in =s= or not; if it is, then print the index where it is.
-- How Rabin Karp differs from trivial bruteforce approach is that we first generate a hash for the string =p=; in our case the *hash is simply the sum of the ASCII values of the characters* of =p=.
-- Once we have this hash, we create a [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][window]] in =s= starting from the beginning of =s=, going upto the length of =p=. We calculate the hash for this window.
-- Check if the hash of the window is equal to that of =p=. If it is, then check if the substring is actually equal to =p=. If it is, then append it to the list of found indices.
-- Slide the window one index right, subtracting the ASCII value of the leftmost element and adding the ASCII value of the rightmost element to the hash of the window.
+This algorithm is used for matching patterns in strings.
+* Algorithm
+1. Consider two strings: =s= and =p=.
+2. We want to check if =p= is present in =s= or not; if it is, then print the index where it is.
+3. How Rabin Karp differs from trivial bruteforce approach is that we first generate a hash for the string =p=; in our case the *hash is simply the sum of the ASCII values of the characters* of =p=.
+4. Once we have this hash, we create a [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][window]] in =s= starting from the beginning of =s=, going upto the length of =p=. We calculate the hash for this window.
+5. Check if the hash of the window is equal to that of =p=. If it is, then check if the substring is actually equal to =p=. If it is, then append it to the list of found indices.
+6. Slide the window one index right, subtracting the ASCII value of the leftmost element and adding the ASCII value of the rightmost element to the hash of the window.
 
 #+begin_src cpp
   vector<int> rabinKarp(const string& s, const string& p) {

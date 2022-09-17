@@ -1,0 +1,17 @@
+#+TITLE: Concurrency
+
+*Concurrent* programming is when different parts of the program execute independently, and *parallel* programming is when different parts of the program execute at the same time.
+
+* Threads
+#+begin_src rust
+use std::{thread, time::Duration};
+
+fn main() {
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!("Hi number {} spawned from this thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+}
+#+end_src

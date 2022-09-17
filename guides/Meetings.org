@@ -1,0 +1,58 @@
+#+TITLE: Meeting Minutes
+* Analytics Dashboard
+
+*Requirements*:
+|-----------------------------------+---------+------------+-----------------------------|
+| *Metric*                            | *Calc*    | *Dependency* | *Representation*              |
+|-----------------------------------+---------+------------+-----------------------------|
+| Active User Count                 | -       | [[https://api-v2.onfinance.in/admin/usercount][API Link]]   | Large size no.              |
+|-----------------------------------+---------+------------+-----------------------------|
+| Real User Activity                | Average | [[https://api-v2.onfinance.in/admin/useractivity][API Link]]   | 2 TS Graphs                 |
+|-----------------------------------+---------+------------+-----------------------------|
+| # of users with linked portfolio  | -       | [[https://api-v2.onfinance.in/admin/userportfolio][API Link]]   | 2 Large no.                 |
+| Google Analytics Integration      |         |            | Users active in last 30 min |
+|-----------------------------------+---------+------------+-----------------------------|
+| # of uninstalls (by device)       |         |            |                             |
+| notifications recieved/open ratio |         |            |                             |
+|-----------------------------------+---------+------------+-----------------------------|
+| app store reviews                 |         |            |                             |
+|-----------------------------------+---------+------------+-----------------------------|
+
+*** Remarks
+- For real user activity, each user has 4 metrics:
+  1. articles bookmarked
+  2. articles read
+  3. companies explored
+  4. companies bookmarked
+- The real user activity metric should be represented by a time-series graph of the moving average, and also display the % of users below average.
+- The app store reviews should be a word cloud of all the non 5-star reviews.
+
+*** Doubts & Clarifications
+- [X] What is =entity_id= in the =useractivity= data?
+- [ ] Jupyter dashboard is *STILL* giving BT.
+- [X] What kind of timestamps are provided in the =useractivity= data?
+* DONE Shekhar sir work
+<2022-08-06 Sat>
+
+- Daily basis: mean median mode
+- collect data and show analysis
+*** DONE Points
+- [X] Inconsistent data:
+  - [X] IGMNo., TimeofArrival missing in the second data.
+  - [X] Origin in the first data, destination in the second data (import export)
+- [X] Find out which pieces of data I can discard.
+- [X] Setup sqlite (maybe)
+* Manifest data
+<2022-08-16 Tue>
+
+- Weight, bags, country, flight, courier, and if consignee or consignor are same for many consignments ,goods being imported or exported description and Hsn
+- Also seeing their behaviour over a period of time: Sudden jump some day
+- After seeing overall analysis , seeing the individual details will be necessary
+- Country wise analysis is always helpful
+- And if there is any scheme benefit column look into that too
+- Many a time while exporting people take some benefit drawback, MEIS, Rodtep, RoSTCL or do it under LUT
+- LUT means letter of undertaking and in this case they take refund from GST not us. So from evasion pt of view is necessary to be checked
+
+** Remarks
+- bags, Flight details not in manifest
+

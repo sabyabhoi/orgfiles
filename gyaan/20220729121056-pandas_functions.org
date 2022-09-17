@@ -1,0 +1,345 @@
+:PROPERTIES:
+:ID:       c36d5178-3d1e-4325-bc42-d5144e9fb3ca
+:END:
+#+title: Pandas functions
+#+filetags: :CS:
+
+List of pandas functions in [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]] which I found useful.
+
+#+begin_src python :session :results none 
+  import seaborn as sns
+  import pandas as pd
+
+  df = sns.load_dataset('mpg')
+#+end_src
+
+* Basic Information
+#+begin_src python :session :results output
+df.info()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 398 entries, 0 to 397
+Data columns (total 9 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           398 non-null    float64
+ 1   cylinders     398 non-null    int64  
+ 2   displacement  398 non-null    float64
+ 3   horsepower    392 non-null    float64
+ 4   weight        398 non-null    int64  
+ 5   acceleration  398 non-null    float64
+ 6   model_year    398 non-null    int64  
+ 7   origin        398 non-null    object 
+ 8   name          398 non-null    object 
+dtypes: float64(4), int64(3), object(2)
+memory usage: 28.1+ KB
+#+end_example
+
+#+begin_src python :session 
+df.head()
+#+end_src
+
+#+RESULTS:
+:     mpg  cylinders  displacement  ...  model_year  origin                       name
+: 0  18.0          8         307.0  ...          70     usa  chevrolet chevelle malibu
+: 1  15.0          8         350.0  ...          70     usa          buick skylark 320
+: 2  18.0          8         318.0  ...          70     usa         plymouth satellite
+: 3  16.0          8         304.0  ...          70     usa              amc rebel sst
+: 4  17.0          8         302.0  ...          70     usa                ford torino
+: 
+: [5 rows x 9 columns]
+
+* Getting unique entries
+** Name of unique entries
+#+begin_src python :session 
+df.origin.unique()
+#+end_src
+
+#+RESULTS:
+| usa | japan | europe |
+
+** Number of unique entries
+#+begin_src python :session 
+df.origin.nunique()
+#+end_src
+
+#+RESULTS:
+: 3
+
+* Cumulative Summation: =cumsum=
+#+begin_src python :session 
+  df[['mpg', 'displacement']].cumsum()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+        mpg  displacement
+0      18.0         307.0
+1      33.0         657.0
+2      51.0         975.0
+3      67.0        1279.0
+4      84.0        1581.0
+..      ...           ...
+393  9223.8       76512.5
+394  9267.8       76609.5
+395  9299.8       76744.5
+396  9327.8       76864.5
+397  9358.8       76983.5
+
+[398 rows x 2 columns]
+#+end_example
+
+* Querying 
+** Using =where=
+#+begin_src python :session 
+df[['name', 'mpg', 'model_year']].where(df.origin == 'usa')
+#+end_src
+
+#+RESULTS:
+#+begin_example
+                          name   mpg  model_year
+0    chevrolet chevelle malibu  18.0        70.0
+1            buick skylark 320  15.0        70.0
+2           plymouth satellite  18.0        70.0
+3                amc rebel sst  16.0        70.0
+4                  ford torino  17.0        70.0
+..                         ...   ...         ...
+393            ford mustang gl  27.0        82.0
+394                        NaN   NaN         NaN
+395              dodge rampage  32.0        82.0
+396                ford ranger  28.0        82.0
+397                 chevy s-10  31.0        82.0
+
+[398 rows x 3 columns]
+#+end_example
+
+*** Multiple queries
+#+begin_src python :session 
+  df[['name', 'mpg', 'model_year']].where((df.origin == 'usa') & (df.mpg <= 28.0))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+                          name   mpg  model_year
+0    chevrolet chevelle malibu  18.0        70.0
+1            buick skylark 320  15.0        70.0
+2           plymouth satellite  18.0        70.0
+3                amc rebel sst  16.0        70.0
+4                  ford torino  17.0        70.0
+..                         ...   ...         ...
+393            ford mustang gl  27.0        82.0
+394                        NaN   NaN         NaN
+395                        NaN   NaN         NaN
+396                ford ranger  28.0        82.0
+397                        NaN   NaN         NaN
+
+[398 rows x 3 columns]
+#+end_example
+
+Note that the parenthesis around the individual conditions are necessary.
+
+* Grouping
+#+begin_src python :session 
+df.groupby("origin").mpg.count()
+#+end_src
+
+#+RESULTS:
+: origin
+: europe     70
+: japan      79
+: usa       249
+: Name: mpg, dtype: int64
+
+* Sorting by columns
+*** In ascending order
+#+begin_src python :session 
+df.sort_values(by=['mpg'])
+#+end_src
+
+#+RESULTS:
+#+begin_example
+      mpg  cylinders  displacement  ...  model_year  origin                  name
+28    9.0          8         304.0  ...          70     usa              hi 1200d
+25   10.0          8         360.0  ...          70     usa             ford f250
+26   10.0          8         307.0  ...          70     usa             chevy c20
+103  11.0          8         400.0  ...          73     usa      chevrolet impala
+124  11.0          8         350.0  ...          73     usa      oldsmobile omega
+..    ...        ...           ...  ...         ...     ...                   ...
+326  43.4          4          90.0  ...          80  europe    vw dasher (diesel)
+394  44.0          4          97.0  ...          82  europe             vw pickup
+325  44.3          4          90.0  ...          80  europe  vw rabbit c (diesel)
+329  44.6          4          91.0  ...          80   japan   honda civic 1500 gl
+322  46.6          4          86.0  ...          80   japan             mazda glc
+
+[398 rows x 9 columns]
+#+end_example
+
+*** In descending order
+#+begin_src python :session 
+df.sort_values(by=['mpg'], ascending=False)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+      mpg  cylinders  displacement  ...  model_year  origin                  name
+322  46.6          4          86.0  ...          80   japan             mazda glc
+329  44.6          4          91.0  ...          80   japan   honda civic 1500 gl
+325  44.3          4          90.0  ...          80  europe  vw rabbit c (diesel)
+394  44.0          4          97.0  ...          82  europe             vw pickup
+326  43.4          4          90.0  ...          80  europe    vw dasher (diesel)
+..    ...        ...           ...  ...         ...     ...                   ...
+103  11.0          8         400.0  ...          73     usa      chevrolet impala
+67   11.0          8         429.0  ...          72     usa       mercury marquis
+25   10.0          8         360.0  ...          70     usa             ford f250
+26   10.0          8         307.0  ...          70     usa             chevy c20
+28    9.0          8         304.0  ...          70     usa              hi 1200d
+
+[398 rows x 9 columns]
+#+end_example
+
+* Selecting NaN rows
+** One particular column
+#+begin_src python :session 
+df[df["horsepower"].isna()]
+#+end_src
+
+#+RESULTS:
+:       mpg  cylinders  displacement  ...  model_year  origin                  name
+: 32   25.0          4          98.0  ...          71     usa            ford pinto
+: 126  21.0          6         200.0  ...          74     usa         ford maverick
+: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
+: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
+: 354  34.5          4         100.0  ...          81  europe           renault 18i
+: 374  23.0          4         151.0  ...          82     usa        amc concord dl
+: 
+: [6 rows x 9 columns]
+
+** All columns
+#+begin_src python :session 
+df[df.isna().any(axis=1)]
+#+end_src
+
+#+RESULTS:
+:       mpg  cylinders  displacement  ...  model_year  origin                  name
+: 32   25.0          4          98.0  ...          71     usa            ford pinto
+: 126  21.0          6         200.0  ...          74     usa         ford maverick
+: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
+: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
+: 354  34.5          4         100.0  ...          81  europe           renault 18i
+: 374  23.0          4         151.0  ...          82     usa        amc concord dl
+: 
+: [6 rows x 9 columns]
+
+* Mutate columns
+#+begin_src python :session 
+df.origin = df.origin.map(lambda o: o.upper() if o == 'usa' else o)
+df.head()
+#+end_src
+
+#+RESULTS:
+:     mpg  cylinders  displacement  ...  model_year  origin                       name
+: 0  18.0          8         307.0  ...          70     USA  chevrolet chevelle malibu
+: 1  15.0          8         350.0  ...          70     USA          buick skylark 320
+: 2  18.0          8         318.0  ...          70     USA         plymouth satellite
+: 3  16.0          8         304.0  ...          70     USA              amc rebel sst
+: 4  17.0          8         302.0  ...          70     USA                ford torino
+: 
+: [5 rows x 9 columns]
+
+* Rename columns
+#+begin_src python :session 
+df.rename(columns = {'mpg': 'mileage'}, inplace=False)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     mileage  cylinders  displacement  ...  model_year  origin                       name
+0       18.0          8         307.0  ...          70     usa  chevrolet chevelle malibu
+1       15.0          8         350.0  ...          70     usa          buick skylark 320
+2       18.0          8         318.0  ...          70     usa         plymouth satellite
+3       16.0          8         304.0  ...          70     usa              amc rebel sst
+4       17.0          8         302.0  ...          70     usa                ford torino
+..       ...        ...           ...  ...         ...     ...                        ...
+393     27.0          4         140.0  ...          82     usa            ford mustang gl
+394     44.0          4          97.0  ...          82  europe                  vw pickup
+395     32.0          4         135.0  ...          82     usa              dodge rampage
+396     28.0          4         120.0  ...          82     usa                ford ranger
+397     31.0          4         119.0  ...          82     usa                 chevy s-10
+
+[398 rows x 9 columns]
+#+end_example
+
+** Convert index to column
+You can simply employ the =DataFrame.reset_index= function:
+#+begin_src python :session 
+df.reset_index()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     index   mpg  cylinders  ...  model_year  origin                       name
+0        0  18.0          8  ...          70     usa  chevrolet chevelle malibu
+1        1  15.0          8  ...          70     usa          buick skylark 320
+2        2  18.0          8  ...          70     usa         plymouth satellite
+3        3  16.0          8  ...          70     usa              amc rebel sst
+4        4  17.0          8  ...          70     usa                ford torino
+..     ...   ...        ...  ...         ...     ...                        ...
+393    393  27.0          4  ...          82     usa            ford mustang gl
+394    394  44.0          4  ...          82  europe                  vw pickup
+395    395  32.0          4  ...          82     usa              dodge rampage
+396    396  28.0          4  ...          82     usa                ford ranger
+397    397  31.0          4  ...          82     usa                 chevy s-10
+
+[398 rows x 10 columns]
+#+end_example
+
+* Drop columns
+Make use of the =drop= function:
+#+begin_src python :session 
+df.drop(['mpg', 'origin'], axis=1)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     cylinders  displacement  horsepower  ...  acceleration  model_year                       name
+0            8         307.0       130.0  ...          12.0          70  chevrolet chevelle malibu
+1            8         350.0       165.0  ...          11.5          70          buick skylark 320
+2            8         318.0       150.0  ...          11.0          70         plymouth satellite
+3            8         304.0       150.0  ...          12.0          70              amc rebel sst
+4            8         302.0       140.0  ...          10.5          70                ford torino
+..         ...           ...         ...  ...           ...         ...                        ...
+393          4         140.0        86.0  ...          15.6          82            ford mustang gl
+394          4          97.0        52.0  ...          24.6          82                  vw pickup
+395          4         135.0        84.0  ...          11.6          82              dodge rampage
+396          4         120.0        79.0  ...          18.6          82                ford ranger
+397          4         119.0        82.0  ...          19.4          82                 chevy s-10
+
+[398 rows x 7 columns]
+#+end_example
+
+#+begin_src python :session 
+df.drop(columns=['mpg', 'origin'])
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     cylinders  displacement  horsepower  ...  acceleration  model_year                       name
+0            8         307.0       130.0  ...          12.0          70  chevrolet chevelle malibu
+1            8         350.0       165.0  ...          11.5          70          buick skylark 320
+2            8         318.0       150.0  ...          11.0          70         plymouth satellite
+3            8         304.0       150.0  ...          12.0          70              amc rebel sst
+4            8         302.0       140.0  ...          10.5          70                ford torino
+..         ...           ...         ...  ...           ...         ...                        ...
+393          4         140.0        86.0  ...          15.6          82            ford mustang gl
+394          4          97.0        52.0  ...          24.6          82                  vw pickup
+395          4         135.0        84.0  ...          11.6          82              dodge rampage
+396          4         120.0        79.0  ...          18.6          82                ford ranger
+397          4         119.0        82.0  ...          19.4          82                 chevy s-10
+
+[398 rows x 7 columns]
+#+end_example
+
+You can also alter the dataframe inplace by setting the =inplace=True= parameter.

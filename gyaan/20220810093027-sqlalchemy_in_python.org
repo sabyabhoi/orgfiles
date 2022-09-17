@@ -1,0 +1,110 @@
+:PROPERTIES:
+:ID:       017edfe4-4a45-4ea9-b42e-e693f86f9d8e
+:END:
+#+title: SQLAlchemy in Python
+#+filetags: :CS:
+
+SQLAlchemy is an _Object Relational Mapper_ (ORM) for [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]]. It provides ways to connect with various different SQL Databases.
+
+* Creating a database connection
+We need to employ the =create_engine= function available in the =sqlalchemy= module:
+#+begin_src python :session
+  import sqlalchemy as sql
+  engine = sql.create_engine('sqlite:///college.db', echo=True)
+  engine
+#+end_src
+
+#+RESULTS:
+: Engine(sqlite:///college.db)
+
+Passing =echo=True= is going to dump out all the output we get from executing SQL queries.
+
+* Creating models
+In order to create tables, we first need to specify their schema. We can do this by creating a class which is a child of the =declarative_base= class:
+#+begin_src python :session :results output
+  from sqlalchemy import Column, Integer, String
+  from sqlalchemy.ext.declarative import declarative_base 
+
+  Base = declarative_base()
+
+  class User(Base):
+      __tablename__ = 'user'
+
+      id = Column('id', Integer, primary_key=True)
+      username = Column('username', String, unique=True)
+
+  Base.metadata.create_all(bind=engine)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+2022-08-11 13:34:47,230 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2022-08-11 13:34:47,231 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("user")
+2022-08-11 13:34:47,231 INFO sqlalchemy.engine.Engine [raw sql] ()
+2022-08-11 13:34:47,231 INFO sqlalchemy.engine.Engine PRAGMA temp.table_info("user")
+2022-08-11 13:34:47,231 INFO sqlalchemy.engine.Engine [raw sql] ()
+2022-08-11 13:34:47,232 INFO sqlalchemy.engine.Engine 
+CREATE TABLE user (
+	id INTEGER NOT NULL, 
+	username VARCHAR, 
+	PRIMARY KEY (id), 
+	UNIQUE (username)
+)
+
+
+2022-08-11 13:34:47,232 INFO sqlalchemy.engine.Engine [no key 0.00012s] ()
+2022-08-11 13:34:47,947 INFO sqlalchemy.engine.Engine COMMIT
+#+end_example
+
+Here, in the second line of output we can see a =PRAGMA= command, which ensures to not create the =user= table again.
+
+* Sessions
+We need to setup a session in order to interact with the database:
+#+begin_src python :session :results output
+  from sqlalchemy.orm import sessionmaker, relationship
+
+  Session = sessionmaker(bind=engine)
+#+end_src
+
+#+RESULTS:
+
+** Inserting data
+#+begin_src python :session :results output
+  session = Session()
+
+  user = User()
+  user.id = 0
+  user.username = 'cognusboi'
+
+  session.add(user)
+  session.commit()
+
+#+end_src
+
+#+RESULTS:
+: 2022-08-11 13:34:59,653 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+: 2022-08-11 13:34:59,654 INFO sqlalchemy.engine.Engine INSERT INTO user (id, username) VALUES (?, ?)
+: 2022-08-11 13:34:59,654 INFO sqlalchemy.engine.Engine [generated in 0.00023s] (0, 'cognusboi')
+: 2022-08-11 13:34:59,655 INFO sqlalchemy.engine.Engine COMMIT
+
+** Querying data
+#+begin_src python :session :results output
+  users = session.query(User).all()
+  for user in users:
+      print(user.username)
+#+end_src
+
+#+RESULTS:
+: 2022-08-11 13:35:33,413 INFO sqlalchemy.engine.Engine SELECT user.id AS user_id, user.username AS user_username 
+: FROM user
+: 2022-08-11 13:35:33,413 INFO sqlalchemy.engine.Engine [cached since 31.27s ago] ()
+: cognusboi
+
+** Closing the session
+The session must be closed after using the database:
+#+begin_src python :session 
+session.close()
+#+end_src
+
+#+RESULTS:
+: None

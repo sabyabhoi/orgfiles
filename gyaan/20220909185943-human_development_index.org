@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       d72a0fc1-a91b-4721-af08-7943d6e07798
+:ROAM_ALIASES: HDI
+:END:
+#+title: Human Development Index
+#+filetags: :ECONOMICS:
+
+Looking back at [[id:e00b327d-cdfd-4bd8-b2a3-cc29c79d8aa4][1970's Redefinition]] of [[id:3377733d-11cd-4749-9757-75fc92b9a62f][Economic Development]], economists have developed a new metric called the *Human Development Index*, which takes 3 things into account:
+- Health
+- Education
+- Income
+
+*Note:* Here, I'm talking about *New HDI*, or NHDI, whose calculation differs from the original HDI.
+
+* Dimension Index
+We use the *Dimension Index* to normalize the values of all the components:
+\[
+\textrm{Dimension Index} = \frac{\textrm{Actual value} - \textrm{Min value}}{\textrm{Max value} - \textrm{Min value}}
+\]
+
+* Components
+** Health
+
+Life expectancy at birth is taken as the metric for health. 
+** Education
+The expected number of years of schooling is taken as a metric for education.
+** Income
+The PPP-adjusted per-capita [[id:7c190ee8-978e-46f5-88d5-58cfbd9efc9c][GNI]] is taken as the metric for income. Log transformation is first performed before taking calculating the dimension index, because income provides diminishing returns.
+
+* Calculating HDI
+Take the geometric mean of the three components: Health, Education and Income in order to get the HDI.

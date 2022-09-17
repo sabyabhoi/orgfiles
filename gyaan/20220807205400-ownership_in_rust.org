@@ -1,0 +1,68 @@
+:PROPERTIES:
+:ID:       dfc466d8-99a0-488b-9ae7-e5bb58b3ecee
+:END:
+#+title: Ownership in Rust
+#+filetags: :CS:
+
+* Rules
+1. Each value in [[id:4208e4ff-6603-46c1-a128-750757d7f217][Rust]] has a variable that's called its /owner/.
+2. Each value can only have a single owner at a time.
+3. When the owner goes out of scope, the underlying value is dropped.
+* Example
+Consider the following snippet:
+#+begin_src rust :main yes
+let x = 10u8;
+let y = x;
+#+end_src
+
+Here, the value of =x= is copied into =y=. 
+
+Now, Consider the default =String= type:
+#+begin_src rust :main yes
+let s1 = String::from("hello");
+#+end_src
+
+The =String= type stores data on the heap, and has 3 components:
+1. A pointer to the memory on the heap,
+2. the length of the memory on the heap, and
+3. the capacity of the memory (slightly different than the length but idk). 
+
+#+ATTR_HTML: :width 350
+[[../assets/ownership.svg]]
+Here, =s1= is the *owner* of the data in the heap, since it points to that piece of data. Now if we consider the following piece of code:
+
+#+begin_src rust :main yes
+let s1 = String::from("hello");
+let s2 = s1;
+#+end_src
+
+It would be invalid to copy the value of =s1=, i.e., the pointer to the memory, the length and capacity of the memory to =s2=, because then the data lying in the heap would have *two owners*, hence violating the 2^nd rule of ownership. 
+In such cases rust /moves/ the ownership of the data to =s2=, i.e., all the contents of =s1= are moved into =s2=, and =s1= is no longer valid.
+
+However, if we /want/ to copy the underlying data, we can use the =clone()= function:
+#+begin_src rust :main yes
+let s1 = String::from("hello");
+let s2 = s1.clone();
+#+end_src
+
+* Important case (that I've never understood properly before)
+Consider the following snippet:
+#+begin_src rust 
+fn foo() -> String {
+    let s = String::from("Hello sailor");
+    s
+}
+#+end_src
+
+This function is valid, because whenever this function is called, the string =s= comes into scope and passes over its ownership to the variable calling the function. It makes more sense when put in the following format:
+#+begin_src rust :main yes
+  let s1: String;
+  {
+      let s2 = String::from("Hello sailor");
+      s1 = s2;
+  }
+  println!("{}", s1);
+#+end_src
+
+#+RESULTS:
+: Hello sailor
