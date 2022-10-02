@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       ea6ba9c0-d07f-48a5-a412-b0209d197b90
+:END:
+#+title: Equal Sum Partition
+#+filetags: :CS:
+
+This is a type of [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]] problem in which we're given an array =a[n]=, and we're supposed to split it into two sub-arrays such that the sum of the elements in both the sub-arrays are equal. We're supposed to find whether there's a way of doing so or not.
+
+* Solution
+For a solution to exist the sum of the elements of the original array must be even, or else we won't be able to split it into two equal-summed sub-arrays. After that, we're only meant to find a sub-array whose sum is =sum(a)/2=.
+
+#+begin_src c++
+  bool equalSumParition(const vector<int>& a, int n) {
+    int sum = accumulate(a.begin(), a.end(), 0);
+    if(sum % 2 == 1) return false;
+
+    sum /= 2;
+    vector<vector<bool>> dp(n + 1, vector<bool>(sum + 1)); // dp[n][sum]
+
+    REP(i, n + 1) {
+      REP(j, sum + 1) {
+        if(i == 0) {dp[i][j] = false; continue;}
+        if(j == 0) {dp[i][j] = true; continue;}
+
+        if(a[i - 1] > j)
+          dp[i][j] = dp[i - 1][j];
+        else
+          dp[i][j] = dp[i - 1][j] || dp[i - 1][j - a[i - 1]];
+      }
+    }
+    return dp[n][sum];
+  }
+#+end_src

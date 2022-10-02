@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       d1ccf846-8b65-41bc-8d5f-723c3f1f928a
+:END:
+#+title: Proofs
+#+filetags: :CS:
+
+The primary objective of a proof is to demonstrate that an expression of the form
+
+\[
+\forall x P(x) \to Q(x)
+\]
+
+is true. Here, we're going to examine various different methods by which such a tautology can be established.
+
+* Direct proofs
+Using the given premises, construct all the logical steps to reach the conclusion
+
+\[
+p \to q
+\]
+
+* Proof by contraposition
+A crucial property of the $\to$ operator is
+
+\[
+p \to q \equiv \neg q \to \neg p
+\]
+
+We can use this property to prove the original expression. Just negate the conclusion and try to construct the logical steps that reach the negation of the original premises.
+
+* Vacuous and trivial proofs
+** Vacuous Proof
+If we're given an expression of the form:
+
+\[
+p \to q
+\]
+
+And we know that $p$ is always false, then we can directly conclude $q$. This is called a *Vacuous Proof*
+
+** Trivial Proof
+Similarly, if we know that $q$ is always true, then we can directly prove the expression. This is called a *Trivial Proof*.
+
+* Proof by contradiction
+Suppose we wish to prove that a statement $p$ is true. Furthermore, if we can conclude a contradiction $r \land \neg r$, (which is always false) from $\neg p$, or in other words:
+
+\[
+\neg p \to (r \land \neg r)
+\]
+
+Since $r \land \neg r$ is always false, $\neg p$ must also be false. Hence, $p$ must be true.
+
+* Proof of equivalence
+If a theorem is presented with a biconditional statement: /if and only if/, then we can use the following tautology to prove it:
+
+\[
+(p \iff q) \iff (p \to q) \land (q \to p)
+\]
+

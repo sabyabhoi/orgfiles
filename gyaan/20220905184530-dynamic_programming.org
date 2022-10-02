@@ -18,7 +18,7 @@ Recursion \to Memoization or Top-down
 ** [[id:e8089b0e-fdc0-4ae6-a873-a2c75cf2410b][Knapsack Problems]]
 *** [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]]
 1. [[id:d8cab1eb-aaf3-4373-bd03-9aabb9656cbf][Subset sum]]
-2. Equal sum partition
+2. [[id:ea6ba9c0-d07f-48a5-a412-b0209d197b90][Equal sum partition]]
 3. Count of subset sum
 4. Minimum subset sum difference
 5. Target sum

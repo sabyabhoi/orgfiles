@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       e990715f-b664-42dd-b3fb-446556c507ef
+:END:
+#+title: Longest Palindromic Substring
+#+filetags: :CS:
+
+We're given a string =s=, and we're supposed to find the length of the longest palindromic subsequence in the string.
+
+* Algorithm
+The way this is solved is to compare every substring and check if it's a palindrome or not.
+
+Checking substrings of even lengths: 
+#+begin_src c++
+  int lps = 0;
+  REP(i, n) {
+    int j;
+    for(j = 1; i - j + 1 >= 0 && i + j < n; ++j) {
+      if(s[i - j + 1] != s[i + j]) break;
+    }
+    lps = max(lps, 2 * --j);
+  }
+#+end_src
+
+Then check substrings of odd length:
+#+begin_src c++
+  REP(i, n) {
+    int j;
+    for(j = 0; i - j >= 0 && i + j < n; ++j) 
+      if(s[i - j] != s[i + j]) break;
+
+    lps = max(lps, 2 * --j + 1);
+  }
+#+end_src

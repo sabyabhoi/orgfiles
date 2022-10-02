@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       5998d4d1-d248-4e84-a676-f180bd66f147
+:END:
+#+title: Proposition
+#+filetags: :CS:
+
+A *proposition* is a declarative sentence: it states a fact, and is either true or false, but _not both_.
+
+* Examples of what count as propositions
+- Tokyo is the capital of Japan
+- =1 + 1 = 3=
+
+* Examples of what doesn't count as propositions
+- What's the time right now?
+- =x + 3 = 20=

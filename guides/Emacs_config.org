@@ -12,6 +12,8 @@
   (set-fringe-mode 10) ;; give some inline padding
   (menu-bar-mode -1) ;; disable menu bar
 
+  (setq-default indent-tabs-mode t)
+  (setq-default tab-width 4)
   (setq backup-directory-alist '((".*" . "/tmp")))
   (setq byte-compile-warnings '(cl-functions))
 #+end_src
@@ -284,6 +286,7 @@ Easier way to setup keybindings
     (setq lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t)
+    (message "LSP Mode loaded")
     (setq lsp-idle-delay 0.1))
 #+end_src
 
@@ -475,119 +478,19 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
 #+end_src
 
-** Debugging with DAP Mode
+*** LaTeX
+Set the prefix for inserting mathematical symbols to ";".
 #+begin_src emacs-lisp
-  (use-package dap-mode
-    :defer 0
-    ;;     :config
-    ;;     (require 'dap-lldb)
-    )
+(setq LaTeX-math-abbrev-prefix ";")
 #+end_src
 
-** Web Development
-*** Web mode
 #+begin_src emacs-lisp
-  (use-package web-mode
+  (use-package auctex
     :ensure t
-    :mode (("\\.js\\'" . web-mode)
-           ("\\.jsx\\'" .  web-mode)
-           ("\\.ts\\'" . web-mode)
-           ("\\.tsx\\'" . web-mode)
-           ("\\.html\\'" . web-mode))
-    :commands web-mode)
-#+end_src
-
-*** Prettier JS
-#+begin_src emacs-lisp
-  (defun enable-minor-mode (my-pair)
-    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-    (if (buffer-file-name)
-        (if (string-match (car my-pair) buffer-file-name)
-            (funcall (cdr my-pair)))))
-  (use-package prettier-js
-    :ensure t)
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.jsx?\\'" . prettier-js-mode))
-                               (enable-minor-mode
-                                '("\\.tsx?\\'" . prettier-js-mode))))
-#+end_src
-
-** Dired
-#+begin_src emacs-lisp
-  (use-package dired
-    :ensure nil
-    :commands (dired dired-jump)
-    :bind (("C-x C-j" . dired-jump))
-    :custom ((dired-listing-switches "-agho --group-directories-first"))
+    :defer t
     :config
-    (evil-collection-define-key 'normal 'dired-mode-map
-      "h" 'dired-up-directory
-      "l" 'dired-find-file))
-#+end_src
-
-** Terminal modes
-All the different terminal modes available within Emacs.
-*** term-mode
-It is the default terminal emulator shipped with emacs.
-#+begin_src emacs-lisp
-  (use-package term
-    :config
-    (setq explicit-shell-file-name "bash")
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
     )
-#+end_src
-
-*** Better colour support
-#+begin_src emacs-lisp
-  (use-package eterm-256color
-    :hook (term-mode . eterm-256color-mode))
-#+end_src
-
-*** vterm
-Provided a native emulation experience rather than one written in elisp.
-#+begin_src emacs-lisp
-  (use-package vterm
-    :commands vterm
-    :config
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
-    (setq vterm-max-scrollback 10000))
-#+end_src
-
-** Treemacs
-*** LSP Treemacs
-#+begin_src emacs-lisp
-  (use-package lsp-treemacs
-    :after lsp)
-#+end_src
-
-** Font Ligatures
-#+begin_src emacs-lisp
-(use-package ligature
-  :load-path "~/workspace/userfiles/programming/Lisp/ligature.el/"
-  :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; Enable all Cascadia Code ligatures in programming modes
-  (ligature-set-ligatures 't '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                       "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
+  (use-package cdlatex :ensure t)
 #+end_src
 
 * Org mode

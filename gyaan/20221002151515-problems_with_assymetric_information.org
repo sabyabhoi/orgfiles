@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       ea260d71-9459-4c08-bec2-e57f9c5ebebe
+:END:
+#+title: Problems with Assymetric Information
+#+filetags: :ECONOMICS:
+
+Assymetric information exists when two parties getting into any kind of transaction have different amount of information available at their disposal.
+
+To elucidate the problems related with assymetric information, we're going to employ an example of a health insurance agency.
+
+* Adverse Selection
+Adverse in this context means /bad/. It is possible for a rather unhealty person to lie about their health status in order to get a lower premium on their health insurance.
+
+** Solution
+Screening (background check) is a solution for eliminating the problem of adverse selection.
+
+* Moral Hazard
+This relates to the problem of increased risk appetite amongst people who are now insured. E.g. people may eat more unhealthy food now that they're insured.
+
+** Solution
+Monitoring or sign a contract with restrictive covenant

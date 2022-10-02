@@ -1,21 +1,3 @@
 #+TITLE: Tasks
-* DONE File complaints
- SCHEDULED: <2022-08-30 Tue> 
-- [X] For missing white board
-- [X] For missing window curtain rod
-* DONE Buy AllOut
- SCHEDULED: <2022-08-30 Tue> 
-* DONE Buy window curtains
- SCHEDULED: <2022-08-30 Tue> 
-* DONE Buy towels
- SCHEDULED: <2022-08-30 Tue> 
-* DONE Give clothes for laundry
-SCHEDULED: <2022-08-30 Tue 18:10>
-- Check if the in-hostel laundry service is available or not. 
-* DONE Wash clothes
- SCHEDULED: <2022-08-30 Tue> 
-- Wash before taking a bath 
-* DONE Check out stuff related to ICPC
- SCHEDULED: <2022-08-30 Tue> 
 * TODO Buy bulb
  

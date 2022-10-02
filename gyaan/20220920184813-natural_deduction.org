@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       d18adeb4-0798-4db6-bd4c-3c4a03d48efb
+:END:
+#+title: Natural Deduction
+#+filetags: :CS:
+
+The area of logic which deals with [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositions]] is called *Propositional Calculus*. Natural deduction is a crucial component in propositional calculus.
+In natural deduction, we have a series of formulae called *premises*, and we wish to reach another formula called *conclusion*:
+
+\[
+\phi_1, \phi_2, \dots \phi_3 \vdash \psi
+\]
+
+This formula is called a *sequent*.
+
+* Logically equivalent statements
+If one can reach a conclusion using some premises, and reach the premises using this conclusion as well, then one can say that the conclusion and the premises are *logically equivalent*.
+
+\[
+\phi \dashv \vdash \psi
+\]
+
+* And operation
+** Elimination
+\[
+\frac{\phi \land \psi}{\phi} \land e_1
+\]
+
+\[
+\frac{\phi \land \psi}{\psi} \land e_2
+\]
+
+Here, the the premise is given in the numerator and the conclusion is given in the denominator. The operation is given after the fraction.
+** Introduction
+\[
+\frac{\phi \; \psi}{\phi \land \psi} \land i
+\]
+
+* Double negation
+** Introduction
+\[
+\frac{\phi}{\neg \neg \phi} \neg \neg i
+\]
+
+** Elimination
+\[
+\frac{\neg\neg \phi}{\phi} \neg \neg e
+\]
+
+* Implication
+** Elimination
+*** Modus Ponens
+\[
+\frac{\phi \; \phi \to \psi}{\psi} \to e
+\]
+*** Modus Tollens
+\[
+\frac{\phi\to\psi \; \neg \psi}{\neg \phi} MT
+\]
+** Introduction
+\[
+\frac{\fbox{\phi \dots \psi}}{\phi \to \psi} \to i
+\]
+
+This means that if we can reach $\psi$ by temporarily assuming $\phi$, then we can conclude that $\phi \to \psi$ must be true.
+
+

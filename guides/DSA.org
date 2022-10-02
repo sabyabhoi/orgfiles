@@ -401,7 +401,7 @@
 - [ ] [[https://practice.geeksforgeeks.org/problems/friends-pairing-problem5425/1][Friends Pairing Problem]]
 - [ ] [[https://www.geeksforgeeks.org/gold-mine-problem/][Gold Mine Problem]]
 - [ ] [[https://www.geeksforgeeks.org/assembly-line-scheduling-dp-34/][Assembly Line Scheduling Problem]]
-- [ ] [[https://practice.geeksforgeeks.org/problems/painting-the-fence3727/1][Painting the Fenceproblem]]
+- [ ] [[https://practice.geeksforgeeks.org/problems/painting-the-fence3727/1][Painting the Fence problem]]
 - [ ] [[https://practice.geeksforgeeks.org/problems/cutted-segments/0][Maximize The Cut Segments]]
 - [ ] [[https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0][Longest Common Subsequence]]
 - [ ] [[https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence/0][Longest Repeated Subsequence]]
