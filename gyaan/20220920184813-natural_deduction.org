@@ -2,7 +2,7 @@
 :ID:       d18adeb4-0798-4db6-bd4c-3c4a03d48efb
 :END:
 #+title: Natural Deduction
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 The area of logic which deals with [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositions]] is called *Propositional Calculus*. Natural deduction is a crucial component in propositional calculus.
 In natural deduction, we have a series of formulae called *premises*, and we wish to reach another formula called *conclusion*:

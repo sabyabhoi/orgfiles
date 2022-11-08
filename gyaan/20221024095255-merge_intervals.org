@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       94d17605-a846-4376-8fc8-74118c72baf2
+:END:
+#+title: Merge Intervals
+#+filetags: :CS:
+
+We're given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] of intervals, and we're asked to merge all the intervals and return a new array of intervals.
+#+begin_example
+Input: [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+#+end_example
+
+* Algorithm
+1. Sort the array
+   #+begin_src c++
+     sort(arr.begin(), arr.end(), [](const vi& p1, const vi& p2) {
+       return p1[0] < p2[0];
+      });
+   #+end_src
+
+2. Push the first element of the array into the answer array.
+   #+begin_src c++
+     ans.push_back(arr[0]);
+   #+end_src
+
+3. Traverse through the original array: if there is an overlap with the last element of the answer array and the current element in the original array, merge the two intervals by setting the y component of the anser array element to the maximum of the two elements (since the array is sorted). Otherwise, just push the array element onto the answer array.
+   #+begin_src c++
+     int curr = 0;
+     for(int i = 0; i < arr.size(); ++i) {
+       if(ans[curr][1] >= arr[i][0])
+         ans[curr][1] = max(ans[curr][1], arr[i][1]);
+       else {
+         ans.push_back(arr[i]);
+         curr++;
+       }
+     }
+   #+end_src
+
+* Final code
+#+begin_src c++
+  vector<vi> merge_intervals(vi& arr) {
+    vector<vi> ans;
+
+    sort(arr.begin(), arr.end(), [](const vi& p1, const vi& p2) {
+      return p1[0] < p2[0];
+    });
+
+    int curr = 0;
+    ans.push_back(arr[0]);
+    for(int i = 0; i < arr.size(); ++i) {
+      if(ans[curr][1] >= arr[i][0])
+        ans[curr][1] = max(ans[curr][1], arr[i][1]);
+      else {
+        ans.push_back(arr[i]);
+        ++curr;
+      }
+    }
+    return ans;
+  }
+#+end_src

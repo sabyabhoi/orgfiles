@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       e73f62be-35d4-45bc-a242-eaa7a35657ae
+:END:
+#+title: Countability
+#+filetags: :CONCEPT:
+
+* Countable sets
+A set is said to be countable if it has the same cardinality as the set of positive integers. In other words, we can create a [[id:0910229d-b3b2-4b15-93f1-1e128f518a3c][bijection]] from the set of positive integers to this set in order to rank all the elements of the set. 
+E.g. Set of all odd numbers; set of all rational numbers.
+
+** Properties
+- It can be proved that the union and intersection of two countable sets is countable.
+
+* Uncountable sets
+When we cannot create a [[id:0910229d-b3b2-4b15-93f1-1e128f518a3c][bijection]] between the given set and the set of positive integers, the set is said to be uncountably infinite.
+E.g. Set of real numbers; set of irrational numbers.

@@ -3,7 +3,7 @@
 :ROAM_ALIASES: DP
 :END:
 #+title: Dynamic Programming
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 Dynamic Programming is an important concept in [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]]. It is an enhanced version of *recursion*.
 

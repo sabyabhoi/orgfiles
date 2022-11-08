@@ -1,0 +1,120 @@
+:PROPERTIES:
+:ID:       dd99baf0-36f0-4357-9695-f9a8870ad6c2
+:END:
+#+title: Count Inversions
+#+filetags: :CS:
+
+In this problem, we're given an array =a[n]=, and we're supposed to count the number of pairs =(i, j)= for which
+#+begin_src 
+i < j
+a[i] > a[j]
+#+end_src
+
+E.g.
+#+begin_example
+n = 5
+a = [2, 5, 1, 3, 4]
+
+answer = 4
+Here, the pairs are (2, 1), (5, 1), (5, 3) and (5, 4).
+#+end_example
+
+This can be done using [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][Merge Sort]]. 
+
+* Solution in C++
+Merge function:
+#+begin_src c++
+  int merge(const vi& a, const vi& b, vi& arr) {
+    int ans = 0;
+    int n = a.size(), m = b.size();
+    int i = 0, l = 0, r = 0;
+    while(l < n && r < m) {
+      if(a[l] > b[r]) {
+        arr[i++] = b[r++];
+      } else {
+        arr[i++] = a[l++];
+        ans += r;
+      }
+    }
+    while(l < n) {
+      arr[i++] = a[l++];
+      ans += r;
+    }
+    while(r < m) arr[i++] = b[r++];
+    return ans;
+  }
+#+end_src
+
+Merge sort function:
+#+begin_src c++
+  int mergeSort(vi& a) {
+    int ans = 0;
+    int n = a.size();
+    if (n <= 1) return ans;
+
+    vi left(a.begin(), a.begin() + n / 2);
+    vi right(a.begin() + n / 2, a.end());
+  
+    ans += mergeSort(left);
+    ans += mergeSort(right);
+    ans += merge(left, right, a);
+
+    return ans;
+  }
+#+end_src
+
+* Solution in Rust
+Merge function:
+#+begin_src rust
+  fn merge(a: &Vec<u32>, b: &Vec<u32>, arr: &mut Vec<u32>) -> u32 {
+      let n = a.len();
+      let m = b.len();
+      let mut l = 0;
+      let mut r = 0;
+      let mut i = 0;
+
+      let mut inversions = 0;
+      while l < n && r < m {
+          if a[l] > b[r] {
+              arr[i] = b[r];
+              r += 1;
+          } else {
+              arr[i] = a[l];
+              inversions += r;
+              l += 1;
+          }
+          i += 1;
+      }
+      while l < n {
+          arr[i] = a[l];
+          inversions += r;
+          l += 1;
+      }
+      while r < m {
+          arr[i] = b[r];
+          r += 1;
+      }
+      inversions as u32
+  }
+#+end_src
+
+Merge sort function:
+#+begin_src rust
+  fn merge_sort(a: &mut Vec<u32>) -> u32 {
+      let n = a.len();
+      let mut ans = 0;
+      if n <= 1 {
+          return ans;
+      }
+	
+      let (left, right) = a.split_at_mut(n / 2);
+      let mut left = left.to_vec();
+      let mut right = right.to_vec();
+
+      ans += merge_sort(&mut left);
+      ans += merge_sort(&mut right);
+      ans += merge(&left, &right, a);
+
+      ans
+  }
+#+end_src

@@ -2,7 +2,7 @@
 :ID:       9039e766-05bd-49ba-bb5f-5d0e46f63dd4
 :END:
 #+title: Insertion Sort
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 In this sorting O(n^2) sorting algorithm, we maintain a /sorted/ array at the beginning of the original array, adding each element of the unsorted array to the sorted array by comparing and shifting each element to the right.
 

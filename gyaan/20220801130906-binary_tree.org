@@ -2,7 +2,7 @@
 :ID:       a5f37e57-e61c-4a10-93cd-f3c87b44b064
 :END:
 #+title: Binary Tree
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 * Basic structure
 #+begin_src C++

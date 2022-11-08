@@ -1,0 +1,45 @@
+#+TITLE:Sioyek configuration
+#+AUTHOR:Sabyasachi Bhoi
+#+PROPERTY: header-args :tangle ~/.config/sioyek/prefs_user.config
+
+* Key bindings
+#+begin_src conf :tangle ~/.config/sioyek/keys_user.config
+  quit q
+
+  screen_down d
+  screen_up u
+
+  screen_down <C-d>
+  screen_up <C-u>
+  goto_toc <tab>
+
+  toggle_statusbar <C-n>
+
+  toggle_custom_color <C-r>
+
+  set_mark            m
+  goto_mark           ;
+#+end_src
+
+* Dark mode settings
+#+begin_src conf
+default_dark_mode 1
+page_separator_width 2
+page_separator_color	0.3 0.34 0.42
+#+end_src
+
+#+begin_src conf
+  dark_mode_background_color    1.0 0.20 0.25
+  dark_mode_background_color    1.0 0.20 0.25
+
+  background_color    0.18 0.20 0.25
+  dark_mode_background_color    0.18 0.20 0.25
+#+end_src
+
+* Font settings
+#+begin_src conf
+ui_font JetBrainsMono Nerd Font
+font_size 24
+
+status_bar_font_size 20
+#+end_src

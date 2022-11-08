@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       406917cf-4c24-4b5d-9d11-fde64ba65751
+:END:
+#+title: Function
+#+filetags: :CONCEPT:CS:
+
+* Injection 
+:PROPERTIES:
+:ID:       7d905f93-137b-4574-8add-96a224ebc75a
+:ROAM_ALIASES: one-one
+:END:
+
+A function $f: A \to B$ is an injection when
+
+\[
+\forall a, b \in A \left[ f(a) = f(b) \to a = b \right]
+\]
+
+or if we take the contraposition of the statement, we get
+
+\[
+\forall a, b \in A \left[ a \neq b \rightarrow f(a) \neq f(b) \right]
+\]
+
+* Surjection 
+:PROPERTIES:
+:ID:       f28dcce9-624f-43d3-ab40-82b062dcf950
+:ROAM_ALIASES: onto
+:END:
+
+A function $f: A \to B$ is a surjection when
+
+\[
+\forall b \in B \exists a \in A \left[ f(a) = b \right]
+\]
+
+* Bijection 
+:PROPERTIES:
+:ID:       0910229d-b3b2-4b15-93f1-1e128f518a3c
+:END:
+
+A function $f : A \rightarrow B$ is called a bijection when it is injective and surjective.

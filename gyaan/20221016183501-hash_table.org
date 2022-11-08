@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       f4867445-681f-4a04-a1b5-70b160dedf69
+:END:
+#+title: Hash Table
+#+filetags: :CONCEPT:CS:
+
+A hash table comprises of a hash function and an array. It maps values given to it to specific positions in the array using the hash function.
+
+* Hash function
+** Required characteristics
+1. Should produce the same output for a given input everytime
+2. Should be fast
+3. Should be random

@@ -31,10 +31,11 @@
 ** Font configuration
 Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I prefer using fixed-pitch fonts for writing code and variable-pitch fonts for writing prose.
 #+begin_src emacs-lisp
+ 
   (defun cb/set-font-faces ()
-    (let ((font-name "JetBrainsMono Nerd Font Mono") (font-height 153))
+    (let ((font-name "JetBrainsMono Nerd Font Mono") (font-height 152))
       (dolist (face '(default fixed-pitch))
-        (set-face-attribute `,face nil :font font-name :height font-height :weight 'semi-light))
+        (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
       (set-face-attribute 'variable-pitch nil :font "SF Pro Text" :height 182 :weight 'normal)
       ))
 
@@ -113,9 +114,10 @@ Use the =no-littering= package to keep folders clean.
 *** Evil Collection
 #+begin_src emacs-lisp
   (use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+    :ensure t
+    :after evil
+    :config
+    (evil-collection-init))
 #+end_src
 
 ** Project Management
@@ -146,15 +148,18 @@ For a directory to be considered as a project by Projectile, it should
 
 ** Vertico
 #+begin_src emacs-lisp
-    (use-package vertico
-      :ensure t
-      :custom
-      (vertico-cycle t)
-      :init
-      (vertico-mode)
-      (savehist-mode)
-      (setq completion-ignore-case t)
-   )
+  (use-package vertico
+    :ensure t
+    :custom
+    (vertico-cycle t)
+    :init
+    (vertico-mode)
+    (savehist-mode)
+    (setq completion-ignore-case t)
+    )
+  (define-key vertico-map "?" #'minibuffer-completion-help)
+  (define-key vertico-map (kbd "M-RET") #'minibuffer-force-complete-and-exit)
+  (define-key vertico-map (kbd "M-TAB") #'minibuffer-complete)
 #+end_src
 
 *** Orderless
@@ -196,7 +201,7 @@ Marginalia provides additional informational text in the Vertico buffers.
 
 ** Company
 This is the main autocompletion framework we're going to use.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
   (use-package company
     :hook (prog-mode . company-mode)
     :after lsp
@@ -210,7 +215,7 @@ This is the main autocompletion framework we're going to use.
     (company-idle-delay 0.3))
 
   (add-hook 'after-init-hook 'global-company-mode)
-#+end_src
+#+END_SRC
 
 *** Company box
 #+begin_src emacs-lisp
@@ -259,6 +264,7 @@ Easier way to setup keybindings
 #+end_src
 
 ** Doom modeline, theme and rainbow delimiters
+Modeline:
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
@@ -267,14 +273,30 @@ Easier way to setup keybindings
     (use-package all-the-icons
       :ensure t))
 
+#+end_src
+
+Themes:
+#+begin_src emacs-lisp 
   (use-package doom-themes
     :ensure t
     :init
-    (load-theme 'doom-moonlight t)
-    )
+    (load-theme 'doom-moonlight t))
+#+end_src
 
+Rainbow delimiters:
+#+begin_src emacs-lisp
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** Themes
+#+begin_src emacs-lisp :tangle no
+  (use-package autothemer
+	:ensure t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+(load-theme 'catppuccin-macchiato t)
 #+end_src
 
 ** LSP
@@ -311,14 +333,34 @@ Require the posframe package for showing the diagnostics in a popup.
 #+begin_src emacs-lisp
   (use-package yasnippet
     :config
-    ;;(setq yas-snippet-dirs
-    ;;      '("~/.config/emacs/snippets"))
     (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
     (yas-global-mode 1))
+#+end_src
+**** Integration with company mode
+#+begin_src emacs-lisp :tangle no
+  (defun check-expansion ()
+    (save-excursion
+      (if (looking-at "\\_>") t
+        (backward-char 1)
+        (if (looking-at "\\.") t
+          (backward-char 1)
+          (if (looking-at "->") t nil)))))
 
-  (add-hook 'c++-mode-hook 'lsp)
-  (add-hook 'c++-mode-hook 'company-mode)
-  (add-hook 'c++-mode-hook 'yas-minor-mode)
+  (defun do-yas-expand ()
+    (let ((yas/fallback-behavior 'return-nil))
+      (yas/expand)))
+
+  (defun tab-indent-or-complete ()
+    (interactive)
+    (if (minibufferp)
+        (minibuffer-complete)
+      (if (or (not yas/minor-mode)
+              (null (do-yas-expand)))
+          (if (check-expansion)
+              (company-complete-common)
+            (indent-for-tab-command)))))
+
+  (global-set-key [tab] 'tab-indent-or-complete)
 #+end_src
 
 *** Emmet
@@ -336,6 +378,15 @@ Require the posframe package for showing the diagnostics in a popup.
 #+end_src
 
 ** Filetype specific plugins
+*** C++
+#+begin_src emacs-lisp
+  (use-package c++-mode
+    :ensure nil
+    :hook ((c++-mode . lsp-deferred)
+           (c++-mode . yas-minor-mode)
+           (c++-mode . company-mode)))
+#+end_src
+
 *** Rust
 #+begin_src emacs-lisp
   (use-package rustic
@@ -422,9 +473,11 @@ Require the posframe package for showing the diagnostics in a popup.
     :ensure t
     :hook
     ((java-mode . lsp-deferred)
+     (java-mode . yas-minor-mode)
      (java-mode . company-mode))
     )
   (add-hook 'java-mode-hook (lambda () (setq tab-width 4)))
+  (add-hook 'java-mode-hook 'lsp)
   (use-package java-snippets
     :ensure t)
 #+end_src
@@ -466,6 +519,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 *** TypeScript
 #+begin_src emacs-lisp
   (use-package typescript-mode
+  :mode "\\.tsx?\\'"
     :ensure t)
   (add-hook 'web-mode-hook #'(lambda ()
                                (enable-minor-mode
@@ -502,7 +556,8 @@ Set the prefix for inserting mathematical symbols to ";".
     (auto-fill-mode 0)
     (visual-line-mode 1)
     (setq org-fontify-done-headline t
-          evil-auto-indent nil
+          org-html-validation-link nil
+          evil-auto-indent t
           org-startup-with-inline-images t
           org-default-notes-file (concat org-directory "/notes.org"))
     (display-line-numbers-mode 0))
@@ -521,6 +576,7 @@ Set the prefix for inserting mathematical symbols to ";".
     :custom
     (org-directory "~/workspace/userfiles/orgfiles/guides")
     (org-agenda-files '("Tasks.org" "Meetings.org"))
+    (org-agenda-start-with-log-mode t)
     (org-tags-column 5)
     (org-startup-with-latex-preview t) 
     (org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "KILL")))
@@ -590,7 +646,7 @@ Set the prefix for inserting mathematical symbols to ";".
 
 ** Hide keywords
 #+begin_src emacs-lisp
-  (setq org-hidden-keywords '(title author date email))
+  (setq org-hidden-keywords '(title subtitle author date email))
 #+end_src
 
 ** Inline padding
@@ -602,28 +658,6 @@ Set the prefix for inserting mathematical symbols to ";".
 
   (use-package visual-fill-column
     :hook (org-mode . cb/org-mode-visual-fill))
-#+end_src
-
-** Org Appear
-- Auto-toggle org elements.
-- Show the contents of the org links _only in insert mode_.
-#+begin_src emacs-lisp
-  (use-package org-appear
-    :disabled
-    :hook (org-mode . org-appear-mode)
-    :custom
-    (org-appear-autolinks t)
-    (org-appear-trigger 'manual)
-    :config
-    ;; Appears only when in evil-insert-mode
-    (add-hook 'evil-insert-state-entry-hook
-              #'org-appear-manual-start
-              nil
-              t)
-    (add-hook 'evil-insert-state-exit-hook
-              #'org-appear-manual-stop nil
-              t)
-    )
 #+end_src
 
 ** Org bullets
@@ -688,53 +722,6 @@ Set the prefix for inserting mathematical symbols to ";".
           org-roam-ui-follow t))
 #+end_src
 
-*** Export to Hugo
-#+begin_src emacs-lisp :tangle no
-  (use-package ox-hugo
-    :ensure t
-    :custom (org-hugo-base-dir "~/workspace/userfiles/programming/web/homepage/")
-    (org-hugo-section "notes")
-    )
-(defun ox-hugo/export-all (&optional org-files-root-dir dont-recurse)
-  "Export all Org files (including nested) under ORG-FILES-ROOT-DIR.
-
-All valid post subtrees in all Org files are exported using
-`org-hugo-export-wim-to-md'.
-
-If optional arg ORG-FILES-ROOT-DIR is nil, all Org files in
-current buffer's directory are exported.
-
-If optional arg DONT-RECURSE is nil, all Org files in
-ORG-FILES-ROOT-DIR in all subdirectories are exported. Else, only
-the Org files directly present in the current directory are
-exported.  If this function is called interactively with
-\\[universal-argument] prefix, DONT-RECURSE is set to non-nil.
-
-Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
-  (interactive)
-  (let* ((org-files-root-dir (or org-files-root-dir default-directory))
-         (dont-recurse (or dont-recurse (and current-prefix-arg t)))
-         (search-path (file-name-as-directory (expand-file-name org-files-root-dir)))
-         (org-files (if dont-recurse
-                        (directory-files search-path :full "\.org$")
-                      (directory-files-recursively search-path "\.org$")))
-         (num-files (length org-files))
-         (cnt 1))
-    (if (= 0 num-files)
-        (message (format "No Org files found in %s" search-path))
-      (progn
-        (message (format (if dont-recurse
-                             "[ox-hugo/export-all] Exporting %d files from %S .."
-                           "[ox-hugo/export-all] Exporting %d files recursively from %S ..")
-                         num-files search-path))
-        (dolist (org-file org-files)
-          (with-current-buffer (find-file-noselect org-file)
-            (message (format "[ox-hugo/export-all file %d/%d] Exporting %s" cnt num-files org-file))
-            (org-hugo-export-wim-to-md :all-subtrees)
-            (setq cnt (1+ cnt))))
-        (message "Done!")))))
-#+end_src
-
 ** Org capture
 #+begin_src emacs-lisp
   (use-package org-capture
@@ -781,4 +768,70 @@ Checkout [[https://www.gnu.org/software/emacs/manual/html_node/org/Template-expa
   (add-hook 'emacs-startup-hook #'cb/display-startup-time)
 #+end_src
 
-* Font
+* Misc
+** Terminal modes
+All the different terminal modes available within Emacs.
+*** term-mode
+It is the default terminal emulator shipped with emacs.
+#+begin_src emacs-lisp
+  (use-package term
+    :defer t
+    :config
+    (setq explicit-shell-file-name "bash")
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+    )
+#+end_src
+
+*** Better colour support
+#+begin_src emacs-lisp
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+#+end_src
+
+*** vterm
+Provided a native emulation experience rather than one written in elisp.
+#+begin_src emacs-lisp
+  (use-package vterm
+    :commands vterm
+    :config
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+    (setq vterm-max-scrollback 10000))
+#+end_src
+
+** Treemacs
+** LSP Treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :after lsp)
+#+end_src
+
+** Font Ligatures
+#+begin_src emacs-lisp
+  (use-package ligature
+    :load-path "~/workspace/userfiles/programming/Lisp/ligature.el/"
+    :config
+    ;; Enable the "www" ligature in every possible major mode
+    (ligature-set-ligatures 't '("www"))
+    ;; Enable traditional ligature support in eww-mode, if the
+    ;; `variable-pitch' face supports it
+    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+    ;; Enable all Cascadia Code ligatures in programming modes
+    (ligature-set-ligatures 't '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                 ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                 "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                 "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                 "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                 "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                 "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                 "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                 ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                 "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                 "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                 "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                 "\\\\" "://"))
+    ;; Enables ligature checks globally in all buffers. You can also do it
+    ;; per mode with `ligature-mode'.
+    (global-ligature-mode t))
+#+END_SRC
+
+

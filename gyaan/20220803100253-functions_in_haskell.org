@@ -3,7 +3,6 @@
 :END:
 #+title:Functions in Haskell
 #+filetags: :CS:
-#+DATE:2022-07-05
 
 * Basic Syntax
 *Note*: Functions cannot begin with an uppercase letter in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]].

@@ -2,7 +2,7 @@
 :ID:       6a9a5dae-f0b6-4b98-b93a-cfd7238f7595
 :END:
 #+title: Sorting Algorithms
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 * O(n^2) Algorithms
 - [[id:c1126bf4-8bf3-4023-b5ce-1005bb47c756][Bubble sort]]

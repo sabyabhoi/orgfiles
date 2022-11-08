@@ -2,7 +2,7 @@
 :ID:       5998d4d1-d248-4e84-a676-f180bd66f147
 :END:
 #+title: Proposition
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 A *proposition* is a declarative sentence: it states a fact, and is either true or false, but _not both_.
 

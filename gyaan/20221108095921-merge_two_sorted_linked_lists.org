@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       76c06b29-f24b-4883-9027-8a49407cc41a
+:END:
+#+title: Merge two sorted Linked Lists
+#+filetags: :CS:
+
+Given two sorted [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked lists]], we're supposed to [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][merge]] them in sorted order.
+
+#+begin_src c++
+  Node mergeTwoLists(Node* l1, Node* l2) {
+    Node* head = new Node();
+    Node* itr = head;
+    while(l1 && l2) {
+      if(l1->val < l2->val) {
+        itr->next = l1;
+        l1 = l1->next;
+      } else {
+        itr->next = l2;
+        l2 = l2->next;
+      }
+      itr = itr->next;
+    }
+    while(l1) {
+      itr->next = l1;
+      l1 = l1->next;
+      itr = itr->next;
+    }
+    while(l2) {
+      itr->next = l2;
+      l2 = l2->next;
+      itr = itr->next;
+    }
+    return head->next;
+  }
+#+end_src

@@ -51,16 +51,16 @@ All smart pointers /must/ implement the =Drop= trait, which has a function calle
 
   impl Drop for SmartPtr {
       fn drop(&mut self) {
-	  println!("{} dropped", self.data);
+          println!("{} dropped", self.data);
       }
   }
 
   fn main() {
       let s1 = SmartPtr {
-	  data: String::from("Hello world"),
+          data: String::from("Hello world"),
       };
       let s2 = SmartPtr {
-	  data: String::from("Hello sailor"),
+          data: String::from("Hello sailor"),
       };
   }
 #+end_src

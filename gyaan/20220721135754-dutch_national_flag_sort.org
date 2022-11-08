@@ -2,7 +2,7 @@
 :ID:       25152c82-3785-4ea0-8041-4ec7a9838085
 :END:
 #+title: Dutch National Flag Sort
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 - Used for [[id:6a9a5dae-f0b6-4b98-b93a-cfd7238f7595][sorting]] an array comprising of only 0s, 1s, and 2s.
 
@@ -13,7 +13,7 @@
    3. =r=, which keeps track of the 2s
 2. Instantiate =l = 0=, =m = 0= and =r = n - 1=, where =n= is the length of the array =a=.
 3. If =a[m] = 1=, increment =m=.
-4. If =a[m] = 0=, swap =a[l]= and =a[m]=, increment =l= by 1.
+4. If =a[m] = 0=, swap =a[l]= and =a[m]=, increment =l= and =m= by 1.
 5. If =a[m] = 2=, swap =a[r]= and =a[m]=, decrement =r= by 1.
 
 * Time & Space Complexity
@@ -25,9 +25,9 @@
     int l = 0, m = 0, r = a.size() - 1;
 
     while(m <= r) {
-      if(a[m] == 1) ++m;
-      else if(a[m] == 0) swap(a[l++], a[m]);
-      else if(a[m] == 2) swap(a[r--], a[m]);
+      if(a[m] == 1) { ++m; continue; }
+      else if(a[m] == 0) swap(a[l++], a[m++]);
+      else swap(a[r--], a[m]);
     }
   }
 #+end_src

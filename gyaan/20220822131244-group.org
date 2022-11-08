@@ -2,10 +2,11 @@
 :ID:       5016f76a-f2ba-489c-96ec-316ab4a91bd9
 :END:
 #+title: Group
+#+filetags: :CONCEPT:
 
 In [[id:121106e1-bfee-4e5b-80b9-51446259a4cd][Group Theory]], a group is a collection of elements *grouped* by a /common binary operation/. The elements can be of any type: real numbers, complex numbers, matrices etc. The common operation can also be anything: addition, multiplication etc.
 
-* Axioms a group must satisfy 
+* Axioms a group must satisfy
 :PROPERTIES:
 :ID:       223969e9-d808-45fc-bf36-335c4468c0b3
 :END:

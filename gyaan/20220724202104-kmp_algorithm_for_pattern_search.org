@@ -3,7 +3,7 @@
 :ROAM_REFS: https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
 :END:
 #+title: KMP Algorithm for Pattern Search
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 The *Knuth-Morris-Pratt* pattern search algorithm is a string algorithm wherein we're supposed to find the occurrences of a string =p= in another string =s=. 
 

@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       b67cd3f8-5dfb-4d95-b825-44f43fd14e93
+:END:
+#+title: Satisfiability
+#+filetags: :CONCEPT:CS:
+
+Given a [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] logic $\phi$, we say $\phi$ is satisfiable if even for a single entry of the truth table, $\phi = T$.
+
+Example:
+\[
+p \lor q \to p
+\]
+
+This expression is satisfiable, but not [[id:f3781b4c-02a3-43c6-8f64-e1d3f92d0dec][valid]].
+
+* Condition for satisfiability
+$\phi$ is satisfiable if and only if $\neg \phi$ is not [[id:f3781b4c-02a3-43c6-8f64-e1d3f92d0dec][valid]]. 
+
+** Proof
+Let $\phi$ be satisfiable. Then there exists a row in its truth table where $\phi$ is true and $\neg \phi$ is false. This means that $\neg \phi$ is not [[id:f3781b4c-02a3-43c6-8f64-e1d3f92d0dec][valid]].
+
+Let $\neg \phi$ be not [[id:f3781b4c-02a3-43c6-8f64-e1d3f92d0dec][valid]].  Then there exists atleast one row in its truth table where $\neg \phi$ is false and $\phi$ is true. This means that $\phi$ is satisfiable.

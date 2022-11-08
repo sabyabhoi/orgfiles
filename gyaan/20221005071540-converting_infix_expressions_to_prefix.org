@@ -1,0 +1,113 @@
+:PROPERTIES:
+:ID:       29703180-e1a3-47de-80e3-c053e115376f
+:END:
+#+title: Converting infix expressions to prefix
+#+filetags: :CS:
+
+The precedence order of all the operations are as follows:
+
+#+begin_src 
+~ > * > + > (>)
+#+end_src
+
+In order to convert an infix propositional logic expresson to a prefix expression, we make use of the *Stack* [[id:a9338446-247d-4883-912e-bd4d705efd39][data structure]].
+
+** Algorithm
+1. Initialize an empty stack and an =ans= variable to keep track of the final answer.
+    #+begin_src c++
+    stack<char> st;
+    string ans = "";
+    #+end_src
+
+2. Define a hashmap to keep track of the precedence order of all the operators:
+    #+begin_src c++
+    unordered_map<char, int> operators = {{'>', 1}, {'+', 2}, {'*', 3}, {'~', 4}};
+    #+end_src
+
+3. Reverse the original infix expression.
+    #+begin_src c++
+    reverse(s.begin(), s.end());
+    #+end_src
+
+4. Traverse through the expression:
+   1. If the current character is propositional atom, append it to the output string.
+   2. If the current character is an operator, check the precedence order:
+      1. If it has higher or equal precedence than the topmost element of the stack, then push it onto the stack.
+      2. otherwise, pop the topmost operator on the stack, append it to the output string, and push the current operator onto the stack.
+5. For dealing with parenthesis:
+   1. If you encounter a closing parenthesis, push it onto the stack.
+   2. If you encounter an opening parenthesis, keeping popping operators from the stack till you encounter a closing parenthesis, and keep appending these operators to the output string.
+    #+begin_src c++
+    for(char c : s) {
+        if(operators.find(c) != operators.end()) {
+        if(st.empty() || operators[c] > operators[st.top()]) st.push(c);
+        else {
+            ans.push_back(st.top());
+            st.pop();
+            st.push(c);
+        }
+        }
+        else if(c == ')') st.push(c);
+        else if(c == '(') {
+        while(st.top() != ')') {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        st.pop();
+        }
+        else ans.push_back(c);
+    }
+    #+end_src
+
+6. Once you reach the end of the expression, pop all the operators from the stack and append them to the output string.
+    #+begin_src c++
+    while(!st.empty()) {
+        ans.push_back(st.top());
+        st.pop();
+    }
+    #+end_src
+
+7. Reverse the output string to get the final prefix expression.
+    #+begin_src c++
+    reverse(ans.begin(), ans.end());
+    #+end_src
+
+** Final function
+#+begin_src c++
+string infixToPrefix(string s) {
+  stack<char> st;
+  reverse(s.begin(), s.end());
+
+  unordered_map<char, int> operators = {{'>', 1}, {'+', 2}, {'*', 3}, {'~', 4}};
+  string ans = "";
+
+  for(char c : s) {
+	if(c == ' ') continue;
+	if(operators.find(c) != operators.end()) {
+	  if(st.empty() || operators[c] > operators[st.top()]) st.push(c);
+	  else {
+		ans.push_back(st.top());
+		st.pop();
+		st.push(c);
+	  }
+	}
+	else if(c == ')') st.push(c);
+	else if(c == '(') {
+	  while(st.top() != ')') {
+		ans.push_back(st.top());
+		st.pop();
+	  }
+	  st.pop();
+	}
+	else ans.push_back(c);
+  }
+
+  while(!st.empty()) {
+	ans.push_back(st.top());
+	st.pop();
+  }
+
+  reverse(ans.begin(), ans.end());
+  return ans;
+}
+#+end_src

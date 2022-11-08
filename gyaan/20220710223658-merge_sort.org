@@ -2,7 +2,7 @@
 :ID:       c31089e9-a39e-43d7-9686-1f8d5fd84cd9
 :END:
 #+title: Merge Sort
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 Employs a divide and conquer algorithm to split the array into two parts till the size of each sub-array reaches 1.
 #+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std

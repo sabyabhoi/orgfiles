@@ -2,8 +2,7 @@
 :ID:       58e01dcb-3b38-41dc-852d-777a5ec4cd2a
 :END:
 #+title: Linked Lists
-#+FILETAGS: :CS:
-#+DATE:2022-07-05
+#+FILETAGS: :CONCEPT:CS:
 
 * Basic structure
 #+NAME: nodeStruct

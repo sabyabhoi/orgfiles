@@ -2,7 +2,7 @@
 :ID:       e8089b0e-fdc0-4ae6-a873-a2c75cf2410b
 :END:
 #+title: Knapsack Problems
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 It is a famous subset of problems with a similar hue:
 [[../assets/knapsack.jpeg]]

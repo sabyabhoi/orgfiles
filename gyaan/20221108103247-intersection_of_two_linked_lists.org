@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       8504d49f-98d8-4fc8-be4d-ba3818a044db
+:END:
+#+title: Intersection of two Linked Lists
+#+filetags: :CS:
+
+Given two [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked lists]] which merge at some point in the list, find the point at which the intersect.
+
+[[../assets/linked_list_intersect.png]]
+
+* Approach
+1. Find the length of both the linked lists and get the linked list with the maximum length.
+2. Move through the difference of both the lengths in the linked list with the maximum length so that both the lists have equal length.
+3. Iterate through both the lists and check if they intersect. If they do, then return the node; if they don't, then return null.
+
+Length function:
+#+begin_src c++
+  int length(Node* head) {
+    int len = 0;
+    while(head) {
+      head = head->next;
+      ++len;
+    }
+    return len;
+  }
+#+end_src
+
+Intersection function:
+#+begin_src c++
+  Node* findIntersection(Node* i1, Node* i2) {
+    int l1 = length(i1), l2 = length(i2);
+
+    if(l1 < l2) {
+      swap(l1, l2);
+      swap(i1, i2);
+    }
+
+    l1 -= l2;
+    for(int i = 0; i < l1; ++i) i1 = i1->next;
+
+    while(i1 && i2) {
+      if(i1 == i2) return i1;
+      i1 = i1->next;
+      i2 = i2->next;
+    }
+    return nullptr;
+  }
+#+end_src

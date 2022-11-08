@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       b4c6d038-9ba5-4d60-96f1-5f24409de08b
+:END:
+#+title: Kadane's Algorithm
+#+filetags: :CONCEPT:CS:
+
+Kadane's algorithm is used to find the sum of the maximum sum sub-array from a given [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] =a[n]=.
+
+* Primary argument
+The maximum sum sub-array is either going to be a single-element array =[x]=, or an array comprising of the maximum sum sub-array up till that element =x= and including =x=, in other words: =[M, x]=.
+
+* Proof
+This statement can be [[id:32b1333e-ff84-4e44-8c79-86f4f538af2a][proved by contradiction]]: assume a sub-array till element =x= which is non-empty and not equal to =M=, and assume =[T, x]= is the maximum sum sub-array, and try to prove that it actually isn't the maximum sum sub-array.
+
+* Algorithm
+1. Keep track of two states: the maximum sum up till the current element, and the current element.
+2. Choose the maximum between =[x]= and =[M, x]=
+
+#+begin_src rust
+  fn max_subarray(a: &Vec<i32>) -> i32 {
+      let mut sum = a[0];
+      let mut max_sum = sum;
+      for &x in a.iter().skip(1) {
+          sum = x.max(sum + x);
+          max_sum = max_sum.max(sum);
+      }
+      max_sum
+  }
+#+end_src

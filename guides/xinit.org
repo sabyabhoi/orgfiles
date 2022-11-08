@@ -51,7 +51,7 @@ export VISUAL=nvim
 #+end_src
 
 ** GoLang
-#+begin_src shell
+#+begin_src shell 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH 
 #+end_src
@@ -113,17 +113,17 @@ xset r rate 200 25
 
 ** Emacs daemon
 Launch the emacs server
-#+begin_src shell
+#+begin_src shell 
 emacs --daemon &
 #+end_src
 
 ** Stretch notifications
 #+begin_src shell
-$SCRIPTS/takeabreak.sh &
+$SCRIPTS/takeabreak
 #+end_src
 
 ** Polybar 
-#+begin_src shell :tangle no
+#+begin_src shell 
 $XDG_CONFIG_HOME/polybar/launch.sh --forest
 #+end_src
 
@@ -161,6 +161,6 @@ exec xmonad
 #+end_src
 
 ** Awesome
-#+begin_src shell  :tangle no
+#+begin_src shell :tangle no
 exec awesome
 #+end_src

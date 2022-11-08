@@ -3,10 +3,14 @@
 :ROAM_ALIASES: DSA
 :END:
 #+title: Data Structures & Algorithms
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
+* Arrays
+:PROPERTIES:
+:ID:       5adf9d6d-4832-420c-8c61-41d7747a47d1
+:END:
 * [[id:6a9a5dae-f0b6-4b98-b93a-cfd7238f7595][Sorting Algorithms]]
-* String Algorithms                                                   :CS:
+* String Algorithms
 :PROPERTIES:
 :ID:       4fdac2a8-cc9e-4e99-aa77-9ab6dd4be497
 :END:
@@ -16,3 +20,4 @@
 - [[id:e990715f-b664-42dd-b3fb-446556c507ef][Longest Palindromic Substring]]
 * [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][Linked Lists]]
 * [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]]
+* [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][Dynamic Programming]]

@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       f3781b4c-02a3-43c6-8f64-e1d3f92d0dec
+:END:
+#+title: Validity
+#+filetags: :CONCEPT:CS:
+
+Given a [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] logic $\phi$, we say $\phi$ is valid if and only if $\models \phi$ holds, meaning that $\phi$ is a tautology.

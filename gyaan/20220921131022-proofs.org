@@ -2,7 +2,7 @@
 :ID:       d1ccf846-8b65-41bc-8d5f-723c3f1f928a
 :END:
 #+title: Proofs
-#+filetags: :CS:
+#+filetags: :CONCEPT:CS:
 
 The primary objective of a proof is to demonstrate that an expression of the form
 
@@ -20,6 +20,9 @@ p \to q
 \]
 
 * Proof by contraposition
+:PROPERTIES:
+:ID:       9ed9dd23-f2c5-4519-8a96-9b82fad2421d
+:END:
 A crucial property of the $\to$ operator is
 
 \[
@@ -36,12 +39,15 @@ If we're given an expression of the form:
 p \to q
 \]
 
-And we know that $p$ is always false, then we can directly conclude $q$. This is called a *Vacuous Proof*
+And if we know that $p$ is always false, then we can directly conclude $q$. This is called a *Vacuous Proof*
 
 ** Trivial Proof
 Similarly, if we know that $q$ is always true, then we can directly prove the expression. This is called a *Trivial Proof*.
 
 * Proof by contradiction
+:PROPERTIES:
+:ID:       32b1333e-ff84-4e44-8c79-86f4f538af2a
+:END:
 Suppose we wish to prove that a statement $p$ is true. Furthermore, if we can conclude a contradiction $r \land \neg r$, (which is always false) from $\neg p$, or in other words:
 
 \[
@@ -51,6 +57,9 @@ Suppose we wish to prove that a statement $p$ is true. Furthermore, if we can co
 Since $r \land \neg r$ is always false, $\neg p$ must also be false. Hence, $p$ must be true.
 
 * Proof of equivalence
+:PROPERTIES:
+:ID:       d990ed3d-6860-41b3-a405-fd01f765fd5d
+:END:
 If a theorem is presented with a biconditional statement: /if and only if/, then we can use the following tautology to prove it:
 
 \[

@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       33737657-e314-4980-ab53-c68bfb9ebc10
+:ROAM_ALIASES: BNF
+:END:
+#+title: Backus-Naur Form
+#+filetags: :CONCEPT:CS:
+
+It is a set of derivation rules, and is of the following format:
+#+BEGIN_SRC
+<symbol> ::= <expr1> | <expr2> | <expr3> ... | <exprn>
+#+END_SRC
+
+For example,
+\[
+\phi ::= p | (\neg \phi) | (\phi \land \phi) | (\phi \lor \phi) | (\phi \rightarrow \phi)
+\]
+
+Here, $p$ is any [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] atom. The $::=$ symbol means that the LHS can be subsituted for any of the expressions separated by the $|$ symbol. 

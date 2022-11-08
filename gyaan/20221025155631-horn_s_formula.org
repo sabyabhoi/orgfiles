@@ -1,0 +1,14 @@
+:PROPERTIES:
+:id: 5963c431-d017-4e4e-8aeb-db0282879791
+:END:
+#+title: Horn's Formula
+#+filetags: :CONCEPT:CS:
+
+A Horn formula is a formula $\phi$ of [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] logic if it can be generated as an instance of $H$ in this [[id:33737657-e314-4980-ab53-c68bfb9ebc10][grammar]]:
+
+\begin{align*}
+P &::= \bot | \top | p \\
+A &::= P | P \land A \\
+C &::= A \to P \\
+H &::= C | C \land H
+\end{align*}

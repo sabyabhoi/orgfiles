@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       2e9e3621-486a-4748-90a4-c8516ef2348b
+:ROAM_ALIASES: CNF
+:END:
+#+title: Conjuctive Normal Form
+#+filetags: :CONCEPT:CS:
+
+A literal $L$ is either a [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] atom $p$ or negation of a [[id:5998d4d1-d248-4e84-a676-f180bd66f147][propositional]] atom: $\neg p$. A formula $C$ is in CNF if it is a conjuction of clauses, where each clause $D$ is a disjunction of literals.
+Employing the [[id:33737657-e314-4980-ab53-c68bfb9ebc10][Backus-Naur Form]] grammar, we can define a CNF formula in the following manner:
+
+\begin{align*}
+L &::= p | \neg p \\
+D &::= L | L \lor D \\
+C &::= D | D \land C
+\end{align*}
+
+Example:
+\[
+(\neg q \lor p \lor r) \land (\neg p \lor r) \land q
+\]
+
+It can be thought of as a [[https://www.electronics-tutorials.ws/boolean/product-of-sum.html#:~:text=Product%20of%20Sum%20expressions%20are,are%20then%20AND'ed%20together.][Product of Sums]] expression. 
