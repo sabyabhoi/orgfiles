@@ -7,7 +7,7 @@
 Given two sorted [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][linked lists]], we're supposed to [[id:c31089e9-a39e-43d7-9686-1f8d5fd84cd9][merge]] them in sorted order.
 
 #+begin_src c++
-  Node mergeTwoLists(Node* l1, Node* l2) {
+  Node* mergeTwoLists(Node* l1, Node* l2) {
     Node* head = new Node();
     Node* itr = head;
     while(l1 && l2) {

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       2e44ee6b-8242-4c93-8313-8eabd4624206
+:END:
+#+title: Activity Selection Problem
+#+filetags: :CS:
+
+You are given =n= activities with their start and finish times. Select the maximum number of activities that can be performed by a single person, assuming that a person can only work on a single activity at a time. 
+
+#+begin_example
+n = 3
+activities = {(10, 20), (12, 25), (20, 30)}
+
+ans = 2
+by selecting (10, 20) & (20, 30)
+#+end_example
+
+* Approach
+We employ a [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][Greedy Algorithm]].
+1. Sort the activities by their ending time.
+2. Choose the 1^st activity as part of the solution.
+3. Take [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]] =i= and =j= at the first activity.
+4. If the starting time of the j^th activity is more than the ending time of the i^th activity, increment answer, and update i to be equal to j.
+5. Increment j by one
+
+#+begin_src c++
+  bool sortFunc(const vi& a, const vi& b) {
+    return a[1] < b[1];
+  }
+
+  int select_activities(const vector<vi>& a) {
+    sort(a.begin(), a.end(), sortFunc);
+
+    int ans = 1, j = 0;
+    for(int i = 0; i < n; ++i) {
+      if(a[i][0] > a[j][1]) {
+        ++ans;
+        j = i;
+      }
+    }
+
+    return ans;
+  }
+#+end_src
+
+** Why this solution works
+Consider a tuple *B* which isn't the first tuple. Then we're going to select the rest of the activities from the right side of the array, for activities which lie on the left side of *B*, their starting time is always going to be less than that of *B*.
+So ultimately we're going to be excluding some activities from the solution if we consider *B*. Hence, there are going to be zeroes activities to the left of *B*, which implies that the optimal solution can be achieved by taking the first activity.

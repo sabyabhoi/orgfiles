@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       3513f35a-de10-4f4b-9449-80863532e071
+:END:
+#+title: N Queens Problem
+#+filetags: :CS:
+
+The n-queens puzzle is the problem of placing n queens on an =n x n= chessboard such that no two queens attack each other.
+
+Given an integer =n=, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+
+* Solution
+We employ a [[id:091a34ea-64e4-4b21-81e6-aa322df47655][recursive]] algorithm.
+
+** safe utility function
+The =safe= function is present to check whether a queen can be placed in the given row and column or not. It cannot be placed if there's already a queen present in the given row (by checking all the previous columns), the north-west diagonal and the south-west diagonal.
+
+#+begin_src c++
+  bool safe(const vs& board, int row, int col) {
+    int n = board.size();
+
+    for(int c = col; c >= 0; --c)
+      if(board[row][c] == 'Q') return false;
+
+    for(int r = row, c = col; r >= 0 && c >= 0; r--, c--)
+      if(board[r][c] == 'Q') return false;
+
+    for(int r = row, c = col; r < n && c >= 0; ++r, --c)
+      if(board[r][c] == 'Q') return false;
+
+    return true;
+  }
+#+end_src
+
+** Recursive function
+
+#+begin_src c++
+  void n_queens(vs& board, int col, vvs& ans, int n) {
+    if(col >= n) {
+      ans.push_back(board);
+      return;
+    }
+
+    for(int r = 0; r < n; ++r) {
+      if(safe(board, r, col))
+        board[r][col] = 'Q';
+      else continue;
+
+      n_queens(board, col + 1, ans, n);
+
+      board[r][col] = '.';
+    }
+  }
+#+end_src

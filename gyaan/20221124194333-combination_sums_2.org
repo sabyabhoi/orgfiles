@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       3db8f180-bf77-40cf-afed-f6fc174814aa
+:ROAM_REFS: https://leetcode.com/problems/combination-sum-ii/description/
+:END:
+#+title: Combination Sums 2 
+#+filetags: :CS:
+
+Given a collection of candidate numbers =a[n]= and a target number =s=, find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+*Note*: The solution set must not contain duplicate combinations.
+
+#+begin_example
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+#+end_example
+
+* Solution 
+Here, we write a [[id:091a34ea-64e4-4b21-81e6-aa322df47655][recursive]] function:
+
+#+begin_src c++
+  void helperFunc(const vi& a, int l, int r, int s, vector<vi>& ans, vi tmp) {
+    if(s == 0) {
+      ans.push_back(tmp);
+      return;
+    } else if(s < 0) return;
+
+    int prev = -1;
+    for(int i = l; i <= r; ++i) {
+      if(a[i] == prev) continue;
+
+      tmp.push_back(a[i]);
+      helperFunc(a, i + 1, r, s - a[i], ans, tmp);
+      tmp.pop_back();
+
+      prev = a[i];
+    }
+  }
+
+  vector<vi> combinationSum2(const vi& candidates, int target) {
+    sort(candidates.begin(), candidates.end());
+    vector<vi> ans;
+    vi tmp;
+    helperFunc(candidates, 0, candidates.size() - 1, target, tmp);
+    return ans;
+  }
+#+end_src

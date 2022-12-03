@@ -25,8 +25,8 @@ void inorder(Node* head) {
   if(head == nullptr) return;
   stack<Node*> s;
 
-  while(!s.empty() || head != nullptr) {
-    if(head != nullptr) {
+  while(!s.empty() || head) {
+    if(head) {
       s.push(head);
       head = head->left;
     } else {
@@ -50,20 +50,21 @@ void inorder(Node* head) {
 
 *** Code
 #+begin_src c++
-void preorder(Node* head) {
-  if(head == nullptr) return;
-  stack<Node*> s;
+  void preorder(Node* head) {
+    if(head == nullptr) return;
+    stack<Node*> s;
+    s.push(head);
 
-  while(!s.empty() || head != nullptr) {
-    if(head != nullptr) {
-      cout << head->data << ' ';
-      s.push(head);
-      head = head->left;
-    } else {
-      head = s.top()->right;
-      s.pop();
+    while(!st.empty()) {
+      Node* topNode = st.top();
+
+      cout << topNode->val << '\n';
+      st.pop();
+
+      if(topNode->right)
+        st.push(topNode->right);
+      if(topNode->left)
+        st.push(topNode->left);
     }
   }
-  cout << '\n';
-}
 #+end_src

@@ -6,4 +6,3 @@
 #+LATEX_HEADER: \usepackage{hyperref}
 #+LATEX_HEADER: \usepackage{fontspec}
 
-#+OPTIONS: toc:nil

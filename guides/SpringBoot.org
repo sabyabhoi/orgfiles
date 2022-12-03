@@ -1,0 +1,56 @@
+#+TITLE:Spring Boot
+#+SUBTITLE:Learning this atrocity once and for all
+
+* Bean
+In a spring program, a spring container is created inside the JVM, withing which, instances of components can be created, which can be then injected into classes which require them. Such instances are called beans.
+* Inversion of Control & Dependency Injection
+- Dependency Injection is a sub-category of Inversion of Control
+- Let class =A= be dependent on class =B=. Then by using dependency injection, class =B= will be injected into class =A=.
+
+** Example
+Suppose we have an =Alien= class:
+#+begin_src java
+  @Getter
+  @Setter
+  class Alien {
+      private int id;
+      private String name;
+      private String tech;
+  }
+
+#+end_src
+
+And we wish to perform some logic on it:
+#+begin_src java
+  class App {
+      public static void main(String[] args) {
+          Alien a = new Alien();
+      }
+  }
+#+end_src
+
+Then we have to instantiate the =Alien= object in order to actually use it:
+#+begin_src java
+  Alien a = new Alien();
+#+end_src
+
+* Autowiring
+When we autowire any object, we're telling the spring framework to find for the bean instance inside the spring container
+#+begin_src java
+  @Container
+  class A {
+      public void foo() {
+          System.out.println("Hello sailor");
+      }
+  }
+
+  @Container
+  class B {
+      @AutoWired
+      private A a;
+
+      public void foo() {
+          a.foo();
+      }
+  }
+#+end_src

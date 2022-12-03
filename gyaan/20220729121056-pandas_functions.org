@@ -6,7 +6,7 @@
 
 List of pandas functions in [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]] which I found useful.
 
-#+begin_src python :session :results none 
+#+begin_src python :session :results none
   import seaborn as sns
   import pandas as pd
 
@@ -141,6 +141,53 @@ df[['name', 'mpg', 'model_year']].where(df.origin == 'usa')
 
 Note that the parenthesis around the individual conditions are necessary.
 
+** Using =query=
+#+begin_src python :session
+df.query('origin == "usa"')
+#+end_src
+
+#+RESULTS:
+#+begin_example
+      mpg  cylinders  displacement  ...  model_year  origin                       name
+0    18.0          8         307.0  ...          70     usa  chevrolet chevelle malibu
+1    15.0          8         350.0  ...          70     usa          buick skylark 320
+2    18.0          8         318.0  ...          70     usa         plymouth satellite
+3    16.0          8         304.0  ...          70     usa              amc rebel sst
+4    17.0          8         302.0  ...          70     usa                ford torino
+..    ...        ...           ...  ...         ...     ...                        ...
+392  27.0          4         151.0  ...          82     usa           chevrolet camaro
+393  27.0          4         140.0  ...          82     usa            ford mustang gl
+395  32.0          4         135.0  ...          82     usa              dodge rampage
+396  28.0          4         120.0  ...          82     usa                ford ranger
+397  31.0          4         119.0  ...          82     usa                 chevy s-10
+
+[249 rows x 9 columns]
+#+end_example
+
+One can also use variables inside such queries:
+#+begin_src python :session
+  ORIGIN='usa'
+  df.query('origin == @ORIGIN')
+#+end_src
+
+#+RESULTS:
+#+begin_example
+      mpg  cylinders  displacement  ...  model_year  origin                       name
+0    18.0          8         307.0  ...          70     usa  chevrolet chevelle malibu
+1    15.0          8         350.0  ...          70     usa          buick skylark 320
+2    18.0          8         318.0  ...          70     usa         plymouth satellite
+3    16.0          8         304.0  ...          70     usa              amc rebel sst
+4    17.0          8         302.0  ...          70     usa                ford torino
+..    ...        ...           ...  ...         ...     ...                        ...
+392  27.0          4         151.0  ...          82     usa           chevrolet camaro
+393  27.0          4         140.0  ...          82     usa            ford mustang gl
+395  32.0          4         135.0  ...          82     usa              dodge rampage
+396  28.0          4         120.0  ...          82     usa                ford ranger
+397  31.0          4         119.0  ...          82     usa                 chevy s-10
+
+[249 rows x 9 columns]
+#+end_example
+
 * Grouping
 #+begin_src python :session 
 df.groupby("origin").mpg.count()
@@ -234,6 +281,7 @@ df[df.isna().any(axis=1)]
 : [6 rows x 9 columns]
 
 * Mutate columns
+** Using =map=
 #+begin_src python :session 
 df.origin = df.origin.map(lambda o: o.upper() if o == 'usa' else o)
 df.head()

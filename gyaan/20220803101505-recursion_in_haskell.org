@@ -3,9 +3,8 @@
 :END:
 #+title: Recursion in Haskell
 #+filetags: :CS:
-#+DATE:2022-07-05
 
-There are no loops in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]]. Hence, [[id:7039543f-f0c6-4750-843d-5f9855f15394][function]] recursion is one of the only ways through which we can iterate in Haskell.
+There are no loops in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]]. Hence, [[id:7039543f-f0c6-4750-843d-5f9855f15394][function]] [[id:091a34ea-64e4-4b21-81e6-aa322df47655][recursion]] is one of the only ways through which we can iterate in Haskell.
 
 Example:
 #+begin_src haskell

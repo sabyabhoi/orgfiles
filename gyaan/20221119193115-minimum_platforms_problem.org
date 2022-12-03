@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       91ca454f-821a-42be-9f4a-dfe707fcdea8
+:END:
+#+title: Minimum Platforms Problem
+#+filetags: :CS:
+
+Given arrival and departure times of all trains that reach a railway station. Find the minimum number of platforms required for the railway station so that no train is kept waiting.
+At any given instance of time, same platform can not be used for both departure of a train and arrival of another train. In such cases, we need different platforms.
+
+#+begin_example
+Input: n = 6 
+arr[] = {0900, 0940, 0950, 1100, 1500, 1800}
+dep[] = {0910, 1200, 1120, 1130, 1900, 2000}
+Output: 3
+Explanation: 
+Minimum 3 platforms are required to 
+safely arrive and depart all trains.
+#+end_example
+
+* Approach
+In this problem, we're supposed to find the maximum number of overlapping interval at any given point of time. This can be achieved by employing a [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][greedy algorithm]]:
+1. Maintain an array of size *2361* (time range is 0000-2359; + 1 extra number)
+2. Iterate over all tuples. Increment the value at the arrival time in this array by one, and decrement the value at the departure time by one.
+3. Find the maximum prefix sum of this array to get the final answer.
+
+#+begin_src c++
+  int findPlatform(int arr[], int dep[], int n)
+  {
+    int platform[2361] = {0};
+    int psum[2361] = {0};
+    for(int i = 0; i < n; ++i) {
+      platform[arr[i]]++;
+      platform[dep[i]+1]--;
+    }
+    psum[0] = platform[0];
+    int ans = 0;
+    for(int i = 1; i <= 2360; ++i) {
+      psum[i] = psum[i - 1] + platform[i];
+      ans = max(ans, psum[i]);
+    }
+    return ans;
+  }
+#+end_src

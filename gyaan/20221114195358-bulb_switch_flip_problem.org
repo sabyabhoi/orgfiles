@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       b27dcb25-b980-422f-aa97-10d2c3c2e78e
+:END:
+#+title: Bulb Switch Flip problem
+#+filetags: :CS:
+
+We're given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] =a[n]= consisting of 0s and 1s, where 1 denotes that the i^th bulb is in /on/ state and 0 means that the i^th bulb is in /off/ state. Toggling the i^th switch toggles the current bulb along with the rest of the bulbs (on the right). We're supposed to find the minimum number of toggles such that all bulbs are in /on/ state.  
+
+* Approach
+- We employ a [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][Greedy Algorithm]].
+- If the cost (number of toggles) is even, that means that all the subsequent bulbs are in their original state, else they have been switched.
+
+#+begin_src python
+  def bulbs(bulbs):
+      cost = 0
+      for b in bulbs: 
+          if cost % 2 == 1:
+              b = 1 - b
+          if b == 0:
+              cost += 1
+      return cost
+#+end_src

@@ -52,8 +52,8 @@ export VISUAL=nvim
 
 ** GoLang
 #+begin_src shell 
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH 
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$PATH 
 #+end_src
 
 ** Deno
@@ -65,7 +65,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 ** Java
 #+begin_src shell
 export _JAVA_AWT_WM_NONREPARENTING=1
-export JAVA_HOME='/usr/lib/jvm/java-18-openjdk'
+export JAVA_HOME='/usr/lib/jvm/java-19-openjdk'
 export PATH=$JAVA_HOME/bin:$PATH 
 #+end_src
 

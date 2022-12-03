@@ -202,6 +202,8 @@ Marginalia provides additional informational text in the Vertico buffers.
 ** Company
 This is the main autocompletion framework we're going to use.
 #+begin_src emacs-lisp 
+  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 0.3)
   (use-package company
     :hook (prog-mode . company-mode)
     :after lsp
@@ -210,9 +212,7 @@ This is the main autocompletion framework we're going to use.
           ("<tab>" . company-complete-selection))
     (:map lsp-mode-map
           ("<tab>" . company-indent-or-complete-common))
-    :custom
-    (company-minimum-prefix-length 0)
-    (company-idle-delay 0.3))
+    )
 
   (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
@@ -372,6 +372,13 @@ Require the posframe package for showing the diagnostics in a popup.
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 #+end_src
 
+** DAP Mode
+Used for debugging applications
+#+begin_src emacs-lisp
+  (use-package dap-mode
+    :ensure t)
+#+end_src
+
 ** CC Mode
 #+begin_src emacs-lisp
   (load-file "~/workspace/userfiles/programming/Lisp/cc-mode/main.el")
@@ -384,7 +391,10 @@ Require the posframe package for showing the diagnostics in a popup.
     :ensure nil
     :hook ((c++-mode . lsp-deferred)
            (c++-mode . yas-minor-mode)
-           (c++-mode . company-mode)))
+           (c++-mode . company-mode))
+    :config
+    (require 'dap-node)
+    (dap-node-setup))
 #+end_src
 
 *** Rust
@@ -471,6 +481,14 @@ Require the posframe package for showing the diagnostics in a popup.
 #+begin_src emacs-lisp
   (use-package lsp-java
     :ensure t
+    :custom
+    (lsp-java-vmargs
+     (list
+      "-noverify"
+      "-Xmx1G"
+      "-XX:+UseG1GC"
+      "-XX:+UseStringDeduplication"
+      "-javaagent:/home/cognusboi/workspace/instdir/lombok.jar"))
     :hook
     ((java-mode . lsp-deferred)
      (java-mode . yas-minor-mode)
@@ -517,19 +535,57 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 *** TypeScript
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package typescript-mode
-  :mode "\\.tsx?\\'"
+    :mode "\\.tsx?\\'"
+    :hook ((typescript-mode . lsp-deferred)
+           (typescript-mode . yas-minor-mode)
+           (typescript-mode . company-mode))
     :ensure t)
   (add-hook 'web-mode-hook #'(lambda ()
                                (enable-minor-mode
                                 '("\\.jsx?\\'" . typescript-mode))
                                (enable-minor-mode
                                 '("\\.tsx?\\'" . typescript-mode))))
-  (add-hook 'typescript-mode-hook #'yas-minor-mode)
-  (add-hook 'typescript-mode-hook #'company-mode)
-  (add-hook 'typescript-mode-hook #'lsp)
+#+end_src
+**** Prettier
+#+begin_src emacs-lisp
+  (defun enable-minor-mode (my-pair)
+    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+    (if (buffer-file-name)
+        (if (string-match (car my-pair) buffer-file-name)
+            (funcall (cdr my-pair)))))
 
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package prettier-js
+    :ensure t)
+  (add-hook 'web-mode-hook #'(lambda ()
+                               (enable-minor-mode
+                                '("\\.jsx?\\'" . prettier-js-mode))
+                               (enable-minor-mode
+                                '("\\.tsx?\\'" . prettier-js-mode))
+                               ))
+#+end_src
+
+*** Web mode
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :hook ((web-mode . lsp-deferred)
+           (web-mode . yas-minor-mode)
+           (web-mode . company-mode))
+    :custom
+    (web-mode-markup-indent-offset 2)
+    (web-mode-code-indent-offset 2)
+    (web-mode-css-indent-offset 2)
+    :mode (("\\.js\\'" . web-mode)
+           ("\\.jsx\\'" . web-mode)
+           ("\\.ts\\'" . web-mode)
+           ("\\.tsx\\'" . web-mode)
+           ("\\.html\\'" . web-mode))
+    :commands web-mode)
 #+end_src
 
 *** LaTeX
@@ -561,6 +617,14 @@ Set the prefix for inserting mathematical symbols to ";".
           org-startup-with-inline-images t
           org-default-notes-file (concat org-directory "/notes.org"))
     (display-line-numbers-mode 0))
+#+end_src
+
+** Org habits
+#+begin_src emacs-lisp
+  (use-package org-habit
+    :ensure nil
+    :custom
+    (org-habit-graph-column 70))
 #+end_src
 
 ** Variable pitch
@@ -631,6 +695,7 @@ Set the prefix for inserting mathematical symbols to ";".
     :config
     (add-to-list 'org-latex-packages-alist '("" "minted"))
     (setq org-latex-listings 'minted) 
+    (setq org-latex-caption-above nil)
     )
 #+end_src
 
@@ -640,6 +705,7 @@ Set the prefix for inserting mathematical symbols to ";".
     (require 'org-tempo)
     (dolist (expand '(("el" . "src emacs-lisp")
                       ("pro" . "src python :session :results output")
+                      ("rro" . "src R :session :results output")
                       ("prv" . "src python :session ")))
       (add-to-list 'org-structure-template-alist expand)))
 #+end_src
@@ -670,8 +736,8 @@ Set the prefix for inserting mathematical symbols to ";".
 *** Configure babel languages
 #+begin_src emacs-lisp
   (with-eval-after-load 'org
-    (setq py-default-interpreter "/usr/bin/python3")
-    (setq org-src-tab-acts-natively t)
+    ;; (setq py-default-interpreter "/usr/bin/python3")
+    ;; (setq org-src-tab-acts-natively t)
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
