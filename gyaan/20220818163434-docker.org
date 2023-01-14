@@ -4,11 +4,15 @@
 #+title: Docker
 #+filetags: :CS:
 
+* Container
+- A container is a layer of images stacked on top of each other.
+- Usually, the base image in any container is a linux base image like Alpine.
+- On top of the stack of images comes the /application/ image, like postgres.
 * Basic commands
 ** Images
 *** Pull an image
 #+begin_src bash
-docker pull ubuntu
+docker pull ubuntu:16.1
 #+end_src
 
 *** View images

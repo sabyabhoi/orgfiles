@@ -15,18 +15,22 @@ Instantiate [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: =l= and =
    - If =a[m]= is greater than =a[r]=, then the right part of the array is sorted; so go left. 
 
 #+begin_src C++
-int rotations(int a[], int n) {
-  int l = 0, r = n - 1, m;
+  int rotations(int a[], int n) {
+    int l = 0, r = n - 1, m;
 
-  while(l <= r) {
-    m = l + (r - l) / 2;
-    if(a[m] < a[m - 1] && a[m] < a[m + 1]) return m;
-    else if(a[m] > a[l]) { // go right
-      l = m + 1;
-    } else { // go left
-      r = m - 1;
+    while(l <= r) {
+      m = l + (r - l) / 2;
+
+      int next = (m + 1) % n;
+      int prev = (m + n - 1) % n;
+
+      if(a[m] < a[prev] && a[m] < a[next]) return m;
+      else if(a[m] >= a[l]) { // go right
+        l = m + 1;
+      } else { // go left
+        r = m - 1;
+      }
     }
+    return -1;
   }
-  return -1;
-}
 #+end_src

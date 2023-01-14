@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       e6130276-0dad-4723-878b-331a9dbfcd87
+:END:
+#+title: Using a 32-bit integer to store characters
+#+filetags: :CS:
+
+A really nice trick a learnt recently for storing the existence of case-insensitive characters is by using a 32-bit integer as a substitute for an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] of booleans or a hashset.
+
+#+begin_src c++
+  struct Storage {
+    uint32_t s;
+
+    Storage() : s(0) {}
+    Storage(uint32_t s1) : s(s1) {}
+
+    bool exists(char c) {
+      return s & (c % 32);
+    }
+
+    void store(char c) {
+      s |= c % 32;
+    }
+  
+    void remove(char c) {
+      s &= ~c;
+    }
+  };
+#+end_src

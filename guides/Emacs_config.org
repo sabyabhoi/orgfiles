@@ -88,7 +88,7 @@ Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I pref
 
   (require 'use-package)
   (setq use-package-always-ensure t)
-;;  (setq use-package-verbose t)
+  (setq use-package-verbose t)
 #+end_src
 *Note*: If Emacs is unable to find any of the given packages, run the =package-refresh-contents= command to update the =package.el= repository.
 ** Keep folders clean
@@ -189,6 +189,24 @@ Marginalia provides additional informational text in the Vertico buffers.
     :bind (("C-s" . consult-line)))
 #+end_src
 
+** Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :custom
+    (dashboard-center-content t)
+    (dashboard-show-shortcuts nil)
+    (dashboard-set-heading-icons t)
+    (dashboard-set-file-icons t)
+    (dashboard-set-navigator t)
+    (dashboard-items 'nil)
+    (dashboard-set-footer 'nil)
+    :config
+    (dashboard-setup-startup-hook)
+    (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+    )
+#+end_src
+
 ** Which Key
 #+begin_src emacs-lisp
   (use-package which-key
@@ -203,18 +221,24 @@ Marginalia provides additional informational text in the Vertico buffers.
 This is the main autocompletion framework we're going to use.
 #+begin_src emacs-lisp 
   (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 0.3)
+  (setq company-idle-delay 0.10)
   (use-package company
     :hook (prog-mode . company-mode)
     :after lsp
-    :bind
-    (:map company-active-map
-          ("<tab>" . company-complete-selection))
-    (:map lsp-mode-map
-          ("<tab>" . company-indent-or-complete-common))
+ ;;   :bind
+ ;;   (:map company-active-map
+ ;;         ("<tab>" . company-complete-selection))
+ ;;   (:map lsp-mode-map
+ ;;         ("<tab>" . company-indent-or-complete-common))
+    :config
     )
 
   (add-hook 'after-init-hook 'global-company-mode)
+
+;;  (with-eval-after-load 'company
+;;    (define-key company-active-map (kbd "<return>") nil)
+;;    (define-key company-active-map (kbd "RET") nil)
+;;    (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 #+END_SRC
 
 *** Company box
@@ -237,7 +261,7 @@ A better help buffer for Emacs (with text formatting and all).
 #+end_src
 
 ** General
-Easier way to setup keybindings
+Easier way to setup global keybindings
 #+begin_src emacs-lisp
   (use-package general
     :ensure t
@@ -257,10 +281,21 @@ Easier way to setup keybindings
       "mdd" '(org-deadline :which-key "Agenda Deadline")
       "oe" '(lambda () (interactive) (find-file
                                       (expand-file-name "~/workspace/userfiles/orgfiles/guides/Emacs_config.org")))
+      "c" '(lambda () (interactive) (dired "~/workspace/userfiles/college/3-1/"))
       "rn" 'lsp-rename)
     (general-nmap
       "K" 'lsp-ui-doc-glance
       ))
+#+end_src
+
+** Hydra
+#+begin_src emacs-lisp
+  (use-package hydra)
+  (defhydra hydra-text-scale (:timeout 4)
+    "scale text"
+    ("j" text-scale-increase "in")
+    ("k" text-scale-decrease "out")
+    ("f" nil "finished" :exit t))
 #+end_src
 
 ** Doom modeline, theme and rainbow delimiters
@@ -268,6 +303,9 @@ Modeline:
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
+    :custom
+    (doom-modeline-irc nil)
+    (doom-modeline-height 50)
     :init
     (doom-modeline-mode 1)
     (use-package all-the-icons
@@ -280,7 +318,7 @@ Themes:
   (use-package doom-themes
     :ensure t
     :init
-    (load-theme 'doom-moonlight t))
+    (load-theme 'doom-material-dark t))
 #+end_src
 
 Rainbow delimiters:
@@ -289,23 +327,16 @@ Rainbow delimiters:
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-** Themes
-#+begin_src emacs-lisp :tangle no
-  (use-package autothemer
-	:ensure t)
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-(load-theme 'catppuccin-macchiato t)
-#+end_src
-
 ** LSP
 *** LSP mode
 #+begin_src emacs-lisp
   (use-package lsp-mode
     :commands (lsp lsp-deferred)
     :init
-    (setq lsp-keymap-prefix "C-c l")
+    (setq gc-cons-threshold (* 100 1024 1024)
+          read-process-output-max (* 1024 1024))
+    :custom
+    (lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t)
     (message "LSP Mode loaded")
@@ -319,12 +350,21 @@ Require the posframe package for showing the diagnostics in a popup.
   (setq lsp-signature-function 'lsp-signature-posframe)
 #+end_src
 
+*** LSP Treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :after lsp)
+#+end_src
+
 *** LSP UI
 #+begin_src emacs-lisp
   (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :hook (lsp-mode . lsp-ui-sideline-mode)
     :commands lsp-ui-mode
     :ensure t
     :custom
+    (lsp-ui-sideline-show-diagnostics t)
     (lsp-ui-doc-delay 0.0)
     (lsp-ui-doc-position 'at-point))
 #+end_src
@@ -336,6 +376,7 @@ Require the posframe package for showing the diagnostics in a popup.
     (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
     (yas-global-mode 1))
 #+end_src
+
 **** Integration with company mode
 #+begin_src emacs-lisp :tangle no
   (defun check-expansion ()
@@ -372,11 +413,20 @@ Require the posframe package for showing the diagnostics in a popup.
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 #+end_src
 
-** DAP Mode
-Used for debugging applications
+** Debugging
+*** Realgud
+=realgud= is a really simple debugger available for Emacs.
+#+begin_src emacs-lisp
+  (use-package realgud
+    :ensure t
+    :defer 0)
+#+end_src
+
+*** DAP Mode
 #+begin_src emacs-lisp
   (use-package dap-mode
-    :ensure t)
+    :ensure t
+    :config (require 'dap-cpptools))
 #+end_src
 
 ** CC Mode
@@ -389,12 +439,7 @@ Used for debugging applications
 #+begin_src emacs-lisp
   (use-package c++-mode
     :ensure nil
-    :hook ((c++-mode . lsp-deferred)
-           (c++-mode . yas-minor-mode)
-           (c++-mode . company-mode))
-    :config
-    (require 'dap-node)
-    (dap-node-setup))
+    :hook ((c++-mode . lsp-deferred)))
 #+end_src
 
 *** Rust
@@ -402,6 +447,7 @@ Used for debugging applications
   (use-package rustic
     :ensure t
     :defer 0
+    :hook((rustic-mode . lsp-deferred))
     :config
     (require 'lsp-rust))
 #+end_src
@@ -429,9 +475,7 @@ Used for debugging applications
 #+begin_src emacs-lisp
   (use-package lua-mode
     :ensure t
-    :hook ((lua-mode . lsp-deferred)
-           (lua-mode . yas-minor-mode)
-           (lua-mode . company-mode))
+    :hook ((lua-mode . lsp-deferred))
     :config
     ;;    (add-hook 'lua-mode-hook #'yas-minor-mode)
     ;;    (add-hook 'lua-mode-hook #'company-mode)
@@ -484,15 +528,12 @@ Used for debugging applications
     :custom
     (lsp-java-vmargs
      (list
-      "-noverify"
       "-Xmx1G"
       "-XX:+UseG1GC"
       "-XX:+UseStringDeduplication"
       "-javaagent:/home/cognusboi/workspace/instdir/lombok.jar"))
     :hook
-    ((java-mode . lsp-deferred)
-     (java-mode . yas-minor-mode)
-     (java-mode . company-mode))
+    ((java-mode . lsp-deferred))
     )
   (add-hook 'java-mode-hook (lambda () (setq tab-width 4)))
   (add-hook 'java-mode-hook 'lsp)
@@ -511,6 +552,8 @@ Used for debugging applications
   (use-package python-mode
     :ensure t
     :hook (python-mode . lsp-deferred)
+  :config
+  (setq lsp-pylsp-plugins-flake8-ignore '("D100"))
     )
 #+end_src
 
@@ -526,7 +569,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 *** LilyPond
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package lilypond-mode
     :ensure nil
     :defer 0
@@ -538,9 +581,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+begin_src emacs-lisp :tangle no
   (use-package typescript-mode
     :mode "\\.tsx?\\'"
-    :hook ((typescript-mode . lsp-deferred)
-           (typescript-mode . yas-minor-mode)
-           (typescript-mode . company-mode))
+    :hook ((typescript-mode . lsp-deferred))
     :ensure t)
   (add-hook 'web-mode-hook #'(lambda ()
                                (enable-minor-mode
@@ -548,6 +589,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
                                (enable-minor-mode
                                 '("\\.tsx?\\'" . typescript-mode))))
 #+end_src
+
 **** Prettier
 #+begin_src emacs-lisp
   (defun enable-minor-mode (my-pair)
@@ -573,9 +615,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+begin_src emacs-lisp
   (use-package web-mode
     :ensure t
-    :hook ((web-mode . lsp-deferred)
-           (web-mode . yas-minor-mode)
-           (web-mode . company-mode))
+    :hook ((web-mode . lsp-deferred))
     :custom
     (web-mode-markup-indent-offset 2)
     (web-mode-code-indent-offset 2)
@@ -588,19 +628,34 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     :commands web-mode)
 #+end_src
 
-*** LaTeX
-Set the prefix for inserting mathematical symbols to ";".
+**** Astro support
 #+begin_src emacs-lisp
-(setq LaTeX-math-abbrev-prefix ";")
+  (define-derived-mode astro-mode web-mode "astro")
+  (setq auto-mode-alist
+        (append '((".*\\.astro\\'" . astro-mode))
+                auto-mode-alist))
+
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-language-id-configuration
+                 '(astro-mode . "astro"))
+
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection '("astro-ls" "--stdio"))
+                      :activation-fn (lsp-activate-on "astro")
+                      :server-id 'astro-ls)))
 #+end_src
 
+**** Tailwind support
 #+begin_src emacs-lisp
-  (use-package auctex
-    :ensure t
-    :defer t
-    :config
-    )
-  (use-package cdlatex :ensure t)
+  (use-package lsp-tailwindcss
+    :custom
+    (lsp-tailwindcss-major-modes
+     '(rjsx-mode web-mode html-mode css-mode typescript-mode astro-mode)))
+#+end_src
+
+*** MDX Support
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 #+end_src
 
 * Org mode
@@ -729,7 +784,9 @@ Set the prefix for inserting mathematical symbols to ";".
 ** Org bullets
 #+begin_src emacs-lisp
   (use-package org-bullets
-    :hook (org-mode . org-bullets-mode))
+    :hook (org-mode . org-bullets-mode)
+    :custom (org-bullets-bullet-list '("◉" "○" "◉" "○"))
+    )
 #+end_src
  
 ** Org babel
@@ -823,6 +880,16 @@ Checkout [[https://www.gnu.org/software/emacs/manual/html_node/org/Template-expa
     )
 #+end_src
 
+** Presentations using reveal.js
+#+begin_src emacs-lisp
+  (use-package ox-reveal
+    :custom
+    (org-reveal-root "/home/cognusboi/workspace/instdir/reveal.js")
+    (org-reveal-theme "blood")
+    (org-reveal-init-options "transition: \'none\'")
+    )
+#+end_src
+
 * Measuring the startup time
 #+begin_src emacs-lisp
   (defun cb/display-startup-time()
@@ -864,13 +931,6 @@ Provided a native emulation experience rather than one written in elisp.
     (setq vterm-max-scrollback 10000))
 #+end_src
 
-** Treemacs
-** LSP Treemacs
-#+begin_src emacs-lisp
-  (use-package lsp-treemacs
-    :after lsp)
-#+end_src
-
 ** Font Ligatures
 #+begin_src emacs-lisp
   (use-package ligature
@@ -899,5 +959,4 @@ Provided a native emulation experience rather than one written in elisp.
     ;; per mode with `ligature-mode'.
     (global-ligature-mode t))
 #+END_SRC
-
 

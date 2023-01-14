@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       355168fa-52a0-4128-afcb-9a288b6ed854
+:END:
+#+title: Find an element in a rotated sorted array
+#+filetags: :CS:
+
+We're given a [[id:6a9a5dae-f0b6-4b98-b93a-cfd7238f7595][sorted]] [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] =a[n]=. We're supposed to find the position of an element =k= in the array, or return =-1= if it doesn't exist.
+
+* Solution
+This can be done using a modified version of [[id:53b8c21d-c96a-4e92-bbd7-7ff176bec026][binary search]] algorithm.
+
+1. Use [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: =l= and =r=, let their middle point be =m=.
+2. If =a[m] == k=, return =m=.
+3. Otherwise,
+   - Check if the left sub-array is sorted by comparing =a[l]= and =a[m]=. If it is, then check if =k= lies in this sub-array. 
+   - Check if the right sub-array is sorted by comparing =a[r]= and =a[m]=. If it is, then check if =k= lies in this sub-array. 
+4. Update =l= and =r= accordingly.
+
+#+begin_src c++
+  int find_in_sorted_rotated_array(int a[], int n, int k) {
+    int l = 0, r = n - 1, m;
+    while(l <= r) {
+      m = l + (r - l) / 2;
+      if(a[m] == k) return m;
+      else if(a[l] <= a[m]) { // left is sorted
+        if(a[l] <= k && k <= a[m]) // does k lie in the left-subarray?
+          r = m - 1;
+        else
+          l = m + 1;
+      }
+      else if(a[m] <= a[r]) { // left is sorted
+        if(a[m] <= k && k <= a[r]) // does k lie in the right-subarray?
+          l = m + 1;
+        else
+          r = m - 1;
+      }
+    }
+    return -1;
+  }
+#+end_src
