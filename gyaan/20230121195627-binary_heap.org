@@ -1,0 +1,146 @@
+:PROPERTIES:
+:ID:       c1ae45fd-419d-40e1-996d-418331dc3e36
+:END:
+#+title: Binary Heap
+#+filetags: :CS:
+
+Binary Heap is a complete [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]], meaning all the levels of the binary tree are filled. The height of a heap is /always/ =log(n)=,  where =n= is the number of elements in the heap
+
+We're going to use an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] to represent a binary heap.
+
+#+begin_src c++
+  struct Heap {
+    vi a;
+  };
+#+end_src
+
+* Max Heap
+Every node should have a value >= than its decendants.
+
+** Insertion
+#+begin_src c++
+  void insert(int k) {
+    a.push_back(k);
+
+    int i = a.size() - 1;
+    while(i > 0) {
+      // compare k with (i - 1) / 2th element.
+      if(k > a[(i - 1) / 2]) {
+        swap(a[i], a[(i - 1) / 2]);
+        i = (i - 1) / 2;
+      } else break;
+    }
+  }
+#+end_src
+
+** Deletion
+Only the root element can be deleted from a heap.
+#+begin_src c++
+  int pop() {
+    if(a.empty()) return -1;
+    int root = a[0];
+
+    int n = a.size();
+    a[0] = a[--n];
+    a.pop_back();
+
+    int i = 0;
+    while(2 * i + 2 < n) {
+      int greater_ix = a[2 * i + 1] > a[2 * i + 2] ? 2 * i + 1 : 2 * i + 2;
+      if(a[i] < a[greater_ix]) {
+        swap(a[i], a[greater_ix]);
+        i = greater_ix;
+      } else break;
+    }
+
+    return root;
+  }
+#+end_src
+
+** C++ STL Usage
+We employ a =priority_queue= to simulate a Max Heap
+#+begin_src c++
+  priority_queue<int> pq;
+#+end_src
+
+*** Pushing elements:
+#+begin_src c++
+  pq.push(5);
+  pq.push(1);
+  pq.push(2);
+  pq.push(3);
+#+end_src
+
+*** Popping elements
+#+begin_src c++
+  while(!pq.empty()) {
+    cout << pq.top() << ' ';
+    pq.pop();
+   }
+#+end_src
+
+* Min Heap
+Every node should have a value <= than its decendants.
+
+** Insertion
+#+begin_src c++
+  void insert(int k) {
+    a.push_back(k);
+
+    int i = a.size() - 1;
+    while(i > 0) {
+      // compare k with (i - 1) / 2th element.
+      if(k < a[(i - 1) / 2]) {
+        swap(a[i], a[(i - 1) / 2]);
+        i = (i - 1) / 2;
+      } else break;
+    }
+  }
+#+end_src
+
+** Deletion
+Only the root element can be deleted from a heap.
+#+begin_src c++
+  int pop() {
+    if(a.empty()) return -1;
+    int root = a[0];
+
+    int n = a.size();
+    a[0] = a[--n];
+    a.pop_back();
+
+    int i = 0;
+    while(2 * i + 2 < n) {
+      int greater_ix = a[2 * i + 1] < a[2 * i + 2] ? 2 * i + 1 : 2 * i + 2;
+      if(a[i] > a[greater_ix]) {
+        swap(a[i], a[greater_ix]);
+        i = greater_ix;
+      } else break;
+    }
+
+    return root;
+  }
+#+end_src
+
+
+** C++ STL Usage
+We employ a =priority_queue= with additional parameters to simulate a Max Heap
+#+begin_src c++
+  priority_queue<int, vector<int>, greater<int>> pq;
+#+end_src
+
+*** Pushing elements:
+#+begin_src c++
+  pq.push(5);
+  pq.push(1);
+  pq.push(2);
+  pq.push(3);
+#+end_src
+
+*** Popping elements
+#+begin_src c++
+  while(!pq.empty()) {
+    cout << pq.top() << ' ';
+    pq.pop();
+   }
+#+end_src

@@ -4,7 +4,7 @@
 #+title: Kruskal's Algorithm
 #+filetags: :CS:
 
-It is a [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][greedy algorithm]] used to find the [[id:11bbbc86-d34c-4800-8e1e-422c902fa992][Minimum weight spanning tree]] in a graph.
+It is a [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][greedy algorithm]] used to find the [[id:11bbbc86-d34c-4800-8e1e-422c902fa992][Minimum weight spanning tree]] in a [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][graph]].
 
 * Approach
 1. Begin by choosing any edge with the smallest weight, putting it in the spanning tree.

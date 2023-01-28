@@ -1,13 +1,1 @@
 #+TITLE: Meeting Minutes
-* OOPS Tasks
-** DONE use PostgreSQL instead of MongoDB
-** TODO use Swagger2 for doc generation
-* IE Paper [0/7]
-** TODO Introduction
-*** TODO Literature Review
-** TODO Variables
-** TODO Procedure
-** TODO Data used 
-** TODO Regression
-** TODO Interpretation
-** TODO Conclusion

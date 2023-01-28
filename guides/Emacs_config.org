@@ -1,4 +1,4 @@
-#+TITLE: Emacs Configuration
+#+Title: Emacs Configuration
 #+AUTHOR: Sabyasachi Bhoi
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
 
@@ -31,12 +31,15 @@
 ** Font configuration
 Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I prefer using fixed-pitch fonts for writing code and variable-pitch fonts for writing prose.
 #+begin_src emacs-lisp
- 
+
+  (setq font-name "FiraCode Nerd Font Mono"
+        font-height 166)
   (defun cb/set-font-faces ()
-    (let ((font-name "JetBrainsMono Nerd Font Mono") (font-height 152))
+    (let ((font-name "FiraCode Nerd Font Mono") (font-height 166))
       (dolist (face '(default fixed-pitch))
         (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
       (set-face-attribute 'variable-pitch nil :font "SF Pro Text" :height 182 :weight 'normal)
+      
       ))
 
   (if (daemonp)
@@ -281,7 +284,7 @@ Easier way to setup global keybindings
       "mdd" '(org-deadline :which-key "Agenda Deadline")
       "oe" '(lambda () (interactive) (find-file
                                       (expand-file-name "~/workspace/userfiles/orgfiles/guides/Emacs_config.org")))
-      "c" '(lambda () (interactive) (dired "~/workspace/userfiles/college/3-1/"))
+      "c" '(lambda () (interactive) (dired "~/workspace/userfiles/college/3-2/"))
       "rn" 'lsp-rename)
     (general-nmap
       "K" 'lsp-ui-doc-glance
@@ -318,7 +321,7 @@ Themes:
   (use-package doom-themes
     :ensure t
     :init
-    (load-theme 'doom-material-dark t))
+    (load-theme 'doom-material t))
 #+end_src
 
 Rainbow delimiters:
@@ -413,6 +416,25 @@ Require the posframe package for showing the diagnostics in a popup.
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 #+end_src
 
+** Treesitter
+#+begin_src emacs-lisp :tangle no
+  (use-package tree-sitter
+    :ensure t
+    :config
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+;;    (add-function :before-while tree-sitter-hl-face-mapping-function
+;;                  (lambda (capture-name)
+;;                    (not (@function= capture-name "functions"))))
+    )
+  (use-package tree-sitter-langs :ensure t)
+#+end_src
+
+*** Disable Tree sitter for org-mode
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook (lambda () (tree-sitter-mode 0)))
+#+end_src
+
 ** Debugging
 *** Realgud
 =realgud= is a really simple debugger available for Emacs.
@@ -426,7 +448,10 @@ Require the posframe package for showing the diagnostics in a popup.
 #+begin_src emacs-lisp
   (use-package dap-mode
     :ensure t
-    :config (require 'dap-cpptools))
+    :config
+    (require 'dap-cpptools)
+    (require 'dap-lldb)
+    (setq dap-lldb-debug-program "/home/cognusboi/.vscode/extensions/lanza.lldb-vscode-0.2.3/bin/darwin/bin/lldb-vscode"))
 #+end_src
 
 ** CC Mode
@@ -440,6 +465,13 @@ Require the posframe package for showing the diagnostics in a popup.
   (use-package c++-mode
     :ensure nil
     :hook ((c++-mode . lsp-deferred)))
+#+end_src
+
+*** C
+#+begin_src emacs-lisp
+  (use-package c-mode
+    :ensure nil
+    :hook ((c-mode . lsp-deferred)))
 #+end_src
 
 *** Rust
@@ -720,7 +752,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
                     (org-level-7 . 1.1)
                     (org-level-8 . 1.1)))
       (set-face-attribute (car face) nil
-                          :font "JetBrainsMono Nerd Font Mono"
+                          :font "FiraCode Nerd Font Mono"
                           :weight 'bold
                           :height (cdr face))))
 #+end_src
@@ -960,3 +992,11 @@ Provided a native emulation experience rather than one written in elisp.
     (global-ligature-mode t))
 #+END_SRC
 
+
+** Dired configuration
+#+begin_src emacs-lisp
+  (evil-define-key 'normal dired-mode-map
+    (kbd "h") 'dired-up-directory
+    (kbd "l") 'dired-find-file)
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+#+end_src

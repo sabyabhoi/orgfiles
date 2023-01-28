@@ -4,7 +4,7 @@
 #+title: Spanning Trees
 #+filetags: :CONCEPT:CS:
 
-A spanning tree is a tree formed using a graph =G = (V, E)= such that it has the same vertices =V=. 
+A spanning tree is a tree formed using a [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][graph]] =G = (V, E)= such that it has the same vertices =V=. 
 
 *Note*: All trees with vertices =V= have =|V| - 1= edges.
 
@@ -12,5 +12,5 @@ A spanning tree is a tree formed using a graph =G = (V, E)= such that it has the
 :PROPERTIES:
 :ID:       11bbbc86-d34c-4800-8e1e-422c902fa992
 :END:
-Given a graph =G = (V, E)= with weights =W=, we're interested in finding the spanning tree with the minimum sum of weights.
+Given a [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][graph]] =G = (V, E)= with weights =W=, we're interested in finding the spanning tree with the minimum sum of weights.
 Therefore, a /minimum spanning tree/ in a connected weighted graph is a spanning tree that has the smallest possible sum of weights of its edges.

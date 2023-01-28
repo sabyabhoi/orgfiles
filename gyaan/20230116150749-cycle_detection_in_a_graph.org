@@ -1,0 +1,91 @@
+:PROPERTIES:
+:ID:       552f08a1-dacd-4380-8413-f606184a822f
+:END:
+#+title: Cycle Detection in an undirected graph
+#+filetags: :CS:
+
+See [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]].
+* Using DFS
+:PROPERTIES:
+:ID:       9fcab8aa-c0ea-4916-93b1-4cb29a15af0b
+:END:
+#+begin_src c++
+  bool dfs(const vvi& adj, int curr, int parent, vb& vis) {
+    vis[curr] = true;
+
+    for(int i : adj[curr]) {
+      if(i == parent) continue;
+      if(vis[i] || dfs(adj, i, curr, vis)) return true;
+    }
+    return false;
+  }
+
+  void solve() {
+    int n, e; cin >> n >> e;
+    vvi adj(n, vi());
+
+    REP(_, e) {
+      int a, b; cin >> a >> b;
+      adj[a - 1].push_back(b - 1);
+      adj[b - 1].push_back(a - 1);
+    }
+
+    REP(i, n) {
+      vb vis(n, false);
+      if(dfs(adj, i, -1, vis)) {
+        cout << "Yes\n";
+        return;
+      }
+    }
+    cout << "No\n";
+  }
+#+end_src
+
+* Using BFS
+:PROPERTIES:
+:ID:       aa41e477-faf7-48e0-83e0-db460d42cb5e
+:END:
+#+begin_src c++
+  bool cyclic(const vvi& adj, int curr, vb& vis) {
+    // {curr, parent}
+    queue<pair<int, int>> q;
+
+    q.push({curr, -1});
+
+    while(!q.empty()) {
+      auto [cur, parent] = q.front();
+      q.pop();
+
+      if(vis[curr]) return true;
+      vis[curr] = true;
+
+      for(int i : adj[cur]) {
+        if(i == parent) continue;
+        q.push({i, curr});
+      }
+    }
+    return false;
+  }
+
+  bool cyclicDisconnected(const vvi& adj, int n) {
+    vb vis(n, false);
+
+    REP(i, n) {
+      if(!vis[i] && cyclic(adj, i, vis)) return true;
+    }
+    return false;
+  }
+
+  void solve() {
+    int n, e; cin >> n >> e;
+    vvi adj(n, vi());
+
+    REP(_, e) {
+      int a, b; cin >> a >> b;
+      adj[a - 1].push_back(b - 1);
+      adj[b - 1].push_back(a - 1);
+    }
+
+    cout << (cyclicDisconnected(adj, n) ? "Yes" : "No") << '\n';
+  }
+#+end_src

@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       74a08425-2744-4d72-9903-9cad4d1a84af
+:END:
+#+title: Cycle Detection in a directed graph
+#+filetags: :CS:
+
+Given a Directed [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]] with V vertices and E edges, check whether it contains any cycle or not.
+
+* Using DFS
+#+begin_src c++
+  bool cycle(const vvi& adj, int curr, vb& vis, vb& dfs_vis) {
+    vis[curr] = true;
+    dfs_vis[curr] = true;
+
+    for(int i : adj[curr]) {
+      if((!vis[i] && cycle(adj, i, vis, dfs_vis)) || dfs_vis[i]) return true;
+    }
+
+    dfs_vis[curr] = false;
+    return false;
+  }
+
+  bool cycle_disconnected(const vvi& adj, int n) {
+    vb vis(n, false), dfs_vis(n, false);
+    REP(i, n) {
+      if(!vis[i] && cycle(adj, i, vis, dfs_vis)) return true;
+    }
+    return false;
+  }
+#+end_src

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       5606497d-39ad-4cd6-aa86-bdb8055f0f23
+:END:
+#+title: Graph
+#+filetags: :CONCEPT:CS:
+
+A graph in Computer Science is a non-linear [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structure]] which comprises of vertices and edges.
+
+It is generally represented using /Adjacency matrices/ and /Adjacency lists/. 

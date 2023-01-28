@@ -1,14 +1,27 @@
 #+TITLE: Tasks
-* TODO Buy bulb
-* DONE Buy Roll-on
-* DONE Submit scholarship documents
- SCHEDULED: <2022-11-04 Fri 15:30> 
-- Submit the documents as soon as you return from DD midsem. 
-* DONE OOPS Mid-sem evaluation :w:
- SCHEDULED: <2022-11-09 Wed 17:30-17:45> 
- - In T5 Section
-* DONE Use NoSQL instead of Postgres
- SCHEDULED: <2022-11-06 Sun> 
-* DONE OOPS meeting
- SCHEDULED: <2022-11-09 Wed 16:00> 
+* Logic Compre
+ SCHEDULED: <2022-12-17 Sat 09:30-12:30> 
+:PROPERTIES:
+:LOCATION: F108
+:END:
+* IE Compre
+ SCHEDULED: <2022-12-20 Tue 09:30-12:30>
+:PROPERTIES:
+:LOCATION: F108
+:END:
+* OOPS Compre
+ SCHEDULED: <2022-12-22 Thu 14:00-17:00>
+:PROPERTIES:
+:LOCATION: F208
+:END:
+* MBFM Compre
+ SCHEDULED: <2022-12-24 Sat 14:00-17:00>
+:PROPERTIES:
+:LOCATION: F105
+:END:
+* IED Compre
+ SCHEDULED: <2022-12-26 Mon 14:00-17:00>
+:PROPERTIES:
+:LOCATION: F105
+:END:
  

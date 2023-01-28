@@ -186,7 +186,8 @@
                   ),
                   # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                   # widget.StatusNotifier(),
-                            widget.Net(background=colors[-1]),
+                  widget.Net(background=colors[-1]),
+                  widget.Mpd2(background=colors[-1]),
                   get_symbol("left_arrow", colors[13], colors[-1]),
                   get_symbol("battery", colors[-1], colors[13], 18),
                   widget.Battery(

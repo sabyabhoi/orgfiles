@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       524d541b-255c-48a0-b322-f6e4b0a818ce
+:ROAM_ALIASES: BFS
+:END:
+#+title: Breadth-First Search
+#+filetags: :CS:
+
+#+begin_src c++
+  vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+    // Code here
+    vector<bool> vis(V, false);
+    vector<int> ans;
+        
+    queue<int> q;
+    vis[0] = true;
+    q.push(0);
+        
+    while(!q.empty()) {
+      int f = q.front();
+      ans.push_back(f);
+      q.pop();
+            
+      for(int i : adj[f]) {
+        if(vis[i]) continue;
+        vis[i] = true;
+        q.push(i);
+      }
+    }
+    return ans;
+  }
+#+end_src

@@ -1,0 +1,65 @@
+:PROPERTIES:
+:ID:       e240ee73-7c95-4960-bad4-482e922e30e4
+:END:
+#+title: Check if a graph is bipartite
+#+filetags: :CS:
+
+We're given an undirected [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][graph]] and we're supposed to check whether it is bipartite or not.
+
+* Using BFS
+#+begin_src c++
+  bool bfs(const vvi& adj, int curr, vi& colour) {
+    colour[curr] = 1;
+
+    queue<int> q;
+    q.push(curr);
+
+    while(!q.empty()) {
+      int f = q.front();
+      q.pop();
+
+      for(int i : adj[f]) {
+        if(colour[i] == -1) {
+          colour[i] = 1 - colour[f];
+          q.push(i);
+        } else if(colour[i] == colour[f]) return false;
+      }
+    }
+    return true;
+  }
+
+  bool isBipartite(const vvi& adj, int n) {
+    vi colour(n, -1);
+    for(int i = 0; i < n; ++i) {
+      if(colour[i] == -1 && !bfs(graph, i, colour))
+        return false;
+    }
+    return true;
+  }
+#+end_src
+
+* Using DFS
+#+begin_src c++
+  bool bipartite_dfs(const vvi& adj, int col, int curr, vi& colour) {
+    colour[curr] = col;
+
+    for(int i : adj[curr]) {
+      if((colour[i] == -1 && !bipartite_dfs(adj, 1 - col, i, colour)) || 
+         colour[i] == colour[curr])
+        return false;
+    }
+
+    return true;
+  }
+
+  bool isBipartite(vector<vector<int>>& graph) {
+    int n = graph.size();
+    vi colour(n, -1);
+
+    REP(i, n) {
+      if(colour[i] == -1 && !bipartite_dfs(graph, 0, i, colour))
+        return false;
+    }
+    return true;
+  }
+#+end_src
