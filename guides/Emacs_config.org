@@ -228,13 +228,11 @@ This is the main autocompletion framework we're going to use.
   (use-package company
     :hook (prog-mode . company-mode)
     :after lsp
- ;;   :bind
- ;;   (:map company-active-map
- ;;         ("<tab>" . company-complete-selection))
- ;;   (:map lsp-mode-map
- ;;         ("<tab>" . company-indent-or-complete-common))
-    :config
-    )
+    :bind
+    (:map company-active-map
+          ("<tab>" . company-complete-selection))
+    (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common)))
 
   (add-hook 'after-init-hook 'global-company-mode)
 
@@ -343,7 +341,8 @@ Rainbow delimiters:
     :config
     (lsp-enable-which-key-integration t)
     (message "LSP Mode loaded")
-    (setq lsp-idle-delay 0.1))
+    (setq lsp-idle-delay 0.1
+          lsp-prefer-capf t))
 #+end_src
 
 **** Posframe for diagnostics popup
@@ -645,6 +644,11 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
 *** Web mode
 #+begin_src emacs-lisp
+  (setq gc-cons-threshold (* 100 1024 1024)
+        read-process-output-max (* 1024 1024)
+        company-idle-delay 0.0
+        company-minimum-prefix-length 1
+        create-lockfiles nil)
   (use-package web-mode
     :ensure t
     :hook ((web-mode . lsp-deferred))
@@ -657,7 +661,14 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
            ("\\.ts\\'" . web-mode)
            ("\\.tsx\\'" . web-mode)
            ("\\.html\\'" . web-mode))
-    :commands web-mode)
+    :commands web-mode
+    :config
+    (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+
+  (defun web-mode-init-prettier-hook ()
+    (prettier-js-mode))
+
+  (add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
 #+end_src
 
 **** Astro support
@@ -688,6 +699,12 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 *** MDX Support
 #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+#+end_src
+
+*** Prisma
+#+begin_src emacs-lisp
+  (use-package prisma-mode
+    :load-path "/home/cognusboi/workspace/instdir/emacs-prisma-mode")
 #+end_src
 
 * Org mode
@@ -726,11 +743,13 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     :bind (("C-x e" . org-edit-src-code))
     :custom
     (org-directory "~/workspace/userfiles/orgfiles/guides")
-    (org-agenda-files '("Tasks.org" "Meetings.org"))
+    (org-agenda-files '("inbox.org" "projects.org" "repeaters.org"))
     (org-agenda-start-with-log-mode t)
+    (org-use-speed-commands t)
     (org-tags-column 5)
     (org-startup-with-latex-preview t) 
-    (org-todo-keywords '((type "TODO" "WAIT" "|" "DONE" "KILL")))
+    (org-todo-keywords '((type "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                         (type "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
     :config
     (setq org-format-latex-options
           '(:foreground "White" :background "White"
@@ -883,19 +902,9 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     :ensure nil
     :config
     (setq org-capture-templates
-          '(("m" "Meeting Minutes" entry
-             (file "~/workspace/userfiles/orgfiles/guides/Meetings.org") "* %?")
-            ("t" "Todo" entry
-             (file "~/workspace/userfiles/orgfiles/guides/Tasks.org")
-             "* TODO %^{Enter Todo}\n SCHEDULED: %^t \n %?")
-            ("n" "Note")
-            ("nr" "Reference Note" entry
-             (file "~/workspace/userfiles/orgfiles/guides/References.org")
-             "* %^{Enter note title}\n:PROPERTIES:\n:REF: %?\n:END:\n%T\n")
-            ("nf" "Fleeting Note" entry
-             (file "~/workspace/userfiles/orgfiles/guides/Fleets.org")
-             "* %?\n%T\n")
-            ))
+          '(("t" "Todo" entry
+             (file "~/workspace/userfiles/orgfiles/guides/inbox.org")
+             "* TODO %^{Enter Todo}\n SCHEDULED: %^t \n %?")))
     )
 #+end_src
 
@@ -992,11 +1001,10 @@ Provided a native emulation experience rather than one written in elisp.
     (global-ligature-mode t))
 #+END_SRC
 
-
 ** Dired configuration
 #+begin_src emacs-lisp
   (evil-define-key 'normal dired-mode-map
     (kbd "h") 'dired-up-directory
     (kbd "l") 'dired-find-file)
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;;  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 #+end_src
