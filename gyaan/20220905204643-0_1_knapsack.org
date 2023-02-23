@@ -36,21 +36,22 @@ In order to memoize the recursive solution, we first split the inputs into const
 
 In this case, we memoize by taking the size of the array, and the capacity of the knapsack.
 #+begin_src c++
-int knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
-static vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
-if(dp[n][W] != -1) return dp[n][W];
+  int knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
+    static vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
 
-if (n == 0 || W == 0)
-    return 0;
+    if (n == 0 || W == 0)
+      return 0;
 
-if (wt[n - 1] <= W) 
-    dp[n][W] = max(val[n - 1] + knapsack(wt, val, W - wt[n - 1], n - 1),
-                    knapsack(wt, val, W, n - 1));
-else 
-    dp[n][W] = knapsack(wt, val, W, n - 1);
+    if(dp[n][W] != -1) return dp[n][W];
 
-return dp[n][W];
-}
+    if (wt[n - 1] <= W) 
+      dp[n][W] = max(val[n - 1] + knapsack(wt, val, W - wt[n - 1], n - 1),
+                     knapsack(wt, val, W, n - 1));
+    else 
+      dp[n][W] = knapsack(wt, val, W, n - 1);
+
+    return dp[n][W];
+  }
 #+end_src
 
 * Top-down approach

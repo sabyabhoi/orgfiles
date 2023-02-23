@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       288bcd38-8dca-4cf4-9c2e-41f82d1df681
+:END:
+#+title: Matrix Chain Multiplication
+#+filetags: :CS:
+
+Given some matrices A_1, A_2, ... A_n, we're supposed to find out their cross product with the minimum number of multiplications.

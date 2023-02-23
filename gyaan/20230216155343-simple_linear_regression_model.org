@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       4f2897a7-ceae-4fed-ac80-94ed75e79d64
+:END:
+#+title: Simple Linear Regression Model
+#+filetags: :ECONOMICS:
+
+* General Format
+\[
+y = \beta_{0} + \beta_{1} x + u
+\]
+
+Here,
+- $x$ and $y$ are the independent and the dependent variables respectively,
+- $\beta_{0}$ and $\beta_{1}$ are the intercept terms and the slope coefficients respectively, and
+- $u$ is the error term
+
+* Assumptions of SLR
+** Linear in Parameters
+All the parameters are *linear*. 
+
+\[
+y = \beta_{0} + \beta_{1} x + u
+\]
+
+** Random Sampling
+All the datapoints $(x_{i}, y_{i})$ are drawn randomly from the sample (with replacement).
+
+** Sample Variation in explanatory variable
+The values of the explanatory variable aren't all the same.
+
+\[
+\sum_{i=1}^{n} (x_{i} - \bar{x})^{2} > 0
+\]
+
+** Zero Conditional mean
+The value of the explanatory variable must contain no information about the mean of the unobserved factors.
+
+\[
+E(u_{i} | x_{i}) = 0
+\]
+
+This assumption is important for establishing causality.
+
+** Homoskedasticity
+The value of the explanatory variable must contain no information about the variability of the unobserved factors
+
+\[
+\textrm{Var}(u_{i}|x_{i}) = \sigma^{2}
+\]
+
+*** Problems with Heteroskedasticity
+- The OLS estimators and regression predictions based on them remains unbiased and consistent.
+- The OLS estimators are no longer the /BLUE/ (Best Linear Unbiased Estimators) because they are no longer efficient, so the regression predictions will be inefficient too.
+
+** Normality of Error Terms (Optional)
+
+\[
+u \sim N(0,\sigma^{2})
+\]
+
+This assumption is required for [[id:06a9c756-1215-4dd8-813d-72f446c76a90][Hypothesis Testing]].

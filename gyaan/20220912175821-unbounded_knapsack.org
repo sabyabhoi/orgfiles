@@ -10,23 +10,23 @@ This is a type of [[id:e8089b0e-fdc0-4ae6-a873-a2c75cf2410b][Knapsack problem]] 
 The approach is exactly the same as that of [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]]. The only point where it differs is when we make the choice of accepting/rejecting an item. If we reject an item, then it is the same as [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]], but if we accept it, then we can use the same item again, so we don't reduce the size of the array by one. 
 
 #+begin_src c++
-int unbounded_knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
-  vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
+  int unbounded_knapsack(const vector<int> &wt, const vector<int> &val, int W, int n) {
+    vector<vector<int>> maxVal(n + 1, vector<int>(W + 1, -1));
 
-  REP(i, n + 1) {
-    REP(j, W + 1) {
-      if (i == 0 || j == 0) {
-        dp[i][j] = 0;
-        continue;
+    REP(i, n + 1) {
+      REP(w, W + 1) {
+        if (i == 0 || w == 0) {
+          maxVal[i][w] = 0;
+          continue;
+        }
+
+        if (wt[i - 1] <= w)
+          maxVal[i][w] = max(val[i - 1] + maxVal[i][w - wt[i - 1]], maxVal[i - 1][w]);
+        else
+          maxVal[i][w] = maxVal[i - 1][w];
       }
-
-      if (wt[i - 1] <= j)
-        dp[i][j] = max(val[i - 1] + dp[i][j - wt[i - 1]], dp[i - 1][j]);
-      else
-        dp[i][j] = dp[i - 1][j];
     }
-  }
 
-  return dp[n][W];
-}
+    return maxVal[n][W];
+  }
 #+end_src

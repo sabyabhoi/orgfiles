@@ -166,6 +166,6 @@ exec awesome
 #+end_src
 
 ** Qtile
-#+begin_src shell
+#+begin_src shell 
 exec qtile start
 #+end_src

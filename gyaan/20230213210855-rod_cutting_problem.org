@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       750b8ebe-1eee-4890-a9ac-4b98c07511bd
+:END:
+#+title: Rod Cutting Problem
+#+filetags: :CS:
+
+This is a variation of [[id:9d0c5d26-0aed-4ec7-9df5-0e4dc8b6dd4b][Unbounded Knapsack]]. 
+#+begin_src c++
+  void solve(const vi& price, int n) {
+    vi cuts(n);
+    REP(i, n) cuts[i] = i + 1;
+
+    // maxPrice for rod of length n
+    vvi maxPrice(n + 1, vi(n + 1));
+    REP(cut, n + 1) {
+      REP(len, n + 1) {
+        if (cut == 0 || len == 0) {
+          maxPrice[cut][len] = 0;
+          continue;
+        }
+
+        if (cuts[cut - 1] <= len) {
+          maxPrice[cut][len] =
+            max(price[cut - 1] + maxPrice[cut][len - cuts[cut - 1]],
+                maxPrice[cut - 1][len]);
+        } else {
+          maxPrice[cut][len] = maxPrice[cut - 1][len];
+        }
+      }
+    }
+    return maxPrice[n][n];
+  }
+#+end_src

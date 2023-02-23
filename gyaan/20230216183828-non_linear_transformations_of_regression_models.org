@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       e05ae178-1740-444f-bc98-f528f3ed3c9f
+:END:
+#+title: Non-Linear Transformations of Regression Models
+#+filetags: :ECONOMICS:
+
+Given any [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][Regression Model]], we can perform various transformations on the independent as well as the dependent variables to capture non-linear relationships.
+
+* Log-Level model
+
+\[
+\log(y) = \beta_{0} + \beta_{1} x + u
+\]
+
+Differentiating on both sides, we get
+
+\[
+100 \cdot \frac{\partial y}{y} = 100 \cdot \beta_{1}_{} \cdot \partial x
+\]
+
+This means that if we increase $x$ by 1 unit, $y$ increases by 100\beta_1%.
+
+* Log-Log model
+
+\[
+\log (y) = \beta_{0} + \beta_{1} \log(x) + u
+\]
+
+Differentiating on both sides, we get
+
+\[
+\beta_{1} = \frac{\partial y/y}{\partial x / x} 
+\]
+
+This is the elasticity of $y$ with respect to $x$.
+
+*Note*: Log-Log model is also known as *constant elasticity model*.
+
+* Level-Log model
+
+\[
+y = \beta_{0} + \beta_{1} \log(x) + u
+\]
+
+Differentiating on both sides, we get
+
+\[
+\frac{\partial y}{\partial x / x} = \beta_{1}
+\]
+
+If $x$ increases by 1%, then $y$ increases by $\beta_{1}/100$ units.

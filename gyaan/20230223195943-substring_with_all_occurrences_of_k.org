@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       f84a3dcb-4edb-4146-bf3a-7af03aa53baf
+:END:
+#+title: Substring with all occurrences of k
+#+filetags: :CS:
+
+You are given a string ~s~ of length ~n~ consisting of the first ~k~ lowercase letters only. Note that ~s~ may not contain all the ~k~ lowercase letters. Find the number of substrings of ~s~ that contain at least one occurrence of all the ~k~ letters. The expected time complexity of your solution is ~O(n * k)~. 
+
+* Solution
+We can solve this problem using a sliding window approach with [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]].
+
+First, we initialize a frequency array to keep track of the count of each letter in the string s. We also initialize two pointers, left and right, to the start of the string.
+
+We then move the right pointer until we have seen all k distinct letters at least once. At this point, we know that any substring starting from the left pointer and ending at or after the current right pointer will contain all k distinct letters at least once. So, we add (n - right + 1) to our answer since there are (n - right + 1) such substrings.
+
+Next, we move the left pointer to the right until we no longer have all k distinct letters in our substring. We also update our frequency array accordingly. We continue this process until the right pointer reaches the end of the string.
+
+#+begin_src python
+  def count_substrings(s, k):
+      n = len(s)
+      freq = [0] * k
+      left = 0
+      right = 0
+      distinct = 0
+      ans = 0
+    
+      while right < n:
+          # expand window
+          if freq[ord(s[right]) - ord('a')] == 0:
+              distinct += 1
+              freq[ord(s[right]) - ord('a')] += 1
+              right += 1
+            
+          # count substrings
+          while distinct == k:
+              ans += (n - right + 1)
+              freq[ord(s[left]) - ord('a')] -= 1
+              if freq[ord(s[left]) - ord('a')] == 0:
+                  distinct -= 1
+                  left += 1
+                
+      return ans
+#+end_src

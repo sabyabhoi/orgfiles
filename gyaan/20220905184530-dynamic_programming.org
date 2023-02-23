@@ -2,7 +2,7 @@
 :ID:       79fd085c-e5b2-47f8-916e-034de5aba48e
 :ROAM_ALIASES: DP
 :END:
-#+title: Dynamic Programming
+#+TITLE:Dynamic Programming
 #+filetags: :CONCEPT:CS:
 
 Dynamic Programming is an important concept in [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]]. It is an enhanced version of [[id:091a34ea-64e4-4b21-81e6-aa322df47655][Recursion]].
@@ -23,10 +23,10 @@ Recursion \to Memoization or Top-down
 4. Minimum subset sum difference
 5. Target sum
 6. Number of subsets with given difference
-*** [[id:02c7c5e5-7431-4022-8b43-1b2f5112f120][Unbounded knapsack]]
+*** [[id:9d0c5d26-0aed-4ec7-9df5-0e4dc8b6dd4b][Unbounded Knapsack]]
 - [[id:69f76e4b-bbc0-4446-b1b2-b53c17037560][Coin change problems]]
 ** Fibonacci
-** LCS
+** [[id:3a6b12cc-d212-404f-9a10-bee3e37de3eb][LCS]]
 ** LIS
 ** Kadane's Algorithm
 ** Matrix Chain Multiplication

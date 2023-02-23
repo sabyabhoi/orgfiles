@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       06a9c756-1215-4dd8-813d-72f446c76a90
+:END:
+#+title: Hypothesis Testing
+#+filetags: :ECONOMICS:
+
+We're given a Null Hypothesis $H_0$ and an Alternate Hypothesis $H_1$. We're supposed to check whether we're able to reject $H_0$ or not.

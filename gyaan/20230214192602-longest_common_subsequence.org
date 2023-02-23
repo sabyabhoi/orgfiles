@@ -1,0 +1,73 @@
+:PROPERTIES:
+:ID:       3a6b12cc-d212-404f-9a10-bee3e37de3eb
+:END:
+#+title: Longest Common Subsequence
+#+filetags: :CS:
+
+Given two strings ~X~ and ~Y~, we're supposed to return the length of the longest common subsequence. The subsequence need not be continuous (it's not a /substring/).
+
+#+begin_example
+input:
+X = "abcdgh"
+Y = "abedfhr"
+
+output:
+4 (for string "abdh")
+#+end_example
+
+* Recursive Solution
+#+begin_src c++
+  int lcs(const string &x, const string &y, int n, int m) {
+    if (m <= 0 || n <= 0)
+      return 0;
+
+    if (x[n - 1] == y[m - 1])
+      return 1 + lcs(x, y, n - 1, m - 1);
+    else
+      return max(lcs(x, y, n, m - 1), lcs(x, y, n - 1, m));
+  }
+#+end_src
+
+* Recursion + Memoization
+#+begin_src c++
+  int lcs(const string &x, const string &y, int n, int m) {
+    static vvi memo(n + 1, vi(m + 1, -1));
+    if (m <= 0 || n <= 0)
+      return 0;
+
+    if(memo[n][m] != -1) return memo[n][m];
+
+    if (x[n - 1] == y[m - 1])
+      memo[n][m] = 1 + lcs(x, y, n - 1, m - 1);
+    else
+      memo[n][m] = max(lcs(x, y, n, m - 1), lcs(x, y, n - 1, m));
+
+    return memo[n][m];
+  }
+#+end_src
+
+* Dynamic Programming
+
+Using [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][DP]].
+#+begin_src c++
+  int lcs(const string &x, const string &y, int n, int m) {
+    vvi longestSubseq(n + 1, vi(m + 1, 0));
+
+    REP(i1, n + 1) {
+      REP(i2, m + 1) {
+        if(i1 == 0 || i2 == 0) {
+          longestSubseq[i1][i2] = 0;
+          continue;
+        }
+
+        if(x[i1 - 1] == y[i2 - 1])
+          longestSubseq[i1][i2] = 1 + longestSubseq[i1 - 1][i2 - 1];
+        else {
+          longestSubseq[i1][i2] = max(longestSubseq[i1 - 1][i2],
+                                      longestSubseq[i1][i2 - 1]);
+        }
+      }
+    }
+    return longestSubseq[n][m];
+  }
+#+end_src

@@ -18,3 +18,16 @@ D/E = \frac{\textrm{Total liabilities}}{\textrm{Shareholder's equity}}
 - This ratio is useful for understanding a company's risk status.
 - Lower is better.
 - E.g. if a company has a =D/E= of 2, that means that it has Rs. 2 worth of debt for every Rs. 1 of equity. This means that the company is high risk. 
+
+* Interest Coverage Ratio
+:PROPERTIES:
+:ID:       1f27ebf1-e19c-49f5-80b4-a2c986bcdeba
+:END:
+
+\[
+\textrm{Interest Coverage Ratio} = \frac{\textrm{EBIT}}{\textrm{Interest Expense}}
+\]
+
+Here, EBIT Is the *Earnings Before Interest and Tax Payments*.
+
+This ratio tells us how much of the total earnings goes into paying the interest expense. E.g. if the ratio is equal to one, then all of the company's earnings is going into paying its interest expenses. Hence, higher Interest Coverage Ratio implies better credit rating of the company. 

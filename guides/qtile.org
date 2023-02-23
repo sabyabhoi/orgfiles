@@ -174,7 +174,8 @@
                       background=colors[-1],
                       highlight_method='block',
                       this_current_screen_border=colors[2],
-                      rounded=False
+                      rounded=False,
+                      disable_drag=True
                   ),
                   widget.Prompt(foreground=colors[8], background=colors[-1]),
                   widget.WindowName(background=colors[-1]),

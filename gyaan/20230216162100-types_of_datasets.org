@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       b4c1c344-cfbd-425c-b1ca-58492ad3c84c
+:END:
+#+title: Types of Datasets
+#+filetags: :ECONOMICS:
+
+* Timeseries data
+- *Univariate*: information about single series is present
+- *Multivariate*: information about multiple series is present
+
+  Timeseries data is typically *serially correlated*.
+
+* Cross-sectional data
+- Cross-sectional data refers to data collected at a particular point in time, from a group of individuals, households, firms, or other units.
+- These units can be located in different geographical locations, have different characteristics, and be engaged in different economic activities.
+
+* Pooled Cross-Sectional data
+- Take 2 cross sectional datasets and combine(append) them
+- E.g.
+
+  |---------+-------------+--------------+---------------|
+  | Name    | Survey Year | Observations | Year Variable |
+  |---------+-------------+--------------+---------------|
+  | NFHS IV |     2015-16 | 1 Lakh       |             0 |
+  | NFHS V  |     2019-20 | 1.5 Lakh     |             1 |
+  |---------+-------------+--------------+---------------|
+
+* Panel/Longitudinal Data
+- Panel data in econometrics is a type of data that combines both cross-sectional and time-series data.
+- Panel data consists of multiple observations of the same individuals, households, firms, or other units over time.
+- These units can be located in the same or different geographical locations, have different characteristics, and be engaged in different economic activities.
+- When different cross-sectional datasets are observed during some period of time, it becomes panel data.
+- Ability to remove the unboserved factors which remain  constant over a period of time.

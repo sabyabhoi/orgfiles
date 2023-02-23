@@ -325,6 +325,8 @@ Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
         {description = "go back", group = "client"}),
 
      -- Standard program
+     awful.key({ modkey,           }, "e", function () awful.spawn("emacsclient -c") end,
+        {description = "Launch Emacs client", group = "client"}),
      awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
         {description = "open a terminal", group = "launcher"}),
      awful.key({ modkey, "Shift" }, "r", awesome.restart,
@@ -362,8 +364,8 @@ Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
         {description = "restore minimized", group = "client"}),
 
      -- Prompt
-     awful.key({ modkey },            "d",     function () awful.screen.focused().mypromptbox:run() end,
-        {description = "run prompt", group = "launcher"}),
+     awful.key({ modkey },            "d",     function () awful.spawn("rofi -show run") end,
+        {description = "run rofi prompt", group = "launcher"}),
 
      awful.key({ modkey }, "x",
         function ()

@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       0fd81399-0939-4dc3-8adb-d7c262c7d54e
+:END:
+#+title: Kurtosis
+#+filetags: :ECONOMICS:
+
+Kurtosis is a statistical measure that describes the degree of peakedness or flatness of a probability distribution relative to the normal distribution. It is a measure of the tail-heaviness of a distribution, which refers to the relative weight of the distribution's tails compared to its center.
+
+Kurtosis is an important measure of a distribution's shape, and it is often used in finance, biology, and other fields to describe the characteristics of data. A high kurtosis value can indicate that a distribution has more outliers or extreme values, while a low kurtosis value indicates that the data is more tightly clustered around the mean.
+
+* Types
+There are three types of kurtosis:
+
+** Mesokurtic
+This is the normal distribution and has a kurtosis value of 3. It means that the distribution has a similar level of peakedness and tail thickness as the normal distribution.
+
+** Leptokurtic
+This distribution has a kurtosis value greater than 3. It is more peaked and has thicker tails than the normal distribution. It means that the distribution has more extreme values, and there is a higher probability of observations being far away from the mean.
+
+** Platykurtic
+This distribution has a kurtosis value less than 3. It is less peaked and has thinner tails than the normal distribution. It means that the distribution has fewer extreme values, and observations are more likely to be close to the mean.
+
+
+
+

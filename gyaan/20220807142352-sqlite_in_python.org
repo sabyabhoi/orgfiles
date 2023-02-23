@@ -40,9 +40,9 @@ sql_command = 'INSERT INTO student VALUES (1, "John Doe", 20);'
 cursor.execute(sql_command)
 #+end_src
 
-For reasons beyond my comprehension, we have to use the =cursor.commit= function to actually insert the data into the database:
+For reasons beyond my comprehension, we have to use the =con.commit= function to actually insert the data into the database:
 #+begin_src python :session :results none
-cursor.commit()
+con.commit()
 #+end_src
 
 ** Selecting data

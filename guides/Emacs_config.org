@@ -11,6 +11,7 @@
   (tooltip-mode -1) ;; disable tooltips
   (set-fringe-mode 10) ;; give some inline padding
   (menu-bar-mode -1) ;; disable menu bar
+  (global-hl-line-mode 1)
 
   (setq-default indent-tabs-mode t)
   (setq-default tab-width 4)
@@ -33,9 +34,9 @@ Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I pref
 #+begin_src emacs-lisp
 
   (setq font-name "FiraCode Nerd Font Mono"
-        font-height 166)
+        font-height 170)
   (defun cb/set-font-faces ()
-    (let ((font-name "FiraCode Nerd Font Mono") (font-height 166))
+    (let ((font-name "FiraCode Nerd Font Mono") (font-height 170))
       (dolist (face '(default fixed-pitch))
         (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
       (set-face-attribute 'variable-pitch nil :font "SF Pro Text" :height 182 :weight 'normal)
@@ -65,12 +66,16 @@ Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I pref
   (global-display-line-numbers-mode t)
   (setq display-line-numbers-type 'relative)
 
+  (make-variable-buffer-local 'global-hl-line-mode)
   (dolist (mode '(org-mode-hook
                   term-mode-hook
                   eshell-mode-hook
                   treemacs-mode-hook
                   vterm-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    (add-hook mode (
+                    lambda () 
+                    (display-line-numbers-mode 0) (setq global-hl-line-mode nil)
+                    )))
 #+end_src
 
 * Package management
@@ -91,7 +96,7 @@ Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I pref
 
   (require 'use-package)
   (setq use-package-always-ensure t)
-  (setq use-package-verbose t)
+;;  (setq use-package-verbose t)
 #+end_src
 *Note*: If Emacs is unable to find any of the given packages, run the =package-refresh-contents= command to update the =package.el= repository.
 ** Keep folders clean
@@ -236,10 +241,16 @@ This is the main autocompletion framework we're going to use.
 
   (add-hook 'after-init-hook 'global-company-mode)
 
-;;  (with-eval-after-load 'company
-;;    (define-key company-active-map (kbd "<return>") nil)
-;;    (define-key company-active-map (kbd "RET") nil)
-;;    (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
+  (dolist (mode '(term-mode-hook
+                  eshell-mode-hook
+                  treemacs-mode-hook
+                  gdb-mode-hook))
+    (add-hook mode (lambda () (company-mode 0))))
+
+  ;;  (with-eval-after-load 'company
+  ;;    (define-key company-active-map (kbd "<return>") nil)
+  ;;    (define-key company-active-map (kbd "RET") nil)
+  ;;    (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 #+END_SRC
 
 *** Company box
@@ -276,6 +287,7 @@ Easier way to setup global keybindings
     (cb/leader-key-def
       "b" '(consult-buffer :which-key "Find File")
       "." '(find-file :which-key "Find File")
+      "og" '(lambda () (interactive) (dired "~/workspace/userfiles/orgfiles/guides/"))
       "oa" '(org-agenda :which-key "Org Agenda")
       "oc" '(org-capture :which-key "Org Capture Prompt")
       "mds" '(org-schedule :which-key "Agenda Schedule")
@@ -374,6 +386,7 @@ Require the posframe package for showing the diagnostics in a popup.
 *** Yasnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
+    :defer t
     :config
     (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
     (yas-global-mode 1))
@@ -408,11 +421,35 @@ Require the posframe package for showing the diagnostics in a popup.
 
 *** Emmet
 #+begin_src emacs-lisp
-(use-package emmet-mode)
+  (use-package emmet-mode
+  :hook (sgml-mode-hook web-mode-hook css-mode-hook))
 
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'web-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+  ;;(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  ;;(add-hook 'web-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  ;;(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+#+end_src
+
+** Debugging
+*** using DAP Mode
+#+begin_src emacs-lisp
+  (use-package dap-mode
+    :commands dap-debug
+    :config
+    (require 'dap-lldb))
+#+end_src
+
+*** using native GDB
+#+begin_src emacs-lisp
+  (evil-define-key nil prog-mode-map
+    (kbd "<f9>") 'gud-break
+    (kbd "S-<f9>") 'gud-remove
+    (kbd "<f5>") 'gud-next
+    (kbd "S-<f5>") 'gud-cont)
+
+  ;;  (evil-define-key nil c-mode-map
+  ;;    (kbd "<f9>") 'gud-break
+  ;;    (kbd "S-<f9>") 'gud-remove
+  ;;    (kbd "<f5>") 'gud-next)
 #+end_src
 
 ** Treesitter
@@ -432,25 +469,6 @@ Require the posframe package for showing the diagnostics in a popup.
 *** Disable Tree sitter for org-mode
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook (lambda () (tree-sitter-mode 0)))
-#+end_src
-
-** Debugging
-*** Realgud
-=realgud= is a really simple debugger available for Emacs.
-#+begin_src emacs-lisp
-  (use-package realgud
-    :ensure t
-    :defer 0)
-#+end_src
-
-*** DAP Mode
-#+begin_src emacs-lisp
-  (use-package dap-mode
-    :ensure t
-    :config
-    (require 'dap-cpptools)
-    (require 'dap-lldb)
-    (setq dap-lldb-debug-program "/home/cognusboi/.vscode/extensions/lanza.lldb-vscode-0.2.3/bin/darwin/bin/lldb-vscode"))
 #+end_src
 
 ** CC Mode
@@ -569,7 +587,8 @@ Require the posframe package for showing the diagnostics in a popup.
   (add-hook 'java-mode-hook (lambda () (setq tab-width 4)))
   (add-hook 'java-mode-hook 'lsp)
   (use-package java-snippets
-    :ensure t)
+    :ensure t
+    :hook java-mode)
 #+end_src
 
 *** Nim
@@ -596,6 +615,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     (insert "%>%"))
 
   (use-package ess
+    :defer t
     :ensure t)
 #+end_src
 
@@ -633,6 +653,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
 #+begin_src emacs-lisp
   (use-package prettier-js
+    :defer t
     :ensure t)
   (add-hook 'web-mode-hook #'(lambda ()
                                (enable-minor-mode
@@ -670,7 +691,6 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
   (add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
 #+end_src
-
 **** Astro support
 #+begin_src emacs-lisp
   (define-derived-mode astro-mode web-mode "astro")
@@ -689,11 +709,26 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 **** Tailwind support
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package lsp-tailwindcss
-    :custom
-    (lsp-tailwindcss-major-modes
-     '(rjsx-mode web-mode html-mode css-mode typescript-mode astro-mode)))
+    :init
+    (setq lsp-tailwindcss-major-modes '(rjsx-mode web-mode html-mode css-mode typescript-mode astro-mode))
+    (setq lsp-tailwindcss-add-on-mode t))
+#+end_src
+
+**** Svelte support
+#+begin_src emacs-lisp
+  (use-package svelte-mode
+    :ensure t
+    :defer 0
+    :hook((svelte-mode . lsp-deferred)))
+#+end_src
+
+*** CSS Mode 
+#+begin_src emacs-lisp
+  (use-package css-mode
+    :ensure nil
+    :hook((css-mode . lsp-deferred)))
 #+end_src
 
 *** MDX Support
@@ -704,13 +739,28 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 *** Prisma
 #+begin_src emacs-lisp
   (use-package prisma-mode
+    :defer t
     :load-path "/home/cognusboi/workspace/instdir/emacs-prisma-mode")
+#+end_src
+
+*** LaTeX
+#+begin_src emacs-lisp
+  (setq LaTeX-math-abbrev-prefix ";")
+  (use-package auctex
+    :ensure t
+    :defer t
+    :config
+    )
+  (use-package cdlatex :ensure t :defer t)
 #+end_src
 
 * Org mode
 ** Initial setup hook
 #+begin_src emacs-lisp
   (defun cb/org-mode-setup ()
+    (font-lock-add-keywords 'org-mode
+                            '(("^ *\\([-]\\) "
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
     (org-indent-mode)
     (org-toggle-pretty-entities)
     (auto-fill-mode 0)
@@ -724,7 +774,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 ** Org habits
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package org-habit
     :ensure nil
     :custom
@@ -742,8 +792,10 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     :hook (org-mode . cb/org-mode-setup)
     :bind (("C-x e" . org-edit-src-code))
     :custom
+    (org-agenda-span 10)
+    (org-deadline-warning-days 7)
     (org-directory "~/workspace/userfiles/orgfiles/guides")
-    (org-agenda-files '("inbox.org" "projects.org" "repeaters.org"))
+    (org-agenda-files '("inbox.org" "projects.org" "repeaters.org" "/home/cognusboi/workspace/userfiles/college/3-2/classes.org"))
     (org-agenda-start-with-log-mode t)
     (org-use-speed-commands t)
     (org-tags-column 5)
@@ -765,11 +817,11 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
                     (org-level-1 . 1.3)
                     (org-level-2 . 1.2)
                     (org-level-3 . 1.1)
-                    (org-level-4 . 1.1)
-                    (org-level-5 . 1.1)
-                    (org-level-6 . 1.1)
-                    (org-level-7 . 1.1)
-                    (org-level-8 . 1.1)))
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.0)
+                    (org-level-6 . 1.0)
+                    (org-level-7 . 1.0)
+                    (org-level-8 . 1.0)))
       (set-face-attribute (car face) nil
                           :font "FiraCode Nerd Font Mono"
                           :weight 'bold
@@ -824,7 +876,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 ** Inline padding
 #+begin_src emacs-lisp
   (defun cb/org-mode-visual-fill ()
-    (setq visual-fill-column-width 100
+    (setq visual-fill-column-width 110
           visual-fill-column-center-text t)
     (visual-fill-column-mode 1))
 
@@ -899,6 +951,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 ** Org capture
 #+begin_src emacs-lisp
   (use-package org-capture
+    :defer t
     :ensure nil
     :config
     (setq org-capture-templates
