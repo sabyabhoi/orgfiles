@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       b3a552aa-c687-416d-a057-824fb9674ee6
+:END:
+#+title: Data Transfer Instructions
+#+filetags: :CS:
+
+* Stack Instructions
+:PROPERTIES:
+:ID:       2aa580dc-f6c8-4d32-9dd3-488d33ee252a
+:END:
+- ~SS~ and ~SP~ must be initialized.
+- No flags affected
+- Little Endian rule is applicable: *Lower byte is stored in lower address*
+
+** Push
+#+begin_example asm
+PUSH BX
+
+;; SS:[SP - 1] <- BH
+;; SS:[SP - 2] <- BL
+;; SP <- SP - 2
+#+end_example
+
+** Pop
+- Pop from stack and store it into the register
+
+#+begin_example asm
+POP BX
+
+;; BL <- SS:[SP]
+;; BH <- SS:[SP + 1]
+;; SP <- SP + 2
+#+end_example
+
+* IO Instructions 
+:PROPERTIES:
+:ID:       e9bc2631-598e-429b-a548-fc9b9f8d2549
+:END:
+** Input Operation
+#+begin_example asm
+IN dest, src
+#+end_example
+
+- Destination must be a ~AX~ (16-bit reg) or either of ~AL~ or ~AH~ (8-bit reg).
+
+#+begin_example asm
+IN AL, 80H
+IN AX, 80H
+IN AL, DX
+IN AX, DX
+#+end_example  
+
+** Output Operation
+#+begin_example asm
+IN dest, src
+#+end_example
+Here, the destination is an IO address whereas the source is an accumulator.
+
+* Address Object Data Transfer Instructions
+:PROPERTIES:
+:ID:       c55d90fb-d299-44a3-a3a4-46683470903e
+:END:
+** Load Effective Address
+#+begin_example asm
+LEA BX, ARRAY
+#+end_example
+
+Find the offset of ~ARRAY~ in the data segment and load it into ~BX~.
+
+** Load Pointer using DS
+#+begin_example asm
+LDS reg, mem
+
+;; reg <- [mem]
+;; [DS] <- [mem + 2]
+#+end_example
+
+Used when we wish to search multiple data segments.

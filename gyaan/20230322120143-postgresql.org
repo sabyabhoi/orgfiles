@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       f0e7fea9-7b20-43b1-87ec-9ea5650bc441
+:END:
+#+title: PostgreSQL
+#+filetags: :CS:
+
+* Basic usage
+** Display all databases
+#+begin_src sql
+\l
+#+end_src
+
+** Connect to a database
+#+begin_src sql
+\c <DB>
+#+end_src
+
+** Show all tables/relations
+#+begin_src sql
+\dt
+#+end_src
+
+* Working with tables
+** Describe about the table
+#+begin_src sql
+\d TABLENAME
+#+end_src
+
+** Creating tables
+The basic format is:
+#+begin_src sql
+CREATE TABLE TABLENAME(
+        col1 <TYPE> <PRIMARY KEY> <NOT NULL>,
+        col2 <TYPE> <PRIMARY KEY> <NOT NULL>,
+        col3 <TYPE> <PRIMARY KEY> <NOT NULL>,
+        );
+#+end_src
+
+*** Example
+#+begin_src sql
+CREATE TABLE STUDENTS(
+       ID INT PRIMARY KEY NOT NULL,
+       NAME TEXT NOT NULL,
+       AGE INT NOT NULL
+                );
+#+end_src
+
+** Inserting rows
+*** Inserting for all the columns
+#+begin_src sql
+INSERT INTO TABLENAME
+VALUES (value1, value2, value3);
+#+end_src
+
+*** Inserting into specific columns
+#+begin_src sql
+INSERT INTO TABLENAME (col1, col2, col3)
+VALUES (value1, value2, value3);
+#+end_src
+
+** Updating entries
+#+begin_src sql
+UPDATE TABLENAME
+    SET col1 = val1,
+        col2 = val2,
+        col3 = val3,
+    WHERE CONDITION;
+#+end_src
+
+** Altering columns
+#+begin_src sql
+ALTER TABLE table_name
+ALTER COLUMN column_name TYPE data_type USING expression;
+#+end_src

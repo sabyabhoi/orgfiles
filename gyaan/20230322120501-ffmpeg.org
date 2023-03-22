@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       159416a3-798c-4266-9432-1066788a1e1f
+:END:
+#+title: FFmpeg
+#+filetags: :CS:
+
+
+FFmpeg is a video recording, manipulating and converting tool.
+
+The basic syntax is:
+#+begin_src shell
+ffmpeg -f <format> -i <input> <output>
+#+end_src
+
+* Screen Recording
+Suppose we want to record the current screen, then the command is:
+#+begin_src shell
+ffmpeg -f x11grab -i :0.0 out.mkv
+#+end_src
+
+To change the default dimensions of the recording:
+#+begin_src shell
+ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv
+#+end_src
+
+You can use the ~-y~ tag to automatically overwrite a file, otherwise ffmpeg will
+ask for your confirmation.
+
+You can press ~q~ to stop the recording, or the good old ~Ctrl+c~.
+
+* Webcam Recording
+To record your webcam, use
+#+begin_src shell
+ffmpeg -i /dev/videoN out.mkv
+#+end_src
+Here, ~N~ is a whole number.
+
+* Audio Recording
+We're going to use *pulseaudio* for recording audio.
+
+First, to list all the audio devices use:
+#+begin_src shell
+pactl list short sources
+#+end_src
+
+To use a specific device number:
+#+begin_src shell
+ffmpeg -f pulse -i N <output>
+#+end_src
+Here, ~N~ is the device number.
+
+* Codecs
+To specify the audio and video codecs, use the ~-c~ tag:
+#+begin_src shell
+ffmpeg -i <input> -c:v libx264 -r 30 -c:a flac <output>
+#+end_src
+~:v~ denotes video codec and ~-a~ denotes audio codec.

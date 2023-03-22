@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       5d3b890b-2b07-41bb-8f0c-6ad311c45257
+:END:
+#+title: Packed and Unpacked BCD
+#+filetags: :CS:
+
+* Unpacked BCD
+- Digits 0-9 are stored in 8-bits
+
+#+begin_example
+0 -> 0000 0000 
+1 -> 0000 0001 
+2 -> 0000 0010 
+3 -> 0000 0011 
+...
+8 -> 0000 0111 
+8 -> 0000 1000 
+9 -> 0000 1001 
+#+end_example
+
+#+begin_example
+43 -> 0000 0100 0000 0011 -> 0403H
+#+end_example
+
+* Packed BCD
+- Digits 0-9 are stored in 4-bits
+
+#+begin_example
+0 -> 0000 
+1 -> 0001 
+2 -> 0010 
+3 -> 0011 
+...
+8 -> 0111 
+8 -> 1000 
+9 -> 1001 
+#+end_example
+
+#+begin_example
+43 -> 0100 0011 -> 43H
+#+end_example

@@ -1,2 +1,0 @@
-#+LATEX_CLASS_OPTIONS: [a4paper]
-#+LATEX_HEADER: \usepackage[margin=1in]{geometry}

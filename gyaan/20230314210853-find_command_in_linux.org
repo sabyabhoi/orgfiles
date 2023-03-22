@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       90b1a803-b1b1-473b-8296-1a6bbda52a37
+:END:
+#+title: Find Command in Linux
+#+filetags: :CS:
+
+One of the most useful commands in Linux.
+
+* Search for a particular file extension
+#+begin_src sh 
+find ~/Downloads/ -name "*.md"
+#+end_src
+
+* Search for a particular directory
+#+begin_src sh
+find ~/Downloads/ -type d -name "DC"
+#+end_src
+
+#+RESULTS:
+: /home/cognusboi/Downloads/DC
+
+* Search for a particular file
+#+begin_src sh
+find ~/Downloads/ -type f -name "DC"
+#+end_src
+
+#+RESULTS:
+
+* Case insensitive search
+#+begin_src sh
+find . -iname "foobar"
+#+end_src
+
+Use the ~-iname~ flag instead of the ~-name~ flag.

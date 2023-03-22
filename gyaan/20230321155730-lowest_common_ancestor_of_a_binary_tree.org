@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       95373d3e-fe95-4a35-b484-f3bc48a92e09
+:END:
+#+title: Lowest Common Ancestor of a Binary Tree
+#+filetags: :CS:
+
+The lowest common ancestor is defined between two nodes ~p~ and ~q~ as the lowest node in ~T~ in the [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]] that has both ~p~ and ~q~ as descendants (where we allow a node to be a descendant of itself).
+
+[[../assets/tree.gv.svg]]
+
+
+#+begin_example
+lca(4, 7) = 2
+lca(2, 6) = 2
+#+end_example
+
+* Solution
+#+begin_src c++
+Node *lca(Node *head, int a, int b) {
+  if (head == nullptr || head->val == a || head->val == b)
+    return head;
+
+  Node* left = lca(head->left, a, b),
+	*right = lca(head->right, a, b);
+
+  if(left == nullptr) return right;
+  else if(right == nullptr) return left;
+
+  return head;
+}
+#+end_src

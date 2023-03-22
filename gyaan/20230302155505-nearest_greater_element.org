@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       94164145-4978-417d-892c-ab0e7a641762
+:END:
+#+title: Nearest Greater Element
+#+filetags: :CS:
+
+* To the Right
+The Next greater Element for an element ~x~ is the first greater element on the right side of ~x~ in the array. Elements for which no greater element exist, consider the next greater element as ~-1~. 
+
+#+begin_example
+Input: a = [4, 5, 2, 25]
+Output: [5, 25, 25, -1]
+#+end_example
+
+** O(n) algorithm
+#+begin_src python
+  def nge(a):
+      n = len(a)
+      stack = []
+      ans = [-1 for i in range(n)]
+
+      for i in range(n):
+          if stack.empty() or stack.top()[0] >= a[i]:
+              stack.push((a[i], i))
+              continue
+
+          while not stack.empty() and stack.top()[0] < a[i]:
+              ans[stack.top()[1]] = a[i]
+              stack.pop
+
+          stack.push((a[i], i))
+
+      return ans
+#+end_src
+
+* To the Left
+#+begin_src python
+  def nge(a):
+      n = len(a)
+      stack = []
+      ans = [-1 for i in range(n)]
+
+      for i in range(n):
+          if stack.empty():
+              stack.push((a[i], i))
+
+          elif stack.top()[0] > a[i]:
+              ans[i] = stack.top()[0]
+              stack.push((a[i], i))
+
+          else:
+              while not stack.empty() and stack.top()[0] < a[i]:
+                  stack.pop()
+
+              if not stack.empty():
+                  ans[i] = stack.top()[0]
+  
+              stack.push((a[i], i))
+      return ans;
+#+end_src

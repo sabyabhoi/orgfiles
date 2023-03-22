@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       e98888bb-3732-48c5-ba70-5876666380b3
+:END:
+#+title: Proof that xor of 4 consecutive integers is 0
+#+filetags: :CS:
+
+We're going to prove that ~4K ^ (4K + 1) ^ (4K + 2) ^ (4K + 3) = 0~.
+
+|--------+--------------------|
+|        |        <c>         |
+| Number | Bit Representation |
+|--------+--------------------|
+| 4K     |       xxxx00       |
+| 4K + 1 |       xxxx01       |
+| 4K + 2 |       xxxx02       |
+| 4K + 3 |       xxxx03       |
+|--------+--------------------|
+
+If we take the ~xor~ of these numbers, it comes out to be ~0~.

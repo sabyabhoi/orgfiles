@@ -85,6 +85,12 @@ export PATH=$ANDROID_SDK_ROOT:$PATH
 export PATH=/home/cognusboi/workspace/instdir/nnn:$PATH
 #+end_src
 
+** GTK
+#+begin_src shell
+export GDK_AUTO_SCREEN_SCALE_FACTOR=0
+export GDK_SCREEN_SCALE_FACTORS=1 
+#+end_src
+
 * Pipewire
 #+begin_src shell
 pipewire &

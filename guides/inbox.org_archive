@@ -1,0 +1,68 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/cognusboi/workspace/userfiles/orgfiles/guides/inbox.org
+
+* WAITING Finish "So good, they can't ignore you"
+  DEADLINE: <2023-02-04 Sat -3d>
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-02-09 Thu 15:51
+:ARCHIVE_FILE: ~/workspace/userfiles/orgfiles/guides/inbox.org
+:ARCHIVE_CATEGORY: inbox
+:ARCHIVE_TODO: WAITING
+:END:
+
+  - State "WAITING"    from "TODO"       [2023-01-30 Mon 17:44] \\
+    Book isn't available in the library. Currently reading /"The art of public speaking"/ by Dale Carnegie.
+
+* TODO Sample entry
+ SCHEDULED: <2023-02-09 Thu> 
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-02-09 Thu 15:53
+:ARCHIVE_FILE: ~/workspace/userfiles/orgfiles/guides/inbox.org
+:ARCHIVE_CATEGORY: inbox
+:ARCHIVE_TODO: TODO
+:END:
+Here's some random content 
+
+* TODO Study for MPI Quiz
+ DEADLINE: <2023-02-11 Sat 13:15> 
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-02-09 Thu 15:54
+:ARCHIVE_FILE: ~/workspace/userfiles/orgfiles/guides/inbox.org
+:ARCHIVE_CATEGORY: inbox
+:ARCHIVE_TODO: TODO
+:END:
+
+* CANCELLED Finish "The art of public speaking"
+ SCHEDULED: <2023-02-05 Sun 15:00> 
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-02-09 Thu 15:54
+:ARCHIVE_FILE: ~/workspace/userfiles/orgfiles/guides/inbox.org
+:ARCHIVE_CATEGORY: inbox
+:ARCHIVE_TODO: CANCELLED
+:END:
+ 
+ - State "CANCELLED"  from "TODO"       [2023-02-09 Thu 15:44] \\
+   - There are some discrepancies in the book I got.
+   - I need to first read up some content before having the ability to speak.
+- Finish the book /"The art of public speaking"/ by Dale Carnegie by _Sunday_.
+
+* DONE Study for MPI Quiz
+ DEADLINE: <2023-02-11 Sat 13:15> 
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-02-15 Wed 08:02
+:ARCHIVE_FILE: ~/workspace/userfiles/orgfiles/guides/inbox.org
+:ARCHIVE_CATEGORY: inbox
+:ARCHIVE_TODO: DONE
+:END:
+
+** General Instructions
+- *Room number*: F102
+- Check syllabus just to be sure
+- Solve PYQ
+- Use ChatGPT to generate questions
+** What to study [1/3]
+- [ ] addressing modes
+- [X] op code encoding
+- [ ] whatever's been covered in the latest class

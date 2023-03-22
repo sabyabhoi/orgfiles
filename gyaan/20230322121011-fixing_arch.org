@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       34736fe5-882b-4ca7-a9f4-f0684410de14
+:END:
+#+title: Fixing Arch
+#+filetags: :CS:
+
+* Downgrading packages
+How to downgrade packages when your Arch installation breaks.
+
+To list all the cached package archives of all the packages historically installed on your system:
+#+begin_src shell
+ls /var/cache/pacman/pkg/
+#+end_src
+
+To downgrade to some cached version of the package, run the following command with root privileges:
+#+begin_src shell
+pacman -U /path/to/package/archive
+#+end_src
+
+* How to make the downgrade persistent
+To prevent the package from being updated on the next system update, edit the =/etc/pacman.conf= file, and add the package name in the =IgnorePkg= option.

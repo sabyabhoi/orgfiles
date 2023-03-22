@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       51ccf82d-1608-4043-ab0b-305305f6d223
+:ROAM_ALIASES: GPG
+:END:
+#+title: GNU Privacy Guard
+#+filetags: :CS:
+
+* Generating a key-pair
+#+begin_src shell
+gpg --full-gen-key
+#+end_src
+
+* Encrypting a file
+Suppose we have a simple text file:
+#+begin_src shell
+echo "Hello there" > file.txt
+#+end_src
+
+Then to encrypt this file:
+#+begin_src shell
+gpg -e -r recipient@email.com file.txt
+#+end_src
+Here, the enter the email of the recipient. If you don't want anyone other than
+you to read the contents of the file, just put in the email you entered during
+the key-pair generation
+
+This will generate a new encrypted file called =file.txt.gpg=.
+
+** A healthy practice
+After the file is encrypted, the original file should be shreded to remove all
+trace:
+#+begin_src shell
+shred -u file.txt
+#+end_src
+* Decrypting a file
+Just enter the command:
+#+begin_src shell
+gpg -d file.txt.gpg
+#+end_src

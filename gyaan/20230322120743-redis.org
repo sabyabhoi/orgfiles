@@ -1,0 +1,151 @@
+:PROPERTIES:
+:ID:       439f0f17-1a24-42c4-8676-1ae64d4d4ef4
+:END:
+#+title: Redis
+#+filetags: :CS:
+
+- Redis is based on a simple key-value data model, where data is stored as key-value pairs.
+- It supports a wide range of data structures, including strings, hashes, lists, sets, and sorted sets.
+- Redis can be used as a database, a cache, or a message broker, and it supports various advanced features, such as transactions, Lua scripting, pub/sub messaging, and built-in support for clustering.
+
+After installing the redis package on arch, run the command line interface with:
+
+#+begin_src shell
+redis-cli
+#+end_src
+
+The default redis configuration can be found at =/etc/redis/redis.conf=.
+
+* Basic Syntax
+** Setting key value pairs
+#+begin_src redis
+SET name sabya
+#+end_src
+
+** Getting value from key
+#+begin_src redis
+GET name
+#+end_src
+
+** Deleting key value pairs
+*** Delete a single key value pair
+#+begin_src redis
+DEL name
+#+end_src
+
+*** Delete all key value pairs
+#+begin_src redis
+flushall
+#+end_src
+
+** Check if a key value pair exists or not
+#+begin_src redis
+EXISTS name
+#+end_src
+
+** Get all keys
+#+begin_src redis
+KEYS *
+#+end_src
+
+* Expiration
+Suppose we set a variable in the following manner:
+#+begin_src redis
+set name sabya
+#+end_src
+
+Then if we run the =ttl= command:
+#+begin_src redis
+ttl name
+#+end_src
+
+It returns =-1=. This means that the =name= variable has no expiration at all.
+
+** Setting expiry
+#+begin_src redis
+expire name <seconds>
+#+end_src
+This command will make the name key expire after 10 seconds
+
+** Initializing key value pair with expiry
+#+begin_src redis
+setex <key> <seconds> <value>
+#+end_src
+
+This directly create a key-value pair with the mentioned expiry.
+* Lists
+** Creating lists
+#+begin_src redis
+lpush <listname> <element>
+#+end_src
+This command is used to insert an element at 0^{th} position of the list if it exists, and creates the list if it doesn't exist.
+** Appending elements
+To append elements, use =rpush= to push the elements on the /right/ side of the array instead of the /left/ side
+#+begin_src redis
+rpush <listname> <element>
+#+end_src
+
+** Displaying the list
+#+begin_src redis
+lrange <listname> <start> <end>
+#+end_src
+
+Display the list from the starting to the ending index. If you want to wish to display the entire list:
+#+begin_src redis
+lrange <listname> 0 -1
+#+end_src
+
+** Popping elements
+Use =lpop= and =rpop= to pop and return the elements from the /left/ and /right/ side of the list respectively.
+#+begin_src redis
+lpop <listname>
+#+end_src
+
+#+begin_src redis
+rpop <listname>
+#+end_src
+
+* Sets
+All the commands are prefixed by 's'.
+** Adding to sets
+#+begin_src redis
+sadd <set name> <element>
+#+end_src
+
+** View members of set
+#+begin_src redis
+smembers <set name>
+#+end_src
+
+** Removing elements from the set
+#+begin_src redis
+srem <set name> <element>
+#+end_src
+
+* Hashes
+They are hashmaps. All the commands are prefixed by 'h'.
+** Adding to hash
+#+begin_src redis
+hset <hash name> <key> <value>
+#+end_src
+
+** Getting value from key
+*** Get a single key value pair
+#+begin_src redis
+hget <hash name> <key>
+#+end_src
+
+*** Get all the key value pairs
+#+begin_src redis
+hgetall <hash name>
+#+end_src
+
+** Deleting elements
+#+begin_src redis
+hdel <hash name> <key>
+#+end_src
+
+** Check if a key value pair exists
+#+begin_src redis
+hexists <hash name> <key>
+#+end_src

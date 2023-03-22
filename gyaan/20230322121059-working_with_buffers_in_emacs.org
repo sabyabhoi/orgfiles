@@ -1,0 +1,86 @@
+:PROPERTIES:
+:ID:       8a2cacf5-126d-4f44-bfe7-20a49564e127
+:END:
+#+title: Working with Buffers in Emacs
+#+filetags: :CS:
+
+* Basic buffer functions
+** Get the current buffer
+#+begin_src emacs-lisp
+  (current-buffer)
+#+end_src
+
+** Get the reference to a buffer
+- Just get the reference
+#+begin_src emacs-lisp
+  (get-buffer "*scratch*")
+#+end_src
+
+- Create the buffer if it doesn't already exist and return the reference.
+#+begin_src emacs-lisp
+  (get-buffer-create "foo")
+#+end_src
+
+** Changing the current buffer
+*** Raw method
+We can set the current buffer with =set-buffer=. 
+#+begin_src emacs-lisp
+  (progn
+    (set-buffer (get-buffer "foo"))
+    (current-buffer))
+  ;; Return the current buffer to make sure that the current buffer is indeed foo
+#+end_src
+
+We can also directly set the current buffer without making a call to the =get-buffer= function.
+#+begin_src emacs-lisp
+  (progn
+    (set-buffer "foo")
+    (current-buffer))
+#+end_src
+
+*** Safer method
+We can use the =save-current-buffer= method to perform manipulations on a separate buffer, and once the code inside the buffer finishes executing, we can move back to the original buffer.
+#+begin_src emacs-lisp
+  (progn
+    (save-current-buffer
+      (set-buffer "foo")
+      (message "Current buffer: %s" (current-buffer)))
+    (current-buffer))
+#+end_src
+
+We can use the =with-current-buffer= macro, which is a short-hand for saving the current buffer and then setting the buffer to the new buffer:
+#+begin_src emacs-lisp
+  (progn
+    (with-current-buffer "foo"
+      (message "current buffer: %s" (current-buffer)))
+    (current-buffer))
+#+end_src
+
+* Working with file buffers
+** Get filename of the file in the buffer
+If Emacs creates a buffer with the =find-file= function, we can get the file name of the file inside the buffer using the =buffer-file-name= function:
+#+begin_src emacs-lisp
+  (buffer-file-name)
+#+end_src
+
+** Get reference to buffer from filename
+Using the =get-file-buffer= function:
+#+begin_src emacs-lisp
+  (get-file-buffer "~/workspace/userfiles/orgfiles/guides/emacs_dev/buffers.org")
+#+end_src
+
+*Note*: This function always creates the provided file path into absolute file path (if it isn't already one).
+
+** Loading a file into a buffer
+Emacs provides the =find-file-noselect= function for "visiting" a file without displaying it:
+#+begin_src emacs-lisp
+  (find-file-noselect "foo.txt")
+#+end_src
+
+*** Some interesting details
+- Running this command more than once for the same file will return the same buffer
+- If the buffer for that file is modified and not saved, the user *might* be prompted before opening a new buffer for the file.
+- To prevent the user from being prompted, sent =t= as the second argument
+#+begin_src emacs-lisp
+  (find-file-noselect "foo.txt" t)
+#+end_src 

@@ -1,0 +1,134 @@
+:PROPERTIES:
+:ID:       22fd89bf-4ce0-44a9-b20b-86214b5a54a7
+:END:
+#+title: Arithmetic Instructions
+#+filetags: :CS:
+
+* Addition
+
+We can add two 8-bit numbers or two 16-bit numbers. But addition of 16-bit numbers with 8-bit numbers is illegal.
+#+begin_example asm
+ADD AL, BL
+ADD AX, BX
+
+ADD AX, BL ;; Illegal
+#+end_example
+
+** Add with carry
+#+begin_example asm
+ADC BL, CL ;; BL <- BL + CL + CF
+#+end_example
+
+* Subtraction
+The Carry Flag is set to 1 when borrow happens 
+#+begin_example asm
+SUB BL, CL
+#+end_example
+
+** Subtract with Borrow
+#+begin_example asm
+SBB BL, CL ;; BL <- BL - CL - CF
+#+end_example
+
+* Increment
+#+begin_example asm
+INC AL ;; AL <- AL + 1
+#+end_example
+
+All flags except CF are affected.
+
+When using direct/indirect addressing, mention the size of operand. E.g.
+#+begin_example asm
+INC BYTE [BX]
+INC WORD [BX]
+#+end_example
+
+* Decrement
+#+begin_example asm
+DEC AL ;; AL <- AL - 1
+#+end_example
+
+* Multiplication
+** Note on accumulators
+|--------+-------------|
+| Size   | Accumulator |
+|--------+-------------|
+| 8-bit  | AL          |
+| 16-bit | AX          |
+| 32-bit | DX AX       |
+|--------+-------------|
+
+** 8-bit multiplication
+The output is stored in 16-bit accumulator.
+#+begin_example asm
+MUL BL ;; AX <- AL * BL
+#+end_example
+
+*No carry is generated*
+
+** 16-bit multiplication
+#+begin_example asm
+MUL BX ;; DX AX <- AX * BX
+#+end_example
+
+** Signed multiplication
+#+begin_example asm
+IMUL BX
+#+end_example
+
+* Division
+Product of two 8-bit numbers can be 16-bit at max. Similarly, when we divide a 16-bit number with an 8-bit number, we get another 8-bit number as the result.
+
+** 8-bit division
+#+begin_example asm
+DIV BL 
+#+end_example
+
+Here, 
+- ~BL~ is the divisor, ~AX~ is the dividend. Effectively, ~AX/BL~ is taking place.
+- The quotient is stored in ~AL~.
+- The remainder is stored in ~AH~.
+
+** 16-bit division
+#+begin_example asm
+DIV BX
+#+end_example
+
+Here, 
+- ~BX~ is the divisor, ~DX AX~ is the dividend. Effectively, ~(DX AX)/BX~ is taking place.
+- The quotient is stored in ~AX~.
+- The remainder is stored in ~DX~.
+
+* Register extension
+** Convert Byte to Word
+- Converts byte (8-bits) to a word (16-bits)
+- Implied addressing mode
+- Extends ~AL~ to ~AX~
+- Only works for /signed/ numbers (the MSB is retained).
+#+begin_example asm
+CBW
+#+end_example
+
+** Convert Word to Double Word
+- Extends ~AX~ to ~DX AX~.
+#+begin_example asm
+CWD
+#+end_example
+
+* BCD Arithmetic
+** Decimal Adjustment after Addition
+- Converts the result after addition into packed BCD format.
+- Performed only on ~AL~ register. 
+
+#+begin_example asm
+MOV AL, 09H ;; AL <- 09H
+MOV BL, 01H ;; BL <- 01H
+ADD AL, BL  ;; AL <- 0AH
+DAA         ;; AL <- 10H
+#+end_example
+
+*** How this instruction works
+Check the value of ~AL~:
+1. If the lower nibble > 9 or the ~AC~ flag is set, add ~06H~.
+2. If the higher nibble > 9 or the ~CF~ flag is set, add ~60H~.
+   

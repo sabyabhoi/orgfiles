@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       9e07f25f-9d79-4ec8-b4f5-fdad274f06fc
+:END:
+#+title: String Instructions
+#+filetags: :CS:
+#+OPTIONS: toc:nil
+#+SETUPFILE: ~/workspace/userfiles/orgfiles/guides/template.org
+
+Here are some of the string instructions available in the [[id:2c8335ac-5776-4dba-9cbd-0873a7555f13][8086 Microprocessor]]:
+
+|-------------+--------------------|
+| Instruction | Locations Affected |
+|-------------+--------------------|
+| LODS        | DS:[SI]            |
+| STOS        | ES:[DI]            |
+| SCAS        | ES:[DI]            |
+| CMPS        | DS:[SI] & ES:[DI]  |
+| INS         | ES:[DI]            |
+| OUTS        | DS:[SI]            |
+|-------------+--------------------|
+
+* LODS
+- Loads ~AL~ / ~AX~ / ~EAX~ with string from ~DS:[SI]~ and increments ~SI~ accordingly.
+    - ~LODSB~ loads into ~AL~
+    - ~LODSW~ loads into ~AX~
+    - ~LODSD~ loads into ~EAX~
+- No flags affected
+
+* STOS
+- Stores ~AL~ / ~AX~ / ~EAX~ into from ~ES:[DI]~ and increments ~DI~ accordingly.
+    - ~STOSB~ stores from ~AL~
+    - ~STOSW~ stores from ~AX~
+    - ~STOSD~ stores from ~EAX~
+- No flags affected
+
+* SCAS
+- The ~SCAS~ instruction scans a byte or word string to ascertain the presence of a specific byte or word.
+- This specific data is loaded into ~AL~ or ~AX~.
+- The string which is to be scanned has to be in the extra segment, and is to be pointed by ~DI~. This is mandatory and cannot be overridden.
+
+* CMPS
+- Compares values from ~DS:[SI]~ with ~ES:[DI]~, incrementing them appropriately (based on ~CMPSB~ or ~CMPSW~)

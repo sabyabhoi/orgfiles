@@ -1,4 +1,4 @@
-#+Title: Emacs Configuration
+  #+Title: Emacs Configuration
 #+AUTHOR: Sabyasachi Bhoi
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
 
@@ -33,22 +33,22 @@
 Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I prefer using fixed-pitch fonts for writing code and variable-pitch fonts for writing prose.
 #+begin_src emacs-lisp
 
-  (setq font-name "FiraCode Nerd Font Mono"
-        font-height 170)
-  (defun cb/set-font-faces ()
-    (let ((font-name "FiraCode Nerd Font Mono") (font-height 170))
-      (dolist (face '(default fixed-pitch))
-        (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
-      (set-face-attribute 'variable-pitch nil :font "SF Pro Text" :height 182 :weight 'normal)
-      
-      ))
+(setq font-name "Iosevka Nerd Font Mono"
+      font-height 178)
+(defun cb/set-font-faces ()
+  (dolist (face '(default fixed-pitch))
+    (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
+  (set-face-attribute 'variable-pitch nil :font "SF Pro Text" :height 182 :weight 'normal)
+  ;;    (let ((font-name "Iosevka Nerd Font Mono") (font-height 174))
+  ;;      )
+  )
 
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (cb/set-font-faces))))
-    (cb/set-font-faces))
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (cb/set-font-faces))))
+  (cb/set-font-faces))
 #+end_src
 
 ** Auto-parenthesis completion
@@ -173,10 +173,13 @@ For a directory to be considered as a project by Projectile, it should
 *** Orderless
 Orderless is a completion style for pattern search in buffers. It works well with Vertico.
 #+begin_src emacs-lisp
-  (use-package orderless
-    :ensure t
-    :custom
-    (completion-styles '(orderless basic partial-completion flex)))
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic partial-completion flex))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles . (partial-completion)))))
+  )
 #+end_src
 
 *** Marginalia
@@ -189,6 +192,21 @@ Marginalia provides additional informational text in the Vertico buffers.
     (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
     :init
     (marginalia-mode))
+#+end_src
+
+*** Corfu
+#+begin_src emacs-lisp :tangle no
+(use-package corfu
+  :bind (:map corfu-map
+			  ("C-j" . corfu-next)
+			  ("C-k" . corfu-previous)
+			  ("C-f" . corfu-insert))
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  :config
+  (global-corfu-mode)
+  (setq tab-always-indent 'complete))
 #+end_src
 
 ** Consult
@@ -246,15 +264,10 @@ This is the main autocompletion framework we're going to use.
                   treemacs-mode-hook
                   gdb-mode-hook))
     (add-hook mode (lambda () (company-mode 0))))
-
-  ;;  (with-eval-after-load 'company
-  ;;    (define-key company-active-map (kbd "<return>") nil)
-  ;;    (define-key company-active-map (kbd "RET") nil)
-  ;;    (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 #+END_SRC
 
 *** Company box
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
   (use-package company-box
     :hook (company-mode . company-box-mode))
 #+end_src
@@ -295,7 +308,9 @@ Easier way to setup global keybindings
       "oe" '(lambda () (interactive) (find-file
                                       (expand-file-name "~/workspace/userfiles/orgfiles/guides/Emacs_config.org")))
       "c" '(lambda () (interactive) (dired "~/workspace/userfiles/college/3-2/"))
-      "rn" 'lsp-rename)
+      "rn" 'lsp-rename
+	  "h" 'hydra-text-scale/body
+	  )
     (general-nmap
       "K" 'lsp-ui-doc-glance
       ))
@@ -345,14 +360,13 @@ Rainbow delimiters:
 #+begin_src emacs-lisp
   (use-package lsp-mode
     :commands (lsp lsp-deferred)
-    :init
+	:init
     (setq gc-cons-threshold (* 100 1024 1024)
           read-process-output-max (* 1024 1024))
     :custom
     (lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t)
-    (message "LSP Mode loaded")
     (setq lsp-idle-delay 0.1
           lsp-prefer-capf t))
 #+end_src
@@ -372,15 +386,14 @@ Require the posframe package for showing the diagnostics in a popup.
 
 *** LSP UI
 #+begin_src emacs-lisp
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
-    :hook (lsp-mode . lsp-ui-sideline-mode)
-    :commands lsp-ui-mode
-    :ensure t
-    :custom
-    (lsp-ui-sideline-show-diagnostics t)
-    (lsp-ui-doc-delay 0.0)
-    (lsp-ui-doc-position 'at-point))
+(use-package lsp-ui
+  :ensure t
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-doc-delay 0.05)
+  (lsp-ui-doc-position 'at-point))
 #+end_src
 
 *** Yasnippet
@@ -477,6 +490,14 @@ Require the posframe package for showing the diagnostics in a popup.
 #+end_src
 
 ** Filetype specific plugins
+*** Assembly
+#+begin_src emacs-lisp
+  (use-package nasm-mode
+    :ensure t
+    :config 
+    (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode)))
+#+end_src
+
 *** C++
 #+begin_src emacs-lisp
   (use-package c++-mode
@@ -691,6 +712,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
   (add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
 #+end_src
+
 **** Astro support
 #+begin_src emacs-lisp
   (define-derived-mode astro-mode web-mode "astro")
@@ -754,6 +776,12 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
   (use-package cdlatex :ensure t :defer t)
 #+end_src
 
+** Emacs Speaks Statistics
+#+begin_src emacs-lisp
+  (use-package ess
+    :ensure t)
+#+end_src
+
 * Org mode
 ** Initial setup hook
 #+begin_src emacs-lisp
@@ -770,6 +798,11 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
           evil-auto-indent t
           org-startup-with-inline-images t
           org-default-notes-file (concat org-directory "/notes.org"))
+    (setq org-src-fontify-natively t
+          org-src-window-setup 'current-window ;; edit in current window
+          org-src-strip-leading-and-trailing-blank-lines t
+          org-src-preserve-indentation t ;; do not put two spaces on the left
+          org-src-tab-acts-natively t)
     (display-line-numbers-mode 0))
 #+end_src
 
@@ -874,7 +907,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 ** Inline padding
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
   (defun cb/org-mode-visual-fill ()
     (setq visual-fill-column-width 110
           visual-fill-column-center-text t)

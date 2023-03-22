@@ -5,4 +5,7 @@
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+LATEX_HEADER: \usepackage{hyperref}
 #+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \usepackage{float}
+
+
 

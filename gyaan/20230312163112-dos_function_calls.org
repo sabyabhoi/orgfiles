@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       65d3aa66-d552-45d4-a225-b36e163e4955
+:END:
+#+title: DOS Function Calls
+#+filetags: :CS:
+
+In the [[id:2c8335ac-5776-4dba-9cbd-0873a7555f13][8086 Microprocessor]], we can make several function calls. Here are the important ones.
+
+* Read the keyboard with echo
+#+begin_src asm
+MOV AH, 01
+INT 21H
+#+end_src
+
+The ASCII value of the key pressed is stored in ~AL~ and the key is also printed out on the screen.
+
+* Read the keyboard without echo
+#+begin_src asm
+MOV AH, 08
+INT 21H
+#+end_src
+
+The ASCII value of the key pressed is stored in ~AL~ but the character isn't printed out on the screen.
+
+* Print character to standard output
+#+begin_src asm
+MOV DL, CHAR
+MOV AH, 02
+INT 21H
+#+end_src
+
+* Print string to standard output
+#+begin_src asm
+LEA DX, STRING
+MOV AH, 09
+INT 21H
+#+end_src

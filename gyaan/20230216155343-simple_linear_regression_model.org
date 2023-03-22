@@ -52,6 +52,9 @@ The value of the explanatory variable must contain no information about the vari
 - The OLS estimators and regression predictions based on them remains unbiased and consistent.
 - The OLS estimators are no longer the /BLUE/ (Best Linear Unbiased Estimators) because they are no longer efficient, so the regression predictions will be inefficient too.
 
+*** Test for Heteroskedasticity
+We use the [[https://cran.r-project.org/web/packages/olsrr/vignettes/heteroskedasticity.html#:~:text=Breusch%20Pagan%20Test,-Breusch%20Pagan%20Test&text=It%20is%20used%20to%20test,is%20a%20%CF%872%20test.][Breusch-Pagan test]] for Heteroskedasticity. The null hypothesis here is that the variance of the error term is constant with respect to the explanatory variables and assumes a $\chi^2$ distribution.
+
 ** Normality of Error Terms (Optional)
 
 \[

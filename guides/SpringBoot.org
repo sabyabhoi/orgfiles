@@ -17,7 +17,6 @@ Suppose we have an =Alien= class:
       private String name;
       private String tech;
   }
-
 #+end_src
 
 And we wish to perform some logic on it:
