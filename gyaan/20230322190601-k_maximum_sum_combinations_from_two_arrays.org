@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       3e3c1896-c54a-4dc5-b52e-4b8939027134
+:END:
+#+title: K maximum sum combinations from two arrays
+#+filetags: :CS:
+
+You are given two arrays ~A~ and ~B~ consisting of n elements each. You construct another array ~C~ (initially empty) by performing the following operations (assume 1-based indexing) -
+
+1. You pick a pair of indices ~(i, j)~ where ~1 <= i, j <= n~
+2. Pick the ith element from ~A~ and the jth element from ~B~, add them and insert it to the end ~C~. In other words, you insert ~A[i] + B[j]~ to the end of ~C~
+3. Note that you cannot pick the same pair twice.
+
+You do the above operation for all pairs of i and j and get the complete array ~C~. Find the first ~k~ largest elements (not necessarily unique) of ~C~ in ~O(n logn)~ time.
+
+* Solution
+#+begin_src python
+def k_max(a, b, n, k):
+    a.sort()
+    b.sort()
+
+    # max heap containing (A[i] + B[j], i, j)
+    heap = [] 
+    heap.push((a[n - 1] + b[n - 1], n - 1, n - 1))
+    already_present = {(n - 1, n - 1)}
+
+    for i in range(k):
+        s, i, j = heap.pop()
+        print(s, end=' ')
+
+        if (i - 1, j) not in already_present:
+            heap.push((a[i - 1] + b[j], i - 1, j))
+            already_present.insert((i - 1, j))
+
+        if (i, j - 1) not in already_present:
+            heap.push((a[i] + b[j - 1], i, j - 1))
+            already_present.insert((i, j - 1))
+#+end_src

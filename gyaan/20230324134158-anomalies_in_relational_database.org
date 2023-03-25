@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       57bac75f-ae37-4af2-8d21-e14ae102177a
+:END:
+#+title: Anomalies in RDBMS
+#+filetags: :CS:
+
+Anomalies in [[id:cc745ebc-1bf8-4628-bcfc-dd6b8d12cce9][RDBMS]] refer to the inconsistencies or errors that can occur in a database when data is improperly organized or manipulated. There are three main types of anomalies:
+
+* Insertion anomalies
+- These occur when it is not possible to insert a new record into the database without adding incomplete or redundant data.
+- For example, if a table is not properly [[id:84df91d6-ad3d-4e1e-ad37-0a3b112eb062][normalized]] and contains redundant data, inserting a new record may require duplicating information that already exists in the table.
+
+* Deletion anomalies
+- These occur when deleting a record from the database unintentionally removes other data that is needed for the correct functioning of the database.
+- For example, deleting a record that is referenced by other records in the database may result in the loss of important information.
+
+* Update anomalies
+- These occur when updating a record in the database leads to inconsistencies and errors in other parts of the database.
+- For example, if a record contains multiple pieces of data and only one piece is updated, the other pieces may become outdated or inconsistent with the rest of the database.

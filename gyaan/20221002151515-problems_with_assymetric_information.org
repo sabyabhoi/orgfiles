@@ -1,10 +1,10 @@
 :PROPERTIES:
 :ID:       ea260d71-9459-4c08-bec2-e57f9c5ebebe
 :END:
-#+title: Problems with Assymetric Information
+#+title: Problems with Asymmetric Information
 #+filetags: :ECONOMICS:
 
-Assymetric information exists when two parties getting into any kind of transaction have different amount of information available at their disposal.
+Asymmetric information exists when two parties getting into any kind of transaction have different amount of information available at their disposal.
 
 To elucidate the problems related with assymetric information, we're going to employ an example of a health insurance agency.
 

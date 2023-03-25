@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       1964f6fa-ab8d-4a30-b700-559d62addf66
+:END:
+#+title: First non-repeating integer in a stream
+#+filetags: :CS:
+
+Given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] ~a~ of ~n~ non-negative integers, print the first non-repeating integer in every prefix of ~a~. A
+prefix of an array is any non-empty, contiguous part of the array starting with the first element of the
+array.
+
+* Solution
+#+begin_src python
+def solve(a, n):
+    queue = []
+    freq = {}
+
+    for i in a:
+        queue.push(i)
+        freq[i]++
+
+        while not queue.empty():
+            if freq[q.front()] > 1: # not unique in prefix
+                q.pop()
+            else: # unique in prefix
+                print(q.front())
+                break
+
+        if queue.empty():
+            print('-1')
+#+end_src

@@ -4,30 +4,34 @@
 #+title: Maximum sum sliding window
 #+filetags: :CS:
 
-You are given an array ~a~ of ~n~ integers. There is a sliding window of size ~k~ which is moving from the very left of the array to the very right. You can only see the ~k~ numbers in the window. In every iteration, the sliding window moves right by one position. Print the maximum element in the sliding window in every iteration. The elements in the sliding window need not be unique.
+You are given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] ~a~ of ~n~ integers. There is a sliding window of size ~k~ which is moving from the very left of the array to the very right. You can only see the ~k~ numbers in the window. In every iteration, the sliding window moves right by one position. Print the maximum element in the sliding window in every iteration. The elements in the sliding window need not be unique.
 
 * Solution
 Use a deque.
 
 #+begin_src python
-  def max_subarray(arr, n, k):
-      deque = []
+def max_subarray(arr, n, k):
+    deque = []
 
-      for i in range(k):
-          while not deque.empty() and arr[i] >= arr[deque[-1]]:
-              deque.pop_back()
-          deque.push_back(i)
+    # Process the first k elements
+    for i in range(k):
+        while not deque.empty() and arr[i] >= arr[deque[-1]]:
+            deque.pop_back()
+        deque.push_back(i)
 
-      for i in range(k, n):
-          print(arr[deque[0]], end=' ')
+    # Process the next k elements
+    for i in range(k, n):
+        print(arr[deque[0]], end=' ')
 
-          while not deque.empty() and deque[0] <= i - k:
-              deque.pop_front()
-        
-          while not deque.empty() and arr[i] >= arr[deque[-1]]:
-              deque.pop_back()
+        # Remove the elements which have moved out of window
+        while not deque.empty() and deque[0] <= i - k:
+            deque.pop_front()
+      
+        # Remove the elements which are less than the current element
+        while not deque.empty() and arr[i] >= arr[deque[-1]]:
+            deque.pop_back()
 
-          deque.push_back(i)
+        deque.push_back(i)
 
-      print(arr[deque[0]])
+    print(arr[deque[0]])
 #+end_src

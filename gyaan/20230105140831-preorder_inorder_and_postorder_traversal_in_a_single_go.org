@@ -4,7 +4,7 @@
 #+title: Preorder, Inorder and Postorder traversal in a single go
 #+filetags: :CS:
 
-Write a program to print Preorder, Inorder, and Postorder traversal of the tree in a single traversal.
+Write a program to print Preorder, Inorder, and Postorder traversal of a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]] in a single traversal.
 
 * Solution
 1. Maintain a stack of the current node as well as a count value.

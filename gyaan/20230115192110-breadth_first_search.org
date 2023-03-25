@@ -5,6 +5,8 @@
 #+title: Breadth-First Search
 #+filetags: :CS:
 
+See [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]].
+
 #+begin_src c++
   vector<int> bfsOfGraph(int V, vector<int> adj[]) {
     // Code here

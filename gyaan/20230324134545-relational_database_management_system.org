@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       cc745ebc-1bf8-4628-bcfc-dd6b8d12cce9
+:ROAM_ALIASES: RDBMS
+:END:
+#+title: Relational Database Management System
+#+filetags: :CS:
+
+It is a type of software that is used to manage relational databases. A relational database is a collection of tables, where each table consists of rows and columns. The rows in a table represent individual records, and the columns represent specific attributes of the records.
+
+An RDBMS provides tools and interfaces for creating, modifying, and querying relational databases. It stores data in a structured way, so that it can be easily searched, sorted, and retrieved. An RDBMS also enforces rules and constraints to ensure data integrity and consistency.
+
+One of the key features of an RDBMS is its support for SQL (Structured Query Language), which is a standard language for managing relational databases. SQL allows users to create and modify tables, insert, update and delete records, and query data from the database. RDBMSs are used in a wide variety of applications, from small-scale personal projects to large-scale enterprise systems, and are essential tools for managing and analyzing data in many industries.

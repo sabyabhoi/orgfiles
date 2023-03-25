@@ -29,7 +29,7 @@ Recursion \to Memoization or Top-down
 ** [[id:3a6b12cc-d212-404f-9a10-bee3e37de3eb][LCS]]
 ** LIS
 ** Kadane's Algorithm
-** Matrix Chain Multiplication
+** [[id:288bcd38-8dca-4cf4-9c2e-41f82d1df681][Matrix Chain Multiplication]]
 ** DP on trees
 ** DP on grid
 ** Misc.

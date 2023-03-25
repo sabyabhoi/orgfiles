@@ -957,19 +957,20 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
 ** Org roam
 #+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :custom
-    (org-roam-directory "~/workspace/userfiles/orgfiles/gyaan")
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert))
-    :config
-    (setq org-roam-mode-sections
-          (list #'org-roam-backlinks-section
-                #'org-roam-unlinked-references-section))
-    (org-roam-db-autosync-mode)
-    (org-roam-setup))
+(use-package org-roam
+  :ensure t
+  :defer t
+  :custom
+  (org-roam-directory "~/workspace/userfiles/orgfiles/gyaan")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (setq org-roam-mode-sections
+        (list #'org-roam-backlinks-section
+              #'org-roam-unlinked-references-section))
+  (org-roam-db-autosync-mode)
+  (org-roam-setup))
 #+end_src
 
 *** Org roam UI

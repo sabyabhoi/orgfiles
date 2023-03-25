@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       84df91d6-ad3d-4e1e-ad37-0a3b112eb062
+:END:
+#+title: Normalization in RDBMS
+#+filetags: :CS:
+
+Normal forms are a series of rules that define how data should be organized in a [[id:cc745ebc-1bf8-4628-bcfc-dd6b8d12cce9][relational database]] to reduce data redundancy and inconsistencies and improve data integrity. There are several levels of normal forms, including:
+
+* First normal form (1NF)
+This level requires that each table in a database have a primary key and that each column in the table contains atomic values (i.e., values that cannot be further divided).
+
+* Second normal form (2NF)
+This level requires that the table be in 1NF and that each non-key column be fully dependent on the primary key. In other words, all non-key columns must be related to the primary key, and there should be no partial dependencies (i.e., a non-key column depending on only a part of the primary key).
+
+* Third normal form (3NF)
+This level requires that the table be in 2NF and that each non-key column be dependent only on the primary key or other non-key columns. In other words, there should be no transitive dependencies (i.e., a non-key column depending on another non-key column).
+
+** Checking for 3NF
+If we have a dependency of the form:
+#+begin_example
+X -> A
+#+end_example
+
+Then, 
+- ~X~ must be a superkey, or
+- ~A~ must be a key attribute
+
+* Boyce Codd Normal Form (BCNF)
+This is an advance version of 3NF in which we drop the 2^nd condition of 3NF wherein ~A~ must be a key attribute.
+Converting relations to BCNF sometimes lead to loss of some functional dependency, due to which, in practice people only check upto 3NF.
