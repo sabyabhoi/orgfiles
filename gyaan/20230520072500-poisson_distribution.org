@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       c485fd50-6629-4ac7-9533-23228b40d3d1
+:END:
+#+title: Poisson Distribution
+
+It is a discrete probability distribution that expresses the probability of an event happening more than 1 times.
+
+\begin{align*}
+pdf &= \frac{\lambda^{k}}{k!} e^{-\lambda} 
+\end{align*}
+
+Its mean is equal to its variance.
+
+\begin{align*}
+E(k) = \textrm{Var}(k) = \lambda
+\end{align*}
+

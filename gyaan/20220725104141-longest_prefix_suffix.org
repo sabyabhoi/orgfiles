@@ -28,29 +28,26 @@ For this, we generate a table, keeping track of the LPS of all the substring til
 The string ="a"= at index =3= has an LPS value of =1=, which means that the string position =LPS - 1 = 1 - 1 = 0=, the string ="a"= has been repeated. Similarly, the string ="b"= at index =4= has an LPS value of =2=, meaning that at the string position =LPS - 1 = 2 - 1 = 1=, the string ="ab"= has been repeated already.
 
 * Algorithm
-1. Take [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: =l = 0= and =r = 1=. 
-2. Maintain an =ans= array.
-3. If s_l and s_r are equal, then ans_r = l + 1. Increment =l= and =r=.
-4. If s_l and s_r are not equal, then check if =l = 0=.
-   - If it is, then put ans_r = 0, and increment =r=.
-   - If it isn't, then move =l= back by one step, and make it jump to the place in its answer.
+1. Take [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: ~l = 0~ and ~r = 1~. 
+2. Maintain an ~ans~ array.
+3. If s_l and s_r are equal, then ans_r = l + 1. Increment ~l~ and ~r~.
+4. If s_l and s_r are not equal, then check if ~l = 0~.
+   - If it is, then put ans_r = 0, and increment ~r~.
+   - If it isn't, then move ~l~ back by one step, and make it jump to the place in its answer.
 
-#+begin_src cpp
-  vector<int> lps(const string& s) {
-    size_t n = s.length();
-    vector<int> ans(n);
-    ans[0] = 0;
+#+begin_src python
+def lps(s):
+    n = len(s)
+    ans = [0] * n
 
-    size_t l = 0, r = 1;
-    while(r < n) {
-      if(s[l] == s[r]) {
-        ans[r++] = ++l;
-      } else if(l <= 0) ans[r++] = 0;
-      else {
-        l = ans[l - 1];
-      }
-    }
-
-    return ans;
-  }
+    l, r = 0, 1
+    while r < n:
+        if s[l] == s[r]:
+            ans[r++] = l++ + 1
+            continue
+        if l == 0:
+            ans[r++] = 0
+            continue
+        l = ans[l - 1]
+    return ans
 #+end_src

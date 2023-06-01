@@ -6,8 +6,8 @@
 
 It is a famous subset of problems with a similar hue:
 [[../assets/knapsack.jpeg]]
-1. A knapsack (bag) is given, which can hold at max =W= amount of weight.
-2. A set of items with different weights (=weights[]=) and value(=value[]=) is given
+1. A knapsack (bag) is given, which can hold at max ~W~ amount of weight.
+2. A set of items with different weights (~weights[]~) and value(~value[]~) is given
 3. We're supposed to maximize the value of the knapsack with the given constraints.
 
 * Types of knapsack problems

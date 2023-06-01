@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       00708f0c-1205-4e3e-b4c2-faf65ef9ec75
+:END:
+#+title: Kth largest/smallest element in an array
+#+filetags: :CS:
+
+Given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] and a number ~K~ where ~K~ is smaller than the size of the array. Find the K^th smallest/largest element in the given array. Given that all array elements are distinct.
+
+Without loss of generality, I'm going to demonstrate how to find the K^th /largest/ element.
+
+* Sort the array and print the k^th number
+*Time complexity*: ~O(nlogn)~
+
+* Use a max-heap
+1. [[id:c1ae45fd-419d-40e1-996d-418331dc3e36][Heapify]] the array
+2.  Pop off ~K~ elements. The last element popped is the K^th largest.
+
+#+begin_src python
+def kth_largest(a, k) -> int:
+    heap = heapify(a) # O(n)
+
+   for i in range(k - 1): # O(klogn)
+       heap.pop()
+   return heap.pop()
+#+end_src
+
+*Time complexity*: ~O(n + klogn)~
+
+* Use a min-heap
+1. Push the first ~K~ elements onto the min-heap
+2. For the rest of the elements,
+   1. If the current element is less than the root, continue
+   2. Otherwise, replace the root with the current element and heapify
+3. Finally, the root of the min-heap is the K^th largest element
+
+#+begin_src python
+def kth_largest(a, k) -> int:
+    heap = heapify(a[:k]) # O(k)
+
+    for i in a[k:]: # O((N - k) * logk)
+        if i < heap.top():
+            continue
+        heap.pop()
+        heap.push(i)
+    return heap.top()
+#+end_src
+
+*Time complexity*: ~O(k + (N - k) * logk)~

@@ -14,7 +14,7 @@ There are three types of traversals possible in a [[id:a5f37e57-e61c-4a10-93cd-f
 * In order traversal
 - Visit the left node, then the node itself, then the right node.
 ** Iterative algorithm
-1. Maintain a stack of nodes.
+1. Maintain a [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][stack]] of nodes.
 2. Push the root node onto the stack and goto the left node.
 3. If the node is not null, then push it onto the stack move left.
 4. If the node is null, pop the top element off of the stack, print it and goto the right node of the popped node.
@@ -42,7 +42,7 @@ void inorder(Node* head) {
 * Pre order traversal
 - Visit the node itself, then the left node, then the right node.
 ** Iterative algorithm
-1. Maintain a stack of nodes.
+1. Maintain a [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][stack]] of nodes.
 2. Print the root node.
 3. Push the root node onto the stack and goto the left node.
 4. If the node is not null, then push it onto the stack move left.

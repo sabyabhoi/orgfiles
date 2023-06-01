@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       b3a552aa-c687-416d-a057-824fb9674ee6
 :END:
-#+title: Data Transfer Instructions
+#+title: Data Transfer Instructions in 8086
 #+filetags: :CS:
 
 * Stack Instructions

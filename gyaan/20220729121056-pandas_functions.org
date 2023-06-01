@@ -52,48 +52,8 @@ df.head()
 : 
 : [5 rows x 9 columns]
 
-* Getting unique entries
-** Name of unique entries
-#+begin_src python :session 
-df.origin.unique()
-#+end_src
-
-#+RESULTS:
-| usa | japan | europe |
-
-** Number of unique entries
-#+begin_src python :session 
-df.origin.nunique()
-#+end_src
-
-#+RESULTS:
-: 3
-
-* Cumulative Summation: =cumsum=
-#+begin_src python :session 
-  df[['mpg', 'displacement']].cumsum()
-#+end_src
-
-#+RESULTS:
-#+begin_example
-        mpg  displacement
-0      18.0         307.0
-1      33.0         657.0
-2      51.0         975.0
-3      67.0        1279.0
-4      84.0        1581.0
-..      ...           ...
-393  9223.8       76512.5
-394  9267.8       76609.5
-395  9299.8       76744.5
-396  9327.8       76864.5
-397  9358.8       76983.5
-
-[398 rows x 2 columns]
-#+end_example
-
 * Querying 
-** Using =where=
+** Using ~where~
 #+begin_src python :session 
 df[['name', 'mpg', 'model_year']].where(df.origin == 'usa')
 #+end_src
@@ -141,7 +101,7 @@ df[['name', 'mpg', 'model_year']].where(df.origin == 'usa')
 
 Note that the parenthesis around the individual conditions are necessary.
 
-** Using =query=
+** Using ~query~
 #+begin_src python :session
 df.query('origin == "usa"')
 #+end_src
@@ -188,7 +148,57 @@ One can also use variables inside such queries:
 [249 rows x 9 columns]
 #+end_example
 
-* Grouping
+** Getting unique entries
+** Name of unique entries
+#+begin_src python :session 
+df.origin.unique()
+#+end_src
+
+#+RESULTS:
+| usa | japan | europe |
+
+** Number of unique entries
+#+begin_src python :session 
+df.origin.nunique()
+#+end_src
+
+#+RESULTS:
+: 3
+
+** Selecting NaN rows
+*** One particular column
+#+begin_src python :session 
+df[df["horsepower"].isna()]
+#+end_src
+
+#+RESULTS:
+:       mpg  cylinders  displacement  ...  model_year  origin                  name
+: 32   25.0          4          98.0  ...          71     usa            ford pinto
+: 126  21.0          6         200.0  ...          74     usa         ford maverick
+: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
+: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
+: 354  34.5          4         100.0  ...          81  europe           renault 18i
+: 374  23.0          4         151.0  ...          82     usa        amc concord dl
+: 
+: [6 rows x 9 columns]
+
+*** All columns
+#+begin_src python :session 
+df[df.isna().any(axis=1)]
+#+end_src
+
+#+RESULTS:
+:       mpg  cylinders  displacement  ...  model_year  origin                  name
+: 32   25.0          4          98.0  ...          71     usa            ford pinto
+: 126  21.0          6         200.0  ...          74     usa         ford maverick
+: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
+: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
+: 354  34.5          4         100.0  ...          81  europe           renault 18i
+: 374  23.0          4         151.0  ...          82     usa        amc concord dl
+: 
+: [6 rows x 9 columns]
+
+** Grouping
 #+begin_src python :session 
 df.groupby("origin").mpg.count()
 #+end_src
@@ -200,7 +210,13 @@ df.groupby("origin").mpg.count()
 : usa       249
 : Name: mpg, dtype: int64
 
-* Sorting by columns
+** Regex search
+#+begin_src python
+df[df.name.str.match('regex')]
+#+end_src 
+
+* Column Manipulation
+** Sorting by columns
 *** In ascending order
 #+begin_src python :session 
 df.sort_values(by=['mpg'])
@@ -247,41 +263,8 @@ df.sort_values(by=['mpg'], ascending=False)
 [398 rows x 9 columns]
 #+end_example
 
-* Selecting NaN rows
-** One particular column
-#+begin_src python :session 
-df[df["horsepower"].isna()]
-#+end_src
-
-#+RESULTS:
-:       mpg  cylinders  displacement  ...  model_year  origin                  name
-: 32   25.0          4          98.0  ...          71     usa            ford pinto
-: 126  21.0          6         200.0  ...          74     usa         ford maverick
-: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
-: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
-: 354  34.5          4         100.0  ...          81  europe           renault 18i
-: 374  23.0          4         151.0  ...          82     usa        amc concord dl
-: 
-: [6 rows x 9 columns]
-
-** All columns
-#+begin_src python :session 
-df[df.isna().any(axis=1)]
-#+end_src
-
-#+RESULTS:
-:       mpg  cylinders  displacement  ...  model_year  origin                  name
-: 32   25.0          4          98.0  ...          71     usa            ford pinto
-: 126  21.0          6         200.0  ...          74     usa         ford maverick
-: 330  40.9          4          85.0  ...          80  europe  renault lecar deluxe
-: 336  23.6          4         140.0  ...          80     usa    ford mustang cobra
-: 354  34.5          4         100.0  ...          81  europe           renault 18i
-: 374  23.0          4         151.0  ...          82     usa        amc concord dl
-: 
-: [6 rows x 9 columns]
-
-* Mutate columns
-** Using =map=
+** Mutate columns
+** Using ~map~
 #+begin_src python :session 
 df.origin = df.origin.map(lambda o: o.upper() if o == 'usa' else o)
 df.head()
@@ -297,7 +280,7 @@ df.head()
 : 
 : [5 rows x 9 columns]
 
-* Rename columns
+** Rename columns
 #+begin_src python :session 
 df.rename(columns = {'mpg': 'mileage'}, inplace=False)
 #+end_src
@@ -321,7 +304,7 @@ df.rename(columns = {'mpg': 'mileage'}, inplace=False)
 #+end_example
 
 ** Convert index to column
-You can simply employ the =DataFrame.reset_index= function:
+You can simply employ the ~DataFrame.reset_index~ function:
 #+begin_src python :session 
 df.reset_index()
 #+end_src
@@ -344,7 +327,7 @@ df.reset_index()
 [398 rows x 10 columns]
 #+end_example
 
-* Drop columns
+** Drop columns
 Make use of the =drop= function:
 #+begin_src python :session 
 df.drop(['mpg', 'origin'], axis=1)

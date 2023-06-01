@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       4675af34-a422-45a8-ab6a-2ecd07774db4
+:ROAM_ALIASES: "Ordering in SQL"
+:END:
+#+title: Sorting in SQL
+#+filetags: :CS:
+
+We can use the ~ORDER BY~ clause in [[id:e854003e-c0fd-4fd3-8a87-50f999efc23c][SQL]]:
+
+#+begin_src sql
+SELECT * FROM TABLE
+WHERE CONDITION
+ORDER BY COLNAME1 ASC|DESC, COLNAME2 ASC|DESC;
+#+end_src

@@ -1,7 +1,8 @@
 :PROPERTIES:
 :ID:       3a6b12cc-d212-404f-9a10-bee3e37de3eb
+:ROAM_ALIASES: LCS
 :END:
-#+title: Longest Common Subsequence
+#+title:Longest Common Subsequence
 #+filetags: :CS:
 
 Given two strings ~X~ and ~Y~, we're supposed to return the length of the longest common subsequence. The subsequence need not be continuous (it's not a /substring/).

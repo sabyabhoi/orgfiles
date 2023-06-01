@@ -13,7 +13,7 @@ The precedence order of all the operations are as follows:
 In order to convert an infix propositional logic expresson to a prefix expression, we make use of the *Stack* [[id:a9338446-247d-4883-912e-bd4d705efd39][data structure]].
 
 ** Algorithm
-1. Initialize an empty stack and an =ans= variable to keep track of the final answer.
+1. Initialize an empty [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][stack]] and an =ans= variable to keep track of the final answer.
     #+begin_src c++
     stack<char> st;
     string ans = "";

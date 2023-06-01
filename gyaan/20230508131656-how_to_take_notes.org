@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e435a3ae-271f-4e32-920c-7b33c9bf429a
+:ROAM_ALIASES: "Question/Evidence/Conclusion Method"
+:END:
+#+title: How to take notes
+
+Use the [[https://www.universitylibrarian.com/blog/the-qec-method-of-notetaking][Question/Evidence/Conclusion Method]].
+
+* Question/Evidence/Conclusion Method

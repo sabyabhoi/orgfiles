@@ -18,7 +18,7 @@ Output:
 10 20 30 40 60
 #+end_example
 
-In order to do this, we make use of a *Queue*.
+In order to do this, we make use of a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]
 1. push the root of the tree to the queue.
 2. while the queue isn't empty, pop the front element, and push its left and right values onto the queue.
 

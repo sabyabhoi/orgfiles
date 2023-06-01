@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       95823e22-1360-4a75-b681-7cc406f867fa
+:END:
+#+title: Trie
+#+filetags: :CS:
+
+A trie, also known as a prefix tree, is a tree-like [[id:a9338446-247d-4883-912e-bd4d705efd39][data structure]] used to efficiently store and retrieve strings or sequences of characters.
+
+* Sample Implementation
+#+begin_src C++
+class Trie {
+    Trie* children[26];
+    bool end;
+public:
+    Trie() {
+        for(int i = 0; i < 26; ++i) 
+            children[i] = nullptr;
+        end = false;
+    }
+    
+    void insert(string word) {
+        Trie* itr = this;
+        for(char c : word) {
+            int i = c - 'a';
+            if(!itr->children[i])
+                itr->children[i] = new Trie();
+            itr = itr->children[i];
+        }
+        itr->end = true;
+    }
+    
+    bool search(string word) {
+        Trie* itr = this;
+        for(char c : word) {
+            int i = c - 'a';
+            if(!itr->children[i])
+                return false;
+            itr = itr->children[i];
+        }
+        return itr->end;
+    }
+    
+    bool startsWith(string prefix) {
+        Trie* itr = this;
+        for(char c : prefix) {
+            int i = c - 'a';
+            if(!itr->children[i])
+                return false;
+            itr = itr->children[i];
+        }
+        return true;
+    }
+};
+#+end_src

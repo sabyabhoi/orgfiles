@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       8c1cd09e-d0a9-4ea6-9ab1-14b15807cb4c
+:ROAM_ALIASES: DMA
+:END:
+#+title:Direct Memory Access
+#+filetags: :CS:
+
+- In the [[id:2c8335ac-5776-4dba-9cbd-0873a7555f13][8086 Microprocessor]], Direct Memory Access is a concept in which the memory can be accessed (read or written to) by the IO.
+- The $\textrm{HOLD}$ and $\overline{\textrm{HLDA}}$ pins are used for this feature.
+- Whenever the $\textrm{HOLD}$ pin is given logical one, in the next T-state, $\textrm{HLDA}$ becomes a logical one and the microprocessor stops execution. All buses go into high impedance state.
+
+#+ATTR_HTML: :width 800px
+[[../assets/DMA.png]]

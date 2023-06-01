@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       a4d3ff11-1424-41ca-a908-273623412197
+:END:
+#+title: Extracting data from PDF files in Python
+#+filetags: :CS:
+
+In [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]], we can use the ~tabula~ package to extract data from PDF files.  
+
+* Installation
+#+begin_src python
+pip install tabula-py
+#+end_src
+
+* Usage
+#+begin_src python
+import tabula
+import pandas as pd
+
+df = tabula.read_pdf("file.pdf", pages=all)
+#+end_src

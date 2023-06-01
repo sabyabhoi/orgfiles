@@ -4,7 +4,7 @@
 #+title: K maximum sum combinations from two arrays
 #+filetags: :CS:
 
-You are given two arrays ~A~ and ~B~ consisting of n elements each. You construct another array ~C~ (initially empty) by performing the following operations (assume 1-based indexing) -
+You are given two [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][arrays]] ~A~ and ~B~ consisting of n elements each. You construct another array ~C~ (initially empty) by performing the following operations (assume 1-based indexing) -
 
 1. You pick a pair of indices ~(i, j)~ where ~1 <= i, j <= n~
 2. Pick the ith element from ~A~ and the jth element from ~B~, add them and insert it to the end ~C~. In other words, you insert ~A[i] + B[j]~ to the end of ~C~
@@ -13,6 +13,7 @@ You are given two arrays ~A~ and ~B~ consisting of n elements each. You construc
 You do the above operation for all pairs of i and j and get the complete array ~C~. Find the first ~k~ largest elements (not necessarily unique) of ~C~ in ~O(n logn)~ time.
 
 * Solution
+We use a [[id:c1ae45fd-419d-40e1-996d-418331dc3e36][heap]].
 #+begin_src python
 def k_max(a, b, n, k):
     a.sort()

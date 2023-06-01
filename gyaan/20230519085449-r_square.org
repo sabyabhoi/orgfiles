@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       21946a42-8cfd-4d36-908d-cf86808f62a2
+:END:
+#+title: R-square
+#+filetags: :ECONOMICS:
+
+In a [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][Simple Linear Regression Model]] of the following form:
+
+\[
+y = \beta_{0} + \beta_{1} x + \epsilon
+\]
+
+We define 3 different *sum of squares*:
+
+\begin{align*}
+SST &= \sum(y_{i} - \bar{y})^{2} \\
+SSR &= \sum(\hat{y_{i}} - \bar{y})^{2} \\
+SSE &= \sum \hat{e}_{i}^{2} = \sum(y_i - \hat{y}_i)^2
+\end{align*}
+
+Such that
+\[
+SST = SSR + SSE
+\]
+
+Then the R-square of the regression is given by:
+
+\[
+R^2 = 1 - \frac{SSE}{SST}
+\]

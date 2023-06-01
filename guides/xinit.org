@@ -138,6 +138,12 @@ $XDG_CONFIG_HOME/polybar/launch.sh --forest
 mpd &
 #+end_src
 
+** USB Automount
+Make sure ~udisks2~ and ~udiskie~ packages are installed
+#+begin_src sh
+udiskie &
+#+end_src
+
 * Window managers
 ** i3-gaps
 #+begin_src shell :tangle no

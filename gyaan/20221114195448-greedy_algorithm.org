@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       f5b392bd-7d43-481d-8873-1a7e25b5596d
 :END:
-#+title: Greedy Algorithm
+#+title: Greedy Algorithms
 #+filetags: :CONCEPT:CS:
 
 Greedy algorithm is a type of [[id:a9338446-247d-4883-912e-bd4d705efd39][algorithm]] which takes the local optimum at the given point of iteration.  

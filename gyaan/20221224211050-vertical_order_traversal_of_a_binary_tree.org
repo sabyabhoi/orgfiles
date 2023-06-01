@@ -25,6 +25,7 @@ Create a struct to hold the current node, and the level and column of the curren
   }
 #+end_src
 
+Then use a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]] to traverse the tree.
 #+begin_src c++
   vector<vector<int>> verticalTraversal(Node* root) {
     vector<vector<int>> ans;

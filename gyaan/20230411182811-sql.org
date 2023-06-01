@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       e854003e-c0fd-4fd3-8a87-50f999efc23c
+:END:
+#+title: SQL
+#+filetags: :CS:
+
+Stands for /Structured Query Language/
+
+There are two types of SQL Queries:
+
+* Data Definition Language (DDL)
+Covers all commands related to 
+- Creation
+- Altering
+- Deletion
+of databases
+
+* Data Manipulation Language (DML)
+Covers all commands related to
+- Selection
+- Insertion
+- Deletion
+- Updation
+of data into databases

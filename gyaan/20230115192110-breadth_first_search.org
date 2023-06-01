@@ -5,29 +5,24 @@
 #+title: Breadth-First Search
 #+filetags: :CS:
 
-See [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]].
+See [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]. Here, we use a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]].
 
-#+begin_src c++
-  vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-    // Code here
-    vector<bool> vis(V, false);
-    vector<int> ans;
-        
-    queue<int> q;
-    vis[0] = true;
-    q.push(0);
-        
-    while(!q.empty()) {
-      int f = q.front();
-      ans.push_back(f);
-      q.pop();
-            
-      for(int i : adj[f]) {
-        if(vis[i]) continue;
-        vis[i] = true;
-        q.push(i);
-      }
-    }
-    return ans;
-  }
+#+begin_src python
+def bfs(adj: List[List[int]], V: int):
+    vis = [False] * V
+    ans = []
+
+    q = queue()
+    vis[0] = true
+    q.push(0)
+
+    while len(q) > 0:
+        f = q.pop()
+        ans.append(f)
+
+        for i in adj[f]:
+            if vis[i]: continue
+            vis[i] = true
+            q.push(i)
+    return ans
 #+end_src

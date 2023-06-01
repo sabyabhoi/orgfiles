@@ -9,9 +9,9 @@ Dynamic Programming is an important concept in [[id:a9338446-247d-4883-912e-bd4d
 
 * Identification
 The basic rule of thumb for identifying dynamic programming questions is as follows:
-- Some form of choice is given. E.g. to include something or not.
-  - Some form of repitition is present. If no repitition is present, then DP is pointless.
-- Optimality is considered. E.g. min, max, largest, smallest, total, etc.
+1. Some form of choice is given. E.g. to include something or not.
+2. Some form of repitition is present. If no repitition is present, then DP is pointless.
+3.Optimality is considered. E.g. min, max, largest, smallest, total, etc.
 * Approach
 Recursion \to Memoization or Top-down
 * Types of questions
@@ -25,10 +25,11 @@ Recursion \to Memoization or Top-down
 6. Number of subsets with given difference
 *** [[id:9d0c5d26-0aed-4ec7-9df5-0e4dc8b6dd4b][Unbounded Knapsack]]
 - [[id:69f76e4b-bbc0-4446-b1b2-b53c17037560][Coin change problems]]
+- [[id:750b8ebe-1eee-4890-a9ac-4b98c07511bd][Rod Cutting Problem]] 
 ** Fibonacci
 ** [[id:3a6b12cc-d212-404f-9a10-bee3e37de3eb][LCS]]
-** LIS
-** Kadane's Algorithm
+** [[id:b5ac11a3-cd5e-42cf-962b-c37c164a5e5a][LIS]]
+** [[id:b4c6d038-9ba5-4d60-96f1-5f24409de08b][Kadane's Algorithm]]
 ** [[id:288bcd38-8dca-4cf4-9c2e-41f82d1df681][Matrix Chain Multiplication]]
 ** DP on trees
 ** DP on grid

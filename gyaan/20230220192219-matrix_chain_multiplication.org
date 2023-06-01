@@ -1,7 +1,27 @@
 :PROPERTIES:
 :ID:       288bcd38-8dca-4cf4-9c2e-41f82d1df681
+:ROAM_ALIASES: MCM
 :END:
 #+title: Matrix Chain Multiplication
 #+filetags: :CS:
 
 Given some matrices A_1, A_2, ... A_n, we're supposed to find out their cross product with the minimum number of multiplications.
+
+* Solution
+Using [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][DP]].
+
+#+begin_src python
+def mcm(dim: list[int]) -> int:
+    n = len(dim) # number of matrices = n - 1
+    ops = [[1e7] * n] * n
+    for i in range(n):
+        for j in range(n):
+            if i >= j:
+                ops[i][j] = 0
+                continue
+
+            for k in range(i, j):
+                ops[i][j] = min(ops[i][k] + ops[k + 1][j] + dim[i - 1] * dim[k] * dim[j], ops[i][j])
+
+    return ops[1][n - 1]
+#+end_src

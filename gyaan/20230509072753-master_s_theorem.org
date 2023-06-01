@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       9b0fc125-9bf2-4949-a5fc-4dbc46a01dcf
+:END:
+#+title:Master's Theorem
+#+filetags: :CS:
+
+Let ~T(n)~ be a monotonically increasing function such that
+
+\begin{align*}
+T(n) &= a T(n/b) + f(n) \\
+T(1) &= c
+\end{align*}
+
+where ~a >= 1~, ~b >= 2~, ~c > 0~.
+
+If $f(n) \in \theta(n^d)$, where ~d >= 0~, then 
+
+\[
+T(n)=\begin{cases}
+	\theta(n^d), &\text{ if }a < b^d\\
+	\theta(n^d \log{n}), &\text{ if }a = b^d\\
+	\theta(n^{log_ba}), &\text{ if }a > b^d\\
+\end{cases}
+\]
+
+* Where does this come from?
+[[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]]
+
+* What does it lead to?
+It enables us to find the asymptotic complexity of [[id:091a34ea-64e4-4b21-81e6-aa322df47655][recursive]] relations easily.

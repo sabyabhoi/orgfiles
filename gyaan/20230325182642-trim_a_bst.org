@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       5eea4a54-d3f9-42f6-ba38-b7771252b32c
+:END:
+#+title: Trim a BST
+#+filetags: :CS:
+
+Given the root of a [[id:cc94dbf1-6d0f-43ce-8bee-4b588811a126][binary search tree]] and the lowest and highest boundaries as ~low~ and ~high~, trim the tree so that all its elements lies in ~[low, high]~. Trimming the tree should not change the relative structure of the elements that will remain in the tree (i.e., any node's descendant should remain a descendant). It can be proven that there is a unique answer.
+
+* Solution
+#+begin_src C++
+Node* trimBST(Node* head, int l, int r) {
+  if(head == nullptr) return head;
+  
+  head->left = trimBST(head->left, l, r);
+  head->right = trimBST(head->right, l, r);
+
+  if(l <= head->val && head->val <= r) return head;
+  else if(head->val < l) return head->right;
+  else if(head->val > r) return head->left;
+  return head;
+}
+#+end_src

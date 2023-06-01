@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       5de46369-3b55-46b3-bc1b-1bcc7f3150a7
+:ROAM_ALIASES: CAPM
+:END:
+#+title: Capital Asset Pricing Model
+#+filetags: :FINANCE:
+
+This is used to calculate the rate of returns on equity for a firm
+
+\[
+R_S = R_F + \beta (R_M - R_F)
+\]
+
+here,
+- R_S is the return on equity
+- R_F is the risk-free rate of return (usually returns on T-bills/bonds)
+- R_M is the industry rate of return.
+- \beta is the sensitivity:
+
+\[
+\beta = \frac{\textrm{Cov}(R_I, R_M)}{\textrm{Var}(R_M)}
+\]
+
+* Security Market Line
+The plot between R_s and \beta is called the *Security Market Line*.

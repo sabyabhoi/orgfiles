@@ -16,14 +16,14 @@ This statement can be [[id:32b1333e-ff84-4e44-8c79-86f4f538af2a][proved by contr
 1. Keep track of two states: the maximum sum up till the current element, and the current element.
 2. Choose the maximum between =[x]= and =[M, x]=
 
-#+begin_src rust
-  fn max_subarray(a: &Vec<i32>) -> i32 {
-      let mut sum = a[0];
-      let mut max_sum = sum;
-      for &x in a.iter().skip(1) {
-          sum = x.max(sum + x);
-          max_sum = max_sum.max(sum);
-      }
-      max_sum
-  }
-#+end_src
+#+begin_src python
+def max_subarray(a):
+    curr_sum = a[0]
+    max_sum = curr_sum
+
+    for i in a:
+        curr_sum = max(x, curr_sum + x)
+        max_sum = max(max_sum, curr_sum)
+
+    return max_sum
+#+end_src   

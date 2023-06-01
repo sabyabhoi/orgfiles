@@ -5,11 +5,14 @@
 #+filetags: :CS:
 
 * Instruction Set
-- [[id:22fd89bf-4ce0-44a9-b20b-86214b5a54a7][Arithmetic Instructions]]
-- Logical Instructions
-- Shift and Rotate Instructions
-- String Instructions
-- [[id:b3a552aa-c687-416d-a057-824fb9674ee6][Data Transfer Instructions]]
-  - [[id:e9bc2631-598e-429b-a548-fc9b9f8d2549][IO Instructions]]
-  - [[id:c55d90fb-d299-44a3-a3a4-46683470903e][Address Object Data Transfer]]
-- Flag Manipulation Instructions
+** [[id:22fd89bf-4ce0-44a9-b20b-86214b5a54a7][Arithmetic Instructions]]
+** Logical Instructions
+** Shift and Rotate Instructions
+** [[id:9e07f25f-9d79-4ec8-b4f5-fdad274f06fc][String Instructions]]
+** [[id:b3a552aa-c687-416d-a057-824fb9674ee6][Data Transfer Instructions]]
+*** [[id:2aa580dc-f6c8-4d32-9dd3-488d33ee252a][Stack Instructions]]
+*** [[id:e9bc2631-598e-429b-a548-fc9b9f8d2549][IO Instructions]]
+*** [[id:c55d90fb-d299-44a3-a3a4-46683470903e][Address Object Data Transfer]]
+** Flag Manipulation Instructions
+** [[id:f806db3a-b3c8-47f6-8861-04b7adc9b78a][Macros]]
+

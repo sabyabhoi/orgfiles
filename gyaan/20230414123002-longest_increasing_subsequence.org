@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       b5ac11a3-cd5e-42cf-962b-c37c164a5e5a
+:ROAM_REFS: https://www.youtube.com/watch?v=on2hvxBXJH4
+:ROAM_ALIASES: LIS
+:END:
+#+title: Longest Increasing Subsequence
+#+filetags: :CS:
+
+Given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] of integers, return the length of the longest strictly increasing subsequence.
+
+This can be done in ~O(nlogn)~ using [[id:53b8c21d-c96a-4e92-bbd7-7ff176bec026][binary search]].
+
+#+begin_src python
+def lis(a: list[int]) -> int:
+    v = []
+    for i in a:
+        lb = lower_bound(v, i)
+        if lb == len(v):
+            v.append(i)
+        else:
+            v[lb] = i
+    return len(v)
+#+end_src

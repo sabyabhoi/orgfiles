@@ -5,7 +5,6 @@
 #+FILETAGS: :CONCEPT:CS:
 
 * Basic structure
-#+NAME: nodeStruct
 #+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std :noweb yes
   struct Node {
     int data;
@@ -54,6 +53,3 @@
     return 0;
   }
 #+end_src
-
-#+RESULTS: nodeStruct
-: 1 2 3 4 5

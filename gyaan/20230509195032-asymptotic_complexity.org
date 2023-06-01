@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       e20b0cea-07f5-4450-b901-c5a92a16c6bf
+:END:
+#+title: Asymptotic Complexity
+#+filetags: :CS:
+
+Given two functions ~f(n)~ and ~g(n)~, we say ~g(n)~ is an asymptotic upper bound of ~f(n)~ if \exist a constant ~c~ such that
+
+\[
+f(n) \le c \cdot g(n) \quad \forall \; n \ge n_0
+\]
+

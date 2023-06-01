@@ -7,6 +7,7 @@
 Given a /Directed Acyclic/ [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]] =G(V, E)=, a topologically [[id:6a9a5dae-f0b6-4b98-b93a-cfd7238f7595][sorted]] sequence is one in which for every pair of vertices =(u, v)=, =u= occurs before =v= in the sequence. 
 
 * Using DFS
+Using a [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][Stack]]
 #+begin_src c++
   void dfs(const vvi& adj, int curr, stack<int>& st, vb& vis) {
     vis[curr] = true;
@@ -43,6 +44,7 @@ Given a /Directed Acyclic/ [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]] =G
 #+end_src
 
 * Using BFS
+Using a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]
 #+begin_src c++
   vi topoSort(int V, vi adj[]) 
   {

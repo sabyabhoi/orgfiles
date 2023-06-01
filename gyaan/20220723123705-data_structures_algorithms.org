@@ -21,3 +21,5 @@
 * [[id:58e01dcb-3b38-41dc-852d-777a5ec4cd2a][Linked Lists]]
 * [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]]
 * [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][Dynamic Programming]]
+* [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][Stack]]
+* [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]

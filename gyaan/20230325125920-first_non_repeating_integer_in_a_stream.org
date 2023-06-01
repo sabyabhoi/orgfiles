@@ -9,6 +9,8 @@ prefix of an array is any non-empty, contiguous part of the array starting with 
 array.
 
 * Solution
+Use a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]].
+
 #+begin_src python
 def solve(a, n):
     queue = []

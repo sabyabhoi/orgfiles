@@ -7,7 +7,7 @@
 Write a program to print Preorder, Inorder, and Postorder traversal of a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]] in a single traversal.
 
 * Solution
-1. Maintain a stack of the current node as well as a count value.
+1. Maintain a [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][stack]] of the current node as well as a count value.
 2. Iterate through the elements of the stack (while the stack isn't empty).
 3. If the count value is 1, then increment count, push the node value onto the preorder vector, and go left.
 4. If the count value is 2, then increment count, push the node value onto the inorder vector, and go right.

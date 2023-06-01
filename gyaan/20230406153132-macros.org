@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       f806db3a-b3c8-47f6-8861-04b7adc9b78a
+:END:
+#+title: Macros in 8086
+#+filetags: :CS:
+
+* Defining a macro
+#+begin_src asm
+	MACRONAME MACRO PARAMETER1, PARAMETER2
+		INC PARAMETER1
+		INC PARAMETER2
+	ENDM
+#+end_src
+
+* Using it
+#+begin_src asm
+	MACRONAME AX, BX
+#+end_src

@@ -1,10 +1,5 @@
 #+TITLE:Inbox
 #+AUTHOR:Sabyasachi Bhoi
 
-* TODO SFC Meeting
-SCHEDULED: <2023-02-16 Thu 17:00> 
-:PROPERTIES:
-:LOCATION: H-101
-:END:
-* DONE FM Quiz
- SCHEDULED: <2023-02-16 Thu 09:00-10:00> 
+* DONE 10 DSA Questions
+ SCHEDULED: <2023-05-23 Tue +1d> 
