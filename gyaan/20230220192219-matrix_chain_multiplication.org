@@ -21,7 +21,10 @@ def mcm(dim: list[int]) -> int:
                 continue
 
             for k in range(i, j):
-                ops[i][j] = min(ops[i][k] + ops[k + 1][j] + dim[i - 1] * dim[k] * dim[j], ops[i][j])
+                ops[i][j] = min(
+                    ops[i][k] + ops[k + 1][j] + dim[i - 1] * dim[k] * dim[j],
+                    ops[i][j]
+                )
 
     return ops[1][n - 1]
 #+end_src

@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       aa12abeb-848f-4451-b1c1-208d6b08ab8c
+:END:
+#+title:Kosaraju's algorithm for finding Strongly Connected Components
+#+filetags: :CS:
+
+- Strongly Connected Components(SCCs) in directed [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][graphs]] are subsets of vertices where there is a directed path between every pair of vertices in the subset, and there are no additional vertices outside the subset that can be reached from within the subset.
+
+- SCCs are inherently disjoint from each other.
+
+* Algorithm  
+1. Sort all edges according to finishing time
+   - The vertex which appears last in the DFS has the shortest finishing time.
+3. Reverse the graph
+4. Perform DFS
+
+#+begin_src python
+def get_scc(adj: List[List[int]]) -> List[List[int]]: 
+    n = len(adj)
+
+    vis = [False] * n
+    st = Stack()
+    def dfs(curr, st):
+        vis[curr] = true
+
+        for nei in adj[curr]:
+            if not vis[nei]:
+                dfs(nei, st)
+
+        st.push(curr)
+
+    for curr in range(n):
+        if not vis[curr]:
+            dfs(curr, st)
+            
+    # Reverse graph
+    adj1 = [[]] * n
+    for curr in range(n):
+        for nei in adj[curr]:
+            adj1[nei].append(curr)
+
+    adj = adj1
+
+    vis = [False] * n
+    ans = [] 
+    while st:
+        curr = st.pop()
+        if vis[curr]: continue
+
+        st1 = Stack()
+        dfs(curr, st1)
+        ans.append(list(st1))
+
+    return ans
+#+end_src
+
+* Time complexity
+It performs DFS twice, which takes ~O(|V| + |E|)~ time.

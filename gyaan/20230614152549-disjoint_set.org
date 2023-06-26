@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       eba9b085-5087-4b9e-ad9f-d602124fce18
+:END:
+#+title:Disjoint Set
+#+filetags: :CS:
+
+#+begin_src python
+class DSU:
+    def __init__(self, n):
+        self.arr = [-1] * n
+
+    def getHead(self, a):
+        while self.arr[a] >= 0:
+            a = self.arr[a]
+        return a
+
+    def union(self, a, b):
+        a = self.getHead(a)
+        b = self.getHead(b)
+
+        if a == b:
+            return abs(self.arr[a])
+        if abs(self.arr[a]) > abs(self.arr[b]):
+            self.arr[a] += self.arr[b]
+            self.arr[b] = a
+        else:
+            self.arr[b] += self.arr[a]
+            self.arr[a] = b
+        return max(abs(self.arr[a]), abs(self.arr[b]))
+#+end_src
+

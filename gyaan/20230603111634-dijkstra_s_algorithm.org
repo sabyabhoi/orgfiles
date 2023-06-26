@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       abcb832d-dbe2-4b50-99d0-38501f4555f4
+:ROAM_REFS: "[[https://youtu.be/_lHSawdgXpI][Explanation Video]]"
+:END:
+#+title:Dijkstra's Algorithm
+#+filetags: :CS:
+
+* Algorithm
+#+begin_src python
+def dijkstra(V: int, S: int, adj) -> List[int]:
+    dist = [1e9] * V
+    dist[S] = 0
+
+    # min heap: (weight, node)
+    pq = [(0, S)]
+
+    while pq:
+        d, node = pq.pop()
+
+        if d > dist[node]: continue
+
+        for (nei, wt) in adj[node]:
+            if d + wt < dist[nei]:
+                dist[nei] = d + wt
+                pq.push((dist[nei], nei))
+
+    return dist
+#+end_src
+
+* Zettelkasten
+** North: Comes from
+[[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]
+
+** East: Similar to
+- Similar to [[id:4072b134-cfe4-4b7e-8e0d-5e0891f53554][Bellman-Ford Algorithm]], but cannot work with negative weights.

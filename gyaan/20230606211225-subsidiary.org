@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9aae079f-7adf-4231-8291-81708eb33350
+:END:
+#+title:Subsidiary
+#+filetags: :FINANCE:
+
+- A subsidiary is a company that is controlled by another company, referred to as the parent company or the holding company.
+- The controlling entity, usually owning more than 50% of the subsidiary's voting shares, has the ability to exercise control over the subsidiary's financial and operating policies.
+- The parent company consolidates (combines) the financial results of its subsidiaries into its own financial statements.
+- Subsidiaries can be wholly owned (100% ownership) or partially owned by the parent company.

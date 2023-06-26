@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       567cabd1-d0f6-4ed0-8877-1bee7c37c692
+:END:
+#+title: Number of times a sorted array is rotated
+#+filetags: :CS:
+
+Given an array =a[n]=, which was initially sorted and then rotated sometimes in clockwise direction, we want to find out how many times the array is rotated.
+
+* Approach
+We need to find out the position of the smallest element. That many times the array is going to be rotated. An important property here would be that the neighbours of such an element would be greater than the element.  We can use [[id:53b8c21d-c96a-4e92-bbd7-7ff176bec026][Binary Search]] to do so:
+
+Instantiate [[id:d7ee77e6-ac4d-472b-9e6c-8660076a2b15][two pointers]]: =l= and =r=. Take their mean =m=.
+   - If =a[m]= is less than its neighbours, return =m=.
+   - If =a[m]= is greater than =a[l]=, then the left part of the array is sorted; so go right. 
+   - If =a[m]= is greater than =a[r]=, then the right part of the array is sorted; so go left. 
+
+#+begin_src C++
+int rotations(int a[], int n) {
+  int l = 0, r = n - 1, m;
+
+  while(l <= r) {
+    m = l + (r - l) / 2;
+    if(a[m] < a[m - 1] && a[m] < a[m + 1]) return m;
+    else if(a[m] > a[l]) { // go right
+      l = m + 1;
+    } else { // go left
+      r = m - 1;
+    }
+  }
+  return -1;
+}
+#+end_src

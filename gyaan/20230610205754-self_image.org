@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       ad031360-1f8a-46fc-a1b5-a13e914043ef
+:END:
+#+title: Self-Image
+#+filetags: :BOOK:
+
+- The self-image of a person is the blueprint of that person.
+- It is determined by how we perceive our successes and failures.
+- It can be altered (empirically proven)

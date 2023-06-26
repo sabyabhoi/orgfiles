@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       1fa4046d-8c5c-4acb-9494-1145db5bbc02
+:END:
+#+title: Recursion in Haskell
+#+filetags: :CS:
+#+DATE:2022-07-05
+
+There are no loops in [[id:cb7eda74-5f0d-4b23-ab28-34f1c57e7814][Haskell]]. Hence, [[id:7039543f-f0c6-4750-843d-5f9855f15394][function]] recursion is one of the only ways through which we can iterate in Haskell.
+
+Example:
+#+begin_src haskell
+fac n =
+  if n <= 1 then
+    1
+  else
+    n * fac (n - 1)
+#+end_src
+
+We can also use [[id:ca008108-abc4-4a4f-9a4b-ad1a85d32196][function guards]] to simplify this notation:
+#+begin_src haskell
+fac n
+  | n <= 1 = 1
+  | otherwise = n * fac(n - 1)
+#+end_src

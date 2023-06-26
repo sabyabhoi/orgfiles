@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       52162a04-8733-4b0f-973f-f3731e168e5f
+:END:
+#+title:GPT Prompts
+#+filetags: :CS:
+
+I'm using this note as a collection for all the prompts I find useful. More prompts are available [[https://github.com/f/awesome-chatgpt-prompts][here]]. The general recipe for crafting a good prompt is as follows:
+
+1. Provide context
+2. State the problem
+3. State what solution you want
+4. State the format of the solution
+
+* General personal context
+#+begin_example
+I'm a student currently pursuing my bachelors in computer science engineering. I also have a master's degree in economics and have firm understanding of concepts like statistics, mathematics, econometrics and computer science. 
+#+end_example
+
+* Prompts
+** Learn concepts using the Pareto Principle
+- The Pareto Principle, also known as the 80/20 rule, suggests that in many situations, approximately 80% of the results come from 20% of the causes.
+- When it comes to learning new things, this principle implies that by focusing on the most crucial and impactful 20% of information or skills, one can achieve approximately 80% of the desired learning outcomes.
+- Therefore, rather than attempting to absorb every single detail, the Pareto Principle encourages prioritizing the most significant aspects of a subject or skill to maximize learning efficiency and effectiveness.
+
+#+begin_example
+I want to learn Prompt Engineering. Can we use the Pareto principle, which identifies the 20% of the topics that will yield 80% of the desired results, to create a focused learning plan for me?
+#+end_example
+
+** Create study schedule
+
+#+begin_example
+Create a schedule for all of the above in an appropriate amount of weeks. I can study for 2 hours every Tuesday, Thursday and Saturday. Please include time for revision and testing. 
+#+end_example
+
+** Get resources for learning concepts 
+
+#+begin_example
+Suggest me various learning resources (like books, videos, lecture series, courses, interactive exercises) for the given topics that cater to the different learning styles. Make sure the resources are free.
+#+end_example

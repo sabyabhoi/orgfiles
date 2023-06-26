@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       a313e0ae-9889-4c12-87b3-8a8169a6b609
+:ROAM_ALIASES: AMC
+:END:
+#+title: Asset Management Company
+#+filetags: :FINANCE:
+
+- An Asset Management Company(AMC) is established to manage the money of a [[id:0635b621-f216-45ff-91f0-1d8d03ce0628][Mutual Fund]] trust.
+- Their main source of income is the fee/commission retrieved by managing the assets.

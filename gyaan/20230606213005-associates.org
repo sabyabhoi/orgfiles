@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       1cdc2fe7-9575-41b3-95b7-9da238bb0230
+:END:
+#+title:Associates
+#+filetags: :FINANCE:
+
+- When a company has an associate, it means they have a certain level of influence and involvement in another company's operations, usually by owning a significant portion of their shares (usually between 20% and 50%).
+- The company accounts for its investment in the associate using the equity method, which means they record their share of the associate's profits or losses in their own financial statements.

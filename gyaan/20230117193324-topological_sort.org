@@ -8,67 +8,58 @@ Given a /Directed Acyclic/ [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]] =G
 
 * Using DFS
 Using a [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][Stack]]
-#+begin_src c++
-  void dfs(const vvi& adj, int curr, stack<int>& st, vb& vis) {
-    vis[curr] = true;
+#+begin_src python
+def topoSort(adj: List[List[int]]) -> List[int]:
+    n = len(adj)
 
-    for(int i : adj[curr]) {
-      if(vis[i]) continue;
-      dfs(adj, i, st, vis);
-    }
+    vis = [False] * n
+    st = stack()
 
-    st.push(curr);
-  }
+    def dfs(curr):
+        vis[curr] = true
 
-  void solve() {
-    int n, e; cin >> n >> e;
-    vvi adj(n, vi());
+        for next in adj[curr]:
+            if vis[next]: continue
+            dfs(next)
 
-    REP(i, e) {
-      int a, b; cin >> a >> b;
-      adj[a].push_back(b);
-    }
+        st.push(curr)
 
-    vb vis(n, false);
-    stack<int> st;
-    REP(i, n) {
-      if(vis[i]) continue;
-      dfs(adj, i, st, vis);
-    }
-    while(!st.empty()) {
-      cout << st.top() << ' ';
-      st.pop();
-    }
-    cout << '\n';
-  }
+    for i in range(n):
+        if not vis[i]:
+            dfs(i)
+
+    return list(st)
 #+end_src
 
 * Using BFS
-Using a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]
-#+begin_src c++
-  vi topoSort(int V, vi adj[]) 
-  {
-    // code here
-    vi ans, in_degree(V, 0);
-    queue<int> q;
+This is called *Kahn's Algorithm* (Using a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]])
+
+#+begin_src python
+def topoSort(adj: List[List[int]]) -> List[int]:
+    n = len(adj)
+
+    # Create in_degree array
+    in_degree = [0] * n
+    for i in range(n):
+        for nei in adj[i]:
+            in_degree[nei] += 1
+
+    q = Queue()
+    # Push vertices with in_degree = 0
+    for i in range(n):
+        if in_degree[i] == 0:
+            q.push(i)
+
+    ans = []
+    while q:
+        curr = q.pop()
+        ans.append(curr)
         
-    REP(i, V) {
-      for(int j : adj[i]) in_degree[j]++;
-    }
-        
-    REP(i, V) {
-      if(in_degree[i] == 0) q.push(i);
-    }
-        
-    while(!q.empty()) {
-      int f = q.front();
-      q.pop();
-      ans.push_back(f);
-            
-      for(int i : adj[f]) {
-        if(--in_degree[i] == 0) q.push(i);
-      }
-    }
-    return ans;
-  }
+        for nei in adj[curr]:
+            in_degree[nei] -= 1
+            if in_degree[nei] == 0:
+                q.push(nei)
+
+    return ans
 #+end_src
+

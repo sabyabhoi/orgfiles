@@ -6,4 +6,4 @@
 
 A graph in Computer Science is a non-linear [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structure]] which comprises of vertices and edges.
 
-It is generally represented using /Adjacency matrices/ and /Adjacency lists/. 
+It is generally represented using /Adjacency matrices/ or /Adjacency lists/. 

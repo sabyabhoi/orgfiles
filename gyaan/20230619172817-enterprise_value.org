@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       25bbd555-2523-4f21-acf1-b6022749e2d9
+:END:
+#+title:Enterprise Value
+#+filetags: :FINANCE:
+
+EV = Market Cap + Debt - Cash & Cash Equivalents.

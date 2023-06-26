@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       c91ac4a5-6cda-47f5-98e5-7d8802f1dc68
 :END:
-#+title: Leverage ratios
+#+title:Leverage ratios
 #+filetags: :FINANCE:
 
 These ratios tell us how much capital comes in to a company in the form of /debt/, and assess the ability of a company to meet its obligations. 
@@ -17,7 +17,8 @@ D/E = \frac{\textrm{Total liabilities}}{\textrm{Shareholder's equity}}
 
 - This ratio is useful for understanding a company's risk status.
 - Lower is better.
-- E.g. if a company has a =D/E= of 2, that means that it has Rs. 2 worth of debt for every Rs. 1 of equity. This means that the company is high risk. 
+- E.g. if a company has a =D/E= of 2, that means that it has Rs. 2 worth of debt for every Rs. 1 of equity. This means that the company is high risk.
+- *Don't apply this ratio for a bank*.
 
 * Interest Coverage Ratio
 :PROPERTIES:

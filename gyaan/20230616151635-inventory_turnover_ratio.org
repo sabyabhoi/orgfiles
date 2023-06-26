@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       8c20936b-dbf4-402e-aa43-ab796fca1e05
+:END:
+#+title:Inventory Turnover Ratio
+#+filetags: :FINANCE:
+
+- It is the number of times a firm was able to turnover, i.e., produce and sell all of its inventories in a given year.
+- If the % increase in sales is less than % increase in inventories, that means that the company was not able to sell as much as it aimed to sell.
+

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       3513f35a-de10-4f4b-9449-80863532e071
 :END:
-#+title: N Queens Problem
+#+title:N Queens Problem
 #+filetags: :CS:
 
 The n-queens puzzle is the problem of placing n queens on an =n x n= chessboard such that no two queens attack each other.

@@ -3,10 +3,28 @@
 :ROAM_REFS: https://www.youtube.com/watch?v=on2hvxBXJH4
 :ROAM_ALIASES: LIS
 :END:
-#+title: Longest Increasing Subsequence
+#+title:Longest Increasing Subsequence
 #+filetags: :CS:
 
 Given an [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]] of integers, return the length of the longest strictly increasing subsequence.
+
+* Using [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][DP]]
+
+Time complexity: O(n^2)
+#+begin_src python
+def lis(a: List[int]) -> int:
+    n = len(a)
+    maxLen = [1] * n
+
+    for i in range(n):
+        for j in range(i):
+            if a[j] < a[i]:
+                maxLen[i] = max(maxLen[j] + 1, maxLen[i])
+
+    return max(maxLen)
+#+end_src
+
+* Using Binary Search
 
 This can be done in ~O(nlogn)~ using [[id:53b8c21d-c96a-4e92-bbd7-7ff176bec026][binary search]].
 

@@ -6,7 +6,7 @@
 
 Employs a divide and conquer algorithm to split the array into two parts till the size of each sub-array reaches 1.
 #+begin_src C++ :includes <bits/stdc++.h> :main no :namespaces std
-  void merge(const vector<int>& l, const vector<int>& r, vector<int>& a) {
+  void merge(const vi& l, const vi& r, vi& a) {
     int il = 0, ir = 0, ia = 0, nl = l.size(), nr = r.size();
     while(il < nl && ir < nr) {
       if(l[il] < r[ir]) a[ia++] = l[il++];
@@ -16,12 +16,12 @@ Employs a divide and conquer algorithm to split the array into two parts till th
     while(ir < nr) a[ia++] = r[ir++];
   }
 
-  void merge_sort(vector<int>& a) {
+  void merge_sort(vi& a) {
     int n = a.size();
     if(n == 1) return;
 
-    vector<int> left(a.begin(), a.begin() + n / 2);
-    vector<int> right(a.begin() + n / 2, a.end());
+    vi left(a.begin(), a.begin() + n / 2);
+    vi right(a.begin() + n / 2, a.end());
 
     merge_sort(left);
     merge_sort(right);

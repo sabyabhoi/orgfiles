@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       a4f5f87a-fd74-4eb2-a1a8-8b07d49fc4eb
+:END:
+#+title: Financial Statement
+#+filetags: :FINANCE:
+
+There are 5 financial statements for any given company:
+
+1. Income statement
+2. Cash flow statement
+3. Statement of changes in equity
+4. [[id:f01a14c9-0956-47d5-8b4c-ea10de913ee1][Balance sheet]]
+5. Note to financial statements
+
+* Standalone vs Consolidated Statements
+** Standalone Financial Statements
+:PROPERTIES:
+:ID:       56ac7adb-bcd0-4ed0-977f-a32339507606
+:END:
+- provides a detailed view of the performance and financial health of a specific company without considering its [[id:9aae079f-7adf-4231-8291-81708eb33350][subsidiaries]], [[id:1cdc2fe7-9575-41b3-95b7-9da238bb0230][associates]], or joint ventures.
+
+** Consolidated Financial Statements
+:PROPERTIES:
+:ID:       f8ed747c-a73a-4b4e-8f6f-42ca35dfcf12
+:END:
+- A consolidated financial statement combines the financial information of a parent company and its [[id:9aae079f-7adf-4231-8291-81708eb33350][subsidiaries]], [[id:1cdc2fe7-9575-41b3-95b7-9da238bb0230][associates]], and other controlled entities.
+- The purpose of consolidation is to reflect the financial results and position of the entire group as if it were a single economic entity.

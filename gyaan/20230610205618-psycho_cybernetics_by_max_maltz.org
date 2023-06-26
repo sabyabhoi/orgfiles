@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       f6a44d02-90ab-4338-b390-856112c06076
+:END:
+#+title:Psycho-Cybernetics by Max Maltz
+#+filetags: :BOOK:
+
+* Cybernetics
+- Etymologically refers to the study of control and regulation of mechanical/electrical systems.
+
+* [[id:ad031360-1f8a-46fc-a1b5-a13e914043ef][Self-Image]] 
+* [[id:2d01cd01-961a-4e2a-87ea-a6df0f5752e9][Success Mechanism present inside us]]

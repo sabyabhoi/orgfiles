@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       5c1b8e59-9478-4e81-a675-8ea8089a10d1
+:END:
+#+title: Feature Scaling
+#+filetags: :CS:
+
+- Given a random variable $x$, we wish to bring it into reasonable ranges.
+- Few of the commonly used techniques are as follows:
+
+\[
+a \le x \le b
+\]  
+
+* Divide by Maximum
+
+\[
+x = \frac{x}{b}
+\]
+
+* Mean Normalization
+
+\[
+x = \frac{x - \mu}{b - a}
+\]
+
+* z-Score Normalization
+
+\[
+x = \frac{x - \mu}{\sigma}
+\]

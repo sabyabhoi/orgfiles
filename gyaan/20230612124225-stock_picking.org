@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       0073450b-25f9-4df4-b727-b85c2935e31a
+:ROAM_REFS: https://www.youtube.com/watch?v=lqk2LppTl84
+:END:
+#+title:Stock Picking
+#+filetags: :FINANCE:
+
+In order to pick stocks for investment purposes, we're going to go through a three-stage filtering process:
+
+1. Go through the latest budget and see which sectors are going to get impacted positively.
+2. Go to [[screener.in][screener.in]] and click on screens.
+   - Filter the companies with the highest market cap, ROE and Free Cash Flow
+3. Perform:
+   1. [[id:7090804a-e681-425f-84b2-9f40050c777d][Fundamental Analysis]]
+   2. Valuation: whether the company is undervalued or overvalued (using strategies such as P/E analysis)
+   3. Technical Analysis

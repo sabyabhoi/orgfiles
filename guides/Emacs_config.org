@@ -1,5 +1,5 @@
-  #+Title: Emacs Configuration
-#+AUTHOR: Sabyasachi Bhoi
+  #+Title:Emacs Configuration
+#+AUTHOR:Sabyasachi Bhoi
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.config/emacs/init.el
 
 * Basic UI Configuration
@@ -34,7 +34,7 @@ Fixed-pitch font refers to monospaced fonts, i.e. fonts with fixed width. I pref
 #+begin_src emacs-lisp
 
 (setq font-name "JetBrainsMono Nerd Font"
-      font-height 168)
+      font-height 170)
 (defun cb/set-font-faces ()
   (dolist (face '(default fixed-pitch))
     (set-face-attribute `,face nil :font font-name :height font-height :weight 'normal))
@@ -351,7 +351,14 @@ Easier way to setup global keybindings
     ("f" nil "finished" :exit t))
 #+end_src
 
-** Doom modeline, theme and rainbow delimiters
+** Themes
+*** Nordic Night Theme
+#+begin_src emacs-lisp
+(use-package nordic-night-theme
+  :ensure t)
+#+end_src
+
+*** Doom modeline, theme and rainbow delimiters
 Modeline:
 #+begin_src emacs-lisp
   (use-package doom-modeline
@@ -371,7 +378,7 @@ Themes:
   (use-package doom-themes
     :ensure t
     :init
-    (load-theme 'doom-material t))
+    (load-theme 'doom-tomorrow-night t))
 #+end_src
 
 Rainbow delimiters:
@@ -814,7 +821,8 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 * Org mode
-** Initial setup hook
+** Initial Setup
+*** Initial setup hook
 #+begin_src emacs-lisp
 (defun cb/org-mode-setup ()
   (font-lock-add-keywords 'org-mode
@@ -824,7 +832,8 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
   (visual-line-mode 1) ;; word wrap turned on
   (setq org-fontify-done-headline t
         org-html-validation-link nil
-		org-indent-mode t
+        org-indent-mode t
+        org-startup-indented t
         evil-auto-indent t
         org-pretty-entities t
         org-startup-with-inline-images t
@@ -838,16 +847,14 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
   (display-line-numbers-mode 0))
 #+end_src
 
-** Org refile
-#+begin_src emacs-lisp :tangle no
-(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-(setq org-refile-use-outline-path 'file)
-(setq org-refile-allow-creating-parent-nodes 'confirm)
-#+end_src
-
-** Variable pitch
+*** Variable pitch
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook 'variable-pitch-mode)
+#+end_src
+
+*** Org indent hook
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'org-indent-mode)
 #+end_src
 
 ** Package setup
@@ -860,7 +867,9 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
   (org-agenda-span 10)
   (org-deadline-warning-days 7)
   (org-directory "~/workspace/userfiles/orgfiles/guides")
-  (org-agenda-files '("inbox.org" "repeaters.org" "/home/cognusboi/workspace/userfiles/college/3-2/academics.org"))
+  (org-agenda-files '("inbox.org"
+					  "repeaters.org"
+					  "/home/cognusboi/workspace/userfiles/college/3-2/academics.org"))
   (org-agenda-start-with-log-mode t)
   (org-use-speed-commands t)
   (org-tags-column 5)
@@ -893,7 +902,8 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
                         :height (cdr face))))
 #+end_src
 
-** Setting fonts for various org sections
+** General configuration
+*** Setting fonts for various org sections
 #+begin_src emacs-lisp
   (custom-theme-set-faces
    'user
@@ -910,7 +920,32 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 #+end_src
 
-** LaTeX source code export
+*** Inline padding
+#+begin_src emacs-lisp 
+  (defun cb/org-mode-visual-fill ()
+    (setq visual-fill-column-width 110
+          visual-fill-column-center-text t)
+    (visual-fill-column-mode 1))
+
+  (use-package visual-fill-column
+    :hook (org-mode . cb/org-mode-visual-fill))
+#+end_src
+
+*** Org bullets
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :hook (org-mode . org-bullets-mode)
+    :custom (org-bullets-bullet-list '("◉" "○" "◉" "○"))
+    )
+#+end_src
+ 
+*** Hide keywords
+#+begin_src emacs-lisp
+  (setq org-hidden-keywords '(title subtitle author date email))
+#+end_src
+
+** Source Code
+*** LaTeX source code export
 #+begin_src emacs-lisp :tangle no
   (use-package ox-latex
     :ensure t
@@ -922,7 +957,7 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
     )
 #+end_src
 
-** Source code templates
+*** Source code templates
 #+begin_src emacs-lisp
   (with-eval-after-load 'org
     (require 'org-tempo)
@@ -934,32 +969,8 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
       (add-to-list 'org-structure-template-alist expand)))
 #+end_src
 
-** Hide keywords
-#+begin_src emacs-lisp
-  (setq org-hidden-keywords '(title subtitle author date email))
-#+end_src
-
-** Inline padding
-#+begin_src emacs-lisp 
-  (defun cb/org-mode-visual-fill ()
-    (setq visual-fill-column-width 110
-          visual-fill-column-center-text t)
-    (visual-fill-column-mode 1))
-
-  (use-package visual-fill-column
-    :hook (org-mode . cb/org-mode-visual-fill))
-#+end_src
-
-** Org bullets
-#+begin_src emacs-lisp
-  (use-package org-bullets
-    :hook (org-mode . org-bullets-mode)
-    :custom (org-bullets-bullet-list '("◉" "○" "◉" "○"))
-    )
-#+end_src
- 
-** Org babel
-*** Configure babel languages
+*** Org babel
+**** Configure babel languages
 #+begin_src emacs-lisp
   (with-eval-after-load 'org
     ;; (setq py-default-interpreter "/usr/bin/python3")
@@ -986,6 +997,23 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cb/org-babel-tangle-config)))
+#+end_src
+
+*** Org ref
+#+begin_src emacs-lisp
+  (use-package org-ref
+    :defer 0
+    :config
+    (setq bibtex-completion-bibliography '("~/workspace/userfiles/college/uni.bib"))
+    (setq org-latex-pdf-process (list "latexmk -pdflatex=xelatex -shell-escape -f -pdf %f"))
+    )
+#+end_src
+
+** Org refile
+#+begin_src emacs-lisp :tangle no
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-use-outline-path 'file)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
 #+end_src
 
 ** Org roam
@@ -1035,16 +1063,14 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 #+end_src
 
 *** Note
-Checkout [[https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html][the official template expansion list]] to find out about more templates.
+Checkout [[https://www.gnu.org/software/emacs/manual/html_node/org/Template-expansion.html][the official template expansion list]] to find out about more capture templates.
 
-** Org ref
+** Org journal
 #+begin_src emacs-lisp
-  (use-package org-ref
-    :defer 0
-    :config
-    (setq bibtex-completion-bibliography '("~/workspace/userfiles/college/uni.bib"))
-    (setq org-latex-pdf-process (list "latexmk -pdflatex=xelatex -shell-escape -f -pdf %f"))
-    )
+(use-package org-journal
+  :ensure t
+  :custom
+  (org-journal-dir "~/workspace/userfiles/orgfiles/journal/"))
 #+end_src
 
 ** Presentations using reveal.js

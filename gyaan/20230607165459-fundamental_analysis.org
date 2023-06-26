@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       7090804a-e681-425f-84b2-9f40050c777d
+:END:
+#+title:Fundamental Analysis
+#+filetags: :FINANCE:
+
+* Company analysis
+* Annual Report
+** [[id:a4f5f87a-fd74-4eb2-a1a8-8b07d49fc4eb][Financial Statement]]
+*** [[id:f01a14c9-0956-47d5-8b4c-ea10de913ee1][Balance sheet]]
+*** [[id:56ac7adb-bcd0-4ed0-977f-a32339507606][Standalone Financial Statements]]
+*** [[id:f8ed747c-a73a-4b4e-8f6f-42ca35dfcf12][Consolidated Financial Statements]]
+**** [[id:9aae079f-7adf-4231-8291-81708eb33350][Subsidiary]]
+**** [[id:1cdc2fe7-9575-41b3-95b7-9da238bb0230][Associates]]
+**** Joint Ventures
+*** [[id:4f6e1c7d-1ad5-4b53-8b8e-f8170bb2c76a][Cash Flow Statement]]
+*** [[id:37453c81-ab46-4cbb-9184-70f6a423d014][Profit & Loss Statement]]
+* Shareholding Pattern
+** [[id:0635b621-f216-45ff-91f0-1d8d03ce0628][Mutual Funds]]
+*** [[id:a313e0ae-9889-4c12-87b3-8a8169a6b609][Asset Management Company]]
+** Regulators
+** Bulk Deals
+** [[id:18fab767-a213-4ce2-81e9-70382774d933][Pledging Shares]]
+** [[id:4c745005-4a91-4b87-adb7-f9f71f8d19ff][Auditor's Report]]
+* Shareholder's Funds
+** Share capital
+** Reservers and Surpluses
+*** General Reserves
+*** Retained Earnings
+*** Securities Premium
+* Good profits but no cash is a bad sign (check cashflow)
+* Equity and Liability
+* Debt & Debentures
+* [[id:015a9a59-7267-4f10-84fa-c37cc24bdfdd][Ratios]]
+** [[id:7e93c048-e5b6-4607-8557-fb85053815d4][Debt-to-Equity (D/E) Ratio]] 
+** [[id:081bd6a9-e9f3-4f42-ae65-953b8bc2ef1a][Liquidity ratios]]
+*** [[id:352e757e-5353-4063-ba90-e510739c57db][Current ratio]]
+*** [[id:d0203825-b8bd-453d-959f-c511f5e5c0b1][Free Cash Flow]]
+* [[id:1a77cdf1-c709-47b2-8041-14053d981af8][8 pointer theory]]
+* [[id:25bbd555-2523-4f21-acf1-b6022749e2d9][Enterprise Value]]

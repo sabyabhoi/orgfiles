@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       87b470da-9b96-448d-a9ee-79ff5f00a717
+:END:
+#+title:Debentures
+#+filetags: :FINANCE:
+
+- Basically they're like bonds, but are usually issued by firms and aren't backed by any collateral or bank (more risky).
+- Usually, debentures have a term of 1 to 3 years.
+
+Two types of debentures:
+* Secured
+In case of liquidation of the company, the holders of the secured debentures are going to be compensated first.
+* Unsecured

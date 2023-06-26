@@ -23,3 +23,4 @@
 * [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][Dynamic Programming]]
 * [[id:3f4d8da3-a131-4e3a-9fe9-78009dba3164][Stack]]
 * [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]
+* [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]

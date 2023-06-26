@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       4f6e1c7d-1ad5-4b53-8b8e-f8170bb2c76a
+:END:
+#+title:Cash Flow Statement
+#+filetags: :FINANCE:
+
+* Net Cash from operating activities
+- Profit before Tax + DA
+- Negative cash flow from operating activities should be avoided, because it means that the core operations of the company are not generating sufficient cash.
+* Cash flow from investing activities
+- A negative cash flow from investing activities shouldn't necessarily be treated as a bad sign, as it would mean that we've invested more and sold less.
+* Cash flow from financing activities
+- Financing means raising money or repaying money.
+- Positive value: raising money
+- Negative value: repaying money
+* Free Cash Flow
+:PROPERTIES:
+:ID:       d0203825-b8bd-453d-959f-c511f5e5c0b1
+:END:
+- It is calculated as Cash flow from operations less net investment in fixed assets
+- If the company has good profitability, but still has negative free cash flow for the past 3-4 years, don't invest. 

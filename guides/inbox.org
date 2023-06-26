@@ -1,5 +1,19 @@
 #+TITLE:Inbox
 #+AUTHOR:Sabyasachi Bhoi
 
-* DONE 10 DSA Questions
- SCHEDULED: <2023-05-23 Tue +1d> 
+* DSA Questions
+** Arrays
+*** Two Pointers
+*** Sorting
+*** Sliding Window
+*** Intervals
+*** Binary Search
+** Strings
+** Linked List
+** Binary Trees
+** Stack
+** Heap
+** Recursion/Backtracking
+** DP
+** Graphs
+** Greedy

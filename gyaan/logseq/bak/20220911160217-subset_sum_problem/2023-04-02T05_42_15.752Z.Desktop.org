@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       d8cab1eb-aaf3-4373-bd03-9aabb9656cbf
+:END:
+#+title: Subset sum problem
+#+filetags: :CS:
+
+Consider an array =a[n]=, and a number =k=. We wish to find whether \exists a subset of =a= whose sum is equal to =k=.
+
+* Recursive approach
+A naive approach can be formulated by employing logic similar to that of [[id:df129ee0-22bd-4718-b89d-85de5ac4fc38][0-1 Knapsack]]:
+#+begin_src c++
+bool possible(const vector<int>& a, int n, int k) {
+  if(k == 0) return true;
+  if(n == 0) return false;
+
+  if(a[n - 1] > k) return possible(a, n - 1, k);
+  return possible(a, n - 1, k) || possible(a, n - 1, k - a[n - 1]);
+}
+#+end_src
+
+* [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][DP]] approach
+#+begin_src c++
+bool possible(const vector<int>& a, int n, int k) {
+  // dp[n + 1][k + 1]
+  auto dp = vector<vector<bool>>(n + 1, vector<bool>(k + 1));
+  
+  // dp[0][i] = false; (when i > 0)
+  REP(i, k + 1) dp[0][i] = false;
+
+  // dp[i][0] = true;
+  REP(i, n + 1) dp[i][0] = true;
+  
+  FOR(i, 1, n + 1) {
+    FOR(j, 1, k + 1) {
+      if(a[i - 1] > j)
+	dp[i][j] = dp[i - 1][j];
+      else
+	dp[i][j] = dp[i - 1][j] || dp[i - 1][j - a[i - 1]];
+    }
+  }
+  return dp[n][k];
+}
+#+end_src

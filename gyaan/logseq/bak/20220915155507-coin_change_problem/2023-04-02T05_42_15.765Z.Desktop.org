@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       69f76e4b-bbc0-4446-b1b2-b53c17037560
+:END:
+#+title: Coin change problems
+#+filetags: :CS:
+
+In this problem, we're given an array of coins =a[n]=, and a sum variable =k=. We're supposed to find the total number of ways by which we can represent this sum using the coins we're given, such that the sum of the coins used adds upto the sum. 
+
+* Solution
+This is an [[id:9d0c5d26-0aed-4ec7-9df5-0e4dc8b6dd4b][Unbounded Knapsack]] problem. We have the option to take or discard a coin, any number of times. Since we also want to ensure that the sum of the selected coins adds upto =k=, this is also a [[id:d8cab1eb-aaf3-4373-bd03-9aabb9656cbf][Subset sum problem]], where we have to count the number of subsets formed.
+
+#+begin_src c++
+int coinChange(int[] a, int n, int k) {
+  vector<vector<int>> dp(n + 1, vector<int>(k + 1));
+
+  REP(i, n + 1) {
+    REP(j, k + 1) {
+      if(i == 0) { dp[i][j] = 0; continue; }
+      if(j == 0) { dp[i][j] = 1; continue; }
+
+      if(a[i - 1] > j) dp[i][j] = dp[i - 1][j];
+      else dp[i][j] = dp[i - 1][j] + dp[i][j - a[i - 1]];
+    }
+  }
+  return (dp[n][k] == 0 ? -1 : dp[n][k]);
+}
+#+end_src

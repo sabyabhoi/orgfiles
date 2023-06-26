@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       4c745005-4a91-4b87-adb7-f9f71f8d19ff
+:END:
+#+title:Auditor's Report
+#+filetags: :FINANCE:
+
+- Look for an *Independent(unbiased)* auditor's report before investing in a company.
+- Shareholders aren't allowed to look at the actual books of accounts (sales revenue etc.) by showing up at the company.
+- So auditors are appointed by the shareholders who go into the company and check all the books of accounts. 
+
+* Main Point
+- Go to the opinion section and check whether the financial statements give a *true and fair view* of the company.
+- *Bad sign*: Auditor resigns because they may be getting pressurized by the promoters in some way. 
+* Key Audit Matters
+- Discloses important findings of the auditor communicated with the promoters.

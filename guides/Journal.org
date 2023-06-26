@@ -1,7 +1,0 @@
-#+TITLE:Journal
-#+AUTHOR:Sabyasachi Bhoi
-
-* Fleeting Notes
-** Discord Bot Development
-<2022-08-01 Mon 21:41>
-

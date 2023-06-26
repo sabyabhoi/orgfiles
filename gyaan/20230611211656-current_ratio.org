@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       352e757e-5353-4063-ba90-e510739c57db
+:END:
+#+title: Current ratio
+#+filetags: :FINANCE:
+
+\[
+\textrm{Current ratio} = \frac{\textrm{Current Assets}}{\textrm{Current Liabilities}}
+\]
+
+- It measures a company's ability to pay off *short-term liabilities* with its current assets.
+- Higher is better.
+- AKA *Working Capital Ratio*.
+- An ideal current ratio is 2:1.
+- E.g. if the current ratio of a company is 2, then it has the ability repay all its current liabilities (using its current assets) twice.
+
+* Case when the ratio is excessively high
+- One should check the components of the current assets.
+- E.g. if major portion is formed from the trade receivables, that may not be that great of a sign.
+

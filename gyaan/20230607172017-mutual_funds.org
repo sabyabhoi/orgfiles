@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       0635b621-f216-45ff-91f0-1d8d03ce0628
+:ROAM_ALIASES: MF
+:END:
+#+title: Mutual Funds
+#+filetags: :FINANCE:
+
+A mutual fund is a trust, in which people invest their money, and the trustees hire a third party company called an [[id:a313e0ae-9889-4c12-87b3-8a8169a6b609][Asset Management Company]], for managing these assets and buying stocks using the same. 

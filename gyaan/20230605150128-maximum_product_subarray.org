@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       c291b84b-ab1a-403f-8913-10c645a2d9c7
+:END:
+#+title: Maximum Product Subarray
+#+filetags: :CS:
+
+Given an integer [[id:5adf9d6d-4832-420c-8c61-41d7747a47d1][array]], find a subarray that has the largest product, and return the product.
+
+* Solution
+Using [[id:79fd085c-e5b2-47f8-916e-034de5aba48e][DP]]
+
+#+begin_src python
+def maxProduct(nums: List[int]) -> int:
+    n = len(nums)
+    ans = [0] * n
+    ans[0] = nums[0]
+
+    mn, mx = nums[0], nums[0]
+
+    for i in range(1, n):
+        new_mx = max([nums[i], mn * nums[i], mx * nums[i]])
+        new_mn = min([nums[i], mn * nums[i], mx * nums[i]])
+
+        mn, mx = new_mn, new_mx
+        
+        ans[i] = mx
+
+    return max(ans)
+#+end_src

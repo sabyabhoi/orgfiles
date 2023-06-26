@@ -1,26 +1,14 @@
 :PROPERTIES:
 :ID:       081bd6a9-e9f3-4f42-ae65-953b8bc2ef1a
 :END:
-#+title: Liquidity ratios
+#+title:Liquidity ratios
 #+DATE:2022-07-06
 #+filetags: :FINANCE:
 
 These are [[id:015a9a59-7267-4f10-84fa-c37cc24bdfdd][financial ratios]] used to measure a company's ability to repay both short and long term obligations.
 
-* Current ratio
-:PROPERTIES:
-:ID:       352e757e-5353-4063-ba90-e510739c57db
-:END:
-
-\[
-\textrm{Current ratio} = \frac{\textrm{Current Assets}}{\textrm{Current Liabilities}}
-\]
-
-- It measures a company's ability to pay off *short-term liabilities* with its current assets.
-- Higher is better.
-- AKA *Working Capital Ratio*.
-- E.g. if the current ratio of a company is 2, then it has the ability repay all its current liabilities (using its current assets) twice.
-
+* [[id:352e757e-5353-4063-ba90-e510739c57db][Current ratio]]
+* [[id:316dc74a-a8e4-4ba0-8d34-1e1bb3bd5a19][Free Cash Flow]]
 * Quick ratio/Acid-test ratio
 :PROPERTIES:
 :ID:       e86a6944-7d2e-427a-9e05-176d1520dfee
@@ -62,3 +50,5 @@ OCF = \textrm{Revenues} - \textrm{Operating expenses}
 - Measures a company's abililty to pay its bills.
 
 *Note*: The sources of revenue should be observed carefully: whether the revenue is coming from sales operations or liquidating assets.
+
+* [[id:8c20936b-dbf4-402e-aa43-ab796fca1e05][Inventory Turnover Ratio]]

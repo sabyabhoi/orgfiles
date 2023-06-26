@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       1a77cdf1-c709-47b2-8041-14053d981af8
+:END:
+#+title:8 pointer theory
+#+filetags: :FINANCE:
+
+1. [[id:352e757e-5353-4063-ba90-e510739c57db][Current ratio]]
+2. [[id:7e93c048-e5b6-4607-8557-fb85053815d4][Debt-to-Equity (D/E) Ratio]]
+3. [[id:cfe73105-c845-47c1-96df-7e59171ea4e8][Return on Capital Employed (ROCE)]]
+4. [[id:d0203825-b8bd-453d-959f-c511f5e5c0b1][Free Cash Flow]]
+5. Shareholding Pattern
+   - [[id:18fab767-a213-4ce2-81e9-70382774d933][Pledging Shares]]
+6. [[id:8c20936b-dbf4-402e-aa43-ab796fca1e05][Inventory Turnover Ratio]]
+7. Reserves and Surpluses/Capital Ratio
+8. [[id:c2dc60ab-fe6d-49d7-940d-a9f0b6e5b7be][Profit-to-Earnings Ratio (P/E)]]
+   - Also check Book Value and Price/Book Value
+
+* Summary
+
+|------------------------------------------+---------------------------------------------------|
+| Ratio                                    | What do we achieve                                |
+|------------------------------------------+---------------------------------------------------|
+| Current Ratio                            | understand liquidity position. Ideal: 2:1         |
+| D/E Ratio                                | understand capital structure. Max: 2:1            |
+| ROCE                                     | measures profitability. Atleast 10%               |
+| Inventory Turnover Ratio                 | measure operational efficiency. higher the better |
+| P/E Ratio                                | how costly the share is                           |
+| Share Capital:Reserves or Reserves Trend | share capital = invested money, reserves: returns |
+| Fresh Cash flows                         | Higher the better                                 |
+| Shareholding: pledged shares             | should be 0                                       |
+|------------------------------------------+---------------------------------------------------|

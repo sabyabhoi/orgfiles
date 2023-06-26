@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       cfe73105-c845-47c1-96df-7e59171ea4e8
+:END:
+#+title:Return on Capital Employed (ROCE)
+#+filetags: :FINANCE:
+
+It is calculated as
+
+\begin{align*}
+ROCE &= \frac{EBIT}{\textrm{capital employed}} \times 100 
+\end{align*}
+
+- Capital employed = shareholder's funds + non-current liabilities (loans and debentures)
+- Should be atleast greater than 10%, or else no point in investing in the company.
+
+* Zettelkasten
+** North (comes from)
+- Can be calculated from figures given in the [[id:37453c81-ab46-4cbb-9184-70f6a423d014][Profit & Loss Statement]]
+- Comes under [[id:015a9a59-7267-4f10-84fa-c37cc24bdfdd][Financial Ratios Analysis]]  
+** West (similar to)
+- [[id:816ffff7-c18f-46f7-b957-f56ef0147b3d][Return on Equity (ROE)]]
+** East (opposite of)
+** South (leads to)

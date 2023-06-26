@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       37453c81-ab46-4cbb-9184-70f6a423d014
+:ROAM_ALIASES: "PnL Statement"
+:END:
+#+title:Profit & Loss Statement
+#+filetags: :FINANCE:
+
+* EBIT (Operating Profits)
+This is an important figure for comparing two companies, because it represents the profits made by the *core* operations of the company. 
+
+* Zettelkasten
+** North (comes from)
+- [[id:7090804a-e681-425f-84b2-9f40050c777d][Fundamental Analysis]]
+** West (similar to)
+- [[id:f01a14c9-0956-47d5-8b4c-ea10de913ee1][Balance sheet]]
+- [[id:4f6e1c7d-1ad5-4b53-8b8e-f8170bb2c76a][Cash Flow Statement]]
+** East (opposite from)
+** South (Leads to)
+- [[id:cfe73105-c845-47c1-96df-7e59171ea4e8][Return on Capital Employed (ROCE)]]
+- [[id:816ffff7-c18f-46f7-b957-f56ef0147b3d][Return on Equity (ROE)]]
+- Basic [[id:6752a8d5-7fe2-4082-9396-c51a581c4e21][Earnings Per Share (EPS)]]
+- [[id:c2dc60ab-fe6d-49d7-940d-a9f0b6e5b7be][Profit-to-Earnings Ratio (P/E)]]
