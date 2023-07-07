@@ -1045,21 +1045,31 @@ To perform statistical analysis in Emacs, we make use of the /Emacs Speaks Stati
 
 ** Org capture
 #+begin_src emacs-lisp
-  (use-package org-capture
-    :defer t
-    :ensure nil
-    :config
-    (setq org-capture-templates
-          '(
-			("t" "Todo")
-			("tg" "General" entry
-             (file "~/workspace/userfiles/orgfiles/guides/inbox.org")
-             "* TODO %^{Enter Todo}\n SCHEDULED: %^t \n %?")
-			("ta" "Academics" entry
-			 (file "~/workspace/userfiles/college/3-2/academics.org")
-			 "* TODO %^{Enter Todo}\n %^{Choose|SCHEDULED|DEADLINE}: %^t \n %?")
-			))
-    )
+(use-package org-capture
+  :defer t
+  :ensure nil
+  :config
+  (setq org-capture-templates
+        '(
+		  ("t" "Todo")
+		  ("tg" "General" entry
+           (file "~/workspace/userfiles/orgfiles/guides/inbox.org")
+           "* TODO %^{Enter Todo}\n SCHEDULED: %^t \n %?")
+		  ("ta" "Academics" entry
+		   (file "~/workspace/userfiles/college/3-2/academics.org")
+		   "* TODO %^{Enter Todo}\n %^{Choose|SCHEDULED|DEADLINE}: %^t \n %?")
+		  ("b" "Book Entry" entry
+		   (file "~/workspace/userfiles/orgfiles/journal/reading_list.org")
+		   "* %^{Enter Name of the Book}
+:PROPERTIES:
+:AUTHOR: %^{Enter Name of the Author}
+:RATING: %^{Choose|TBD|OKAY|NICE|GOAT}
+:COMPLETED:  %?
+:END:
+"
+		   )
+		  ))
+  )
 #+end_src
 
 *** Note
@@ -1070,7 +1080,12 @@ Checkout [[https://www.gnu.org/software/emacs/manual/html_node/org/Template-expa
 (use-package org-journal
   :ensure t
   :custom
-  (org-journal-dir "~/workspace/userfiles/orgfiles/journal/"))
+  (org-journal-dir "~/workspace/userfiles/orgfiles/journal/")
+  (org-journal-date-prefix "#+TITLE: ")
+  (org-journal-date-format "%a, %Y-%m-%d")
+  (org-journal-file-format "%Y-%m-%d.org")
+  (org-journal-time-prefix "*")
+  (org-journal-time-format " "))
 #+end_src
 
 ** Presentations using reveal.js

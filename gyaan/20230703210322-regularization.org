@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       0c836c0f-a2e9-4e02-b211-5fdede79701e
+:END:
+#+title: Regularization
+#+filetags: :CS:
+
+Regularization is a technique in machine learning used to prevent overfitting and improve the generalization ability of a model.
+
+* Ridge Regularization
+Here, we add a penalty term proportional to the square of the weights to the [[id:017b7c98-adcc-43ea-9af0-640f99ec9d08][Cost function]].
+
+\[
+	\textrm{Cost} = \textrm{normal cost} + \frac{\lambda}{2 m} \sum w_j^2
+\]
+
+Here $\lambda$ is a hyper-parameter which denotes the amount of penalty to add. Greater the value of $\lambda$, more is the penalty, and smaller will be the weights.
+
+* Zettelkasten
+** North: comes from
+[[id:023000e3-dc67-416d-a14a-d3742c43e904][Machine Learning]]
+** East: Similar to
+** West: Opposite of
+** South: Leads to

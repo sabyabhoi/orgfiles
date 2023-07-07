@@ -2,7 +2,7 @@
 :ID:       524d541b-255c-48a0-b322-f6e4b0a818ce
 :ROAM_ALIASES: BFS
 :END:
-#+title: Breadth-First Search
+#+title:Breadth-First Search
 #+filetags: :CS:
 
 See [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]. Here, we use a [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]].
@@ -26,3 +26,12 @@ def bfs(adj: List[List[int]], V: int):
             q.push(i)
     return ans
 #+end_src
+
+* Zettelkasten
+** North: comes from
+- [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]
+** East: Similar to
+** West: Opposite of
+- [[id:963e07c9-c92d-4ec0-831f-bc6f7c59bdc8][Depth-First Search]]
+** South: Leads to
+- [[id:abcb832d-dbe2-4b50-99d0-38501f4555f4][Dijkstra's Algorithm]]

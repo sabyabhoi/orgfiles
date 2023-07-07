@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       023000e3-dc67-416d-a14a-d3742c43e904
+:ROAM_ALIASES: ML
+:END:
+#+title:Machine Learning
+#+filetags: :CS:
+
+Machine learning (ML) is a field of study and practice within artificial intelligence (AI) that focuses on developing algorithms and models capable of automatically learning from data and making predictions or decisions without being explicitly programmed. ML algorithms enable computers to analyze and interpret large amounts of data, identifying patterns, extracting insights, and improving their performance through experience. 
+
+* [[id:017b7c98-adcc-43ea-9af0-640f99ec9d08][Cost function]]
+* Regression
+** [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][Linear Regression]]
+* Classification
+:PROPERTIES:
+:ID:       f905aebc-a4ac-459e-9c2b-73816ea8430f
+:END:
+** [[id:51ee17a0-d97c-4937-a0de-53c2a2ac8326][Logistic Regression]]
+*** [[id:d163e7fd-b291-4ea9-a9cd-2389466b5123][Sigmoid activation function]]
+*** [[id:0c836c0f-a2e9-4e02-b211-5fdede79701e][Regularization]]
+* [[id:21a3d267-9b86-4eb9-a6e1-6d6ce27396cb][Neural Networks]]

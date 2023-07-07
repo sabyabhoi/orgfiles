@@ -7,3 +7,12 @@
 A graph in Computer Science is a non-linear [[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structure]] which comprises of vertices and edges.
 
 It is generally represented using /Adjacency matrices/ or /Adjacency lists/. 
+
+* Zettelkasten
+** North: Comes from
+[[id:a9338446-247d-4883-912e-bd4d705efd39][Data Structures & Algorithms]]
+** South: Leads to
+- [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Tree]] data structure
+*** Graph searching algorithms
+- DFS
+- BFS

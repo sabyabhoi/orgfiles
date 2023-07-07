@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       70445be6-ef4c-4b82-83e8-657861859e32
+:END:
+#+title: Minimum Number of Intervals to Cover the Target Interval
+#+filetags: :CS:
+
+Greedy algorithms are so tough ;_;
+
+Given an array ~arr~ consisting of ~N~ intervals and a target interval ~[0, E]~, the task is to find the minimum number of intervals from the given array ~arr~ such that they entirely cover the target interval. If there doesn’t exist any such interval then print "-1".
+
+* Algorithm
+1. Sort the intervals by starting time.
+2. Keep two variables: ~left~ and ~right~.
+   - ~left~ keeps track of the current range in which we're going to search for the optimum answer: ~[left, E]~.
+   - ~right~ keeps track of the ending time of the furthest range. 
+3. Iterate through the intervals.
+4. *If* the start time of the current time <= ~left~, then update ~right~ to the maximum of ~right~ and ending time of the current interval.
+5. *Else*, update ~left~ to ~right~ and increment answer.
+6. One check we have to make is whether there is a gap between any interval; meaning that there is some region in the target interval which isn't covered by any of the given intervals. In such case, return -1.
+7. If the end point of the current furthest interval is >= that of the ending interval, then we've covered all the intervals. Exit the loop in this case.
+8. Return answer
+
+#+begin_src python
+def minIntervals(self, arr: List[List[int]], E: int) -> int:
+    arr.sort()
+    left, right = 0, -1
+    cnt = 1
+
+    i = 0
+    while i < len(arr):
+        start, end = arr[i]
+        if start <= left:
+            right = max(right, end)
+            i += 1
+        else:
+            left = right
+            cnt += 1
+
+        if start > right or right >= E:
+            break
+
+    return cnt if right >= E else -1
+#+end_src
+
+* Zettelkasten
+** North: comes from
+- [[id:f5b392bd-7d43-481d-8873-1a7e25b5596d][Greedy Algorithms]]
+** East: Similar to
+** West: Opposite of
+** South: Leads to

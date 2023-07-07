@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       fa4491df-7000-4e46-b725-e4c1e1cf9c92
+:ROAM_REFS: https://leetcode.com/problems/meeting-rooms-ii/description/
+:END:
+#+title:Meeting Rooms 2
+#+filetags: :CS:
+
+Given an array of meeting time intervals intervals where intervals[i] = [start_i, end_i], return the minimum number of conference rooms required.
+
+#+begin_example
+Input: intervals = [[0,30],[5,10],[15,20]]
+Output: 2
+#+end_example
+
+#+begin_example
+Input: intervals = [[7,10],[2,4]]
+Output: 1
+#+end_example
+
+* Solution
+1. Sort the list of intervals.
+2. We're going to greedily select the earlist meeting based on starting time and alot of a room for it.
+3. We're going to track the ending time of the meeting using a [[id:c1ae45fd-419d-40e1-996d-418331dc3e36][min heap]]. This min heap is going to tell us the time of the meeting ending the soonest.
+4. For any given interval i, if the starting time of i is less than the ending time of the meeting which is ending the soonest, then we need to alot a new meeting room.
+5. Otherwise, we just pop the element from the min heap and use that room.
+
+#+begin_src python
+def minMeetingRooms(intervals: List[List[int]]) -> int:
+    intervals = sorted(intervals)
+
+    heap = minHeap()
+
+    for (start, end) in intervals:
+        if heap and heap[0] <= start:
+            heap.pop()
+        heap.push(end)
+
+    return len(heap)
+#+end_src

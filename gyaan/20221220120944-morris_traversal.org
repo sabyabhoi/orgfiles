@@ -1,35 +1,35 @@
 :PROPERTIES:
 :ID:       f22bac8b-166d-4ea9-9df2-e19ffab6781b
 :END:
-#+title: Morris Traversal
+#+title:Morris Traversal
 #+filetags: :CS:
 
 This is an algorithm used for traversing a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][binary tree]] in almost linear time and constant space.
 
 * Inorder traversal
 #+begin_src c++
-  void morris_inorder(Node* root) {
-    Node* curr = root;
+void morris_inorder(Node* root) {
+  Node* curr = root;
 
-    while(curr) {
-      if(curr->left == nullptr) {
+  while(curr) {
+    if(!curr->left) {
+      cout << curr->data << ' ';
+      curr = curr->right;
+    } else {
+      Node* itr = curr->left;
+      while(itr->right && itr->right != curr)
+        itr = itr->right;
+
+      if(!itr->right) { // if right-most node is not connected to root
+        itr->right = curr;
+        curr = curr->left;
+      } else { // if already connected to root
+        itr->right = nullptr;
         cout << curr->data << ' ';
         curr = curr->right;
-      } else {
-        Node* itr = curr->left;
-        while(itr->right && itr->right != curr) {
-          itr = itr->right;
-        }
-        if(itr->right == nullptr) {
-          itr->right = curr;
-          curr = curr->left;
-        } else {
-          itr->right = nullptr;
-          cout << curr->data << ' ';
-          curr = curr->right;
-        }
       }
     }
-    cout << '\n';
   }
+  cout << '\n';
+}
 #+end_src

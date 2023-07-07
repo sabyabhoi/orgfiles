@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       d163e7fd-b291-4ea9-a9cd-2389466b5123
+:END:
+#+title: Sigmoid activation function
+#+filetags: :CS:
+
+\[
+\textrm{sigmoid}(z) = \frac{1}{1 + e^{-z}}
+\]

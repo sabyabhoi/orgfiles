@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       21a3d267-9b86-4eb9-a6e1-6d6ce27396cb
+:END:
+#+title: Artificial Neural Network
+#+filetags: :CS:
+
+- An artificial neural network is a computational model inspired by the structure and function of biological neural networks found in the human brain.
+- It consists of interconnected nodes, known as artificial neurons or units, organized in layers.
+- Each neuron receives inputs, performs a computation, and produces an output.
+- These outputs are then passed on as inputs to other neurons, forming a complex network of interconnected information processing units.
+
+* How it works
+- WLOG we can say that each neuron performs [[id:51ee17a0-d97c-4937-a0de-53c2a2ac8326][Logistic Regression]] on the data it receives from its previous layer.
+- The output it generates is called the *activation* of that neuron. It is calculated as follows:
+
+  \[
+  A^{[i]}_{1\times n} = g(A^{[i - 1]}_{1\times m} \cdot W_{m\times n} + B_{1\times n})
+  \]
+
+* Zettelkasten
+** North: comes from
+- [[id:023000e3-dc67-416d-a14a-d3742c43e904][ML]]
+** East: Similar to
+** West: Opposite of
+** South: Leads to
+

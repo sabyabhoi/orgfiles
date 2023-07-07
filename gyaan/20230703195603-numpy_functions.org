@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       ae245b90-a4f7-4c51-b75c-6ec5f510cd57
+:END:
+#+title: Numpy functions
+#+filetags: :CS:
+
+* Creating arrays
+#+begin_src python
+np.array([[1, 2, 3], [4, 5, 6]])
+#+end_src
+
+* Zettelkasten
+** North: comes from
+- [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]]
+** East: Similar to
+- [[id:c36d5178-3d1e-4325-bc42-d5144e9fb3ca][Pandas functions]]
+** West: Opposite of
+** South: Leads to

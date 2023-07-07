@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       017b7c98-adcc-43ea-9af0-640f99ec9d08
+:END:
+#+title: Cost function
+#+filetags: :CS:
+
+- The cost function helps in assessing the accuracy of the model's predictions and guides the learning process by providing a measure to minimize during training.
+- The goal is to find the set of model parameters that minimize the cost function, thereby optimizing the performance of the model. 
+  
+It is of the form:
+
+\[
+\textrm{cost}(X, y | w, b) = \frac{1}{2 m} \sum (\textrm{Loss}(X, y | w, b))
+\]
+
+The loss function differs in case of different algorithms. 
+
+* Zettelkasten
+** North: comes from
+- [[id:023000e3-dc67-416d-a14a-d3742c43e904][Machine Learning]]
+** East: Similar to
+** West: Opposite of
+** South: Leads to
+- Sum of Squared Errors Cost function in case of [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][Linear Regression]]
+- [[id:986c3f6c-3d6d-4a88-a741-03d97ce0a249][Logarithmic Loss Function]] in case of [[id:51ee17a0-d97c-4937-a0de-53c2a2ac8326][Logistic Regression]]

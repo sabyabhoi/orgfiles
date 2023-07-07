@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       963e07c9-c92d-4ec0-831f-bc6f7c59bdc8
+:END:
+#+title: Depth-First Search
+#+filetags: :CS:
+
+- Depth First Search (DFS) is a graph traversal algorithm used to explore or search through a graph or tree data structure.
+- DFS may not visit all nodes in a disconnected graph, so additional steps might be needed to cover all components.
+- The time complexity of DFS is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
+- DFS can be used for various applications, such as finding connected components, determining if a path exists between two nodes, and solving puzzles like maze traversal.
+
+* Zettelkasten
+** North: comes from
+- [[id:5606497d-39ad-4cd6-aa86-bdb8055f0f23][Graph]]
+** East: Similar to
+- [[id:ab3c5d9c-741f-47af-bb9e-0b7ba0daafc9][Depth-First Traversal in Binary Trees]]
+** West: Opposite of
+- [[id:524d541b-255c-48a0-b322-f6e4b0a818ce][BFS]]

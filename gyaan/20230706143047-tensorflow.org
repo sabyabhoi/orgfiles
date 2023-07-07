@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       6ef4ea04-b375-49ea-b92e-c13a06016c52
+:END:
+#+title: Tensorflow
+#+filetags: :CS:
+
+* Building and using Neural Network
+** Create a layer of neurons
+#+begin_src python
+layer = Dense(units=3, activation='sigmoid')
+#+end_src
+
+** Stacking layers together
+#+begin_src python
+model = Sequential([
+    Dense(units=3, activation='sigmoid'),
+    Dense(units=1, activation='sigmoid'),
+])
+#+end_src
+
+** Compiling Model
+#+begin_src python
+model.compile()
+#+end_src
+
+*** Get summary of model
+#+begin_src python
+model.summary()
+#+end_src
+
+** Fit training data
+#+begin_src python
+# epochs is optional
+model.fit(X, y, epochs=10)
+#+end_src
+
+** Using forward propogation to predict label for new feature
+#+begin_src python
+model.predict(X_new)
+#+end_src
+
+* Zettelkasten
+** North: comes from
+- [[id:023000e3-dc67-416d-a14a-d3742c43e904][ML]]
+- [[id:df6a7bbc-b960-4d42-9904-b3191cc818f3][Python]]
+** East: Similar to
+- Scikit-Learn
+** West: Opposite of
+** South: Leads to

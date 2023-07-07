@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       eaccd14a-ffb4-4875-99c4-87cc91c94647
+:ROAM_REFS: https://www.youtube.com/watch?v=lOYrE54CtcY
+:END:
+#+title:Resume Building
+
+- On avg. recruiters spend 7 seconds looking at a resume.
+- They look for key things
+
+* Division of the resume
+** Professional Experience
+*** What counts as professional experience
+- Internships
+- Full time work experience
+- If you have your own startup & you can display some tangible value added to the startup
+
+*** Writing a proper professional experience section
+- Start with company name
+- Write a one liner about the company
+- Write the timeline against each position (with months)
+- Mention the position held by you
+
+- One bullet point per project
+  - Use PAR Method: Problem, Action and Result
+  - Keep it short and to the point
+  - Quantify numbers in terms of revenue, additional customers, increasing efficiency, loading time, etc.
+- Google verbs for domain (like software development, management etc.)
+
+** Academics and Co-curriculars
+1. Courework, certifications, scholarships & awards, conferences & workshops 
+2. Academic projects

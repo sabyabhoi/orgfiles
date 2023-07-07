@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       51ee17a0-d97c-4937-a0de-53c2a2ac8326
+:END:
+#+title: Logistic Regression
+#+filetags: :CS:
+
+Instead of a traditional [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][linear regression]] expression of the form:
+
+\[
+y = w \cdot x + b
+\]
+
+Logistic regression transforms the RHS using the [[id:d163e7fd-b291-4ea9-a9cd-2389466b5123][Sigmoid activation function]] to bring the LHS between 0 and 1. This is quite useful for [[id:f905aebc-a4ac-459e-9c2b-73816ea8430f][classification]] tasks.
+
+\[
+y = \textrm{sigmoid}(w \cdot x + b)
+\]
+
+* Logarithmic Loss Function
+:PROPERTIES:
+:ID:       986c3f6c-3d6d-4a88-a741-03d97ce0a249
+:END:
+\[
+\textrm{Loss} = -y * \textrm{log}(\hat{y}) - (1 - y)\textrm{log}(1 - \hat{y})
+\]
+
+* Zettelkasten
+** North: comes from
+- [[id:f905aebc-a4ac-459e-9c2b-73816ea8430f][Classification]]
+** East: Similar to
+- [[id:4f2897a7-ceae-4fed-ac80-94ed75e79d64][Linear Regression]]
+** West: Opposite of
+** South: Leads to

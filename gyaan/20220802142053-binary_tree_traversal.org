@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       ab3c5d9c-741f-47af-bb9e-0b7ba0daafc9
 :END:
-#+title: Depth-First Traversal
+#+title:Depth-First Traversal in Binary Trees
 #+filetags: :CS:
 
 There are three types of traversals possible in a [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][binary tree]]:

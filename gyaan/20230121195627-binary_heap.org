@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       c1ae45fd-419d-40e1-996d-418331dc3e36
 :END:
-#+title: Binary Heap
+#+title:Binary Heap
 #+filetags: :CS:
 
 Binary Heap is a complete [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]], meaning all the levels of the binary tree are filled. The height of a heap is /always/ =log(n)=,  where =n= is the number of elements in the heap
@@ -144,3 +144,13 @@ We employ a =priority_queue= with additional parameters to simulate a Max Heap
     pq.pop();
    }
 #+end_src
+
+
+* Zettelkasten
+** North: comes from
+- [[id:a5f37e57-e61c-4a10-93cd-f3c87b44b064][Binary Tree]]
+** East: Similar to
+- [[id:e1ba462d-51b3-4b75-be27-e236065922cd][Queue]]
+** West: Opposite of
+** South: Leads to
+- [[id:84340619-25a2-4448-89f5-1247a272412a][Task Scheduler Problem]]

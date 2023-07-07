@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       4f2897a7-ceae-4fed-ac80-94ed75e79d64
+:ROAM_ALIASES: "Linear Regression"
 :END:
 #+title: Simple Linear Regression Model
 #+filetags: :ECONOMICS:

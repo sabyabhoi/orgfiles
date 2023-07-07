@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       2cd1b0c4-c890-4d27-8188-4a9acc84e6e2
+:END:
+#+title: Unique BSTs
+#+filetags: :CS:
+
+Given an integer n, return all the structurally unique BST's ([[id:cc94dbf1-6d0f-43ce-8bee-4b588811a126][binary search trees]]), which has exactly n nodes of unique values from 1 to n. Return the answer in any order.
+
+[[../assets/uniquebstn3.jpg]]
+
+#+begin_example
+Input: n = 3
+Output: [[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,1]]
+#+end_example
+
+* Solution
+#+begin_src python
+def generateTrees(n: int) -> List[TreeNode]:
+
+    def construct(l: int, r: int) -> List[TreeNode]:
+        if l > r:
+            return [None]
+
+        ans = []
+
+        for i in range(l, r + 1):
+            left = construct(l, i - 1)
+            right = construct(i + 1, r)
+
+            for l in left:
+                for r in right:
+                    ans.append(TreeNode(i, l, r))
+
+        return ans
+
+    return construct(1, n)
+#+end_src
